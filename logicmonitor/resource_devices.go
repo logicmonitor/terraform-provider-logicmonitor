@@ -108,32 +108,32 @@ func resourceDevices() *schema.Resource {
 		Delete: deleteDevice,
 
 		Schema: map[string]*schema.Schema{
-			"ip_addr": &schema.Schema{
+			"ip_addr": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"display_name": &schema.Schema{
+			"display_name": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"disable_alerting": &schema.Schema{
+			"disable_alerting": {
 				Type:     schema.TypeBool,
 				Optional: true,
 				Default:  true,
 			},
-			"collector": &schema.Schema{
+			"collector": {
 				Type:     schema.TypeInt,
 				Required: true,
 			},
-			"hostgroup_id": &schema.Schema{
+			"hostgroup_id": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"description": &schema.Schema{
+			"description": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"properties": &schema.Schema{
+			"properties": {
 				Type:     schema.TypeMap,
 				Optional: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},

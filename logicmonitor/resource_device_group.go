@@ -57,7 +57,7 @@ func updateDeviceGroup(d *schema.ResourceData, m interface{}) error {
 	id, _ := strconv.Atoi(d.Id())
 
 	// list of available properties
-	s := []string{"name", "parent_id", "applies_to", "disable_alerting", "description", "properties", "full_path"}
+	s := []string{"name", "parent_id", "applies_to", "disable_alerting", "description", "properties"}
 
 	// loops through array of properties to see which one has changed, the ones that did not change are removed from the list
 	for _, v := range s {
@@ -106,35 +106,31 @@ func resourceDeviceGroup() *schema.Resource {
 		Delete: deleteDeviceGroup,
 
 		Schema: map[string]*schema.Schema{
-			"name": &schema.Schema{
+			"name": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"parent_id": &schema.Schema{
+			"parent_id": {
 				Type:     schema.TypeInt,
 				Optional: true,
 			},
-			"applies_to": &schema.Schema{
+			"applies_to": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"disable_alerting": &schema.Schema{
+			"disable_alerting": {
 				Type:     schema.TypeBool,
 				Optional: true,
 				Default:  true,
 			},
-			"description": &schema.Schema{
+			"description": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"properties": &schema.Schema{
+			"properties": {
 				Type:     schema.TypeMap,
 				Optional: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
-			},
-			"full_path": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
 			},
 		},
 	}
