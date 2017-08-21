@@ -15,7 +15,7 @@ type Config struct {
 func (c *Config) NewLMClient() (*lmv1.DefaultApi, error) {
 	config := lmv1.NewConfiguration()
 	config.APIKey = map[string]map[string]string{
-		"Authorization": map[string]string{
+		"Authorization": {
 			"AccessID":  c.AccessID,
 			"AccessKey": c.AccessKey,
 		},

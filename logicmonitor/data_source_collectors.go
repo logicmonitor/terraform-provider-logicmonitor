@@ -16,28 +16,28 @@ func dataSourceFindCollectors() *schema.Resource {
 		Read: findCollectors,
 
 		Schema: map[string]*schema.Schema{
-			"filters": &schema.Schema{
+			"filters": {
 				Type:     schema.TypeSet,
 				Optional: true,
 				ForceNew: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"property": &schema.Schema{
+						"property": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
-						"operator": &schema.Schema{
+						"operator": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
-						"value": &schema.Schema{
+						"value": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
 					},
 				},
 			},
-			"most_recent": &schema.Schema{
+			"most_recent": {
 				Type:     schema.TypeBool,
 				Default:  false,
 				Optional: true,

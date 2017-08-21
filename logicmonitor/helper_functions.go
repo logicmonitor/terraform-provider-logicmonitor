@@ -118,7 +118,7 @@ func checkStatus(serverResponse int32, serverResponseMessage string, apiResponse
 	}
 
 	if serverResponse != 200 {
-		return fmt.Errorf("Failed to find device group: %s", serverResponseMessage)
+		return fmt.Errorf("%s", serverResponseMessage)
 	}
 
 	if err != nil {

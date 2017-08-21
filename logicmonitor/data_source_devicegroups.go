@@ -16,29 +16,29 @@ func dataSourceFindDeviceGroups() *schema.Resource {
 		Read: findDeviceGroup,
 
 		Schema: map[string]*schema.Schema{
-			"filters": &schema.Schema{
+			"filters": {
 				Type:     schema.TypeSet,
 				Optional: true,
 				ForceNew: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"property": &schema.Schema{
+						"property": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
-						"operator": &schema.Schema{
+						"operator": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
-						"value": &schema.Schema{
+						"value": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
-						"custom_property_name": &schema.Schema{
+						"custom_property_name": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
-						"custom_property_value": &schema.Schema{
+						"custom_property_value": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},

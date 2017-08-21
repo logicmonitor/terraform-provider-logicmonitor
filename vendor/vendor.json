@@ -3,7 +3,7 @@
 	"ignore": "test",
 	"package": [
 		{
-			"checksumSHA1": "Liv7AJyNinmP3pvwohcXp4R6xY4=",
+			"checksumSHA1": "7Qr1gyuk1mj2dDtJ821rEeqG3x8=",
 			"path": "github.com/Sirupsen/logrus",
 			"revision": "85b1699d505667d13f8ac4478c1debbf85d6c5de",
 			"revisionTime": "2017-06-08T22:14:41Z"
@@ -205,6 +205,13 @@
 			"revisionTime": "2017-06-13T17:33:17Z"
 		},
 		{
+			"checksumSHA1": "/5cvgU+J4l7EhMXTK76KaCAfOuU=",
+			"origin": "github.com/hashicorp/terraform/vendor/github.com/davecgh/go-spew/spew",
+			"path": "github.com/davecgh/go-spew/spew",
+			"revision": "bc926963444e0e3aaf0d365bfb9c12595db6a169",
+			"revisionTime": "2017-06-13T17:33:17Z"
+		},
+		{
 			"checksumSHA1": "1K+xrZ1PBez190iGt5OnMtGdih4=",
 			"origin": "github.com/hashicorp/terraform/vendor/github.com/go-ini/ini",
 			"path": "github.com/go-ini/ini",
@@ -365,6 +372,13 @@
 			"revisionTime": "2017-06-13T17:33:17Z"
 		},
 		{
+			"checksumSHA1": "vt+P9D2yWDO3gdvdgCzwqunlhxU=",
+			"origin": "github.com/hashicorp/terraform/vendor/github.com/hashicorp/logutils",
+			"path": "github.com/hashicorp/logutils",
+			"revision": "bc926963444e0e3aaf0d365bfb9c12595db6a169",
+			"revisionTime": "2017-06-13T17:33:17Z"
+		},
+		{
 			"checksumSHA1": "G0oGkMDB9pLhBZzKu2J6a+wDe0s=",
 			"path": "github.com/hashicorp/terraform/config",
 			"revision": "bc926963444e0e3aaf0d365bfb9c12595db6a169",
@@ -389,6 +403,12 @@
 			"revisionTime": "2017-06-13T17:33:17Z"
 		},
 		{
+			"checksumSHA1": "uT6Q9RdSRAkDjyUgQlJ2XKJRab4=",
+			"path": "github.com/hashicorp/terraform/helper/config",
+			"revision": "bc926963444e0e3aaf0d365bfb9c12595db6a169",
+			"revisionTime": "2017-06-13T17:33:17Z"
+		},
+		{
 			"checksumSHA1": "Vbo55GDzPgG/L/+W2pcvDhxrPZc=",
 			"path": "github.com/hashicorp/terraform/helper/experiment",
 			"revision": "bc926963444e0e3aaf0d365bfb9c12595db6a169",
@@ -403,6 +423,18 @@
 		{
 			"checksumSHA1": "B267stWNQd0/pBTXHfI/tJsxzfc=",
 			"path": "github.com/hashicorp/terraform/helper/hilmapstructure",
+			"revision": "bc926963444e0e3aaf0d365bfb9c12595db6a169",
+			"revisionTime": "2017-06-13T17:33:17Z"
+		},
+		{
+			"checksumSHA1": "2wJa9F3BGlbe2DNqH5lb5POayRI=",
+			"path": "github.com/hashicorp/terraform/helper/logging",
+			"revision": "bc926963444e0e3aaf0d365bfb9c12595db6a169",
+			"revisionTime": "2017-06-13T17:33:17Z"
+		},
+		{
+			"checksumSHA1": "VAbnGSqUbuPdHsZ3//btY4/fZcc=",
+			"path": "github.com/hashicorp/terraform/helper/resource",
 			"revision": "bc926963444e0e3aaf0d365bfb9c12595db6a169",
 			"revisionTime": "2017-06-13T17:33:17Z"
 		},
@@ -457,7 +489,7 @@
 			"revisionTime": "2017-06-13T17:33:17Z"
 		},
 		{
-			"checksumSHA1": "0DguH/eYGS/9foUmY2B5iiLJVbc=",
+			"checksumSHA1": "fFTX8f2r6ELjZcE97dpTC9Bkcn4=",
 			"path": "github.com/logicmonitor/lm-sdk-go",
 			"revision": "1d4cdc64dff27712f79266283a6c788d4af26fd1",
 			"revisionTime": "2017-06-09T22:04:08Z"
@@ -545,5 +577,5 @@
 			"revisionTime": "2017-06-08T11:43:49Z"
 		}
 	],
-	"rootPath": "github.com/logicmonitor/terraform-provider-logicmonitor"
+	"rootPath": "github.com/terraform-providers/terraform-provider-logicmonitor"
 }
