@@ -1,10 +1,10 @@
-# Terraform Provider for LogicMonitor
+# Terraform Provider for LogicMonitor Testing
 
 - Website: https://www.terraform.io
 - [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
 - Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
 
-<img src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-hashicorp.svg" width="600px">
+<img src="https://cdn.rawgit.com/hashicorp/terraform-website/master/source/assets/images/logo-text.svg" width="600px">
 
 ## Requirements
 
@@ -13,11 +13,11 @@
 
 ## Testing The Provider
 
-Clone repository to: `$GOPATH/src/github.com/terraform-providers/terraform-provider-logicmonitor`
+Clone repository to: `$GOPATH/src/github.com/logicmonitor/terraform-provider-logicmonitor`
 
 ```sh
 $ mkdir -p $GOPATH/src/github.com/terraform-providers; cd $GOPATH/src/github.com/terraform-providers
-$ git clone git@github.com:logicmonitor/terraform-provider-logicmonitor
+$ git clone git@github.com:terraform-providers/terraform-provider-logicmonitor
 ```
 
 Enter the provider directory and build the provider
@@ -35,6 +35,15 @@ Environment Variables
 export LM_API_ID=xyz
 export LM_API_KEY=xyz
 export LM_COMPANY=xyz
+```
+
+Provider Initialization
+```sh
+provider "logicmonitor" {
+  api_id = "${var.logicmonitor_api_id}"
+  api_key = "${var.logicmonitor_api_key}"
+  company = "${var.logicmonitor_company}"
+}
 ```
 
 ## Developing the Provider

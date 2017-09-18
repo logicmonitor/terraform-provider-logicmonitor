@@ -1,12 +1,12 @@
 ---
 layout: "logicmonitor"
-page_title: "LogicMonitor: logicmonitor_devicegroup"
-sidebar_current: "docs-logicmonitor-resource-devicegroup"
+page_title: "LogicMonitor: logicmonitor_device_group"
+sidebar_current: "docs-logicmonitor-resource-device-group"
 description: |-
   Provides a LogicMonitor device group resource. This can be used to create and manage LogicMonitor device groups
 ---
 
-# logicmonitor_devicegroup
+# logicmonitor_device_group
 
 Provides a LogicMonitor device group resource. This can be used to create and manage LogicMonitor device groups
 
@@ -14,7 +14,7 @@ Provides a LogicMonitor device group resource. This can be used to create and ma
 
 ```hcl
 # Create a new LogicMonitor device group
-resource "logicmonitor_devicegroup" "group" {
+resource "logicmonitor_device_group" "group" {
     name = "NewGroup24"
     description = "new test group"
     properties {
@@ -26,7 +26,7 @@ resource "logicmonitor_devicegroup" "group" {
 
 ```hcl
 # Create a new LogicMonitor dynamic device group
-resource "logicmonitor_devicegroup" "group1" {
+resource "logicmonitor_device_group" "group1" {
     name = "NewGroup25"
     applies_to = "system.displayname =~ \"Prod\""
 }

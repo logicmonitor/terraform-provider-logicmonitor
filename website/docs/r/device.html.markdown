@@ -31,15 +31,15 @@ resource "logicmonitor_device" "host" {
 resource "logicmonitor_device" "host" {
   ip_addr = "10.32.12.18"
   disable_alerting = true
-  collector = "${data.logicmonitor_findcollectors.collectors.id}"
-  hostgroup_id = "${logicmonitor_devicegroup.devicegroups.id}"
+  collector = "${data.logicmonitor_collectors.collectors.id}"
+  hostgroup_id = "${logicmonitor_device_group.devicegroups.id}"
   properties {
    "app" = "haproxy"
    "system.categories" = "a,b,c,d"
   }
 }
 
-data "logicmonitor_finddevicegroups" "devicegroups" {
+data "logicmonitor_device_group" "devicegroups" {
   filters {
     "property" = "name"
     "operator" = "~"
@@ -47,7 +47,7 @@ data "logicmonitor_finddevicegroups" "devicegroups" {
   },
 }
 
-data "logicmonitor_findcollectors" "collectors" {
+data "logicmonitor_collectors" "collectors" {
   most_recent = true
 }
 ```

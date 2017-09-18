@@ -67,7 +67,7 @@ func testCollectorExistsHelper(s *terraform.State, client *lmv1.DefaultApi) erro
 
 // finds the most recent collector created that is online
 const testAccLogicMonitorCollectorDataSourceConfig = `
-data "logicmonitor_findcollectors" "collectors" {
+data "logicmonitor_collectors" "collectors" {
   most_recent = true
 }
 `

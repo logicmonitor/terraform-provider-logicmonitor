@@ -28,14 +28,14 @@ func Provider() terraform.ResourceProvider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"logicmonitor_collectorgroup": resourceCollectorGroup(),
-			"logicmonitor_device":         resourceDevices(),
-			"logicmonitor_devicegroup":    resourceDeviceGroup(),
+			"logicmonitor_collector_group": resourceCollectorGroup(),
+			"logicmonitor_device":          resourceDevices(),
+			"logicmonitor_device_group":    resourceDeviceGroup(),
 		},
 
 		DataSourcesMap: map[string]*schema.Resource{
-			"logicmonitor_finddevicegroups": dataSourceFindDeviceGroups(),
-			"logicmonitor_findcollectors":   dataSourceFindCollectors(),
+			"logicmonitor_device_group": dataSourceFindDeviceGroups(),
+			"logicmonitor_collectors":   dataSourceFindCollectors(),
 		},
 		ConfigureFunc: providerConfigure,
 	}
