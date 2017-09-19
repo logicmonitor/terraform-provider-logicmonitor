@@ -21,6 +21,7 @@ func (c *Config) NewLMClient() (*lmv1.DefaultApi, error) {
 		},
 	}
 	config.BasePath = "https://" + c.Company + ".logicmonitor.com/santaba/rest"
+	config.UserAgent = "terraform-provider-logicmonitor"
 
 	api := lmv1.NewDefaultApi()
 	api.Configuration = config
