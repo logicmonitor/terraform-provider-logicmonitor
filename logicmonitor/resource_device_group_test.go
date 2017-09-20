@@ -84,7 +84,7 @@ func testDeviceGroupExistsHelper(s *terraform.State, client *lmv1.DefaultApi) er
 }
 
 const testAccCheckLogicMonitorDeviceGroup = `
-resource "logicmonitor_devicegroup" "group1" {
+resource "logicmonitor_device_group" "group1" {
     name = "NewGroup24"
     disable_alerting = true
     description = "testing group"

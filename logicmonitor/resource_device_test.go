@@ -63,14 +63,14 @@ const testAccCheckLogicMonitorDevice = `
 		ip_addr = "10.32.12.34"
 		display_name = "testing"
 		disable_alerting = true
-		collector = "${data.logicmonitor_findcollectors.collectors.id}"
+		collector = "${data.logicmonitor_collectors.collectors.id}"
 		properties {
 	 		"app" = "haproxy"
 	 		"system.categories" = "a,b,c,d"
 		}
 	}
 
-	data "logicmonitor_findcollectors" "collectors" {
+	data "logicmonitor_collectors" "collectors" {
 	  most_recent = true
 	}
 	`

@@ -2,10 +2,10 @@ package logicmonitor
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 	"strings"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/hashicorp/terraform/helper/schema"
 	lmv1 "github.com/logicmonitor/lm-sdk-go"
 )
@@ -73,7 +73,7 @@ func findCollectors(d *schema.ResourceData, m interface{}) error {
 
 	if (d.Get("most_recent").(bool)) == true {
 		for _, e := range restCollectorPaginationResponse.Data.Items {
-			log.Infof("Found collector with filter %s", filter)
+			log.Printf("Found collector with filter %s", filter)
 			if !e.IsDown {
 				collectorIds = append(collectorIds, strconv.Itoa(int(e.Id)))
 				break
@@ -81,7 +81,7 @@ func findCollectors(d *schema.ResourceData, m interface{}) error {
 		}
 	} else {
 		for _, e := range restCollectorPaginationResponse.Data.Items {
-			log.Infof("Found collector with filter with status %s", e.IsDown)
+			log.Printf("Found collector with filter with status %v", e.IsDown)
 			if !e.IsDown {
 				collectorIds = append(collectorIds, strconv.Itoa(int(e.Id)))
 			}

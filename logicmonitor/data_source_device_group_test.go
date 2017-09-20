@@ -48,7 +48,7 @@ func testAccCheckDeviceGroupID(n string) resource.TestCheckFunc {
 }
 
 const testAccCheckLogicMonitorDeviceGroupDataSourceConfig = `
-resource "logicmonitor_devicegroup" "group1" {
+resource "logicmonitor_device_group" "group1" {
     name = "KB824"
     disable_alerting = true
     description = "testing group"
@@ -59,11 +59,11 @@ resource "logicmonitor_devicegroup" "group1" {
     }
 }
 
-data "logicmonitor_finddevicegroups" "devicegroups" {
+data "logicmonitor_device_group" "devicegroups" {
   filters {
     "property" = "name"
     "operator" = ":"
-    "value" = "${logicmonitor_devicegroup.group1.name}"
+    "value" = "${logicmonitor_device_group.group1.name}"
   }
 }
 `

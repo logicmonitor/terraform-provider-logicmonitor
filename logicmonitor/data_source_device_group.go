@@ -2,10 +2,10 @@ package logicmonitor
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 	"strings"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/hashicorp/terraform/helper/schema"
 	lmv1 "github.com/logicmonitor/lm-sdk-go"
 )
@@ -75,7 +75,7 @@ func findDeviceGroup(d *schema.ResourceData, m interface{}) error {
 
 	var deviceIds []string
 	for _, d := range restDeviceGroupPaginationResponse.Data.Items {
-		log.Infof("Found device group with filter %q", filter)
+		log.Printf("Found device group with filter %q", filter)
 		deviceIds = append(deviceIds, strconv.Itoa(int(d.Id)))
 	}
 

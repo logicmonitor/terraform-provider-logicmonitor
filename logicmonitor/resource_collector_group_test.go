@@ -80,7 +80,7 @@ func testCollectorGroupExistsHelper(s *terraform.State, client *lmv1.DefaultApi)
 }
 
 const testAccCheckLogicMonitorConfigCollectorGroup = `
-resource "logicmonitor_collectorgroup" "group1" {
+resource "logicmonitor_collector_group" "group1" {
     name = "collectorGroupTest"
     description = "testing group"
 }

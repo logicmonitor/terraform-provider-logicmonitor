@@ -2,12 +2,32 @@ package logicmonitor
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/hashicorp/terraform/helper/schema"
 	lmv1 "github.com/logicmonitor/lm-sdk-go"
 )
+
+func resourceCollectorGroup() *schema.Resource {
+	return &schema.Resource{
+		Create: addCollectorGroup,
+		Read:   readCollectorGroup,
+		Update: updateCollectorGroup,
+		Delete: deleteCollectorGroup,
+
+		Schema: map[string]*schema.Schema{
+			"name": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"description": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+		},
+	}
+}
 
 //resource function to add collector group
 func addCollectorGroup(d *schema.ResourceData, m interface{}) error {
@@ -30,12 +50,12 @@ func addCollectorGroup(d *schema.ResourceData, m interface{}) error {
 // function to sync collector group data
 func readCollectorGroup(d *schema.ResourceData, m interface{}) error {
 	client := m.(*lmv1.DefaultApi)
-	id, a := strconv.Atoi(d.Id())
-	if a != nil {
-		log.Error(a)
+	id, err := strconv.Atoi(d.Id())
+	if err != nil {
+		return err
 	}
 	restCollectorGroupResponse, apiResponse, e := client.GetCollectorGroupById(int32(id), "")
-	err := checkStatus(restCollectorGroupResponse.Status, restCollectorGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+	err = checkStatus(restCollectorGroupResponse.Status, restCollectorGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
 	if err != nil {
 		fmt.Printf("Failed to find collector group %q", err)
 		d.SetId("")
@@ -52,7 +72,7 @@ func updateCollectorGroup(d *schema.ResourceData, m interface{}) error {
 	// get Id
 	id, a := strconv.Atoi(d.Id())
 	if a != nil {
-		log.Error(a)
+		return a
 	}
 
 	// list of available properties
@@ -84,36 +104,17 @@ func updateCollectorGroup(d *schema.ResourceData, m interface{}) error {
 // function to delete collector groups
 func deleteCollectorGroup(d *schema.ResourceData, m interface{}) error {
 	client := m.(*lmv1.DefaultApi)
-	groupID, a := strconv.Atoi(d.Id())
-	if a != nil {
-		log.Error(a)
-	}
-	restCollectorGroupResponse, apiResponse, e := client.DeleteCollectorGroupById(int32(groupID))
-	err := checkStatus(restCollectorGroupResponse.Status, restCollectorGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+	groupID, err := strconv.Atoi(d.Id())
 	if err != nil {
 		return err
+	}
+	restCollectorGroupResponse, apiResponse, e := client.DeleteCollectorGroupById(int32(groupID))
+	err = checkStatus(restCollectorGroupResponse.Status, restCollectorGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+	if err != nil {
+		log.Printf("Error deleting collector group %s", err)
+		d.SetId("")
 	}
 
 	d.SetId("")
 	return nil
-}
-
-func resourceCollectorGroup() *schema.Resource {
-	return &schema.Resource{
-		Create: addCollectorGroup,
-		Read:   readCollectorGroup,
-		Update: updateCollectorGroup,
-		Delete: deleteCollectorGroup,
-
-		Schema: map[string]*schema.Schema{
-			"name": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"description": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-		},
-	}
 }

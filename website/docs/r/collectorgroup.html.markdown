@@ -1,12 +1,12 @@
 ---
 layout: "logicmonitor"
-page_title: "LogicMonitor: logicmonitor_collectorgroup"
-sidebar_current: "docs-logicmonitor-resource-collectorgroup"
+page_title: "LogicMonitor: logicmonitor_collector_group"
+sidebar_current: "docs-logicmonitor-resource-collector-group"
 description: |-
   Provides a LogicMonitor collector group resource. This can be used to create and manage LogicMonitor users
 ---
 
-# logicmonitor_collectorgroup
+# logicmonitor_collector_group
 
 Provides a LogicMonitor collector group resource. This can be used to create and manage LogicMonitor users
 
@@ -14,7 +14,7 @@ Provides a LogicMonitor collector group resource. This can be used to create and
 
 ```hcl
 # Create a new LogicMonitor collector group
-resource "logicmonitor_collectorgroup" "group1" {
+resource "logicmonitor_collector_group" "group1" {
   name  = "collector_group_1"
   description = "a new test group"
 }
@@ -24,5 +24,5 @@ resource "logicmonitor_collectorgroup" "group1" {
 
 The following arguments are supported:
 
-* `name` - (Optional) Set description of collector group
-* `description` - (Required) Name of collector group
+* `name` - (Required) Name of collector group
+* `description` - (Optional) Set description of collector group
