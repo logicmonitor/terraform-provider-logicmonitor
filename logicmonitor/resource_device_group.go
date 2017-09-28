@@ -1,7 +1,6 @@
 package logicmonitor
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -15,9 +14,6 @@ func resourceDeviceGroup() *schema.Resource {
 		Read:   readDeviceGroup,
 		Update: updateDeviceGroup,
 		Delete: deleteDeviceGroup,
-		Importer: &schema.ResourceImporter{
-			State: resourceDeviceGroupStateImporter,
-		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
@@ -159,31 +155,4 @@ func deleteDeviceGroup(d *schema.ResourceData, m interface{}) error {
 	}
 	d.SetId("")
 	return nil
-}
-
-func resourceDeviceGroupStateImporter(d *schema.ResourceData, m interface{}) ([]*schema.ResourceData, error) {
-	client := m.(*lmv1.DefaultApi)
-
-	// currently I just set it to add FullPath, I can give it the option later of specifying entire sets of groups if needed
-	filter := fmt.Sprintf("fullPath:%s", d.Id())
-
-	//looks for device Group
-	restDeviceGroupPaginationResponse, apiResponse, e := client.GetDeviceGroupList("id,name", 50, 0, filter)
-	err := checkStatus(restDeviceGroupPaginationResponse.Status, restDeviceGroupPaginationResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
-	if err != nil {
-		return nil, err
-	}
-
-	deviceIds := strconv.Itoa(int(restDeviceGroupPaginationResponse.Data.Items[0].Id))
-	name := restDeviceGroupPaginationResponse.Data.Items[0].Name
-
-	if len(deviceIds) > 0 {
-		d.Set("disable_alerting", true)
-		d.Set("name", name)
-		d.SetId(deviceIds)
-	} else {
-		err := fmt.Errorf("Found no device groups with filter %s", filter)
-		return nil, err
-	}
-	return []*schema.ResourceData{d}, nil
 }
