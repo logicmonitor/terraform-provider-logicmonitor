@@ -17,8 +17,7 @@ Provides a LogicMonitor device resource. This can be used to create and manage L
 resource "logicmonitor_device" "host" {
   ip_addr = "10.32.12.18"
   disable_alerting = true
-  collector = "123"
-  hostgroup_id = "2"
+  collector = "2"
   properties {
    "app" = "haproxy"
    "system.categories" = "a,b,c,d"
@@ -27,24 +26,25 @@ resource "logicmonitor_device" "host" {
 ```
 
 ```hcl
-# Create a new LogicMonitor device with some data source lookups
+# Create a new LogicMonitor device and device group with some data source lookups and computed attributes.
 resource "logicmonitor_device" "host" {
   ip_addr = "10.32.12.18"
   disable_alerting = true
   collector = "${data.logicmonitor_collectors.collectors.id}"
-  hostgroup_id = "${logicmonitor_device_group.devicegroups.id}"
+  hostgroup_id = "${logicmonitor_device_group.group1.id}"
   properties {
    "app" = "haproxy"
    "system.categories" = "a,b,c,d"
   }
 }
 
-data "logicmonitor_device_group" "devicegroups" {
-  filters {
-    "property" = "name"
-    "operator" = "~"
-    "value" = "Mesos"
-  },
+resource "logicmonitor_device_group" "group1" {
+    name = "newgroup"
+    properties {
+     "system.categories" = "ec2"
+     "jmx.port" = "3008"
+     "snmp.version" = "v2c"
+    }
 }
 
 data "logicmonitor_collectors" "collectors" {

@@ -34,19 +34,11 @@ resource "logicmonitor_device" "host" {
 }
 
 resource "logicmonitor_device_group" "group1" {
-    name = "NewGroup24"
+    name = "NewGroup"
     properties {
-     "app.user" = "test"
-     "app.pass" = "XXXXXX"
+     "jmx.port" = "9003"
+     "system.categories" = "ec2"
     }
-}
-
-data "logicmonitor_device_group" "devicegroups" {
-  filters {
-    "property" = "name"
-    "operator" = "~"
-    "value" = "Mesos"
-  },
 }
 
 data "logicmonitor_collectors" "collectors" {

@@ -15,6 +15,9 @@ func resourceDeviceGroup() *schema.Resource {
 		Read:   readDeviceGroup,
 		Update: updateDeviceGroup,
 		Delete: deleteDeviceGroup,
+		Importer: &schema.ResourceImporter{
+			State: resourceDeviceGroupStateImporter,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
@@ -76,11 +79,30 @@ func readDeviceGroup(d *schema.ResourceData, m interface{}) error {
 	restDeviceGroupResponse, apiResponse, e := client.GetDeviceGroupById(int32(id), "")
 	err = checkStatus(restDeviceGroupResponse.Status, restDeviceGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
 	if err != nil {
-		fmt.Printf("Failed to find device group %q", err)
+		log.Printf("Failed to find device group %q", err)
 		d.SetId("")
 		return nil
 	}
 
+	// known issue with v1 Go SDK, fix in v2
+	if restDeviceGroupResponse.Data.ParentId == 1 {
+		log.Printf("Host Group already at root level")
+	} else {
+		d.Set("parent_id", restDeviceGroupResponse.Data.ParentId)
+	}
+
+	d.Set("name", restDeviceGroupResponse.Data.Name)
+	d.Set("description", restDeviceGroupResponse.Data.Description)
+	d.Set("disable_alerting", restDeviceGroupResponse.Data.DisableAlerting)
+	d.Set("applies_to", restDeviceGroupResponse.Data.AppliesTo)
+
+	properties := make(map[string]string)
+	props := restDeviceGroupResponse.Data.CustomProperties
+	for _, v := range props {
+		properties[v.Name] = v.Value
+	}
+
+	d.Set("properties", properties)
 	return nil
 }
 
@@ -137,4 +159,31 @@ func deleteDeviceGroup(d *schema.ResourceData, m interface{}) error {
 	}
 	d.SetId("")
 	return nil
+}
+
+func resourceDeviceGroupStateImporter(d *schema.ResourceData, m interface{}) ([]*schema.ResourceData, error) {
+	client := m.(*lmv1.DefaultApi)
+
+	// currently I just set it to add FullPath, I can give it the option later of specifying entire sets of groups if needed
+	filter := fmt.Sprintf("fullPath:%s", d.Id())
+
+	//looks for device Group
+	restDeviceGroupPaginationResponse, apiResponse, e := client.GetDeviceGroupList("id,name", 50, 0, filter)
+	err := checkStatus(restDeviceGroupPaginationResponse.Status, restDeviceGroupPaginationResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+	if err != nil {
+		return nil, err
+	}
+
+	deviceIds := strconv.Itoa(int(restDeviceGroupPaginationResponse.Data.Items[0].Id))
+	name := restDeviceGroupPaginationResponse.Data.Items[0].Name
+
+	if len(deviceIds) > 0 {
+		d.Set("disable_alerting", true)
+		d.Set("name", name)
+		d.SetId(deviceIds)
+	} else {
+		err := fmt.Errorf("Found no device groups with filter %s", filter)
+		return nil, err
+	}
+	return []*schema.ResourceData{d}, nil
 }

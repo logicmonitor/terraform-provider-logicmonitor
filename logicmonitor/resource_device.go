@@ -1,7 +1,6 @@
 package logicmonitor
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -80,10 +79,29 @@ func readDevice(d *schema.ResourceData, m interface{}) error {
 	restResponse, apiResponse, e := client.GetDeviceById(int32(id), "")
 	err = checkStatus(restResponse.Status, restResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
 	if err != nil {
-		fmt.Printf("Failed to find collector group %q", err)
+		log.Printf("Failed to find collector group %q", err)
 		d.SetId("")
 		return nil
 	}
+
+	if restResponse.Data.DisplayName == restResponse.Data.Name || restResponse.Data.DisplayName == "" {
+		log.Printf("Don't need to set displayname")
+	} else {
+		d.Set("display_name", restResponse.Data.DisplayName)
+	}
+
+	d.Set("ip_addr", restResponse.Data.Name)
+	d.Set("collector", restResponse.Data.PreferredCollectorId)
+	d.Set("disable_alerting", restResponse.Data.DisableAlerting)
+	d.Set("description", restResponse.Data.Description)
+	d.Set("hostgroup_id", restResponse.Data.HostGroupIds)
+
+	properties := make(map[string]string)
+	props := restResponse.Data.CustomProperties
+	for _, v := range props {
+		properties[v.Name] = v.Value
+	}
+	d.Set("properties", properties)
 
 	return nil
 }
