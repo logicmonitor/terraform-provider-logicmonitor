@@ -1,7 +1,6 @@
 package logicmonitor
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -76,11 +75,30 @@ func readDeviceGroup(d *schema.ResourceData, m interface{}) error {
 	restDeviceGroupResponse, apiResponse, e := client.GetDeviceGroupById(int32(id), "")
 	err = checkStatus(restDeviceGroupResponse.Status, restDeviceGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
 	if err != nil {
-		fmt.Printf("Failed to find device group %q", err)
+		log.Printf("Failed to find device group %q", err)
 		d.SetId("")
 		return nil
 	}
 
+	// known issue with v1 Go SDK, fix in v2
+	if restDeviceGroupResponse.Data.ParentId == 1 {
+		log.Printf("Host Group already at root level")
+	} else {
+		d.Set("parent_id", restDeviceGroupResponse.Data.ParentId)
+	}
+
+	d.Set("name", restDeviceGroupResponse.Data.Name)
+	d.Set("description", restDeviceGroupResponse.Data.Description)
+	d.Set("disable_alerting", restDeviceGroupResponse.Data.DisableAlerting)
+	d.Set("applies_to", restDeviceGroupResponse.Data.AppliesTo)
+
+	properties := make(map[string]string)
+	props := restDeviceGroupResponse.Data.CustomProperties
+	for _, v := range props {
+		properties[v.Name] = v.Value
+	}
+
+	d.Set("properties", properties)
 	return nil
 }
 

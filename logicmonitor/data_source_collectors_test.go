@@ -20,9 +20,9 @@ func TestAccLogicMonitorCollectorDataSource(t *testing.T) {
 			{
 				Config: testAccLogicMonitorCollectorDataSourceConfig,
 				Check: resource.ComposeTestCheckFunc(
-					testCollectorExists("data.logicmonitor_findcollectors.collectors"),
+					testCollectorExists("data.logicmonitor_collectors.collectors"),
 					resource.TestCheckResourceAttr(
-						"data.logicmonitor_findcollectors.collectors", "most_recent", "true"),
+						"data.logicmonitor_collectors.collectors", "most_recent", "true"),
 				),
 			},
 		},

@@ -18,15 +18,15 @@ func TestAccLogicMonitorDeviceGroup(t *testing.T) {
 			{
 				Config: testAccCheckLogicMonitorDeviceGroup,
 				Check: resource.ComposeTestCheckFunc(
-					testDeviceGroupExists("logicmonitor_devicegroup.group1"),
+					testDeviceGroupExists("logicmonitor_device_group.group1"),
 					resource.TestCheckResourceAttr(
-						"logicmonitor_devicegroup.group1", "name", "NewGroup24"),
+						"logicmonitor_device_group.group1", "name", "NewGroup"),
 					resource.TestCheckResourceAttr(
-						"logicmonitor_devicegroup.group1", "disable_alerting", "true"),
+						"logicmonitor_device_group.group1", "disable_alerting", "true"),
 					resource.TestCheckResourceAttr(
-						"logicmonitor_devicegroup.group1", "properties.group", "test"),
+						"logicmonitor_device_group.group1", "properties.group", "test"),
 					resource.TestCheckResourceAttr(
-						"logicmonitor_devicegroup.group1", "properties.system.categories", "a,b,c,d"),
+						"logicmonitor_device_group.group1", "properties.system.categories", "a,b,c,d"),
 				),
 			},
 		},
@@ -85,7 +85,7 @@ func testDeviceGroupExistsHelper(s *terraform.State, client *lmv1.DefaultApi) er
 
 const testAccCheckLogicMonitorDeviceGroup = `
 resource "logicmonitor_device_group" "group1" {
-    name = "NewGroup24"
+    name = "NewGroup"
     disable_alerting = true
     description = "testing group"
     applies_to = "system.displayname =~ \"test\""

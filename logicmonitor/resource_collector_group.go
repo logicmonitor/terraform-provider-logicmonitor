@@ -1,7 +1,6 @@
 package logicmonitor
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -57,10 +56,14 @@ func readCollectorGroup(d *schema.ResourceData, m interface{}) error {
 	restCollectorGroupResponse, apiResponse, e := client.GetCollectorGroupById(int32(id), "")
 	err = checkStatus(restCollectorGroupResponse.Status, restCollectorGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
 	if err != nil {
-		fmt.Printf("Failed to find collector group %q", err)
+		log.Printf("Failed to find collector group %q", err)
 		d.SetId("")
 		return nil
 	}
+
+	d.Set("name", restCollectorGroupResponse.Data.Name)
+	d.Set("description", restCollectorGroupResponse.Data.Description)
+
 	return nil
 }
 

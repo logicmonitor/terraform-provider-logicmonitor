@@ -20,7 +20,7 @@ func TestAccCheckLogicMonitorDeviceGroupDataSource(t *testing.T) {
 			{
 				Config: testAccCheckLogicMonitorDeviceGroupDataSourceConfig,
 				Check: resource.ComposeTestCheckFunc(
-					testAccCheckDeviceGroupID("data.logicmonitor_finddevicegroups.devicegroups"),
+					testAccCheckDeviceGroupID("data.logicmonitor_device_group.devicegroups"),
 				),
 			},
 		},

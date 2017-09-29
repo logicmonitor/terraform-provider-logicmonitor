@@ -25,6 +25,8 @@ func TestAccLogicMonitorDevices(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"logicmonitor_device.device1", "disable_alerting", "true"),
 					resource.TestCheckResourceAttr(
+						"logicmonitor_device.device1", "hostgroup_id", "1"),
+					resource.TestCheckResourceAttr(
 						"logicmonitor_device.device1", "properties.app", "haproxy"),
 					resource.TestCheckResourceAttr(
 						"logicmonitor_device.device1", "properties.system.categories", "a,b,c,d"),
@@ -63,6 +65,7 @@ const testAccCheckLogicMonitorDevice = `
 		ip_addr = "10.32.12.34"
 		display_name = "testing"
 		disable_alerting = true
+		hostgroup_id = "1"
 		collector = "${data.logicmonitor_collectors.collectors.id}"
 		properties {
 	 		"app" = "haproxy"

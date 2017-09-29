@@ -15,7 +15,7 @@ Provides a LogicMonitor device group resource. This can be used to create and ma
 ```hcl
 # Create a new LogicMonitor device group
 resource "logicmonitor_device_group" "group" {
-    name = "NewGroup24"
+    name = "NewTestGroup"
     description = "new test group"
     properties {
      "group" = "test"
@@ -27,7 +27,8 @@ resource "logicmonitor_device_group" "group" {
 ```hcl
 # Create a new LogicMonitor dynamic device group
 resource "logicmonitor_device_group" "group1" {
-    name = "NewGroup25"
+    name = "NewDynamicGroup"
+    description = "new dynamic group"
     applies_to = "system.displayname =~ \"Prod\""
 }
 ```

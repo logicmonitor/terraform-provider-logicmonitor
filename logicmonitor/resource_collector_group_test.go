@@ -18,11 +18,11 @@ func TestAccLogicMonitorCollectorGroup(t *testing.T) {
 			{
 				Config: testAccCheckLogicMonitorConfigCollectorGroup,
 				Check: resource.ComposeTestCheckFunc(
-					testCollectorGroupExists("logicmonitor_collectorgroup.id"),
+					testCollectorGroupExists("logicmonitor_collector_group.id"),
 					resource.TestCheckResourceAttr(
-						"logicmonitor_collectorgroup.group1", "name", "collectorGroupTest"),
+						"logicmonitor_collector_group.group1", "name", "collectorGroupTest"),
 					resource.TestCheckResourceAttr(
-						"logicmonitor_collectorgroup.group1", "description", "testing group"),
+						"logicmonitor_collector_group.group1", "description", "testing group"),
 				),
 			},
 		},
