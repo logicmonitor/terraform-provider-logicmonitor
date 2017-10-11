@@ -1,7 +1,7 @@
 ---
 layout: "logicmonitor"
 page_title: "LogicMonitor: logicmonitor_device"
-sidebar_current: "docs-logicmonitor-resource-device"
+sidebar_current: "docs-logicmonitor-resource-device-x"
 description: |-
   Provides a LogicMonitor device resource. This can be used to create and manage LogicMonitor devices
 ---
