@@ -1,4 +1,4 @@
-## 1.0.0 (Unreleased)
+## 1.0.0 (October 11, 2017)
 
 NOTES:
 
