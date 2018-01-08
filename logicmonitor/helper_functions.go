@@ -3,6 +3,7 @@ package logicmonitor
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/hashicorp/terraform/helper/schema"
@@ -136,4 +137,10 @@ func remove(s []string, r string) []string {
 		}
 	}
 	return s
+}
+
+// check if entered string is numeric
+func checkID(s string) bool {
+	_, err := strconv.ParseFloat(s, 64)
+	return err == nil
 }
