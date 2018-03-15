@@ -577,5 +577,5 @@
 			"revisionTime": "2017-06-08T11:43:49Z"
 		}
 	],
-	"rootPath": "github.com/woz5999/terraform-provider-logicmonitor"
+	"rootPath": "github.com/terraform-providers/terraform-provider-logicmonitor"
 }
