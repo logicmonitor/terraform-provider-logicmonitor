@@ -118,7 +118,7 @@ func checkStatus(serverResponse int32, serverResponseMessage string, apiResponse
 	}
 
 	if serverResponse != 200 {
-		return fmt.Errorf("%s", serverResponseMessage)
+		return fmt.Errorf("%d error: %s", serverResponse, serverResponseMessage)
 	}
 
 	if err != nil {
