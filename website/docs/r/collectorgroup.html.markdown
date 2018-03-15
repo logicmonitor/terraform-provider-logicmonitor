@@ -3,12 +3,12 @@ layout: "logicmonitor"
 page_title: "LogicMonitor: logicmonitor_collector_group"
 sidebar_current: "docs-logicmonitor-resource-collector-group"
 description: |-
-  Provides a LogicMonitor collector group resource. This can be used to create and manage LogicMonitor users
+  Provides a LogicMonitor collector group resource. This can be used to create and manage LogicMonitor collector groups
 ---
 
 # logicmonitor_collector_group
 
-Provides a LogicMonitor collector group resource. This can be used to create and manage LogicMonitor users
+Provides a LogicMonitor collector group resource. This can be used to create and manage LogicMonitor collector groups
 
 ## Example Usage
 
