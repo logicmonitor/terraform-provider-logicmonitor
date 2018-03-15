@@ -35,7 +35,7 @@ type RestCollector struct {
 
 	UpdatedOn int64 `json:"updatedOn,omitempty"`
 
-	AutomaticUpgradeInfo AutomaticUpgradeInfo `json:"automaticUpgradeInfo,omitempty"`
+	AutomaticUpgradeInfo *AutomaticUpgradeInfo `json:"automaticUpgradeInfo,omitempty"`
 
 	NumberOfHosts int32 `json:"numberOfHosts,omitempty"`
 
@@ -45,7 +45,7 @@ type RestCollector struct {
 
 	LastSentNotificationOnLocal string `json:"lastSentNotificationOnLocal,omitempty"`
 
-	OnetimeUpgradeInfo OnetimeUpgradeInfo `json:"onetimeUpgradeInfo,omitempty"`
+	OnetimeUpgradeInfo *OnetimeUpgradeInfo `json:"onetimeUpgradeInfo,omitempty"`
 
 	WrapperConf string `json:"wrapperConf,omitempty"`
 
@@ -101,7 +101,7 @@ type RestCollector struct {
 
 	Acked bool `json:"acked,omitempty"`
 
-	OnetimeDowngradeInfo DowngradeInfo `json:"onetimeDowngradeInfo,omitempty"`
+	OnetimeDowngradeInfo *DowngradeInfo `json:"onetimeDowngradeInfo,omitempty"`
 
 	UpTime int64 `json:"upTime,omitempty"`
 
@@ -113,7 +113,7 @@ type RestCollector struct {
 
 	CreatedOnLocal string `json:"createdOnLocal,omitempty"`
 
-	EnableFailBack bool `json:"enableFailBack,omitempty"`
+	EnableFailBack bool `json:"enableFailBack"`
 
 	ResendIval int32 `json:"resendIval,omitempty"`
 

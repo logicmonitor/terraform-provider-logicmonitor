@@ -20,7 +20,7 @@ func TestAccLogicMonitorCollectorDataSource(t *testing.T) {
 			{
 				Config: testAccLogicMonitorCollectorDataSourceConfig,
 				Check: resource.ComposeTestCheckFunc(
-					testCollectorExists("data.logicmonitor_collectors.collectors"),
+					testDataSourceCollectorExists("data.logicmonitor_collectors.collectors"),
 					resource.TestCheckResourceAttr(
 						"data.logicmonitor_collectors.collectors", "most_recent", "true"),
 				),
@@ -29,7 +29,7 @@ func TestAccLogicMonitorCollectorDataSource(t *testing.T) {
 	})
 }
 
-func testCollectorExists(n string) resource.TestCheckFunc {
+func testDataSourceCollectorExists(n string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
 		rs, ok := s.RootModule().Resources[n]
 		if !ok {
@@ -41,7 +41,7 @@ func testCollectorExists(n string) resource.TestCheckFunc {
 		}
 
 		client := testAccProvider.Meta().(*lmv1.DefaultApi)
-		if err := testCollectorExistsHelper(s, client); err != nil {
+		if err := testDataSourceCollectorExistsHelper(s, client); err != nil {
 			return err
 		}
 
@@ -49,7 +49,7 @@ func testCollectorExists(n string) resource.TestCheckFunc {
 	}
 }
 
-func testCollectorExistsHelper(s *terraform.State, client *lmv1.DefaultApi) error {
+func testDataSourceCollectorExistsHelper(s *terraform.State, client *lmv1.DefaultApi) error {
 	for _, r := range s.RootModule().Resources {
 		id, e := strconv.Atoi(r.Primary.ID)
 		if e != nil {
