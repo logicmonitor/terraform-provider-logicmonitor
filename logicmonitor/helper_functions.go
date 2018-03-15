@@ -43,14 +43,14 @@ func getFilters(d *schema.ResourceData) (t string) {
 // get the filters for collector lookup
 func getCollectorFilters(d *schema.ResourceData) (t string) {
 	m := d.Get("filters").(*schema.Set)
-	var collectorIds []string
+	var filters []string
 	for _, v := range m.List() {
 		p := v.(map[string]interface{})
 		if p["property"].(string) != "" {
-			collectorIds = append(collectorIds, fmt.Sprintf("%s%s%s", p["property"].(string), p["operator"].(string), p["value"].(string)))
+			filters = append(filters, fmt.Sprintf("%s%s%s", p["property"].(string), p["operator"].(string), p["value"].(string)))
 		}
 	}
-	t = strings.Join(collectorIds, ",")
+	t = strings.Join(filters, ",")
 	return
 }
 
