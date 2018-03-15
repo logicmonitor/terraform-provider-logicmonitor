@@ -28,6 +28,7 @@ func Provider() terraform.ResourceProvider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
+			"logicmonitor_collector":       resourceCollector(),
 			"logicmonitor_collector_group": resourceCollectorGroup(),
 			"logicmonitor_device":          resourceDevices(),
 			"logicmonitor_device_group":    resourceDeviceGroup(),
