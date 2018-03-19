@@ -1,4 +1,4 @@
-## 1.0.1 (Unreleased)
+## 1.1.0 (Unreleased)
 
 FEATURES:
 * **New Resource:** `logicmonitor_collector` [GH-1]
