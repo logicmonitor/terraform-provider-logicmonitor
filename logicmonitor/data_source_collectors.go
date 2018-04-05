@@ -13,7 +13,7 @@ import (
 // terraform data source to look up collectors
 func dataSourceFindCollectors() *schema.Resource {
 	return &schema.Resource{
-		Read: findCollectors,
+		Read: findDataSourceCollectors,
 
 		Schema: map[string]*schema.Schema{
 			"filters": {
@@ -57,7 +57,7 @@ func dataSourceFindCollectors() *schema.Resource {
 }
 
 // function to find collectors with certain filters
-func findCollectors(d *schema.ResourceData, m interface{}) error {
+func findDataSourceCollectors(d *schema.ResourceData, m interface{}) error {
 	client := m.(*lmv1.DefaultApi)
 	filter := getCollectorFilters(d)
 	size := int32(d.Get("size").(int))

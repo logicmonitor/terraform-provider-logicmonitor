@@ -489,10 +489,10 @@
 			"revisionTime": "2017-06-13T17:33:17Z"
 		},
 		{
-			"checksumSHA1": "fFTX8f2r6ELjZcE97dpTC9Bkcn4=",
+			"checksumSHA1": "oQ0yNFtR+7yIVL6wWy+Ow3/b2kM=",
 			"path": "github.com/logicmonitor/lm-sdk-go",
-			"revision": "1d4cdc64dff27712f79266283a6c788d4af26fd1",
-			"revisionTime": "2017-06-09T22:04:08Z"
+			"revision": "cc3e89aec833b7d628e98fb98057cd4ed7f9ad38",
+			"revisionTime": "2018-03-15T20:34:56Z"
 		},
 		{
 			"checksumSHA1": "guxbLo8KHHBeM0rzou4OTzzpDNs=",

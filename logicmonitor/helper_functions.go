@@ -43,14 +43,14 @@ func getFilters(d *schema.ResourceData) (t string) {
 // get the filters for collector lookup
 func getCollectorFilters(d *schema.ResourceData) (t string) {
 	m := d.Get("filters").(*schema.Set)
-	var collectorIds []string
+	var filters []string
 	for _, v := range m.List() {
 		p := v.(map[string]interface{})
 		if p["property"].(string) != "" {
-			collectorIds = append(collectorIds, fmt.Sprintf("%s%s%s", p["property"].(string), p["operator"].(string), p["value"].(string)))
+			filters = append(filters, fmt.Sprintf("%s%s%s", p["property"].(string), p["operator"].(string), p["value"].(string)))
 		}
 	}
-	t = strings.Join(collectorIds, ",")
+	t = strings.Join(filters, ",")
 	return
 }
 
@@ -112,13 +112,28 @@ func makeDeviceCollectorGroupObject(d *schema.ResourceData) (output lmv1.RestCol
 	return
 }
 
+// add collector helper functions
+func makeDeviceCollectorObject(d *schema.ResourceData) lmv1.RestCollector {
+	output := lmv1.RestCollector{
+		BackupAgentId:                   int32(d.Get("backup_collector_id").(int)),
+		CollectorGroupId:                int32(d.Get("collector_group_id").(int)),
+		Description:                     d.Get("description").(string),
+		EnableFailBack:                  d.Get("enable_failback").(bool),
+		EnableFailOverOnCollectorDevice: d.Get("enable_collector_device_failover").(bool),
+		EscalatingChainId:               int32(d.Get("escalation_chain_id").(int)),
+		ResendIval:                      int32(d.Get("resend_interval").(int)),
+		SuppressAlertClear:              d.Get("suppress_alert_clear").(bool),
+	}
+	return output
+}
+
 func checkStatus(serverResponse int32, serverResponseMessage string, apiResponse int, apiResponseMessage string, err error) error {
 	if apiResponse != http.StatusOK {
 		return fmt.Errorf("Api Response Error: %s", apiResponseMessage)
 	}
 
 	if serverResponse != 200 {
-		return fmt.Errorf("%s", serverResponseMessage)
+		return fmt.Errorf("%d error: %s", serverResponse, serverResponseMessage)
 	}
 
 	if err != nil {
