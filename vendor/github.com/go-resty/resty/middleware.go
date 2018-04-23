@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2017 Jeevanandam M (jeeva@myjeeva.com), All rights reserved.
+// Copyright (c) 2015-2018 Jeevanandam M (jeeva@myjeeva.com), All rights reserved.
 // resty source code and usage is governed by a MIT style
 // license that can be found in the LICENSE file.
 
@@ -6,7 +6,6 @@ package resty
 
 import (
 	"bytes"
-	"encoding/json"
 	"encoding/xml"
 	"errors"
 	"fmt"
@@ -18,11 +17,12 @@ import (
 	"path/filepath"
 	"reflect"
 	"strings"
+	"time"
 )
 
-//
+//‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // Request Middleware(s)
-//
+//___________________________________
 
 func parseRequestURL(c *Client, r *Request) error {
 	// Parsing request URL
@@ -31,21 +31,20 @@ func parseRequestURL(c *Client, r *Request) error {
 		return err
 	}
 
+	// GitHub #103 Path Params
+	reqURL.Path = composeRequestURL(reqURL.Path, c, r)
+
 	// If Request.Url is relative path then added c.HostUrl into
 	// the request URL otherwise Request.Url will be used as-is
 	if !reqURL.IsAbs() {
-		if !strings.HasPrefix(r.URL, "/") {
-			r.URL = "/" + r.URL
-		}
-
-		reqURL, err = url.Parse(c.HostURL + r.URL)
+		reqURL, err = url.Parse(c.HostURL + reqURL.String())
 		if err != nil {
 			return err
 		}
 	}
 
 	// Adding Query Param
-	query := reqURL.Query()
+	query := make(url.Values)
 	for k, v := range c.QueryParam {
 		for _, iv := range v {
 			query.Add(k, iv)
@@ -62,28 +61,41 @@ func parseRequestURL(c *Client, r *Request) error {
 		}
 	}
 
-	reqURL.RawQuery = query.Encode()
+	// GitHub #123 Preserve query string order partially.
+	// Since not feasible in `SetQuery*` resty methods, because
+	// standard package `url.Encode(...)` sorts the query params
+	// alphabetically
+	if len(query) > 0 {
+		if IsStringEmpty(reqURL.RawQuery) {
+			reqURL.RawQuery = query.Encode()
+		} else {
+			reqURL.RawQuery = reqURL.RawQuery + "&" + query.Encode()
+		}
+	}
+
 	r.URL = reqURL.String()
 
 	return nil
 }
 
 func parseRequestHeader(c *Client, r *Request) error {
-	hdr := http.Header{}
+	hdr := make(http.Header)
 	for k := range c.Header {
-		hdr.Set(k, c.Header.Get(k))
+		hdr[k] = append(hdr[k], c.Header[k]...)
 	}
+
 	for k := range r.Header {
-		hdr.Set(k, r.Header.Get(k))
+		hdr.Del(k)
+		hdr[k] = append(hdr[k], r.Header[k]...)
 	}
 
 	if IsStringEmpty(hdr.Get(hdrUserAgentKey)) {
 		hdr.Set(hdrUserAgentKey, fmt.Sprintf(hdrUserAgentValue, Version))
-	} else {
-		hdr.Set("X-"+hdrUserAgentKey, fmt.Sprintf(hdrUserAgentValue, Version))
 	}
 
-	if IsStringEmpty(hdr.Get(hdrAcceptKey)) && !IsStringEmpty(hdr.Get(hdrContentTypeKey)) {
+	ct := hdr.Get(hdrContentTypeKey)
+	if IsStringEmpty(hdr.Get(hdrAcceptKey)) && !IsStringEmpty(ct) &&
+		(IsJSONType(ct) || IsXMLType(ct)) {
 		hdr.Set(hdrAcceptKey, hdr.Get(hdrContentTypeKey))
 	}
 
@@ -93,8 +105,7 @@ func parseRequestHeader(c *Client, r *Request) error {
 }
 
 func parseRequestBody(c *Client, r *Request) (err error) {
-	if isPayloadSupported(r.Method) {
-
+	if isPayloadSupported(r.Method, c.AllowGetMethodPayload) {
 		// Handling Multipart
 		if r.isMultiPart && !(r.Method == MethodPatch) {
 			if err = handleMultipart(c, r); err != nil {
@@ -119,8 +130,6 @@ func parseRequestBody(c *Client, r *Request) (err error) {
 				return
 			}
 		}
-	} else {
-		r.Header.Del(hdrContentTypeKey)
 	}
 
 CL:
@@ -134,7 +143,11 @@ CL:
 
 func createHTTPRequest(c *Client, r *Request) (err error) {
 	if r.bodyBuf == nil {
-		r.RawRequest, err = http.NewRequest(r.Method, r.URL, nil)
+		if reader, ok := r.Body.(io.Reader); ok {
+			r.RawRequest, err = http.NewRequest(r.Method, r.URL, reader)
+		} else {
+			r.RawRequest, err = http.NewRequest(r.Method, r.URL, nil)
+		}
 	} else {
 		r.RawRequest, err = http.NewRequest(r.Method, r.URL, r.bodyBuf)
 	}
@@ -196,46 +209,46 @@ func addCredentials(c *Client, r *Request) error {
 func requestLogger(c *Client, r *Request) error {
 	if c.Debug {
 		rr := r.RawRequest
-		c.Log.Println()
-		c.disableLogPrefix()
-		c.Log.Println("---------------------- REQUEST LOG -----------------------")
-		c.Log.Printf("%s  %s  %s\n", r.Method, rr.URL.RequestURI(), rr.Proto)
-		c.Log.Printf("HOST   : %s", rr.URL.Host)
-		c.Log.Println("HEADERS:")
+		reqLog := "\n---------------------- REQUEST LOG -----------------------\n" +
+			fmt.Sprintf("%s  %s  %s\n", r.Method, rr.URL.RequestURI(), rr.Proto) +
+			fmt.Sprintf("HOST   : %s\n", rr.URL.Host) +
+			fmt.Sprintf("HEADERS:\n")
+
 		for h, v := range rr.Header {
-			c.Log.Printf("%25s: %v", h, strings.Join(v, ", "))
+			reqLog += fmt.Sprintf("%25s: %v\n", h, strings.Join(v, ", "))
 		}
-		c.Log.Printf("BODY   :\n%v", r.fmtBodyString())
-		c.Log.Println("----------------------------------------------------------")
-		c.enableLogPrefix()
+		reqLog += fmt.Sprintf("BODY   :\n%v\n", r.fmtBodyString()) +
+			"----------------------------------------------------------\n"
+
+		c.Log.Print(reqLog)
 	}
 
 	return nil
 }
 
-//
+//‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 // Response Middleware(s)
-//
+//___________________________________
 
 func responseLogger(c *Client, res *Response) error {
 	if c.Debug {
-		c.Log.Println()
-		c.disableLogPrefix()
-		c.Log.Println("---------------------- RESPONSE LOG -----------------------")
-		c.Log.Printf("STATUS 		: %s", res.Status())
-		c.Log.Printf("RECEIVED AT	: %v", res.ReceivedAt())
-		c.Log.Printf("RESPONSE TIME	: %v", res.Time())
-		c.Log.Println("HEADERS:")
+		resLog := "\n---------------------- RESPONSE LOG -----------------------\n" +
+			fmt.Sprintf("STATUS 		: %s\n", res.Status()) +
+			fmt.Sprintf("RECEIVED AT	: %v\n", res.ReceivedAt().Format(time.RFC3339Nano)) +
+			fmt.Sprintf("RESPONSE TIME	: %v\n", res.Time()) +
+			"HEADERS:\n"
+
 		for h, v := range res.Header() {
-			c.Log.Printf("%30s: %v", h, strings.Join(v, ", "))
+			resLog += fmt.Sprintf("%30s: %v\n", h, strings.Join(v, ", "))
 		}
 		if res.Request.isSaveResponse {
-			c.Log.Printf("BODY   :\n***** RESPONSE WRITTEN INTO FILE *****")
+			resLog += fmt.Sprintf("BODY   :\n***** RESPONSE WRITTEN INTO FILE *****\n")
 		} else {
-			c.Log.Printf("BODY   :\n%v", res.fmtBodyString())
+			resLog += fmt.Sprintf("BODY   :\n%v\n", res.fmtBodyString(c.debugBodySizeLimit))
 		}
-		c.Log.Println("----------------------------------------------------------")
-		c.enableLogPrefix()
+		resLog += "----------------------------------------------------------\n"
+
+		c.Log.Print(resLog)
 	}
 
 	return nil
@@ -243,12 +256,12 @@ func responseLogger(c *Client, res *Response) error {
 
 func parseResponseBody(c *Client, res *Response) (err error) {
 	// Handles only JSON or XML content type
-	ct := res.Header().Get(hdrContentTypeKey)
+	ct := firstNonEmpty(res.Header().Get(hdrContentTypeKey), res.Request.fallbackContentType)
 	if IsJSONType(ct) || IsXMLType(ct) {
 		// Considered as Result
 		if res.StatusCode() > 199 && res.StatusCode() < 300 {
 			if res.Request.Result != nil {
-				err = Unmarshal(ct, res.body, res.Request.Result)
+				err = Unmarshalc(c, ct, res.body, res.Request.Result)
 				return
 			}
 		}
@@ -261,7 +274,7 @@ func parseResponseBody(c *Client, res *Response) (err error) {
 			}
 
 			if res.Request.Error != nil {
-				err = Unmarshal(ct, res.body, res.Request.Error)
+				err = Unmarshalc(c, ct, res.body, res.Request.Error)
 			}
 		}
 	}
@@ -270,7 +283,7 @@ func parseResponseBody(c *Client, res *Response) (err error) {
 }
 
 func handleMultipart(c *Client, r *Request) (err error) {
-	r.bodyBuf = getBuffer()
+	r.bodyBuf = acquireBuffer()
 	w := multipart.NewWriter(r.bodyBuf)
 
 	for k, v := range c.FormData {
@@ -301,6 +314,15 @@ func handleMultipart(c *Client, r *Request) (err error) {
 		for _, f := range r.multipartFiles {
 			err = addFileReader(w, f)
 			if err != nil {
+				return
+			}
+		}
+	}
+
+	// GitHub #130 adding multipart field support with content type
+	if len(r.multipartFields) > 0 {
+		for _, mf := range r.multipartFields {
+			if err = addMultipartFormField(w, mf); err != nil {
 				return
 			}
 		}
@@ -351,21 +373,27 @@ func handleRequestBody(c *Client, r *Request) (err error) {
 	r.bodyBuf = nil
 
 	if reader, ok := r.Body.(io.Reader); ok {
-		r.bodyBuf = getBuffer()
-		_, err = r.bodyBuf.ReadFrom(reader)
+		if c.setContentLength || r.setContentLength { // keep backward compability
+			r.bodyBuf = acquireBuffer()
+			_, err = r.bodyBuf.ReadFrom(reader)
+			r.Body = nil
+		} else {
+			// Otherwise buffer less processing for `io.Reader`, sounds good.
+			return
+		}
 	} else if b, ok := r.Body.([]byte); ok {
 		bodyBytes = b
 	} else if s, ok := r.Body.(string); ok {
 		bodyBytes = []byte(s)
 	} else if IsJSONType(contentType) &&
 		(kind == reflect.Struct || kind == reflect.Map || kind == reflect.Slice) {
-		bodyBytes, err = json.Marshal(r.Body)
+		bodyBytes, err = c.JSONMarshal(r.Body)
 	} else if IsXMLType(contentType) && (kind == reflect.Struct) {
 		bodyBytes, err = xml.Marshal(r.Body)
 	}
 
 	if bodyBytes == nil && r.bodyBuf == nil {
-		err = errors.New("Unsupported 'Body' type/value")
+		err = errors.New("unsupported 'Body' type/value")
 	}
 
 	// if any errors during body bytes handling, return it
@@ -375,7 +403,8 @@ func handleRequestBody(c *Client, r *Request) (err error) {
 
 	// []byte into Buffer
 	if bodyBytes != nil && r.bodyBuf == nil {
-		r.bodyBuf = bytes.NewBuffer(bodyBytes)
+		r.bodyBuf = acquireBuffer()
+		_, _ = r.bodyBuf.Write(bodyBytes)
 	}
 
 	return
