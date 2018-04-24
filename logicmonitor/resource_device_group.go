@@ -1,6 +1,7 @@
 package logicmonitor
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 
@@ -14,6 +15,9 @@ func resourceDeviceGroup() *schema.Resource {
 		Read:   readDeviceGroup,
 		Update: updateDeviceGroup,
 		Delete: deleteDeviceGroup,
+		Importer: &schema.ResourceImporter{
+			State: resourceDeviceGroupStateImporter,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
@@ -155,4 +159,47 @@ func deleteDeviceGroup(d *schema.ResourceData, m interface{}) error {
 	}
 	d.SetId("")
 	return nil
+}
+
+// function to import device groups
+func resourceDeviceGroupStateImporter(d *schema.ResourceData, m interface{}) ([]*schema.ResourceData, error) {
+	client := m.(*lmv1.DefaultApi)
+
+	// if it is a groupId, we will add the group directly
+	if checkID(d.Id()) {
+		id, err := strconv.Atoi(d.Id())
+		if err != nil {
+			return nil, err
+		}
+		restDeviceGroupResponse, apiResponse, e := client.GetDeviceGroupById(int32(id), "")
+		err = checkStatus(restDeviceGroupResponse.Status, restDeviceGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+		if err != nil {
+			log.Printf("Failed to find device group %q", err)
+			return nil, err
+		}
+		d.Set("disable_alerting", restDeviceGroupResponse.Data.DisableAlerting)
+		d.Set("name", restDeviceGroupResponse.Data.Name)
+		d.SetId(d.Id())
+	} else {
+
+		// currently I just set it to add FullPath, I can give it the option later of specifying entire sets of groups if needed
+		filter := fmt.Sprintf("fullPath:%s", d.Id())
+
+		//looks for device Group
+		restDeviceGroupPaginationResponse, apiResponse, e := client.GetDeviceGroupList("id,name", 50, 0, filter)
+		err := checkStatus(restDeviceGroupPaginationResponse.Status, restDeviceGroupPaginationResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+		if err != nil {
+			return nil, err
+		}
+
+		if restDeviceGroupPaginationResponse.Data.Total > 0 {
+			d.Set("disable_alerting", restDeviceGroupPaginationResponse.Data.Items[0].DisableAlerting)
+			d.Set("name", restDeviceGroupPaginationResponse.Data.Items[0].Name)
+			d.SetId(strconv.Itoa(int(restDeviceGroupPaginationResponse.Data.Items[0].Id)))
+		} else {
+			err := fmt.Errorf("Found no device groups with filter %s", filter)
+			return nil, err
+		}
+	}
+	return []*schema.ResourceData{d}, nil
 }
