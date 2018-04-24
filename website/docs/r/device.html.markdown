@@ -62,3 +62,12 @@ The following arguments are supported:
 * `disable_alerting` - (Optional) The host is created with alerting disabled (default is true)
 * `hostgroup_id` - (Optional) The host group id that specifies which group the device belongs to (multiple host group ids can be added, represented by a comma separated string)
 * `properties` - (Optional) The properties associated with this device group. Any string value pair will work (see example).
+
+## Import
+
+Devices can be imported using their device id or ip address/dns name
+
+```
+$ terraform import logicmonitor_device.host 751
+$ terraform import logicmonitor_device.host server01.us-east-1.logicmonitor.net
+```
