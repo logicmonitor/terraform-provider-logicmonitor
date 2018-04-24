@@ -29,9 +29,9 @@ func TestAccLogicMonitorDeviceGroup_import(t *testing.T) {
 
 const testAccCheckLogicMonitorDeviceGroupImport = `
 resource "logicmonitor_device_group" "testgroup" {
-    name = "TestGroup"
+    name = "TestGroup123"
     disable_alerting = true
-    description = "testing group"
+    description = "testing group123"
     properties {
      "group" = "test"
      "system.categories" = "a,b,c,d"
