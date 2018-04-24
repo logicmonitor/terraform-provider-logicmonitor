@@ -43,3 +43,12 @@ The following arguments are supported:
 * `applies_to` - (Optional) The Applies to custom query for this group. Setting this field will make this a dynamic group.
 * `disable_alerting` - (Optional) Indicates whether alerting is disabled (true) or enabled (false) for this device group
 * `properties` - (Optional) The properties associated with this device group. Any string value pair will work (see example).
+
+## Import
+
+Device Groups can be imported using their group id or full path
+
+```
+$ terraform import logicmonitor_device_group.group1 451
+$ terraform import logicmonitor_device_group.group1 Production/SBA/Linux
+```
