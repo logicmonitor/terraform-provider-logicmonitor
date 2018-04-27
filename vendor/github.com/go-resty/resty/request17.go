@@ -1,6 +1,6 @@
 // +build go1.7 go1.8
 
-// Copyright (c) 2015-2016 Jeevanandam M (jeeva@myjeeva.com)
+// Copyright (c) 2015-2018 Jeevanandam M (jeeva@myjeeva.com)
 // 2016 Andrew Grigorev (https://github.com/ei-grad)
 // All rights reserved.
 // resty source code and usage is governed by a MIT style
@@ -36,15 +36,19 @@ type Request struct {
 	RawRequest *http.Request
 	SRV        *SRVRecord
 
-	client           *Client
-	bodyBuf          *bytes.Buffer
-	isMultiPart      bool
-	isFormData       bool
-	setContentLength bool
-	isSaveResponse   bool
-	outputFile       string
-	multipartFiles   []*File
-	ctx              context.Context
+	client              *Client
+	bodyBuf             *bytes.Buffer
+	isMultiPart         bool
+	isFormData          bool
+	setContentLength    bool
+	isSaveResponse      bool
+	outputFile          string
+	multipartFiles      []*File
+	multipartFields     []*multipartField
+	notParseResponse    bool
+	ctx                 context.Context
+	fallbackContentType string
+	pathParams          map[string]string
 }
 
 // SetContext method sets the context.Context for current Request. It allows

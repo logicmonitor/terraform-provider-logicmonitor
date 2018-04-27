@@ -1,6 +1,7 @@
 package logicmonitor
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 
@@ -14,6 +15,9 @@ func resourceDevices() *schema.Resource {
 		Read:   readDevice,
 		Update: updateDevice,
 		Delete: deleteDevice,
+		Importer: &schema.ResourceImporter{
+			State: resourceDeviceStateImporter,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"ip_addr": {
@@ -79,7 +83,7 @@ func readDevice(d *schema.ResourceData, m interface{}) error {
 	restResponse, apiResponse, e := client.GetDeviceById(int32(id), "")
 	err = checkStatus(restResponse.Status, restResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
 	if err != nil {
-		log.Printf("Failed to find collector group %q", err)
+		log.Printf("Failed to find device group %q", err)
 		d.SetId("")
 		return nil
 	}
@@ -159,4 +163,51 @@ func deleteDevice(d *schema.ResourceData, m interface{}) error {
 
 	d.SetId("")
 	return nil
+}
+
+// function to import devices
+func resourceDeviceStateImporter(d *schema.ResourceData, m interface{}) ([]*schema.ResourceData, error) {
+	client := m.(*lmv1.DefaultApi)
+
+	// if it is a deviceId, we will add the group directly
+	if checkID(d.Id()) {
+		id, err := strconv.Atoi(d.Id())
+		if err != nil {
+			return nil, err
+		}
+		restResponse, apiResponse, e := client.GetDeviceById(int32(id), "")
+		err = checkStatus(restResponse.Status, restResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+		if err != nil {
+			log.Printf("Failed to find device %q", err)
+			return nil, err
+		}
+		d.Set("ip_addr", restResponse.Data.Name)
+		d.Set("collector", restResponse.Data.PreferredCollectorId)
+		d.Set("disable_alerting", restResponse.Data.DisableAlerting)
+		d.Set("description", restResponse.Data.Description)
+		d.Set("hostgroup_id", restResponse.Data.HostGroupIds)
+	} else {
+
+		// currently set to add displayname
+		filter := fmt.Sprintf("name:%s", d.Id())
+
+		//looks for device Group
+		restResponse, apiResponse, e := client.GetDeviceList("", -1, 0, filter)
+		err := checkStatus(restResponse.Status, restResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+		if err != nil {
+			return nil, err
+		}
+
+		if restResponse.Data.Total > 0 {
+			d.Set("ip_addr", restResponse.Data.Items[0].Name)
+			d.Set("display_name", restResponse.Data.Items[0].DisplayName)
+			d.Set("collector", restResponse.Data.Items[0].PreferredCollectorId)
+			d.Set("disable_alerting", restResponse.Data.Items[0].DisableAlerting)
+			d.SetId(strconv.Itoa(int(restResponse.Data.Items[0].Id)))
+		} else {
+			err := fmt.Errorf("Found no device with filter %s", filter)
+			return nil, err
+		}
+	}
+	return []*schema.ResourceData{d}, nil
 }
