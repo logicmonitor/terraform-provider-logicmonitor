@@ -1,5 +1,4 @@
-## 1.2.1 (Unreleased)
-## 1.2.0 (April 27, 2018)
+## 1.2.0 (Unreleased)
 
 FEATURES:
 * **Import Functionality:** `logicmonitor_device` ([#4](https://github.com/terraform-providers/terraform-provider-logicmonitor/issues/4))
