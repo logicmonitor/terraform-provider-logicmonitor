@@ -1,12 +1,14 @@
 package logicmonitor
 
 import (
+	"log"
 	"strconv"
 	"testing"
 
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
-	lmv1 "github.com/logicmonitor/lm-sdk-go"
+	lmclient "github.com/logicmonitor/lm-sdk-go/client"
+	"github.com/logicmonitor/lm-sdk-go/client/lm"
 )
 
 func TestAccLogicMonitorDevices(t *testing.T) {
@@ -37,7 +39,7 @@ func TestAccLogicMonitorDevices(t *testing.T) {
 
 func testDeviceExists(n string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
-		client := testAccProvider.Meta().(*lmv1.DefaultApi)
+		client := testAccProvider.Meta().(*lmclient.LMSdkGo)
 		if err := testDeviceExistsHelper(s, client); err != nil {
 			return err
 		}
@@ -45,18 +47,19 @@ func testDeviceExists(n string) resource.TestCheckFunc {
 	}
 }
 
-func testDeviceExistsHelper(s *terraform.State, client *lmv1.DefaultApi) error {
+func testDeviceExistsHelper(s *terraform.State, client *lmclient.LMSdkGo) error {
 	deviceID := s.RootModule().Resources["logicmonitor_device.device1"]
 	id, e := strconv.Atoi(deviceID.Primary.ID)
 	if e != nil {
 		return e
 	}
-
-	restDeviceResponse, apiResponse, e := client.GetDeviceById(int32(id), "")
-	err := checkStatus(restDeviceResponse.Status, restDeviceResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+	params := lm.NewGetDeviceByIDParams()
+	params.SetID(int32(id))
+	restResponse, err := client.LM.GetDeviceByID(params)
 	if err != nil {
 		return err
 	}
+	log.Printf("update device response %v", restResponse)
 	return nil
 }
 

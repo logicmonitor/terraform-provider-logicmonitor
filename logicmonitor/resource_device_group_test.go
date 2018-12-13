@@ -1,12 +1,14 @@
 package logicmonitor
 
 import (
+	"log"
 	"strconv"
 	"testing"
 
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
-	lmv1 "github.com/logicmonitor/lm-sdk-go"
+	lmclient "github.com/logicmonitor/lm-sdk-go/client"
+	"github.com/logicmonitor/lm-sdk-go/client/lm"
 )
 
 func TestAccLogicMonitorDeviceGroup(t *testing.T) {
@@ -34,22 +36,23 @@ func TestAccLogicMonitorDeviceGroup(t *testing.T) {
 }
 
 func testDeviceGroupDestroy(s *terraform.State) error {
-	client := testAccProvider.Meta().(*lmv1.DefaultApi)
+	client := testAccProvider.Meta().(*lmclient.LMSdkGo)
 	if err := testCollectorGroupDestroyHelper(s, client); err != nil {
 		return err
 	}
 	return nil
 }
 
-func testDeviceGroupDestroyHelper(s *terraform.State, client *lmv1.DefaultApi) error {
+func testDeviceGroupDestroyHelper(s *terraform.State, client *lmclient.LMSdkGo) error {
 	for _, r := range s.RootModule().Resources {
 		id, e := strconv.Atoi(r.Primary.ID)
 		if e != nil {
 			return e
 		}
+		params := lm.NewDeleteDeviceGroupByIDParams()
+		params.SetID(int32(id))
 
-		restDeviceGroupResponse, apiResponse, e := client.DeleteDeviceGroupById(int32(id), false)
-		err := checkStatus(restDeviceGroupResponse.Status, restDeviceGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+		nil, err := client.LM.DeleteDeviceGroupByID(params)
 		if err != nil {
 			return err
 		}
@@ -59,7 +62,7 @@ func testDeviceGroupDestroyHelper(s *terraform.State, client *lmv1.DefaultApi) e
 
 func testDeviceGroupExists(n string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
-		client := testAccProvider.Meta().(*lmv1.DefaultApi)
+		client := testAccProvider.Meta().(*lmclient.LMSdkGo)
 		if err := testDeviceGroupExistsHelper(s, client); err != nil {
 			return err
 		}
@@ -67,18 +70,20 @@ func testDeviceGroupExists(n string) resource.TestCheckFunc {
 	}
 }
 
-func testDeviceGroupExistsHelper(s *terraform.State, client *lmv1.DefaultApi) error {
+func testDeviceGroupExistsHelper(s *terraform.State, client *lmclient.LMSdkGo) error {
 	for _, r := range s.RootModule().Resources {
 		id, e := strconv.Atoi(r.Primary.ID)
 		if e != nil {
 			return e
 		}
+		params := lm.NewGetDeviceGroupByIDParams()
+		params.SetID(int32(id))
 
-		restDeviceGroupResponse, apiResponse, e := client.GetDeviceGroupById(int32(id), "")
-		err := checkStatus(restDeviceGroupResponse.Status, restDeviceGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+		restDeviceGroupResponse, err := client.LM.GetDeviceGroupByID(params)
 		if err != nil {
 			return err
 		}
+		log.Printf("delete collector response %v", restDeviceGroupResponse)
 	}
 	return nil
 }
@@ -89,7 +94,6 @@ resource "logicmonitor_device_group" "group1" {
     disable_alerting = true
     description = "testing group"
     applies_to = "system.displayname =~ \"test\""
-    parent_id = 0
     properties {
      "group" = "test"
      "system.categories" = "a,b,c,d"

@@ -6,7 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
-	lmv1 "github.com/logicmonitor/lm-sdk-go"
+	lmclient "github.com/logicmonitor/lm-sdk-go/client"
 )
 
 // this test assumes you have a collector installed already, currently this provider does not handle collector installation
@@ -38,7 +38,7 @@ func testAccCheckDeviceGroupID(n string) resource.TestCheckFunc {
 			return fmt.Errorf("logicmonitor device group data source ID not set")
 		}
 
-		client := testAccProvider.Meta().(*lmv1.DefaultApi)
+		client := testAccProvider.Meta().(*lmclient.LMSdkGo)
 		if err := testDeviceGroupExistsHelper(s, client); err != nil {
 			return err
 		}
