@@ -22,6 +22,9 @@ func TestAccLogicMonitorDevice_import(t *testing.T) {
 				ResourceName:      resourceName,
 				ImportState:       true,
 				ImportStateVerify: true,
+				ImportStateVerifyIgnore: []string{
+					"properties",
+				},
 			},
 		},
 	})

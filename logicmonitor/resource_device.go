@@ -60,7 +60,7 @@ func resourceDevices() *schema.Resource {
 func addDevice(d *schema.ResourceData, m interface{}) error {
 	client := m.(*lmclient.LMSdkGo)
 	params := lm.NewAddDeviceParams()
-	device := makeDeviceObject(client, d)
+	device := makeDeviceObject(d)
 	params.SetBody(&device)
 	// calling API to add Device to portal
 	log.Printf("Adding device %q", d.Get("ip_addr").(string))
@@ -125,7 +125,7 @@ func updateDevice(d *schema.ResourceData, m interface{}) error {
 	}
 
 	params := lm.NewUpdateDeviceParams()
-	device := makeDeviceObject(client, d)
+	device := makeDeviceObject(d)
 	device.CustomProperties = getProperties(d)
 	params.SetBody(&device)
 	params.SetID(int32(id))
@@ -199,6 +199,12 @@ func resourceDeviceStateImporter(d *schema.ResourceData, m interface{}) ([]*sche
 		d.Set("disable_alerting", restResponse.Payload.DisableAlerting)
 		d.Set("description", restResponse.Payload.Description)
 		d.Set("hostgroup_id", restResponse.Payload.HostGroupIds)
+		properties := make(map[*string]*string)
+		props := restResponse.Payload.CustomProperties
+		for _, v := range props {
+			properties[v.Name] = v.Value
+		}
+		d.Set("properties", properties)
 	} else {
 
 		// currently set to add displayname
@@ -217,6 +223,12 @@ func resourceDeviceStateImporter(d *schema.ResourceData, m interface{}) ([]*sche
 			d.Set("collector", restResponse.Payload.Items[0].PreferredCollectorID)
 			d.Set("disable_alerting", restResponse.Payload.Items[0].DisableAlerting)
 			d.SetId(strconv.Itoa(int(restResponse.Payload.Items[0].ID)))
+			properties := make(map[*string]*string)
+			props := restResponse.Payload.Items[0].CustomProperties
+			for _, v := range props {
+				properties[v.Name] = v.Value
+			}
+			d.Set("properties", properties)
 		} else {
 			err := fmt.Errorf("Found no device with filter %s", filter)
 			return nil, err

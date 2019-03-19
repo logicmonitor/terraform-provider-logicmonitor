@@ -24,7 +24,7 @@ func TestAccLogicMonitorCollectorGroup(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"logicmonitor_collector_group.group1", "name", "collectorGroupTest"),
 					resource.TestCheckResourceAttr(
-						"logicmonitor_collector_group.group1", "description", "testing group"),
+						"logicmonitor_collector_group.group1", "description", "testing collector group creation"),
 				),
 			},
 		},
@@ -89,6 +89,6 @@ func testCollectorGroupExistsHelper(s *terraform.State, client *lmclient.LMSdkGo
 const testAccCheckLogicMonitorConfigCollectorGroup = `
 resource "logicmonitor_collector_group" "group1" {
     name = "collectorGroupTest"
-    description = "testing group"
+    description = "testing collector group creation"
 }
 `

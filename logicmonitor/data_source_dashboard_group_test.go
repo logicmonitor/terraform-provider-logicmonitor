@@ -11,35 +11,35 @@ import (
 
 // this test assumes you have a collector installed already, currently this provider does not handle collector installation
 
-func TestAccCheckLogicMonitorDeviceGroupDataSource(t *testing.T) {
+func TestAccCheckLogicMonitorDashboardGroupDataSource(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheck(t) },
 		Providers:    testAccProviders,
-		CheckDestroy: testDeviceGroupDestroy,
+		CheckDestroy: testDashboardGroupDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccCheckLogicMonitorDeviceGroupDataSourceConfig,
+				Config: TestAccCheckLogicMonitorDashboardGroupDataSourceConfig,
 				Check: resource.ComposeTestCheckFunc(
-					testAccCheckDeviceGroupID("data.logicmonitor_device_group.devicegroups"),
+					testAccCheckDashboardGroupID("data.logicmonitor_dashboard_group.DashboardGroups"),
 				),
 			},
 		},
 	})
 }
 
-func testAccCheckDeviceGroupID(n string) resource.TestCheckFunc {
+func testAccCheckDashboardGroupID(n string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
 		rs, ok := s.RootModule().Resources[n]
 		if !ok {
-			return fmt.Errorf("Can't find logicmonitor device group data source: %s", n)
+			return fmt.Errorf("Can't find logicmonitor dashboard group data source: %s", n)
 		}
 
 		if rs.Primary.ID == "" {
-			return fmt.Errorf("logicmonitor device group data source ID not set")
+			return fmt.Errorf("logicmonitor dashgroup group data source ID not set")
 		}
 
 		client := testAccProvider.Meta().(*lmclient.LMSdkGo)
-		if err := testDeviceGroupExistsHelper(s, client); err != nil {
+		if err := testDashboardGroupExistsHelper(s, client); err != nil {
 			return err
 		}
 
@@ -47,8 +47,8 @@ func testAccCheckDeviceGroupID(n string) resource.TestCheckFunc {
 	}
 }
 
-const testAccCheckLogicMonitorDeviceGroupDataSourceConfig = `
-resource "logicmonitor_device_group" "group1" {
+const TestAccCheckLogicMonitorDashboardGroupDataSourceConfig = `
+resource "logicmonitor_dashboard" "dash" {
     name = "KB824"
     disable_alerting = true
     description = "testing group"
@@ -58,7 +58,7 @@ resource "logicmonitor_device_group" "group1" {
     }
 }
 
-data "logicmonitor_device_group" "devicegroups" {
+data "logicmonitor_device_group" "DashboardGroups" {
   filters {
     "property" = "name"
     "operator" = ":"

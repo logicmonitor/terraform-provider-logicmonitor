@@ -1,6 +1,7 @@
 package logicmonitor
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 
@@ -15,6 +16,9 @@ func resourceCollectorGroup() *schema.Resource {
 		Read:   readCollectorGroup,
 		Update: updateCollectorGroup,
 		Delete: deleteCollectorGroup,
+		Importer: &schema.ResourceImporter{
+			State: resourceCollectorGroupStateImporter,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
@@ -144,4 +148,61 @@ func deleteCollectorGroup(d *schema.ResourceData, m interface{}) error {
 	log.Printf("payload response %v", restCollectorGroupResponse.Payload)
 	d.SetId("")
 	return nil
+}
+
+func resourceCollectorGroupStateImporter(d *schema.ResourceData, m interface{}) ([]*schema.ResourceData, error) {
+	client := m.(*lmclient.LMSdkGo)
+
+	// if it is a groupId, we will add the group directly
+	if checkID(d.Id()) {
+		id, err := strconv.Atoi(d.Id())
+		if err != nil {
+			return nil, err
+		}
+		params := lm.NewGetCollectorGroupByIDParams()
+		params.SetID(int32(id))
+		restCollectorGroupResponse, err := client.LM.GetCollectorGroupByID(params)
+		if err != nil {
+			log.Printf("Failed to find collector group %q", err)
+			return nil, err
+		}
+		d.Set("name", restCollectorGroupResponse.Payload.Name)
+		d.Set("description", restCollectorGroupResponse.Payload.Description)
+
+		properties := make(map[*string]*string)
+		props := restCollectorGroupResponse.Payload.CustomProperties
+		for _, v := range props {
+			properties[v.Name] = v.Value
+		}
+		d.Set("properties", properties)
+		d.SetId(d.Id())
+	} else {
+
+		// finding collector group by name
+		filter := fmt.Sprintf("name:\"%s\"", d.Id())
+		params := lm.NewGetCollectorGroupListParams()
+		params.SetFilter(&filter)
+
+		//looks for collector group
+		restCollectorGroupPaginationResponse, err := client.LM.GetCollectorGroupList(params)
+		if err != nil {
+			return nil, err
+		}
+
+		if restCollectorGroupPaginationResponse.Payload.Total > 0 {
+			d.Set("name", restCollectorGroupPaginationResponse.Payload.Items[0].Name)
+			d.Set("description", restCollectorGroupPaginationResponse.Payload.Items[0].Description)
+			properties := make(map[*string]*string)
+			props := restCollectorGroupPaginationResponse.Payload.Items[0].CustomProperties
+			for _, v := range props {
+				properties[v.Name] = v.Value
+			}
+			d.Set("properties", properties)
+			d.SetId(strconv.Itoa(int(restCollectorGroupPaginationResponse.Payload.Items[0].ID)))
+		} else {
+			err := fmt.Errorf("Found no collector groups with filter %s", filter)
+			return nil, err
+		}
+	}
+	return []*schema.ResourceData{d}, nil
 }
