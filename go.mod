@@ -15,7 +15,6 @@ require (
 	github.com/hashicorp/hcl v0.0.0-20180404174102-ef8a98b0bbce // indirect
 	github.com/hashicorp/hcl2 v0.0.0-20180406023453-9db880accff1 // indirect
 	github.com/hashicorp/terraform v0.11.12-beta1.0.20190214175014-182daa619826
-	github.com/hashicorp/yamux v0.0.0-20180314200745-2658be15c5f0 // indirect
 	github.com/logicmonitor/lm-sdk-go v0.0.0-20180315203456-cc3e89aec833
 	github.com/mattn/go-colorable v0.0.9 // indirect
 	github.com/mattn/go-isatty v0.0.3 // indirect
