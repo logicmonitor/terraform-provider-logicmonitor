@@ -14,14 +14,17 @@ func TestAccLogicMonitorDevice_import(t *testing.T) {
 		Providers:    testAccProviders,
 		CheckDestroy: testDeviceGroupDestroy,
 		Steps: []resource.TestStep{
-			{
+			resource.TestStep{
 				Config: testAccCheckLogicMonitorDeviceImport,
 			},
 
-			{
+			resource.TestStep{
 				ResourceName:      resourceName,
 				ImportState:       true,
 				ImportStateVerify: true,
+				ImportStateVerifyIgnore: []string{
+					"properties",
+				},
 			},
 		},
 	})
@@ -38,7 +41,6 @@ const testAccCheckLogicMonitorDeviceImport = `
 	 		"system.categories" = "snmp"
 		}
 	}
-
 	data "logicmonitor_collectors" "collectors" {
 	  most_recent = true
 	}

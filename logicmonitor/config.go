@@ -1,7 +1,7 @@
 package logicmonitor
 
 import (
-	lmv1 "github.com/logicmonitor/lm-sdk-go"
+	lmclient "github.com/logicmonitor/lm-sdk-go/client"
 )
 
 //Config struct for setting up AccessKeys and Company name
@@ -12,18 +12,14 @@ type Config struct {
 }
 
 //NewLMClient initialization
-func (c *Config) NewLMClient() (*lmv1.DefaultApi, error) {
-	config := lmv1.NewConfiguration()
-	config.APIKey = map[string]map[string]string{
-		"Authorization": {
-			"AccessID":  c.AccessID,
-			"AccessKey": c.AccessKey,
-		},
-	}
-	config.BasePath = "https://" + c.Company + ".logicmonitor.com/santaba/rest"
-	config.UserAgent = "LogicMonitor Terraform Provider"
+func (c *Config) newLMClient() (*lmclient.LMSdkGo, error) {
+	config := lmclient.NewConfig()
 
-	api := lmv1.NewDefaultApi()
-	api.Configuration = config
-	return api, nil
+	config.SetAccessID(&c.AccessID)
+	config.SetAccessKey(&c.AccessKey)
+	config.SetAccountDomain(&c.Company)
+	client := lmclient.New(config)
+	//	config.SetUserAgent("LogicMonitor Terraform Provider")
+
+	return client, nil
 }

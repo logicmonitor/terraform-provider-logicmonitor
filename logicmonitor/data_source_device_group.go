@@ -7,7 +7,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform/helper/schema"
-	lmv1 "github.com/logicmonitor/lm-sdk-go"
+	lmclient "github.com/logicmonitor/lm-sdk-go/client"
+	"github.com/logicmonitor/lm-sdk-go/client/lm"
 )
 
 // terraform data source to look up device groups
@@ -61,22 +62,26 @@ func dataSourceFindDeviceGroups() *schema.Resource {
 
 // function to find device groups with certain filters
 func findDeviceGroup(d *schema.ResourceData, m interface{}) error {
-	client := m.(*lmv1.DefaultApi)
+	client := m.(*lmclient.LMSdkGo)
 	filter := getFilters(d)
 	size := int32(d.Get("size").(int))
 	offset := int32(d.Get("offset").(int))
 
+	params := lm.NewGetDeviceGroupListParams()
+	params.SetFilter(&filter)
+	params.SetOffset(&offset)
+	params.SetSize(&size)
+
 	//looks for device Group
-	restDeviceGroupPaginationResponse, apiResponse, e := client.GetDeviceGroupList("name,id,customProperties", size, offset, filter)
-	err := checkStatus(restDeviceGroupPaginationResponse.Status, restDeviceGroupPaginationResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+	restDeviceGroupPaginationResponse, err := client.LM.GetDeviceGroupList(params)
 	if err != nil {
 		return err
 	}
 
 	var deviceIds []string
-	for _, d := range restDeviceGroupPaginationResponse.Data.Items {
+	for _, d := range restDeviceGroupPaginationResponse.Payload.Items {
 		log.Printf("Found device group with filter %q", filter)
-		deviceIds = append(deviceIds, strconv.Itoa(int(d.Id)))
+		deviceIds = append(deviceIds, strconv.Itoa(int(d.ID)))
 	}
 
 	if len(deviceIds) > 0 {

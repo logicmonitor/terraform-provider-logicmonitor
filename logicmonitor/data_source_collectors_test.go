@@ -2,12 +2,14 @@ package logicmonitor
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 	"testing"
 
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
-	lmv1 "github.com/logicmonitor/lm-sdk-go"
+	lmclient "github.com/logicmonitor/lm-sdk-go/client"
+	"github.com/logicmonitor/lm-sdk-go/client/lm"
 )
 
 // this test assumes you have a collector installed already, currently this provider does not handle collector installation
@@ -40,7 +42,7 @@ func testDataSourceCollectorExists(n string) resource.TestCheckFunc {
 			return fmt.Errorf("logicmonitor collector data source ID not set")
 		}
 
-		client := testAccProvider.Meta().(*lmv1.DefaultApi)
+		client := testAccProvider.Meta().(*lmclient.LMSdkGo)
 		if err := testDataSourceCollectorExistsHelper(s, client); err != nil {
 			return err
 		}
@@ -49,18 +51,21 @@ func testDataSourceCollectorExists(n string) resource.TestCheckFunc {
 	}
 }
 
-func testDataSourceCollectorExistsHelper(s *terraform.State, client *lmv1.DefaultApi) error {
+func testDataSourceCollectorExistsHelper(s *terraform.State, client *lmclient.LMSdkGo) error {
 	for _, r := range s.RootModule().Resources {
 		id, e := strconv.Atoi(r.Primary.ID)
 		if e != nil {
 			return e
 		}
 
-		restCollectorResponse, apiResponse, e := client.GetCollectorById(int32(id), "")
-		err := checkStatus(restCollectorResponse.Status, restCollectorResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+		params := lm.NewGetCollectorByIDParams()
+		params.SetID(int32(id))
+
+		restCollectorResponse, err := client.LM.GetCollectorByID(params)
 		if err != nil {
 			return err
 		}
+		log.Printf("get collector id response %v", restCollectorResponse.Payload)
 	}
 	return nil
 }
