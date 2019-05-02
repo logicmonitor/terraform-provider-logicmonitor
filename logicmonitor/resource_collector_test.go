@@ -26,25 +26,11 @@ func TestAccLogicMonitorCollector(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"logicmonitor_collector.collector1", "enable_collector_device_failover", "false"),
 					resource.TestCheckResourceAttr(
-						"logicmonitor_collector.collector1", "enable_failback", "false"),
+						"logicmonitor_collector.collector1", "enable_failback", "true"),
 					resource.TestCheckResourceAttr(
 						"logicmonitor_collector.collector1", "resend_interval", "5"),
 					resource.TestCheckResourceAttr(
 						"logicmonitor_collector.collector1", "suppress_alert_clear", "false"),
-
-					testCollectorExists("logicmonitor_collector.collector2"),
-					resource.TestCheckResourceAttr(
-						"logicmonitor_collector.collector2", "description", "test collector2"),
-					resource.TestCheckResourceAttr(
-						"logicmonitor_collector.collector2", "enable_collector_device_failover", "true"),
-					resource.TestCheckResourceAttr(
-						"logicmonitor_collector.collector2", "enable_failback", "true"),
-					resource.TestCheckResourceAttr(
-						"logicmonitor_collector.collector2", "resend_interval", "1"),
-					resource.TestCheckResourceAttr(
-						"logicmonitor_collector.collector2", "suppress_alert_clear", "true"),
-					resource.TestCheckResourceAttr(
-						"logicmonitor_collector.collector2", "escalation_chain_id", "1"),
 				),
 			},
 		},
@@ -109,17 +95,8 @@ const testAccCheckLogicMonitorConfigCollector = `
 resource "logicmonitor_collector" "collector1" {
     description                       = "test collector"
     enable_collector_device_failover  = false
-    enable_failback                   = false
+    enable_failback                   = true
     resend_interval                   = 5
     suppress_alert_clear              = false
-}
-resource "logicmonitor_collector" "collector2" {
-    description                       = "test collector2"
-    enable_collector_device_failover  = true
-    enable_failback                   = true
-    resend_interval                   = 1
-    suppress_alert_clear              = true
-    escalation_chain_id               = 1
-    backup_collector_id = 16
 }
 `
