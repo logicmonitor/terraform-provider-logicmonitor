@@ -6,6 +6,7 @@ require (
 	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/fatih/color v1.6.0 // indirect
 	github.com/go-ini/ini v1.36.0 // indirect
+	github.com/go-openapi/errors v0.0.0-20190502075400-df3fda67a4c8
 	github.com/go-resty/resty v0.0.0-20180405024425-f8815663de1e // indirect
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b // indirect
 	github.com/hashicorp/go-getter v0.0.0-20180410174945-b345bfcec894 // indirect
