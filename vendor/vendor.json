@@ -1,0 +1,131 @@
+{
+	"comment": "",
+	"ignore": "",
+	"package": [
+		{
+			"checksumSHA1": "bwMfTx2pBksUXKr58s0m55JvQSc=",
+			"path": "github.com/PuerkitoBio/purell",
+			"revision": "44968752391892e1b0d0b821ee79e9a85fa13049",
+			"revisionTime": "2019-02-16T21:19:35Z"
+		},
+		{
+			"checksumSHA1": "VPUvioRmgkFq9MLTAqEbd0nxEf8=",
+			"path": "github.com/PuerkitoBio/urlesc",
+			"revision": "de5bf2ad457846296e2031421a34e2568e304e35",
+			"revisionTime": "2017-08-10T14:37:23Z"
+		},
+		{
+			"checksumSHA1": "ZmZhI/oK+pG4me0vYGzrrEer8Gw=",
+			"path": "github.com/go-openapi/analysis",
+			"revision": "e2f3fdbb7ed0e56e070ccbfb6fc75b288a33c014",
+			"revisionTime": "2018-11-17T17:04:47Z"
+		},
+		{
+			"checksumSHA1": "Vc12TN0xudh0NMaaLSumOb+gGgQ=",
+			"path": "github.com/go-openapi/analysis/internal",
+			"revision": "e2f3fdbb7ed0e56e070ccbfb6fc75b288a33c014",
+			"revisionTime": "2018-11-17T17:04:47Z"
+		},
+		{
+			"path": "github.com/go-openapi/client",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "62jUyK2nkrYzRzHTYCHS0NNmA2Q=",
+			"path": "github.com/go-openapi/errors",
+			"revision": "df3fda67a4c851b789d9b34a92cb0edef5734e2c",
+			"revisionTime": "2019-05-02T07:54:00Z"
+		},
+		{
+			"checksumSHA1": "TYZ9mJujPj9WG68nFTfwrMEbznk=",
+			"path": "github.com/go-openapi/jsonpointer",
+			"revision": "ef5f0afec364d3b9396b7b77b43dbe26bf1f8004",
+			"revisionTime": "2018-10-07T00:19:13Z"
+		},
+		{
+			"checksumSHA1": "IRfFtRhcfWT8DPZbiROdMfVkvpU=",
+			"path": "github.com/go-openapi/jsonreference",
+			"revision": "8483a886a90412cd6858df4ea3483dce9c8e35a3",
+			"revisionTime": "2018-10-07T00:19:29Z"
+		},
+		{
+			"checksumSHA1": "Vd5gXwK79HQOlyFjkbX+4/XCe70=",
+			"path": "github.com/go-openapi/loads",
+			"revision": "74628589c3b94e3526a842d24f46589980f5ab22",
+			"revisionTime": "2018-11-28T00:54:46Z"
+		},
+		{
+			"checksumSHA1": "wmJiGrcf9NMm198OCc/FKhT2Vz0=",
+			"path": "github.com/go-openapi/loads/fmts",
+			"revision": "74628589c3b94e3526a842d24f46589980f5ab22",
+			"revisionTime": "2018-11-28T00:54:46Z"
+		},
+		{
+			"checksumSHA1": "w/fLZT8faSaTHChR9bkL2+p85vM=",
+			"path": "github.com/go-openapi/runtime",
+			"revision": "a790424692bbda30f61bc3b21754972de1803b91",
+			"revisionTime": "2019-04-19T23:13:02Z"
+		},
+		{
+			"checksumSHA1": "hpgSdDVrW28sR/eHJt7Ir20PD7s=",
+			"path": "github.com/go-openapi/spec",
+			"revision": "9d9763c0ce87242cb4611b52b8601987f01eb4ed",
+			"revisionTime": "2019-04-16T15:40:47Z"
+		},
+		{
+			"checksumSHA1": "7Z1/lPLlij7xX3nzZElmf4qgjcs=",
+			"path": "github.com/go-openapi/strfmt",
+			"revision": "e87a5af342a82041de4ee5ee9a6b306db7cb1d3b",
+			"revisionTime": "2019-04-11T02:32:35Z"
+		},
+		{
+			"checksumSHA1": "b6timvADCqVFCYx2PxMbimYAVYo=",
+			"path": "github.com/go-openapi/swag",
+			"revision": "b3e2804c8535ee0d1b89320afd98474d5b8e9e3b",
+			"revisionTime": "2019-03-11T06:42:51Z"
+		},
+		{
+			"checksumSHA1": "Y9KI7NwHMCQCF0Vth50fW6LZHKA=",
+			"path": "github.com/go-openapi/validate",
+			"revision": "3fd099a3cf2ee54e86beee561afe8f1b5bfe769e",
+			"revisionTime": "2019-04-03T09:49:41Z"
+		},
+		{
+			"checksumSHA1": "Xolss22hiad7/0XkStk0WM5LdgQ=",
+			"path": "github.com/stretchr/testify/require",
+			"revision": "34c6fa2dc70986bccbbffcc6130f6920a924b075",
+			"revisionTime": "2019-03-04T09:57:49Z"
+		},
+		{
+			"checksumSHA1": "k67OKTaKxIezTUw+OfJ+Ngqbm3Q=",
+			"path": "golang.org/x/text/internal/gen",
+			"revision": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+			"revisionTime": "2018-12-15T17:52:45Z"
+		},
+		{
+			"checksumSHA1": "ag7y2tiDc1Yx4fxBrA/CuwKZptg=",
+			"path": "golang.org/x/text/internal/testtext",
+			"revision": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+			"revisionTime": "2018-12-15T17:52:45Z"
+		},
+		{
+			"checksumSHA1": "NiXSJYqpwWFmbwcaK/KspZ2sjgw=",
+			"path": "golang.org/x/text/internal/ucd",
+			"revision": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+			"revisionTime": "2018-12-15T17:52:45Z"
+		},
+		{
+			"checksumSHA1": "SfSQV/Y3/d4ia+BHuKhviRLr0yA=",
+			"path": "golang.org/x/text/unicode/cldr",
+			"revision": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+			"revisionTime": "2018-12-15T17:52:45Z"
+		},
+		{
+			"checksumSHA1": "nY3LsnQ7qfXMzum791Z1n8sTjvw=",
+			"path": "golang.org/x/text/width",
+			"revision": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+			"revisionTime": "2018-12-15T17:52:45Z"
+		}
+	],
+	"rootPath": "github.com/terraform-providers/terraform-provider-logicmonitor"
+}
