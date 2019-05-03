@@ -8,6 +8,7 @@ require (
 	github.com/fatih/color v1.6.0 // indirect
 	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8
 	github.com/go-ini/ini v1.36.0 // indirect
+	github.com/go-openapi/analysis v0.19.0 // indirect
 	github.com/go-openapi/errors v0.19.0 // indirect
 	github.com/go-openapi/runtime v0.19.0 // indirect
 	github.com/go-openapi/strfmt v0.19.0 // indirect
