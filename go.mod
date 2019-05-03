@@ -1,6 +1,8 @@
 module github.com/terraform-providers/terraform-provider-logicmonitor
 
 require (
+	github.com/PuerkitoBio/purell v1.1.1 // indirect
+	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/armon/go-radix v0.0.0-20170727155443-1fca145dffbc // indirect
 	github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a // indirect
 	github.com/bgentry/speakeasy v0.1.0 // indirect
@@ -47,4 +49,5 @@ require (
 	google.golang.org/grpc v1.11.3 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127
 	gopkg.in/ini.v1 v1.42.0 // indirect
+	gopkg.in/yaml.v2 v2.0.0-20170407172122-cd8b52f8269e // indirect
 )
