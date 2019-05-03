@@ -3,6 +3,7 @@ package logicmonitor
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/terraform"
@@ -44,7 +45,7 @@ func Provider() terraform.ResourceProvider {
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
-	company := fmt.Sprintf("%s.logicmonitor.com", d.Get("company").(string))
+	company := fmt.Sprintf("%s.logicmonitor.com", strings.Replace(d.Get("company").(string), ".logicmonitor.com", "", -1))
 	config := Config{
 		AccessID:  d.Get("api_id").(string),
 		AccessKey: d.Get("api_key").(string),

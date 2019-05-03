@@ -177,7 +177,6 @@ func resourceCollectorGroupStateImporter(d *schema.ResourceData, m interface{}) 
 		d.Set("properties", properties)
 		d.SetId(d.Id())
 	} else {
-
 		// finding collector group by name
 		filter := fmt.Sprintf("name:\"%s\"", d.Id())
 		params := lm.NewGetCollectorGroupListParams()
@@ -189,7 +188,10 @@ func resourceCollectorGroupStateImporter(d *schema.ResourceData, m interface{}) 
 			return nil, err
 		}
 
-		if restCollectorGroupPaginationResponse.Payload.Total > 0 {
+		if restCollectorGroupPaginationResponse.Payload.Total > 1 {
+			err := fmt.Errorf("Found more than 1 group with filter %s, please make the filter more specific or import with Id", filter)
+			return nil, err
+		} else if restCollectorGroupPaginationResponse.Payload.Total > 0 {
 			d.Set("name", restCollectorGroupPaginationResponse.Payload.Items[0].Name)
 			d.Set("description", restCollectorGroupPaginationResponse.Payload.Items[0].Description)
 			properties := make(map[*string]*string)

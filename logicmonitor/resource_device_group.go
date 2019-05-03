@@ -198,7 +198,10 @@ func resourceDeviceGroupStateImporter(d *schema.ResourceData, m interface{}) ([]
 			return nil, err
 		}
 
-		if restDeviceGroupPaginationResponse.Payload.Total > 0 {
+		if restDeviceGroupPaginationResponse.Payload.Total > 1 {
+			err := fmt.Errorf("Found more than 1 device group with filter %s, please make the filter more specific or import with group id", filter)
+			return nil, err
+		} else if restDeviceGroupPaginationResponse.Payload.Total > 0 {
 			d.Set("disable_alerting", restDeviceGroupPaginationResponse.Payload.Items[0].DisableAlerting)
 			d.Set("name", restDeviceGroupPaginationResponse.Payload.Items[0].Name)
 			d.SetId(strconv.Itoa(int(restDeviceGroupPaginationResponse.Payload.Items[0].ID)))

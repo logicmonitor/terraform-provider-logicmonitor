@@ -19,7 +19,6 @@ func (c *Config) newLMClient() (*lmclient.LMSdkGo, error) {
 	config.SetAccessKey(&c.AccessKey)
 	config.SetAccountDomain(&c.Company)
 	client := lmclient.New(config)
-	//	config.SetUserAgent("LogicMonitor Terraform Provider")
 
 	return client, nil
 }
