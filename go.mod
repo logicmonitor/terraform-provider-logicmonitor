@@ -1,6 +1,7 @@
 module github.com/terraform-providers/terraform-provider-logicmonitor
 
 require (
+  github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a
 	github.com/armon/go-radix v0.0.0-20170727155443-1fca145dffbc // indirect
 	github.com/bgentry/speakeasy v0.1.0 // indirect
 	github.com/blang/semver v3.5.1+incompatible // indirect
