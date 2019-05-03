@@ -11,7 +11,6 @@ require (
 	github.com/go-openapi/strfmt v0.19.0 // indirect
 	github.com/go-openapi/swag v0.19.0 // indirect
 	github.com/go-openapi/validate v0.19.0 // indirect
-	github.com/go-resty/resty v0.0.0-20180405024425-f8815663de1e // indirect
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b // indirect
 	github.com/hashicorp/go-getter v0.0.0-20180410174945-b345bfcec894 // indirect
 	github.com/hashicorp/go-hclog v0.0.0-20180402200405-69ff559dc25f // indirect
