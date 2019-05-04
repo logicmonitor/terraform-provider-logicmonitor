@@ -219,7 +219,7 @@ func resourceDeviceStateImporter(d *schema.ResourceData, m interface{}) ([]*sche
 		if restResponse.Payload.Total > 1 {
 			err := fmt.Errorf("Found more than 1 device with filter %s, please make the filter more specific or import with deviceId", filter)
 			return nil, err
-		} else if restResponse.Payload.Total > 0 {
+		} else if restResponse.Payload.Total == 1 {
 			d.Set("ip_addr", restResponse.Payload.Items[0].Name)
 			d.Set("display_name", restResponse.Payload.Items[0].DisplayName)
 			d.Set("collector", restResponse.Payload.Items[0].PreferredCollectorID)
