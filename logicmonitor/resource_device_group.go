@@ -6,7 +6,8 @@ import (
 	"strconv"
 
 	"github.com/hashicorp/terraform/helper/schema"
-	lmv1 "github.com/logicmonitor/lm-sdk-go"
+	lmclient "github.com/logicmonitor/lm-sdk-go/client"
+	"github.com/logicmonitor/lm-sdk-go/client/lm"
 )
 
 func resourceDeviceGroup() *schema.Resource {
@@ -27,6 +28,7 @@ func resourceDeviceGroup() *schema.Resource {
 			"parent_id": {
 				Type:     schema.TypeInt,
 				Optional: true,
+				Default:  1,
 			},
 			"applies_to": {
 				Type:     schema.TypeString,
@@ -53,51 +55,47 @@ func resourceDeviceGroup() *schema.Resource {
 // function to add device groups
 func addDeviceGroup(d *schema.ResourceData, m interface{}) error {
 	log.Printf("Adding group %q", d.Get("name").(string))
-	client := m.(*lmv1.DefaultApi)
+	client := m.(*lmclient.LMSdkGo)
+	params := lm.NewAddDeviceGroupParams()
 	group := makeDeviceGroupObject(d)
-	group.CustomProperties = getGroupProperties(d)
+	params.SetBody(&group)
 
 	// calling API to add Device to portal
-	restDeviceGroupResponse, apiResponse, e := client.AddDeviceGroup(group)
-	err := checkStatus(restDeviceGroupResponse.Status, restDeviceGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+	restDeviceGroupResponse, err := client.LM.AddDeviceGroup(params)
 	if err != nil {
 		return err
 	}
 
 	// calling API to save groupId
-	d.SetId(strconv.Itoa(int(restDeviceGroupResponse.Data.Id)))
+	d.SetId(strconv.Itoa(int(restDeviceGroupResponse.Payload.ID)))
 	return nil
 }
 
 // function to sync device groups
 func readDeviceGroup(d *schema.ResourceData, m interface{}) error {
-	client := m.(*lmv1.DefaultApi)
+	client := m.(*lmclient.LMSdkGo)
 	id, err := strconv.Atoi(d.Id())
 	if err != nil {
 		return err
 	}
-	restDeviceGroupResponse, apiResponse, e := client.GetDeviceGroupById(int32(id), "")
-	err = checkStatus(restDeviceGroupResponse.Status, restDeviceGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+	params := lm.NewGetDeviceGroupByIDParams()
+	params.SetID(int32(id))
+
+	restDeviceGroupResponse, err := client.LM.GetDeviceGroupByID(params)
 	if err != nil {
 		log.Printf("Failed to find device group %q", err)
 		d.SetId("")
 		return nil
 	}
 
-	// known issue with v1 Go SDK, fix in v2
-	if restDeviceGroupResponse.Data.ParentId == 1 {
-		log.Printf("Host Group already at root level")
-	} else {
-		d.Set("parent_id", restDeviceGroupResponse.Data.ParentId)
-	}
+	d.Set("parent_id", restDeviceGroupResponse.Payload.ParentID)
+	d.Set("name", restDeviceGroupResponse.Payload.Name)
+	d.Set("description", restDeviceGroupResponse.Payload.Description)
+	d.Set("disable_alerting", restDeviceGroupResponse.Payload.DisableAlerting)
+	d.Set("applies_to", restDeviceGroupResponse.Payload.AppliesTo)
 
-	d.Set("name", restDeviceGroupResponse.Data.Name)
-	d.Set("description", restDeviceGroupResponse.Data.Description)
-	d.Set("disable_alerting", restDeviceGroupResponse.Data.DisableAlerting)
-	d.Set("applies_to", restDeviceGroupResponse.Data.AppliesTo)
-
-	properties := make(map[string]string)
-	props := restDeviceGroupResponse.Data.CustomProperties
+	properties := make(map[*string]*string)
+	props := restDeviceGroupResponse.Payload.CustomProperties
 	for _, v := range props {
 		properties[v.Name] = v.Value
 	}
@@ -109,15 +107,19 @@ func readDeviceGroup(d *schema.ResourceData, m interface{}) error {
 // function to update device groups
 func updateDeviceGroup(d *schema.ResourceData, m interface{}) error {
 	d.Partial(true)
-	client := m.(*lmv1.DefaultApi)
-	device := makeDeviceGroupObject(d)
-	device.CustomProperties = getProperties(d)
+	client := m.(*lmclient.LMSdkGo)
 
 	// get Id
 	id, err := strconv.Atoi(d.Id())
 	if err != nil {
 		return err
 	}
+
+	device := makeDeviceGroupObject(d)
+	params := lm.NewUpdateDeviceGroupByIDParams()
+	params.SetID(int32(id))
+	params.SetBody(&device)
+
 	// list of available properties
 	s := []string{"name", "parent_id", "applies_to", "disable_alerting", "description", "properties"}
 
@@ -130,8 +132,7 @@ func updateDeviceGroup(d *schema.ResourceData, m interface{}) error {
 	}
 
 	// makes a bulk update for all properties that were changed
-	restDeviceGroupResponse, apiResponse, e := client.UpdateDeviceGroupById(int32(id), device)
-	err = checkStatus(restDeviceGroupResponse.Status, restDeviceGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+	nil, err := client.LM.UpdateDeviceGroupByID(params)
 	if err != nil {
 		return err
 	}
@@ -146,24 +147,28 @@ func updateDeviceGroup(d *schema.ResourceData, m interface{}) error {
 
 // function to delete device groups
 func deleteDeviceGroup(d *schema.ResourceData, m interface{}) error {
-	client := m.(*lmv1.DefaultApi)
-	groupID, err := strconv.Atoi(d.Id())
+	client := m.(*lmclient.LMSdkGo)
+	id, err := strconv.Atoi(d.Id())
 	if err != nil {
 		return err
 	}
-	restDeviceGroupResponse, apiResponse, e := client.DeleteDeviceGroupById(int32(groupID), false)
-	err = checkStatus(restDeviceGroupResponse.Status, restDeviceGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+
+	params := lm.NewDeleteDeviceGroupByIDParams()
+	params.SetID(int32(id))
+
+	restDeviceGroupResponse, err := client.LM.DeleteDeviceGroupByID(params)
 	if err != nil {
 		log.Printf("Error deleting device group %s", err)
 		d.SetId("")
 	}
+	log.Printf("payload response %q", restDeviceGroupResponse.Payload)
 	d.SetId("")
 	return nil
 }
 
 // function to import device groups
 func resourceDeviceGroupStateImporter(d *schema.ResourceData, m interface{}) ([]*schema.ResourceData, error) {
-	client := m.(*lmv1.DefaultApi)
+	client := m.(*lmclient.LMSdkGo)
 
 	// if it is a groupId, we will add the group directly
 	if checkID(d.Id()) {
@@ -171,31 +176,35 @@ func resourceDeviceGroupStateImporter(d *schema.ResourceData, m interface{}) ([]
 		if err != nil {
 			return nil, err
 		}
-		restDeviceGroupResponse, apiResponse, e := client.GetDeviceGroupById(int32(id), "")
-		err = checkStatus(restDeviceGroupResponse.Status, restDeviceGroupResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+		params := lm.NewGetDeviceGroupByIDParams()
+		params.SetID(int32(id))
+		restDeviceGroupResponse, err := client.LM.GetDeviceGroupByID(params)
 		if err != nil {
 			log.Printf("Failed to find device group %q", err)
 			return nil, err
 		}
-		d.Set("disable_alerting", restDeviceGroupResponse.Data.DisableAlerting)
-		d.Set("name", restDeviceGroupResponse.Data.Name)
+		d.Set("disable_alerting", restDeviceGroupResponse.Payload.DisableAlerting)
+		d.Set("name", restDeviceGroupResponse.Payload.Name)
 		d.SetId(d.Id())
 	} else {
 
 		// currently I just set it to add FullPath, I can give it the option later of specifying entire sets of groups if needed
-		filter := fmt.Sprintf("fullPath:%s", d.Id())
-
+		filter := fmt.Sprintf("fullPath:\"%s\"", d.Id())
+		params := lm.NewGetDeviceGroupListParams()
+		params.SetFilter(&filter)
 		//looks for device Group
-		restDeviceGroupPaginationResponse, apiResponse, e := client.GetDeviceGroupList("id,name", 50, 0, filter)
-		err := checkStatus(restDeviceGroupPaginationResponse.Status, restDeviceGroupPaginationResponse.Errmsg, apiResponse.StatusCode, apiResponse.Status, e)
+		restDeviceGroupPaginationResponse, err := client.LM.GetDeviceGroupList(params)
 		if err != nil {
 			return nil, err
 		}
 
-		if restDeviceGroupPaginationResponse.Data.Total > 0 {
-			d.Set("disable_alerting", restDeviceGroupPaginationResponse.Data.Items[0].DisableAlerting)
-			d.Set("name", restDeviceGroupPaginationResponse.Data.Items[0].Name)
-			d.SetId(strconv.Itoa(int(restDeviceGroupPaginationResponse.Data.Items[0].Id)))
+		if restDeviceGroupPaginationResponse.Payload.Total > 1 {
+			err := fmt.Errorf("Found more than 1 device group with filter %s, please make the filter more specific or import with group id", filter)
+			return nil, err
+		} else if restDeviceGroupPaginationResponse.Payload.Total == 1 {
+			d.Set("disable_alerting", restDeviceGroupPaginationResponse.Payload.Items[0].DisableAlerting)
+			d.Set("name", restDeviceGroupPaginationResponse.Payload.Items[0].Name)
+			d.SetId(strconv.Itoa(int(restDeviceGroupPaginationResponse.Payload.Items[0].ID)))
 		} else {
 			err := fmt.Errorf("Found no device groups with filter %s", filter)
 			return nil, err

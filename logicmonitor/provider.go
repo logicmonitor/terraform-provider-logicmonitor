@@ -1,7 +1,9 @@
 package logicmonitor
 
 import (
+	"fmt"
 	"log"
+	"strings"
 
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/terraform"
@@ -35,19 +37,20 @@ func Provider() terraform.ResourceProvider {
 		},
 
 		DataSourcesMap: map[string]*schema.Resource{
-			"logicmonitor_device_group": dataSourceFindDeviceGroups(),
 			"logicmonitor_collectors":   dataSourceFindCollectors(),
+			"logicmonitor_device_group": dataSourceFindDeviceGroups(),
 		},
 		ConfigureFunc: providerConfigure,
 	}
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
+	company := fmt.Sprintf("%s.logicmonitor.com", strings.Replace(d.Get("company").(string), ".logicmonitor.com", "", -1))
 	config := Config{
 		AccessID:  d.Get("api_id").(string),
 		AccessKey: d.Get("api_key").(string),
-		Company:   d.Get("company").(string),
+		Company:   company,
 	}
 	log.Println("[INFO] Initializing LM client")
-	return config.NewLMClient()
+	return config.newLMClient()
 }

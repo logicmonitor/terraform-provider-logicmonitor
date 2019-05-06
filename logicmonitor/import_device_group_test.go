@@ -14,14 +14,17 @@ func TestAccLogicMonitorDeviceGroup_import(t *testing.T) {
 		Providers:    testAccProviders,
 		CheckDestroy: testDeviceGroupDestroy,
 		Steps: []resource.TestStep{
-			{
+			resource.TestStep{
 				Config: testAccCheckLogicMonitorDeviceGroupImport,
 			},
 
-			{
+			resource.TestStep{
 				ResourceName:      resourceName,
 				ImportState:       true,
 				ImportStateVerify: true,
+				ImportStateVerifyIgnore: []string{
+					"properties",
+				},
 			},
 		},
 	})
