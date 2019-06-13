@@ -27,7 +27,7 @@ resource "logicmonitor_device" "host" {
   disable_alerting = true
   collector = "${data.logicmonitor_collectors.collectors.id}"
   hostgroup_id = "${logicmonitor_device_group.group1.id}"
-  properties {
+  properties = {
    "app" = "haproxy"
    "system.categories" = "a,b,c,d"
   }
@@ -35,7 +35,7 @@ resource "logicmonitor_device" "host" {
 
 resource "logicmonitor_device_group" "group1" {
     name = "NewGroup"
-    properties {
+    properties = {
      "jmx.port" = "9003"
      "system.categories" = "ec2"
     }

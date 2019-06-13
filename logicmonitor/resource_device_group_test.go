@@ -94,7 +94,7 @@ resource "logicmonitor_device_group" "group1" {
     disable_alerting = true
     description = "testing group"
     applies_to = "system.displayname =~ \"test\""
-    properties {
+    properties = {
      "group" = "test"
      "system.categories" = "a,b,c,d"
     }

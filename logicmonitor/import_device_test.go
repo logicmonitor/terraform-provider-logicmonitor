@@ -37,7 +37,7 @@ const testAccCheckLogicMonitorDeviceImport = `
 		disable_alerting = true
 		hostgroup_id = "1"
 		collector = "${data.logicmonitor_collectors.collectors.id}"
-		properties {
+		properties = {
 	 		"system.categories" = "snmp"
 		}
 	}

@@ -16,15 +16,15 @@ Use this datasource to get the ID of an available device group.
 # Look up a LogicMonitor device group id
 data "logicmonitor_device_group" "devicegroups" {
   filters {
-    "property" = "name"
-    "operator" = ":"
-    "value" = "Production"
+    property = "name"
+    operator = ":"
+    value = "Production"
   },
 
   filters {
-    "custom_property_name" = "app.user"
-    "operator" = ":"
-    "custom_property_value" = "api"
+    custom_property_name = "app.user"
+    operator = ":"
+    custom_property_value = "api"
   }
 }
 ```
