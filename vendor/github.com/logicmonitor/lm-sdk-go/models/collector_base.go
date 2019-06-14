@@ -142,8 +142,8 @@ type CollectorBase struct {
 	// Read Only: true
 	LastSentNotificationOnLocal string `json:"lastSentNotificationOnLocal,omitempty"`
 
-	// Whether to create a collector device when instance collector
-	NeedAutoCreateCollectorDevice bool `json:"needAutoCreateCollectorDevice,omitempty"`
+	// Whether to create a collector device when instance collector, the default value is true
+	NeedAutoCreateCollectorDevice interface{} `json:"needAutoCreateCollectorDevice,omitempty"`
 
 	// The Netscan version associated with the Collector
 	// Read Only: true

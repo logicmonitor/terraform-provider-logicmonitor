@@ -11,7 +11,7 @@ require (
 	github.com/go-openapi/jsonpointer v0.19.0 // indirect
 	github.com/go-openapi/jsonreference v0.19.0 // indirect
 	github.com/go-openapi/loads v0.19.0 // indirect
-	github.com/go-openapi/runtime v0.19.0 // indirect
+	github.com/go-openapi/runtime v0.18.0 // indirect
 	github.com/go-openapi/spec v0.19.0 // indirect
 	github.com/go-openapi/strfmt v0.19.0 // indirect
 	github.com/go-openapi/swag v0.19.0 // indirect
@@ -22,9 +22,9 @@ require (
 	github.com/hashicorp/go-sockaddr v1.0.0 // indirect
 	github.com/hashicorp/hcl v0.0.0-20180404174102-ef8a98b0bbce // indirect
 	github.com/hashicorp/serf v0.8.2-0.20171022020050-c20a0b1b1ea9 // indirect
-	github.com/hashicorp/terraform v0.12.0
+	github.com/hashicorp/terraform v0.12.1
 	github.com/jen20/awspolicyequivalence v0.0.0-20170831201602-3d48364a137a // indirect
-	github.com/logicmonitor/lm-sdk-go v0.0.0-20180425235613-2f24051229f7
+	github.com/logicmonitor/lm-sdk-go v0.0.0-20190508172519-551e18072ac5
 	github.com/mailru/easyjson v0.0.0-20190403194419-1ea4449da983 // indirect
 	github.com/masterzen/azure-sdk-for-go v0.0.0-20161014135628-ee4f0065d00c // indirect
 	github.com/miekg/dns v1.0.14 // indirect
@@ -37,5 +37,5 @@ require (
 	github.com/terraform-providers/terraform-provider-aws v1.29.0 // indirect
 	github.com/terraform-providers/terraform-provider-template v1.0.0 // indirect
 	github.com/terraform-providers/terraform-provider-tls v1.2.0 // indirect
-	gopkg.in/ini.v1 v1.42.0 // indirect
+	golang.org/x/net v0.0.0-20190613194153-d28f0bde5980 // indirect
 )
