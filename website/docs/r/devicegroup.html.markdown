@@ -17,7 +17,7 @@ Provides a LogicMonitor device group resource. This can be used to create and ma
 resource "logicmonitor_device_group" "group" {
     name = "NewTestGroup"
     description = "new test group"
-    properties {
+    properties = {
      "group" = "test"
      "system.categories" = "a,b,c,d"
     }

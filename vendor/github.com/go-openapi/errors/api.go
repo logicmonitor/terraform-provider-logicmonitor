@@ -23,7 +23,7 @@ import (
 )
 
 // DefaultHTTPCode is used when the error Code cannot be used as an HTTP code.
-var DefaultHTTPCode = http.StatusUnprocessableEntity
+var DefaultHTTPCode = 422
 
 // Error represents a error interface all swagger framework errors implement
 type Error interface {
@@ -115,6 +115,8 @@ func MethodNotAllowed(requested string, allow []string) Error {
 	return &MethodNotAllowedError{code: http.StatusMethodNotAllowed, Allowed: allow, message: msg}
 }
 
+const head = "HEAD"
+
 // ServeError the error handler interface implementation
 func ServeError(rw http.ResponseWriter, r *http.Request, err error) {
 	rw.Header().Set("Content-Type", "application/json")
@@ -131,7 +133,7 @@ func ServeError(rw http.ResponseWriter, r *http.Request, err error) {
 	case *MethodNotAllowedError:
 		rw.Header().Add("Allow", strings.Join(err.(*MethodNotAllowedError).Allowed, ","))
 		rw.WriteHeader(asHTTPCode(int(e.Code())))
-		if r == nil || r.Method != http.MethodHead {
+		if r == nil || r.Method != head {
 			_, _ = rw.Write(errorAsJSON(e))
 		}
 	case Error:
@@ -142,7 +144,7 @@ func ServeError(rw http.ResponseWriter, r *http.Request, err error) {
 			return
 		}
 		rw.WriteHeader(asHTTPCode(int(e.Code())))
-		if r == nil || r.Method != http.MethodHead {
+		if r == nil || r.Method != head {
 			_, _ = rw.Write(errorAsJSON(e))
 		}
 	case nil:
@@ -150,7 +152,7 @@ func ServeError(rw http.ResponseWriter, r *http.Request, err error) {
 		_, _ = rw.Write(errorAsJSON(New(http.StatusInternalServerError, "Unknown error")))
 	default:
 		rw.WriteHeader(http.StatusInternalServerError)
-		if r == nil || r.Method != http.MethodHead {
+		if r == nil || r.Method != head {
 			_, _ = rw.Write(errorAsJSON(New(http.StatusInternalServerError, err.Error())))
 		}
 	}

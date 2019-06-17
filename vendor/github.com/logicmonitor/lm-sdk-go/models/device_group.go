@@ -70,8 +70,8 @@ type DeviceGroup struct {
 	// Read Only: true
 	EffectiveAlertEnabled *bool `json:"effectiveAlertEnabled,omitempty"`
 
-	// Indicates whether Netflow is enabled (true) or disabled (false) for the device group
-	EnableNetflow bool `json:"enableNetflow,omitempty"`
+	// Indicates whether Netflow is enabled (true) or disabled (false) for the device group, the default value is true
+	EnableNetflow interface{} `json:"enableNetflow,omitempty"`
 
 	// The extra setting for cloud group
 	Extra interface{} `json:"extra,omitempty"`
@@ -139,6 +139,10 @@ type DeviceGroup struct {
 	// The id of the parent group for this device group (the root device group has an Id of 1)
 	ParentID int32 `json:"parentId,omitempty"`
 
+	// The child device groups within this device group
+	// Read Only: true
+	SubGroups []*DeviceGroupData `json:"subGroups,omitempty"`
+
 	// The permissions for the device group that are granted to the user that made this API request
 	// Read Only: true
 	UserPermission string `json:"userPermission,omitempty"`
@@ -165,6 +169,10 @@ func (m *DeviceGroup) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSubGroups(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -257,6 +265,31 @@ func (m *DeviceGroup) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *DeviceGroup) validateSubGroups(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SubGroups) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.SubGroups); i++ {
+		if swag.IsZero(m.SubGroups[i]) { // not required
+			continue
+		}
+
+		if m.SubGroups[i] != nil {
+			if err := m.SubGroups[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("subGroups" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

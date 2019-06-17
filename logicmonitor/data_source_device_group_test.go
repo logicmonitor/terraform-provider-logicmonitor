@@ -52,16 +52,16 @@ resource "logicmonitor_device_group" "group1" {
     name = "KB824"
     disable_alerting = true
     description = "testing group"
-    properties {
+    properties = {
      "group" = "test"
      "system.categories" = "a,b,c,d"
     }
 }
 data "logicmonitor_device_group" "devicegroups" {
   filters {
-    "property" = "name"
-    "operator" = ":"
-    "value" = "${logicmonitor_device_group.group1.name}"
+    property = "name"
+    operator = ":"
+    value = "${logicmonitor_device_group.group1.name}"
   }
 }
 `

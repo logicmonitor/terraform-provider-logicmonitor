@@ -35,7 +35,7 @@ resource "logicmonitor_device_group" "testgroup" {
     name = "TestGroup123"
     disable_alerting = true
     description = "testing group123"
-    properties {
+    properties = {
      "group" = "test"
      "system.categories" = "a,b,c,d"
     }

@@ -70,7 +70,7 @@ const testAccCheckLogicMonitorDevice = `
 		disable_alerting = true
 		hostgroup_id = "1"
 		collector = "${data.logicmonitor_collectors.collectors.id}"
-		properties {
+		properties = {
 	 		"app" = "haproxy"
 	 		"system.categories" = "a,b,c,d"
 		}

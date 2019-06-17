@@ -16,9 +16,9 @@ Use this datasource to get the ID of an available collector.
 # Look up a LogicMonitor collector id
 data "logicmonitor_collectors" "collectors" {
   filters {
-    "property" = "hostname"
-    "operator" = "~"
-    "value" = "test"
+    property = "hostname"
+    operator = "~"
+    value = "test"
   },
 "most_recent" = true
 }
