@@ -3,7 +3,7 @@ package logicmonitor
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 )
 
 func TestAccLogicMonitorDevice_import(t *testing.T) {
