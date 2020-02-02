@@ -1,26 +1,25 @@
 ---
 layout: "logicmonitor"
-page_title: "LogicMonitor: logicmonitor_collectors"
-sidebar_current: "docs-logicmonitor-datasource-collectors"
+page_title: "LogicMonitor: logicmonitor_dashboard"
+sidebar_current: "docs-logicmonitor-datasource-dashboard"
 description: |-
-  Use this datasource to get the ID of an available collector.
+  Use this datasource to get the ID of an available dashboard.
 ---
 
-# logicmonitor_collectors
+# logicmonitor_dashboard
 
-Use this datasource to get the ID of an available collector.
+Use this datasource to get the ID of an available dashboard group.
 
 ## Example Usage
 
 ```hcl
-# Look up a LogicMonitor collector id
-data "logicmonitor_collectors" "collectors" {
+# Look up a LogicMonitor dashboard id
+data "logicmonitor_dashboard" "LowerMerion" {
   filters {
-    property = "hostname"
-    operator = "~"
-    value = "test"
-  },
-"most_recent" = true
+    property = "geoLocation"
+    operator = ":"
+    value = "Philadelphia"
+  }
 }
 ```
 
@@ -30,8 +29,7 @@ The following arguments are supported:
 
 * `size` - (Optional) The number of results to display. Max is 1000. Default is 50
 * `offset` - (Optional) The number of results to offset the displayed results by. Default is 0
-* `most_recent` - (Optional) The most recent collector installed that is online
-* `filters` - (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/v1/collector-groups/
+* `filters` - (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/v1/dashboard-groups/
 
 ## Nested filters blocks
 

@@ -10,9 +10,8 @@ func TestAccLogicMonitorDeviceGroup_import(t *testing.T) {
 	resourceName := "logicmonitor_device_group.testgroup"
 
 	resource.Test(t, resource.TestCase{
-		PreCheck:     func() { testAccPreCheck(t) },
-		Providers:    testAccProviders,
-		CheckDestroy: testDeviceGroupDestroy,
+		PreCheck:  func() { testAccPreCheck(t) },
+		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			resource.TestStep{
 				Config: testAccCheckLogicMonitorDeviceGroupImport,

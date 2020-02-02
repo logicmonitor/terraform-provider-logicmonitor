@@ -1,6 +1,7 @@
 package logicmonitor
 
 import (
+	"encoding/json"
 	"fmt"
 	"strconv"
 	"strings"
@@ -57,6 +58,52 @@ func getCollectorFilters(d *schema.ResourceData) (t string) {
 		}
 	}
 	t = strings.Join(filters, ",")
+	return
+}
+
+// add widget token helper function
+func getWidgetTokens(d *schema.ResourceData) (t []*models.WidgetToken) {
+	// interate through hashmap to get custom/system properties
+	if r, ok := d.GetOk("widget_tokens"); ok {
+		for k, v := range r.(map[string]interface{}) {
+			v, _ := v.(string)
+			t = append(t, &models.WidgetToken{Name: k, Value: v})
+		}
+	}
+	return
+}
+
+func makeDashboardGroupObject(d *schema.ResourceData) (output models.DashboardGroup) {
+	var name = d.Get("name").(string)
+	template := []byte(d.Get("template").(string))
+	var jsonOutput map[string]interface{}
+	json.Unmarshal(template, &jsonOutput)
+
+	output = models.DashboardGroup{
+		Name:         &name,
+		Description:  d.Get("description").(string),
+		ParentID:     int32(d.Get("parent_id").(int)),
+		WidgetTokens: getWidgetTokens(d),
+		Template:     jsonOutput,
+	}
+
+	return
+}
+
+func makeDashboardObject(d *schema.ResourceData) (output models.Dashboard) {
+	var name = d.Get("name").(string)
+	template := []byte(d.Get("template").(string))
+	var jsonOutput map[string]interface{}
+	json.Unmarshal(template, &jsonOutput)
+
+	output = models.Dashboard{
+		Name:         &name,
+		Description:  d.Get("description").(string),
+		GroupID:      int32(d.Get("group_id").(int)),
+		WidgetTokens: getWidgetTokens(d),
+		Sharable:     d.Get("public").(bool),
+		Template:     jsonOutput,
+	}
 	return
 }
 
