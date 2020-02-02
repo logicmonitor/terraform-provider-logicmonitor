@@ -13,9 +13,8 @@ import (
 
 func TestAccCheckLogicMonitorDeviceGroupDataSource(t *testing.T) {
 	resource.Test(t, resource.TestCase{
-		PreCheck:     func() { testAccPreCheck(t) },
-		Providers:    testAccProviders,
-		CheckDestroy: testDeviceGroupDestroy,
+		PreCheck:  func() { testAccPreCheck(t) },
+		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccCheckLogicMonitorDeviceGroupDataSourceConfig,

@@ -1,10 +1,18 @@
-## 1.2.2 (Unreleased)
+## 1.2.3 (Unreleased)
+## 1.2.2 (February 20, 2020)
+
+FEATURES:
+* **New Resource:** `logicmonitor_dashboard` ([#22](https://github.com/terraform-providers/terraform-provider-logicmonitor/issues/22))
+* **New Resource:** `logicmonitor_dashboard_group` ([#22](https://github.com/terraform-providers/terraform-provider-logicmonitor/issues/22))
+* **Import Functionality:** `logicmonitor_dashboard` ([#22](https://github.com/terraform-providers/terraform-provider-logicmonitor/issues/22))
+* **Import Functionality:** `logicmonitor_dashboard_group` ([#22](https://github.com/terraform-providers/terraform-provider-logicmonitor/issues/22))
+
 ## 1.2.1 (June 18, 2019)
 
 IMPROVEMENTS:
 
-* Add use LogicMonitor API v2 (#16)
-* Add support for Terraform v0.12.0 (#18)
+* Add use LogicMonitor API v2 ([#16](https://github.com/terraform-providers/terraform-provider-logicmonitor/issues/16))
+* Add support for Terraform v0.12.0 ([#18](https://github.com/terraform-providers/terraform-provider-logicmonitor/issues/18))
 
 ## 1.2.0 (April 30, 2018)
 
