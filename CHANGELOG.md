@@ -1,4 +1,4 @@
-## 1.3.0 (Unreleased)
+## 1.3.0 (February 03, 2020)
 
 FEATURES:
 * **New Resource:** `logicmonitor_dashboard` ([#22](https://github.com/terraform-providers/terraform-provider-logicmonitor/issues/22))
