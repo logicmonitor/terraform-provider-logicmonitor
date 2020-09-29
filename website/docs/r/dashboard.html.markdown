@@ -32,7 +32,7 @@ resource "logicmonitor_dashboard" "dash" {
   widget_tokens {
     "defaultResourceGroup" = "Lakers/Championships"
   }
-  template = "${data.aws_s3_bucket_object.template.body}"
+  template = data.aws_s3_bucket_object.template.body
 }
 
 data "aws_s3_bucket_object" "template" {
