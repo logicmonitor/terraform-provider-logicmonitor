@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/plugin"
-	"github.com/terraform-providers/terraform-provider-logicmonitor/logicmonitor"
+	"github.com/logicmonitor/terraform-provider-logicmonitor/logicmonitor"
 )
 
 func main() {
