@@ -16,17 +16,17 @@ Use the navigation to the left to read about the available resources.
 
 ```hcl
 provider "logicmonitor" {
-  api_id = "${var.logicmonitor_api_id}"
-  api_key = "${var.logicmonitor_api_key}"
-  company = "${var.logicmonitor_company}"
+  api_id = var.logicmonitor_api_id
+  api_key = var.logicmonitor_api_key
+  company = var.logicmonitor_company
 }
 
 #
 resource "logicmonitor_device" "host" {
   ip_addr = "10.32.12.18"
   disable_alerting = true
-  collector = "${data.logicmonitor_collectors.collectors.id}"
-  hostgroup_id = "${logicmonitor_device_group.group1.id}"
+  collector = data.logicmonitor_collectors.collectors.id
+  hostgroup_id = logicmonitor_device_group.group1.id
   properties = {
    "app" = "haproxy"
    "system.categories" = "a,b,c,d"

@@ -30,8 +30,8 @@ resource "logicmonitor_device" "host" {
 resource "logicmonitor_device" "host" {
   ip_addr = "10.32.12.18"
   disable_alerting = true
-  collector = "${data.logicmonitor_collectors.collectors.id}"
-  hostgroup_id = "${logicmonitor_device_group.group1.id}"
+  collector = data.logicmonitor_collectors.collectors.id
+  hostgroup_id = logicmonitor_device_group.group1.id
   properties = {
    "app" = "haproxy"
    "system.categories" = "a,b,c,d"
