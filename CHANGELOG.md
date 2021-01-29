@@ -1,4 +1,4 @@
-## 1.3.2 (January 29, 2021)
+## 1.3.3 (January 29, 2021)
 
 This is patch increment of the previous version and does not introduce any new functionality.
 
