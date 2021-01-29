@@ -1,4 +1,7 @@
-## 1.3.1 (Unreleased)
+## 1.3.2 (January 29, 2021)
+
+This is patch increment of the previous version and does not introduce any new functionality.
+
 ## 1.3.0 (February 03, 2020)
 
 FEATURES:
