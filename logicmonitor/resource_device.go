@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
 	lmclient "github.com/logicmonitor/lm-sdk-go/client"
 	"github.com/logicmonitor/lm-sdk-go/client/lm"
 )
@@ -46,6 +47,12 @@ func resourceDevices() *schema.Resource {
 			"description": {
 				Type:     schema.TypeString,
 				Optional: true,
+			},
+			"type": {
+				Type:         schema.TypeString,
+				Optional:     true,
+				Default:      "HOST",
+				ValidateFunc: validation.StringInSlice([]string{"host", "service"}, true),
 			},
 			"properties": {
 				Type:     schema.TypeMap,
@@ -102,6 +109,7 @@ func readDevice(d *schema.ResourceData, m interface{}) error {
 	d.Set("disable_alerting", restResponse.Payload.DisableAlerting)
 	d.Set("description", restResponse.Payload.Description)
 	d.Set("hostgroup_id", restResponse.Payload.HostGroupIds)
+	d.Set("type", restResponse.Payload.DeviceType)
 
 	properties := make(map[*string]*string)
 	props := restResponse.Payload.CustomProperties
@@ -199,6 +207,7 @@ func resourceDeviceStateImporter(d *schema.ResourceData, m interface{}) ([]*sche
 		d.Set("disable_alerting", restResponse.Payload.DisableAlerting)
 		d.Set("description", restResponse.Payload.Description)
 		d.Set("hostgroup_id", restResponse.Payload.HostGroupIds)
+		d.Set("type", getDeviceType(restResponse.Payload.DeviceType))
 		properties := make(map[*string]*string)
 		props := restResponse.Payload.CustomProperties
 		for _, v := range props {
@@ -206,7 +215,6 @@ func resourceDeviceStateImporter(d *schema.ResourceData, m interface{}) ([]*sche
 		}
 		d.Set("properties", properties)
 	} else {
-
 		// currently set to add displayname
 		filter := fmt.Sprintf("displayName:\"%s\"", d.Id())
 		//looks for device

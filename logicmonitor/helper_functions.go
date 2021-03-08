@@ -61,6 +61,24 @@ func getCollectorFilters(d *schema.ResourceData) (t string) {
 	return
 }
 
+// Get device type id from string
+func getDeviceTypeID(t string) int32 {
+	var deviceTypeID int32 = 0
+	if strings.ToLower(t) == "service" {
+		deviceTypeID = 6
+	}
+	return deviceTypeID
+}
+
+// Get device type from id
+func getDeviceType(i int32) string {
+	var deviceType = "host"
+	if i == 6 {
+		deviceType = "service"
+	}
+	return deviceType
+}
+
 // add widget token helper function
 func getWidgetTokens(d *schema.ResourceData) (t []*models.WidgetToken) {
 	// interate through hashmap to get custom/system properties
@@ -113,6 +131,10 @@ func makeDeviceObject(d *schema.ResourceData) (output models.Device) {
 	var hostgroupID = d.Get("hostgroup_id").(string)
 	var name = d.Get("ip_addr").(string)
 
+	// Device type will default to HOST (0) and optionally be set to SERVICE (6)
+	var deviceType = d.Get("type").(string)
+	var deviceTypeID int32 = getDeviceTypeID(deviceType)
+
 	// if displayname is not there, we can automatically add ipaddr
 	var displayname = d.Get("display_name").(string)
 	if displayname == "" {
@@ -121,6 +143,7 @@ func makeDeviceObject(d *schema.ResourceData) (output models.Device) {
 
 	output = models.Device{
 		Name:                 &name,
+		DeviceType:           deviceTypeID,
 		DisplayName:          &displayname,
 		DisableAlerting:      d.Get("disable_alerting").(bool),
 		HostGroupIds:         &hostgroupID,
