@@ -1,3 +1,9 @@
+## 1.3.4 (March 16, 2021)
+
+IMPROVEMENTS:
+
+* Add possibility to create a service using the device resource
+
 ## 1.3.3 (January 29, 2021)
 
 This is patch increment of the previous version and does not introduce any new functionality.
