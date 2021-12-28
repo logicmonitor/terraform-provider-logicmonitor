@@ -1,0 +1,43 @@
+<% wrap_layout :inner do %>
+    <% content_for :sidebar do %>
+        <div class="docs-sidebar hidden-print affix-top" role="complementary">
+            <ul class="nav docs-sidenav">
+                <li<%= sidebar_current("docs-home") %>>
+                    <a href="/docs/providers/index.html">All Providers</a>
+                </li>
+
+                <li<%= sidebar_current("docs-logicmonitor-index") %>>
+                    <a href="/docs/providers/logicmonitor/index.html">LogicMonitor Provider</a>
+                </li>
+                
+                <li<%= sidebar_current("docs-logicmonitor-resource") %>>
+                    <a href="#">Resources</a>
+                    <ul class="nav nav-visible">
+                        <li<%= sidebar_current("docs-logicmonitor-resource-collector") %>>
+                            <a href="/docs/providers/logicmonitor/r/collector.html">logicmonitor_collector</a>
+                        </li>
+                        <li<%= sidebar_current("docs-logicmonitor-resource-collector-group") %>>
+                            <a href="/docs/providers/logicmonitor/r/collector_group.html">logicmonitor_collector_group</a>
+                        </li>
+                        <li<%= sidebar_current("docs-logicmonitor-resource-device") %>>
+                            <a href="/docs/providers/logicmonitor/r/device.html">logicmonitor_device</a>
+                        </li>
+                        <li<%= sidebar_current("docs-logicmonitor-resource-device-group") %>>
+                            <a href="/docs/providers/logicmonitor/r/device_group.html">logicmonitor_device_group</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li<%= sidebar_current("docs-logicmonitor-datasource") %>>
+                    <a href="#">Data Sources</a>
+                    <ul class="nav nav-visible">
+                        <li<%= sidebar_current("docs-logicmonitor-datasource-data-resource-aws-external-id") %>>
+                            <a href="/docs/providers/logicmonitor/d/data_resource_aws_external_id.html">logicmonitor_data_resource_aws_external_id</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    <% end %>
+    <%= yield %>
+<% end %>

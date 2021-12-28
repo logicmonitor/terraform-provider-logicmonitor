@@ -1,3 +1,9 @@
+## 2.0.0 (December 28, 2021)
+
+NOTES:
+
+* Implementation of our new LogicMonitor Provider
+
 ## 1.3.4 (March 16, 2021)
 
 IMPROVEMENTS:
