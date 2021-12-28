@@ -14,11 +14,11 @@
 ## Building the Provider (Internal)
 Clone repository:
 ```sh
-$ git clone ssh://git@stash.logicmonitor.com:7999/teamintegrations/terraform-integration.git
+$ git clone git@github.com:logicmonitor/terraform-provider-logicmonitor.git
 ```
 Enter the provider directory and build the provider:
 ```sh
-$ cd terraform-integration/terraform-provider-logicmonitor/
+$ cd terraform-provider-logicmonitor/
 $ make
 ```
 The make file will then generate the code, build the binary, and copy it to the Terraform plugin directory. 
@@ -40,10 +40,4 @@ provider "logicmonitor" {
   api_key = var.logicmonitor_api_key
   company = var.logicmonitor_company
 }
-```
-Example usage can be found in the /terraform-integration/examples directory.
-
-## Internal Documentation
-```sh
-https://confluence.logicmonitor.com/display/ENG/Development+Guide
 ```
