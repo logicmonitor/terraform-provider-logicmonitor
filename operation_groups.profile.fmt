@@ -1,0 +1,772 @@
+& {
+	GenCommon: {
+		Copyright: TargetImportPath: terraform - provider - logicmonitor
+	}
+	Name: collectors Operations: [{
+				GenCommon: {
+					Copyright: TargetImportPath: terraform - provider - logicmonitor
+				}
+				Package: collectors ReceiverName: o Name: ackCollectorDownAlertById Summary: ack collector down alert Description: Method: POST Path: /setting/collector / collectors / {
+					id
+				}
+				/ackdown BasePath:/santaba / rest Tags: [Collectors] UseTags: true RootPackage: restapi Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] ExtraSchemas: [] PackageAlias: collectors Authorized: true Security: [[{
+					Name: LMv1 Scopes: []
+				}]] SecurityDefinitions: [{
+					AppName: ackCollectorDownAlertById ID: LMv1 Name: Authorization ReceiverName: o IsBasicAuth: false IsAPIKeyAuth: true IsOAuth2: false Scopes: [] Source: header Principal: interface {}
+					PrincipalIsNullable: false Description: Type: apikey In: header Flow: AuthorizationURL: TokenURL: Extensions: map[] ScopesDesc: []
+				}] SecurityRequirements: [{
+					Name: LMv1 Scopes: []
+				}] Principal: interface {}
+				PrincipalIsNullable: false SuccessResponse: 0xc000bb2a50 SuccessResponses: [{
+					Package: collectors ModelsPackage: models ReceiverName: o Name: ackCollectorDownAlertByIdOK Description: successful operation IsSuccess: true Code: 200 Method: POST Path: /setting/collector / collectors / {
+						id
+					}
+					/ackdown Headers:[] Schema:0xc000c36700 AllowsForStreaming:false Imports:map[client:terraform-provider-logicmonitor/client] DefaultImports:map[collector_groups:terraform-provider-logicmonitor/client/collector_groups collector_versions:terraform-provider-logicmonitor/client/collector_versions collectors:terraform-provider-logicmonitor/client/collectors models:terraform-provider-logicmonitor/models] Extensions:map[] StrictResponders:false OperationName:ackCollectorDownAlertById Examples:[]}] Responses:[{Package:collectors ModelsPackage:models ReceiverName:o Name:ackCollectorDownAlertByIdOK Description:successful operation IsSuccess:true Code:200 Method:POST Path:/setting/collector/collectors/{id}/ackdown Headers:[] Schema:0xc000c36700 AllowsForStreaming:false Imports:map[client:terraform-provider-logicmonitor/client] DefaultImports:map[collector_groups:terraform-provider-logicmonitor/client/collector_groups collector_versions:terraform-provider-logicmonitor/client/collector_versions collectors:terraform-provider-logicmonitor/client/collectors models:terraform-provider-logicmonitor/models] Extensions:map[] StrictResponders:false OperationName:ackCollectorDownAlertById Examples:[]}] DefaultResponse:0xc000bb24b0 Params:[{resolvedType:{IsAnonymous:false IsArray:false IsMap:false IsInterface:false IsPrimitive:false IsCustomFormatter:false IsAliased:false IsNullable:true IsStream:false IsEmptyOmitted:true IsJSONString:false IsEnumCI:false IsBase64:false IsExternal:false IsTuple:false HasAdditionalItems:false IsComplexObject:true IsBaseType:false HasDiscriminator:false GoType:models.AckCollectorDown Pkg: PkgAlias: AliasedType: SwaggerType:object SwaggerFormat: Extensions:map[] ElemType:<nil> IsMapNullOverride:false IsSuperAlias:false IsEmbedded:false SkipExternalValidation:false} sharedValidations:{SchemaValidations:{CommonValidations:{Maximum:<nil> ExclusiveMaximum:false Minimum:<nil> ExclusiveMinimum:false MaxLength:<nil> MinLength:<nil> Pattern: MaxItems:<nil> MinItems:<nil> UniqueItems:false MultipleOf:<nil> Enum:[]} PatternProperties:map[] MaxProperties:<nil> MinProperties:<nil>} HasValidations:false HasContextValidations:true Required:true HasSliceValidations:false ItemsEnum:[]} ID:Body Name:body ModelsPackage:models Path:"body" ValueExpression:o.Body IndexVar:i KeyVar:k ReceiverName:o Location:body Title: Description: Converter: Formatter: Schema:0xc000c36380 CollectionFormat: Child:0xc0009e5800 Parent:<nil> Default:<nil> HasDefault:false ZeroValue:new(models.AckCollectorDown) AllowEmptyValue:false HasSimpleBodyParams:false HasModelBodyParams:true HasSimpleBodyItems:false HasModelBodyItems:false HasSimpleBodyMap:false HasModelBodyMap:false Extensions:map[]} {resolvedType:{IsAnonymous:false IsArray:false IsMap:false IsInterface:false IsPrimitive:true IsCustomFormatter:false IsAliased:false IsNullable:false IsStream:false IsEmptyOmitted:false IsJSONString:false IsEnumCI:false IsBase64:false IsExternal:false IsTuple:false HasAdditionalItems:false IsComplexObject:false IsBaseType:false HasDiscriminator:false GoType:int32 Pkg: PkgAlias: AliasedType: SwaggerType:integer SwaggerFormat:int32 Extensions:map[] ElemType:<nil> IsMapNullOverride:false IsSuperAlias:false IsEmbedded:false SkipExternalValidation:false} sharedValidations:{SchemaValidations:{CommonValidations:{Maximum:<nil> ExclusiveMaximum:false Minimum:<nil> ExclusiveMinimum:false MaxLength:<nil> MinLength:<nil> Pattern: MaxItems:<nil> MinItems:<nil> UniqueItems:false MultipleOf:<nil> Enum:[]} PatternProperties:map[] MaxProperties:<nil> MinProperties:<nil>} HasValidations:false HasContextValidations:false Required:true HasSliceValidations:false ItemsEnum:[]} ID:ID Name:id ModelsPackage:models Path:"id" ValueExpression:o.ID IndexVar:i KeyVar: ReceiverName:o Location:path Title: Description: Converter:swag.ConvertInt32 Formatter:swag.FormatInt32 Schema:<nil> CollectionFormat: Child:<nil> Parent:<nil> Default:<nil> HasDefault:false ZeroValue:0 AllowEmptyValue:false HasSimpleBodyParams:false HasModelBodyParams:false HasSimpleBodyItems:false HasModelBodyItems:false HasSimpleBodyMap:false HasModelBodyMap:false Extensions:map[]}] QueryParams:[] PathParams:[{resolvedType:{IsAnonymous:false IsArray:false IsMap:false IsInterface:false IsPrimitive:true IsCustomFormatter:false IsAliased:false IsNullable:false IsStream:false IsEmptyOmitted:false IsJSONString:false IsEnumCI:false IsBase64:false IsExternal:false IsTuple:false HasAdditionalItems:false IsComplexObject:false IsBaseType:false HasDiscriminator:false GoType:int32 Pkg: PkgAlias: AliasedType: SwaggerType:integer SwaggerFormat:int32 Extensions:map[] ElemType:<nil> IsMapNullOverride:false IsSuperAlias:false IsEmbedded:false SkipExternalValidation:false} sharedValidations:{SchemaValidations:{CommonValidations:{Maximum:<nil> ExclusiveMaximum:false Minimum:<nil> ExclusiveMinimum:false MaxLength:<nil> MinLength:<nil> Pattern: MaxItems:<nil> MinItems:<nil> UniqueItems:false MultipleOf:<nil> Enum:[]} PatternProperties:map[] MaxProperties:<nil> MinProperties:<nil>} HasValidations:false HasContextValidations:false Required:true HasSliceValidations:false ItemsEnum:[]} ID:ID Name:id ModelsPackage:models Path:"id" ValueExpression:o.ID IndexVar:i KeyVar: ReceiverName:o Location:path Title: Description: Converter:swag.ConvertInt32 Formatter:swag.FormatInt32 Schema:<nil> CollectionFormat: Child:<nil> Parent:<nil> Default:<nil> HasDefault:false ZeroValue:0 AllowEmptyValue:false HasSimpleBodyParams:false HasModelBodyParams:false HasSimpleBodyItems:false HasModelBodyItems:false HasSimpleBodyMap:false HasModelBodyMap:false Extensions:map[]}] HeaderParams:[] FormParams:[] HasQueryParams:false HasPathParams:true HasHeaderParams:false HasFormParams:false HasFormValueParams:false HasFileParams:false HasBodyParams:true HasStreamingResponse:false Schemes:[https] ExtraSchemes:[] SchemeOverrides:[] ExtraSchemeOverrides:[] ProducesMediaTypes:[application/json] ConsumesMediaTypes:[application/json] TimeoutName:timeout Extensions:map[] StrictResponders:false ExternalDocs:<nil> Produces:[application/json] Consumes:[application/json]} {GenCommon:{Copyright: TargetImportPath:terraform-provider-logicmonitor} Package:collectors ReceiverName:o Name:addCollector Summary:add collector Description: Method:POST Path:/setting / collector / collectors BasePath: /santaba/rest
+					Tags: [Collectors] UseTags: true RootPackage: restapi Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] ExtraSchemas: [] PackageAlias: collectors Authorized: true Security: [[{
+						Name: LMv1 Scopes: []
+					}]] SecurityDefinitions: [{
+						AppName: addCollector ID: LMv1 Name: Authorization ReceiverName: o IsBasicAuth: false IsAPIKeyAuth: true IsOAuth2: false Scopes: [] Source: header Principal: interface {}
+						PrincipalIsNullable: false Description: Type: apikey In: header Flow: AuthorizationURL: TokenURL: Extensions: map[] ScopesDesc: []
+					}] SecurityRequirements: [{
+						Name: LMv1 Scopes: []
+					}] Principal: interface {}
+					PrincipalIsNullable: false SuccessResponse: 0xc00118e780 SuccessResponses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: addCollectorOK Description: successful operation IsSuccess: true Code: 200 Method: POST Path: /setting/collector / collectors Headers: [] Schema: 0xc002750380 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: addCollector Examples: []
+					}] Responses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: addCollectorOK Description: successful operation IsSuccess: true Code: 200 Method: POST Path: /setting/collector / collectors Headers: [] Schema: 0xc002750380 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: addCollector Examples: []
+					}] DefaultResponse: 0xc00118e4b0 Params: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: false IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: true IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: true IsBaseType: false HasDiscriminator: false GoType: models.Collector Pkg: PkgAlias: AliasedType: SwaggerType: object SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: true Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Body Name: body ModelsPackage: models Path: "body"
+						ValueExpression: o.Body IndexVar: i KeyVar: k ReceiverName: o Location: body Title: Description: Converter: Formatter: Schema: 0xc002750000 CollectionFormat: Child: 0xc0009e5000 Parent: < nil > Default: < nil > HasDefault: false ZeroValue: new(models.Collector) AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: true HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] QueryParams: [] PathParams: [] HeaderParams: [] FormParams: [] HasQueryParams: false HasPathParams: false HasHeaderParams: false HasFormParams: false HasFormValueParams: false HasFileParams: false HasBodyParams: true HasStreamingResponse: false Schemes: [https] ExtraSchemes: [] SchemeOverrides: [] ExtraSchemeOverrides: [] ProducesMediaTypes: [application / json] ConsumesMediaTypes: [application / json] TimeoutName: timeout Extensions: map[] StrictResponders: false ExternalDocs: < nil > Produces: [application / json] Consumes: [application / json]
+				} {
+					GenCommon: {
+						Copyright: TargetImportPath: terraform - provider - logicmonitor
+					}
+					Package: collectors ReceiverName: o Name: deleteCollectorById Summary: delete collector Description: Method: DELETE Path: /setting/collector / collectors / {
+						id
+					}
+					BasePath: /santaba/rest
+					Tags: [Collectors] UseTags: true RootPackage: restapi Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] ExtraSchemas: [] PackageAlias: collectors Authorized: true Security: [[{
+						Name: LMv1 Scopes: []
+					}]] SecurityDefinitions: [{
+						AppName: deleteCollectorById ID: LMv1 Name: Authorization ReceiverName: o IsBasicAuth: false IsAPIKeyAuth: true IsOAuth2: false Scopes: [] Source: header Principal: interface {}
+						PrincipalIsNullable: false Description: Type: apikey In: header Flow: AuthorizationURL: TokenURL: Extensions: map[] ScopesDesc: []
+					}] SecurityRequirements: [{
+						Name: LMv1 Scopes: []
+					}] Principal: interface {}
+					PrincipalIsNullable: false SuccessResponse: 0xc000bb2e10 SuccessResponses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: deleteCollectorByIdOK Description: successful operation IsSuccess: true Code: 200 Method: DELETE Path: /setting/collector / collectors / {
+							id
+						}
+						Headers: [] Schema: 0xc003622000 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: deleteCollectorById Examples: []
+					}] Responses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: deleteCollectorByIdOK Description: successful operation IsSuccess: true Code: 200 Method: DELETE Path: /setting/collector / collectors / {
+							id
+						}
+						Headers: [] Schema: 0xc003622000 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: deleteCollectorById Examples: []
+					}] DefaultResponse: 0xc000bb2690 Params: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ID Name: id ModelsPackage: models Path: "id"
+						ValueExpression: o.ID IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] QueryParams: [] PathParams: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ID Name: id ModelsPackage: models Path: "id"
+						ValueExpression: o.ID IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] HeaderParams: [] FormParams: [] HasQueryParams: false HasPathParams: true HasHeaderParams: false HasFormParams: false HasFormValueParams: false HasFileParams: false HasBodyParams: false HasStreamingResponse: false Schemes: [https] ExtraSchemes: [] SchemeOverrides: [] ExtraSchemeOverrides: [] ProducesMediaTypes: [application / json] ConsumesMediaTypes: [application / json] TimeoutName: timeout Extensions: map[] StrictResponders: false ExternalDocs: < nil > Produces: [application / json] Consumes: []
+				} {
+					GenCommon: {
+						Copyright: TargetImportPath: terraform - provider - logicmonitor
+					}
+					Package: collectors ReceiverName: o Name: getCollectorById Summary: get collector Description: Method: GET Path: /setting/collector / collectors / {
+						id
+					}
+					BasePath: /santaba/rest
+					Tags: [Collectors] UseTags: true RootPackage: restapi Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] ExtraSchemas: [] PackageAlias: collectors Authorized: true Security: [[{
+						Name: LMv1 Scopes: []
+					}]] SecurityDefinitions: [{
+						AppName: getCollectorById ID: LMv1 Name: Authorization ReceiverName: o IsBasicAuth: false IsAPIKeyAuth: true IsOAuth2: false Scopes: [] Source: header Principal: interface {}
+						PrincipalIsNullable: false Description: Type: apikey In: header Flow: AuthorizationURL: TokenURL: Extensions: map[] ScopesDesc: []
+					}] SecurityRequirements: [{
+						Name: LMv1 Scopes: []
+					}] Principal: interface {}
+					PrincipalIsNullable: false SuccessResponse: 0xc00118f860 SuccessResponses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: getCollectorByIdOK Description: successful operation IsSuccess: true Code: 200 Method: GET Path: /setting/collector / collectors / {
+							id
+						}
+						Headers: [] Schema: 0xc002751c00 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: getCollectorById Examples: []
+					}] Responses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: getCollectorByIdOK Description: successful operation IsSuccess: true Code: 200 Method: GET Path: /setting/collector / collectors / {
+							id
+						}
+						Headers: [] Schema: 0xc002751c00 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: getCollectorById Examples: []
+					}] DefaultResponse: 0xc00118f590 Params: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Fields Name: fields ModelsPackage: models Path: "fields"
+						ValueExpression: o.Fields IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: Formatter: Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: ""
+						AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ID Name: id ModelsPackage: models Path: "id"
+						ValueExpression: o.ID IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] QueryParams: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Fields Name: fields ModelsPackage: models Path: "fields"
+						ValueExpression: o.Fields IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: Formatter: Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: ""
+						AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] PathParams: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ID Name: id ModelsPackage: models Path: "id"
+						ValueExpression: o.ID IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] HeaderParams: [] FormParams: [] HasQueryParams: true HasPathParams: true HasHeaderParams: false HasFormParams: false HasFormValueParams: false HasFileParams: false HasBodyParams: false HasStreamingResponse: false Schemes: [https] ExtraSchemes: [] SchemeOverrides: [] ExtraSchemeOverrides: [] ProducesMediaTypes: [application / json] ConsumesMediaTypes: [application / json] TimeoutName: timeout Extensions: map[] StrictResponders: false ExternalDocs: < nil > Produces: [application / json] Consumes: []
+				} {
+					GenCommon: {
+						Copyright: TargetImportPath: terraform - provider - logicmonitor
+					}
+					Package: collectors ReceiverName: o Name: getCollectorInstaller Summary: get collector installer Description: Method: GET Path: /setting/collector / collectors / {
+						collectorId
+					}
+					/installers/ {
+						osAndArch
+					}
+					BasePath: /santaba/rest
+					Tags: [Collectors] UseTags: true RootPackage: restapi Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] ExtraSchemas: [] PackageAlias: collectors Authorized: true Security: [[{
+						Name: LMv1 Scopes: []
+					}]] SecurityDefinitions: [{
+						AppName: getCollectorInstaller ID: LMv1 Name: Authorization ReceiverName: o IsBasicAuth: false IsAPIKeyAuth: true IsOAuth2: false Scopes: [] Source: header Principal: interface {}
+						PrincipalIsNullable: false Description: Type: apikey In: header Flow: AuthorizationURL: TokenURL: Extensions: map[] ScopesDesc: []
+					}] SecurityRequirements: [{
+						Name: LMv1 Scopes: []
+					}] Principal: interface {}
+					PrincipalIsNullable: false SuccessResponse: 0xc000bb3680 SuccessResponses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: getCollectorInstallerOK Description: successful operation IsSuccess: true Code: 200 Method: GET Path: /setting/collector / collectors / {
+							collectorId
+						}
+						/installers/ {
+							osAndArch
+						}
+						Headers: [] Schema: 0xc00330c700 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: getCollectorInstaller Examples: []
+					}] Responses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: getCollectorInstallerOK Description: successful operation IsSuccess: true Code: 200 Method: GET Path: /setting/collector / collectors / {
+							collectorId
+						}
+						/installers/ {
+							osAndArch
+						}
+						Headers: [] Schema: 0xc00330c700 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: getCollectorInstaller Examples: []
+					}] DefaultResponse: 0xc000bb31d0 Params: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: CollectorID Name: collectorId ModelsPackage: models Path: "collectorId"
+						ValueExpression: o.CollectorID IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: CollectorSize Name: collectorSize ModelsPackage: models Path: "collectorSize"
+						ValueExpression: o.CollectorSize IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: The size of the Collector you 'd like to install. Options are nano, small (requires 2GB memory), medium (requires 4GB memory), large (requires 8GB memory), extra large (requires 16GB memory), double extra large (requires 32GB memory). Requires collector version 22.180 or higher. Defaults to small Converter: Formatter: Schema:<nil> CollectionFormat: Child:<nil> Parent:<nil> Default:medium HasDefault:true ZeroValue:"" AllowEmptyValue:false HasSimpleBodyParams:false HasModelBodyParams:false HasSimpleBodyItems:false HasModelBodyItems:false HasSimpleBodyMap:false HasModelBodyMap:false Extensions:map[]} {resolvedType:{IsAnonymous:false IsArray:false IsMap:false IsInterface:false IsPrimitive:true IsCustomFormatter:false IsAliased:false IsNullable:true IsStream:false IsEmptyOmitted:false IsJSONString:false IsEnumCI:false IsBase64:false IsExternal:false IsTuple:false HasAdditionalItems:false IsComplexObject:false IsBaseType:false HasDiscriminator:false GoType:int32 Pkg: PkgAlias: AliasedType: SwaggerType:integer SwaggerFormat:int32 Extensions:map[] ElemType:<nil> IsMapNullOverride:false IsSuperAlias:false IsEmbedded:false SkipExternalValidation:false} sharedValidations:{SchemaValidations:{CommonValidations:{Maximum:<nil> ExclusiveMaximum:false Minimum:<nil> ExclusiveMinimum:false MaxLength:<nil> MinLength:<nil> Pattern: MaxItems:<nil> MinItems:<nil> UniqueItems:false MultipleOf:<nil> Enum:[]} PatternProperties:map[] MaxProperties:<nil> MinProperties:<nil>} HasValidations:false HasContextValidations:false Required:false HasSliceValidations:false ItemsEnum:[]} ID:CollectorVersion Name:collectorVersion ModelsPackage:models Path:"collectorVersion" ValueExpression:o.CollectorVersion IndexVar:i KeyVar: ReceiverName:o Location:query Title: Description:The version of the installer you'
+						d like to download.This defaults to the latest GD Collector,
+						unless useEA is true Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: bool Pkg: PkgAlias: AliasedType: SwaggerType: boolean SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: MonitorOthers Name: monitorOthers ModelsPackage: models Path: "monitorOthers"
+						ValueExpression: o.MonitorOthers IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: swag.ConvertBool Formatter: swag.FormatBool Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: true HasDefault: true ZeroValue: false AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: . + MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: true HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: OsAndArch Name: osAndArch ModelsPackage: models Path: "osAndArch"
+						ValueExpression: o.OsAndArch IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: Formatter: Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: ""
+						AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Token Name: token ModelsPackage: models Path: "token"
+						ValueExpression: o.Token IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: Formatter: Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: ""
+						AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: bool Pkg: PkgAlias: AliasedType: SwaggerType: boolean SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: UseEA Name: useEA ModelsPackage: models Path: "useEA"
+						ValueExpression: o.UseEA IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: If true,
+						the latest EA Collector version will be used.Defaults to false Converter: swag.ConvertBool Formatter: swag.FormatBool Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: false HasDefault: true ZeroValue: false AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] QueryParams: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: CollectorSize Name: collectorSize ModelsPackage: models Path: "collectorSize"
+						ValueExpression: o.CollectorSize IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: The size of the Collector you 'd like to install. Options are nano, small (requires 2GB memory), medium (requires 4GB memory), large (requires 8GB memory), extra large (requires 16GB memory), double extra large (requires 32GB memory). Requires collector version 22.180 or higher. Defaults to small Converter: Formatter: Schema:<nil> CollectionFormat: Child:<nil> Parent:<nil> Default:medium HasDefault:true ZeroValue:"" AllowEmptyValue:false HasSimpleBodyParams:false HasModelBodyParams:false HasSimpleBodyItems:false HasModelBodyItems:false HasSimpleBodyMap:false HasModelBodyMap:false Extensions:map[]} {resolvedType:{IsAnonymous:false IsArray:false IsMap:false IsInterface:false IsPrimitive:true IsCustomFormatter:false IsAliased:false IsNullable:true IsStream:false IsEmptyOmitted:false IsJSONString:false IsEnumCI:false IsBase64:false IsExternal:false IsTuple:false HasAdditionalItems:false IsComplexObject:false IsBaseType:false HasDiscriminator:false GoType:int32 Pkg: PkgAlias: AliasedType: SwaggerType:integer SwaggerFormat:int32 Extensions:map[] ElemType:<nil> IsMapNullOverride:false IsSuperAlias:false IsEmbedded:false SkipExternalValidation:false} sharedValidations:{SchemaValidations:{CommonValidations:{Maximum:<nil> ExclusiveMaximum:false Minimum:<nil> ExclusiveMinimum:false MaxLength:<nil> MinLength:<nil> Pattern: MaxItems:<nil> MinItems:<nil> UniqueItems:false MultipleOf:<nil> Enum:[]} PatternProperties:map[] MaxProperties:<nil> MinProperties:<nil>} HasValidations:false HasContextValidations:false Required:false HasSliceValidations:false ItemsEnum:[]} ID:CollectorVersion Name:collectorVersion ModelsPackage:models Path:"collectorVersion" ValueExpression:o.CollectorVersion IndexVar:i KeyVar: ReceiverName:o Location:query Title: Description:The version of the installer you'
+						d like to download.This defaults to the latest GD Collector,
+						unless useEA is true Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: bool Pkg: PkgAlias: AliasedType: SwaggerType: boolean SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: MonitorOthers Name: monitorOthers ModelsPackage: models Path: "monitorOthers"
+						ValueExpression: o.MonitorOthers IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: swag.ConvertBool Formatter: swag.FormatBool Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: true HasDefault: true ZeroValue: false AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Token Name: token ModelsPackage: models Path: "token"
+						ValueExpression: o.Token IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: Formatter: Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: ""
+						AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: bool Pkg: PkgAlias: AliasedType: SwaggerType: boolean SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: UseEA Name: useEA ModelsPackage: models Path: "useEA"
+						ValueExpression: o.UseEA IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: If true,
+						the latest EA Collector version will be used.Defaults to false Converter: swag.ConvertBool Formatter: swag.FormatBool Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: false HasDefault: true ZeroValue: false AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] PathParams: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: CollectorID Name: collectorId ModelsPackage: models Path: "collectorId"
+						ValueExpression: o.CollectorID IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: . + MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: true HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: OsAndArch Name: osAndArch ModelsPackage: models Path: "osAndArch"
+						ValueExpression: o.OsAndArch IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: Formatter: Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: ""
+						AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] HeaderParams: [] FormParams: [] HasQueryParams: true HasPathParams: true HasHeaderParams: false HasFormParams: false HasFormValueParams: false HasFileParams: false HasBodyParams: false HasStreamingResponse: true Schemes: [https] ExtraSchemes: [] SchemeOverrides: [] ExtraSchemeOverrides: [] ProducesMediaTypes: [application / json] ConsumesMediaTypes: [application / json] TimeoutName: timeout Extensions: map[] StrictResponders: false ExternalDocs: < nil > Produces: [application / json] Consumes: []
+				} {
+					GenCommon: {
+						Copyright: TargetImportPath: terraform - provider - logicmonitor
+					}
+					Package: collectors ReceiverName: o Name: getCollectorList Summary: get collector list Description: Method: GET Path: /setting/collector / collectors BasePath: /santaba/rest
+					Tags: [Collectors] UseTags: true RootPackage: restapi Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] ExtraSchemas: [] PackageAlias: collectors Authorized: true Security: [[{
+						Name: LMv1 Scopes: []
+					}]] SecurityDefinitions: [{
+						AppName: getCollectorList ID: LMv1 Name: Authorization ReceiverName: o IsBasicAuth: false IsAPIKeyAuth: true IsOAuth2: false Scopes: [] Source: header Principal: interface {}
+						PrincipalIsNullable: false Description: Type: apikey In: header Flow: AuthorizationURL: TokenURL: Extensions: map[] ScopesDesc: []
+					}] SecurityRequirements: [{
+						Name: LMv1 Scopes: []
+					}] Principal: interface {}
+					PrincipalIsNullable: false SuccessResponse: 0xc0002f2c30 SuccessResponses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: getCollectorListOK Description: successful operation IsSuccess: true Code: 200 Method: GET Path: /setting/collector / collectors Headers: [] Schema: 0xc00271b500 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: getCollectorList Examples: []
+					}] Responses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: getCollectorListOK Description: successful operation IsSuccess: true Code: 200 Method: GET Path: /setting/collector / collectors Headers: [] Schema: 0xc00271b500 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: getCollectorList Examples: []
+					}] DefaultResponse: 0xc0002f2870 Params: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Fields Name: fields ModelsPackage: models Path: "fields"
+						ValueExpression: o.Fields IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: Formatter: Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: ""
+						AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Filter Name: filter ModelsPackage: models Path: "filter"
+						ValueExpression: o.Filter IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: Formatter: Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: ""
+						AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Offset Name: offset ModelsPackage: models Path: "offset"
+						ValueExpression: o.Offset IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: 0 HasDefault: true ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Size Name: size ModelsPackage: models Path: "size"
+						ValueExpression: o.Size IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: 50 HasDefault: true ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] QueryParams: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Fields Name: fields ModelsPackage: models Path: "fields"
+						ValueExpression: o.Fields IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: Formatter: Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: ""
+						AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: string Pkg: PkgAlias: AliasedType: SwaggerType: string SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Filter Name: filter ModelsPackage: models Path: "filter"
+						ValueExpression: o.Filter IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: Formatter: Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: ""
+						AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Offset Name: offset ModelsPackage: models Path: "offset"
+						ValueExpression: o.Offset IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: 0 HasDefault: true ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Size Name: size ModelsPackage: models Path: "size"
+						ValueExpression: o.Size IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: 50 HasDefault: true ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] PathParams: [] HeaderParams: [] FormParams: [] HasQueryParams: true HasPathParams: false HasHeaderParams: false HasFormParams: false HasFormValueParams: false HasFileParams: false HasBodyParams: false HasStreamingResponse: false Schemes: [https] ExtraSchemes: [] SchemeOverrides: [] ExtraSchemeOverrides: [] ProducesMediaTypes: [application / json] ConsumesMediaTypes: [application / json] TimeoutName: timeout Extensions: map[] StrictResponders: false ExternalDocs: < nil > Produces: [application / json] Consumes: []
+				} {
+					GenCommon: {
+						Copyright: TargetImportPath: terraform - provider - logicmonitor
+					}
+					Package: collectors ReceiverName: o Name: patchCollectorById Summary: update collector Description: Method: PATCH Path: /setting/collector / collectors / {
+						id
+					}
+					BasePath: /santaba/rest
+					Tags: [Collectors] UseTags: true RootPackage: restapi Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] ExtraSchemas: [] PackageAlias: collectors Authorized: true Security: [[{
+						Name: LMv1 Scopes: []
+					}]] SecurityDefinitions: [{
+						AppName: patchCollectorById ID: LMv1 Name: Authorization ReceiverName: o IsBasicAuth: false IsAPIKeyAuth: true IsOAuth2: false Scopes: [] Source: header Principal: interface {}
+						PrincipalIsNullable: false Description: Type: apikey In: header Flow: AuthorizationURL: TokenURL: Extensions: map[] ScopesDesc: []
+					}] SecurityRequirements: [{
+						Name: LMv1 Scopes: []
+					}] Principal: interface {}
+					PrincipalIsNullable: false SuccessResponse: 0xc000bb2c30 SuccessResponses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: patchCollectorByIdOK Description: successful operation IsSuccess: true Code: 200 Method: PATCH Path: /setting/collector / collectors / {
+							id
+						}
+						Headers: [] Schema: 0xc000123880 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: patchCollectorById Examples: []
+					}] Responses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: patchCollectorByIdOK Description: successful operation IsSuccess: true Code: 200 Method: PATCH Path: /setting/collector / collectors / {
+							id
+						}
+						Headers: [] Schema: 0xc000123880 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: patchCollectorById Examples: []
+					}] DefaultResponse: 0xc000bb2960 Params: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: false IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: true IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: true IsBaseType: false HasDiscriminator: false GoType: models.Collector Pkg: PkgAlias: AliasedType: SwaggerType: object SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: true Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Body Name: body ModelsPackage: models Path: "body"
+						ValueExpression: o.Body IndexVar: i KeyVar: k ReceiverName: o Location: body Title: Description: Converter: Formatter: Schema: 0xc000123180 CollectionFormat: Child: 0xc0009e5600 Parent: < nil > Default: < nil > HasDefault: false ZeroValue: new(models.Collector) AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: true HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: bool Pkg: PkgAlias: AliasedType: SwaggerType: boolean SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ForceUpdateFailedOverDevices Name: forceUpdateFailedOverDevices ModelsPackage: models Path: "forceUpdateFailedOverDevices"
+						ValueExpression: o.ForceUpdateFailedOverDevices IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: swag.ConvertBool Formatter: swag.FormatBool Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: false HasDefault: true ZeroValue: false AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ID Name: id ModelsPackage: models Path: "id"
+						ValueExpression: o.ID IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] QueryParams: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: bool Pkg: PkgAlias: AliasedType: SwaggerType: boolean SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ForceUpdateFailedOverDevices Name: forceUpdateFailedOverDevices ModelsPackage: models Path: "forceUpdateFailedOverDevices"
+						ValueExpression: o.ForceUpdateFailedOverDevices IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: swag.ConvertBool Formatter: swag.FormatBool Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: false HasDefault: true ZeroValue: false AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] PathParams: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ID Name: id ModelsPackage: models Path: "id"
+						ValueExpression: o.ID IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] HeaderParams: [] FormParams: [] HasQueryParams: true HasPathParams: true HasHeaderParams: false HasFormParams: false HasFormValueParams: false HasFileParams: false HasBodyParams: true HasStreamingResponse: false Schemes: [https] ExtraSchemes: [] SchemeOverrides: [] ExtraSchemeOverrides: [] ProducesMediaTypes: [application / json] ConsumesMediaTypes: [application / json] TimeoutName: timeout Extensions: map[] StrictResponders: false ExternalDocs: < nil > Produces: [application / json] Consumes: [application / json]
+				} {
+					GenCommon: {
+						Copyright: TargetImportPath: terraform - provider - logicmonitor
+					}
+					Package: collectors ReceiverName: o Name: updateCollectorById Summary: update collector Description: Method: PUT Path: /setting/collector / collectors / {
+						id
+					}
+					BasePath: /santaba/rest
+					Tags: [Collectors] UseTags: true RootPackage: restapi Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] ExtraSchemas: [] PackageAlias: collectors Authorized: true Security: [[{
+						Name: LMv1 Scopes: []
+					}]] SecurityDefinitions: [{
+						AppName: updateCollectorById ID: LMv1 Name: Authorization ReceiverName: o IsBasicAuth: false IsAPIKeyAuth: true IsOAuth2: false Scopes: [] Source: header Principal: interface {}
+						PrincipalIsNullable: false Description: Type: apikey In: header Flow: AuthorizationURL: TokenURL: Extensions: map[] ScopesDesc: []
+					}] SecurityRequirements: [{
+						Name: LMv1 Scopes: []
+					}] Principal: interface {}
+					PrincipalIsNullable: false SuccessResponse: 0xc00118e2d0 SuccessResponses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: updateCollectorByIdOK Description: successful operation IsSuccess: true Code: 200 Method: PUT Path: /setting/collector / collectors / {
+							id
+						}
+						Headers: [] Schema: 0xc0035bc000 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: updateCollectorById Examples: []
+					}] Responses: [{
+						Package: collectors ModelsPackage: models ReceiverName: o Name: updateCollectorByIdOK Description: successful operation IsSuccess: true Code: 200 Method: PUT Path: /setting/collector / collectors / {
+							id
+						}
+						Headers: [] Schema: 0xc0035bc000 AllowsForStreaming: false Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] Extensions: map[] StrictResponders: false OperationName: updateCollectorById Examples: []
+					}] DefaultResponse: 0xc0002f3ef0 Params: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: false IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: true IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: true IsBaseType: false HasDiscriminator: false GoType: models.Collector Pkg: PkgAlias: AliasedType: SwaggerType: object SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: true Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: Body Name: body ModelsPackage: models Path: "body"
+						ValueExpression: o.Body IndexVar: i KeyVar: k ReceiverName: o Location: body Title: Description: Converter: Formatter: Schema: 0xc0035a1c00 CollectionFormat: Child: 0xc0009e5a00 Parent: < nil > Default: < nil > HasDefault: false ZeroValue: new(models.Collector) AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: true HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: bool Pkg: PkgAlias: AliasedType: SwaggerType: boolean SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ForceUpdateFailedOverDevices Name: forceUpdateFailedOverDevices ModelsPackage: models Path: "forceUpdateFailedOverDevices"
+						ValueExpression: o.ForceUpdateFailedOverDevices IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: swag.ConvertBool Formatter: swag.FormatBool Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: false HasDefault: true ZeroValue: false AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					} {
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ID Name: id ModelsPackage: models Path: "id"
+						ValueExpression: o.ID IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] QueryParams: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: true IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: bool Pkg: PkgAlias: AliasedType: SwaggerType: boolean SwaggerFormat: Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: false HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ForceUpdateFailedOverDevices Name: forceUpdateFailedOverDevices ModelsPackage: models Path: "forceUpdateFailedOverDevices"
+						ValueExpression: o.ForceUpdateFailedOverDevices IndexVar: i KeyVar: ReceiverName: o Location: query Title: Description: Converter: swag.ConvertBool Formatter: swag.FormatBool Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: false HasDefault: true ZeroValue: false AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] PathParams: [{
+						resolvedType: {
+							IsAnonymous: false IsArray: false IsMap: false IsInterface: false IsPrimitive: true IsCustomFormatter: false IsAliased: false IsNullable: false IsStream: false IsEmptyOmitted: false IsJSONString: false IsEnumCI: false IsBase64: false IsExternal: false IsTuple: false HasAdditionalItems: false IsComplexObject: false IsBaseType: false HasDiscriminator: false GoType: int32 Pkg: PkgAlias: AliasedType: SwaggerType: integer SwaggerFormat: int32 Extensions: map[] ElemType: < nil > IsMapNullOverride: false IsSuperAlias: false IsEmbedded: false SkipExternalValidation: false
+						}
+						sharedValidations: {
+							SchemaValidations: {
+								CommonValidations: {
+									Maximum: < nil > ExclusiveMaximum: false Minimum: < nil > ExclusiveMinimum: false MaxLength: < nil > MinLength: < nil > Pattern: MaxItems: < nil > MinItems: < nil > UniqueItems: false MultipleOf: < nil > Enum: []
+								}
+								PatternProperties: map[] MaxProperties: < nil > MinProperties: < nil >
+							}
+							HasValidations: false HasContextValidations: false Required: true HasSliceValidations: false ItemsEnum: []
+						}
+						ID: ID Name: id ModelsPackage: models Path: "id"
+						ValueExpression: o.ID IndexVar: i KeyVar: ReceiverName: o Location: path Title: Description: Converter: swag.ConvertInt32 Formatter: swag.FormatInt32 Schema: < nil > CollectionFormat: Child: < nil > Parent: < nil > Default: < nil > HasDefault: false ZeroValue: 0 AllowEmptyValue: false HasSimpleBodyParams: false HasModelBodyParams: false HasSimpleBodyItems: false HasModelBodyItems: false HasSimpleBodyMap: false HasModelBodyMap: false Extensions: map[]
+					}] HeaderParams: [] FormParams: [] HasQueryParams: true HasPathParams: true HasHeaderParams: false HasFormParams: false HasFormValueParams: false HasFileParams: false HasBodyParams: true HasStreamingResponse: false Schemes: [https] ExtraSchemes: [] SchemeOverrides: [] ExtraSchemeOverrides: [] ProducesMediaTypes: [application / json] ConsumesMediaTypes: [application / json] TimeoutName: timeout Extensions: map[] StrictResponders: false ExternalDocs: < nil > Produces: [application / json] Consumes: [application / json]
+				}] Summary: Description: Imports: map[client: terraform - provider - logicmonitor / client] DefaultImports: map[collector_groups: terraform - provider - logicmonitor / client / collector_groups collector_versions: terraform - provider - logicmonitor / client / collector_versions collectors: terraform - provider - logicmonitor / client / collectors models: terraform - provider - logicmonitor / models] RootPackage: operations GenOpts: 0xc0001a0000 PackageAlias: collectors
+			}
