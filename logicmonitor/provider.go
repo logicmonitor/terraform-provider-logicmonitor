@@ -1,16 +1,15 @@
-package logicmonitor
+package logicmonitor 
 
 import (
-	"fmt"
-	"log"
-	"strings"
+	"context"
+	"terraform-provider-logicmonitor/client"
+	"terraform-provider-logicmonitor/logicmonitor/resources"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-//Provider for LogicMonitor
-func Provider() terraform.ResourceProvider {
+func Provider() *schema.Provider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"api_id": {
@@ -30,31 +29,31 @@ func Provider() terraform.ResourceProvider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"logicmonitor_collector":       resourceCollector(),
-			"logicmonitor_collector_group": resourceCollectorGroup(),
-			"logicmonitor_dashboard":       resourceDashboard(),
-			"logicmonitor_dashboard_group": resourceDashboardGroup(),
-			"logicmonitor_device":          resourceDevices(),
-			"logicmonitor_device_group":    resourceDeviceGroup(),
+			"logicmonitor_collector": resources.Collector(),
+			"logicmonitor_collector_group": resources.CollectorGroup(),
+			"logicmonitor_device": resources.Device(),
+			"logicmonitor_device_group": resources.DeviceGroup(),
 		},
-
 		DataSourcesMap: map[string]*schema.Resource{
-			"logicmonitor_collectors":      dataSourceFindCollectors(),
-			"logicmonitor_dashboard":       dataSourceFindDashboards(),
-			"logicmonitor_dashboard_group": dataSourceFindDashboardGroups(),
-			"logicmonitor_device_group":    dataSourceFindDeviceGroups(),
+			"logicmonitor_data_resource_aws_external_id": resources.DataResourceAwsExternalID(),
 		},
-		ConfigureFunc: providerConfigure,
+		ConfigureContextFunc: providerConfigure,
 	}
 }
 
-func providerConfigure(d *schema.ResourceData) (interface{}, error) {
-	company := fmt.Sprintf("%s.logicmonitor.com", strings.Replace(d.Get("company").(string), ".logicmonitor.com", "", -1))
-	config := Config{
-		AccessID:  d.Get("api_id").(string),
-		AccessKey: d.Get("api_key").(string),
-		Company:   company,
-	}
-	log.Println("[INFO] Initializing LM client")
-	return config.newLMClient()
+func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+ 	id := d.Get("api_id").(string)
+ 	key := d.Get("api_key").(string)
+ 	company := d.Get("company").(string) + ".logicmonitor.com"
+	config := client.NewConfig()
+	config.SetAccessKey(&key)
+	config.SetAccessID(&id)
+	config.SetAccountDomain(&company)
+
+	//TODO: Find out what errors this can throw and capture them.
+	c := client.New(config)
+
+	return c, diags
 }
