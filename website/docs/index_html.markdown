@@ -55,6 +55,14 @@ resource "logicmonitor_collector_group" "my_collector_group" {
 }
 ```
 
+### Dashboard
+
+```hcl
+# create a new LogicMonitor dashboard
+resource "logicmonitor_dashboard" "my_dashboard" {
+}
+```
+
 ### DataResourceAwsExternalID
 
 ```hcl

@@ -40,7 +40,7 @@ The following arguments are **required**:
 The following arguments are **optional**:
 * `auto_balance` - Denotes whether or not the collector group should be auto balanced
 * `auto_balance_instance_count_threshold` - Threshold for instance count strategy to check if a collector has high load
-* `auto_balance_strategy` - The auto balance strategy 
+* `auto_balance_strategy` - The auto balance strategy. Typically left blank or set to 'none'.
 * `custom_properties` - The custom properties defined for the Collector group
   + `name` - The name of a property (required)
   + `value` - The value of a property (required)
