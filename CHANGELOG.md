@@ -1,3 +1,9 @@
+## 2.01 (December 28, 2021)
+
+NOTES:
+
+* This release adds documentation for provider as per 2.0.0 release.
+
 ## 2.0.0 (December 28, 2021)
 
 NOTES:
