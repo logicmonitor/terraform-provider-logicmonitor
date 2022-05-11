@@ -36,6 +36,13 @@ func Collector() *schema.Resource {
 	}
 }
 
+func DataResourceCollector() *schema.Resource {
+	return &schema.Resource{
+		ReadContext: getCollectorList,
+		Schema:      schemata.DataSourceCollectorSchema(),
+	}
+}
+
 func addCollector(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	var diags diag.Diagnostics
 
@@ -118,11 +125,42 @@ func getCollectorById(ctx context.Context, d *schema.ResourceData, m interface{}
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
+		return diags
 	}
 
 	respModel := resp.GetPayload()
 	schemata.SetCollectorResourceData(d, respModel)
+	return diags
+}
 
+func getCollectorList(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	params := collector.NewGetCollectorListParams()
+
+	filterVal, filterIsSet := d.GetOk("filter")
+	if filterIsSet {
+		stringVal := filterVal.(string)
+		params.Filter = &stringVal
+	}
+
+	client := m.(*client.LogicMonitorRESTAPI)
+
+	resp, err := client.Collector.GetCollectorList(params)
+	log.Printf("[TRACE] response: %v", resp)
+	if err != nil {
+		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
+		return diags
+	}
+
+	respModel := resp.GetPayload()
+	if len(respModel.Items) == 0 {
+		diags = append(diags, diag.Errorf("no Collector found")...)
+	} else {
+		result := respModel.Items[0]
+		d.SetId(strconv.Itoa(int(result.ID)))
+		schemata.SetCollectorResourceData(d, result)
+	}
 	return diags
 }
 

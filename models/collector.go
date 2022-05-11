@@ -334,6 +334,8 @@ func (m *Collector) validateAutomaticUpgradeInfo(formats strfmt.Registry) error 
 		if err := m.AutomaticUpgradeInfo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("automaticUpgradeInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("automaticUpgradeInfo")
 			}
 			return err
 		}
@@ -356,6 +358,8 @@ func (m *Collector) validateCustomProperties(formats strfmt.Registry) error {
 			if err := m.CustomProperties[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("customProperties" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("customProperties" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -375,6 +379,8 @@ func (m *Collector) validateNextUpgradeInfo(formats strfmt.Registry) error {
 		if err := m.NextUpgradeInfo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("nextUpgradeInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("nextUpgradeInfo")
 			}
 			return err
 		}
@@ -392,6 +398,8 @@ func (m *Collector) validateOnetimeDowngradeInfo(formats strfmt.Registry) error 
 		if err := m.OnetimeDowngradeInfo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("onetimeDowngradeInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("onetimeDowngradeInfo")
 			}
 			return err
 		}
@@ -409,6 +417,8 @@ func (m *Collector) validateOnetimeUpgradeInfo(formats strfmt.Registry) error {
 		if err := m.OnetimeUpgradeInfo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("onetimeUpgradeInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("onetimeUpgradeInfo")
 			}
 			return err
 		}
@@ -666,6 +676,8 @@ func (m *Collector) contextValidateAutomaticUpgradeInfo(ctx context.Context, for
 		if err := m.AutomaticUpgradeInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("automaticUpgradeInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("automaticUpgradeInfo")
 			}
 			return err
 		}
@@ -763,6 +775,8 @@ func (m *Collector) contextValidateCustomProperties(ctx context.Context, formats
 			if err := m.CustomProperties[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("customProperties" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("customProperties" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -860,6 +874,8 @@ func (m *Collector) contextValidateNextUpgradeInfo(ctx context.Context, formats 
 		if err := m.NextUpgradeInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("nextUpgradeInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("nextUpgradeInfo")
 			}
 			return err
 		}
@@ -892,6 +908,8 @@ func (m *Collector) contextValidateOnetimeDowngradeInfo(ctx context.Context, for
 		if err := m.OnetimeDowngradeInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("onetimeDowngradeInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("onetimeDowngradeInfo")
 			}
 			return err
 		}
@@ -906,6 +924,8 @@ func (m *Collector) contextValidateOnetimeUpgradeInfo(ctx context.Context, forma
 		if err := m.OnetimeUpgradeInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("onetimeUpgradeInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("onetimeUpgradeInfo")
 			}
 			return err
 		}

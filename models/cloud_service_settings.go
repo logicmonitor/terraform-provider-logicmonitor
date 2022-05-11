@@ -128,6 +128,8 @@ func (m *CloudServiceSettings) validateNormalCollectorConfig(formats strfmt.Regi
 		if err := m.NormalCollectorConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("normalCollectorConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("normalCollectorConfig")
 			}
 			return err
 		}
@@ -150,6 +152,8 @@ func (m *CloudServiceSettings) validateTags(formats strfmt.Registry) error {
 			if err := m.Tags[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tags" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tags" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -206,6 +210,8 @@ func (m *CloudServiceSettings) contextValidateNormalCollectorConfig(ctx context.
 		if err := m.NormalCollectorConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("normalCollectorConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("normalCollectorConfig")
 			}
 			return err
 		}
@@ -222,6 +228,8 @@ func (m *CloudServiceSettings) contextValidateTags(ctx context.Context, formats 
 			if err := m.Tags[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tags" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tags" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

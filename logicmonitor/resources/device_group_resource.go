@@ -36,6 +36,13 @@ func DeviceGroup() *schema.Resource {
 	}
 }
 
+func DataResourceDeviceGroup() *schema.Resource {
+	return &schema.Resource{
+		ReadContext: getDeviceGroupList,
+		Schema:      schemata.DataSourceDeviceGroupSchema(),
+	}
+}
+
 func addDeviceGroup(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	var diags diag.Diagnostics
 
@@ -123,11 +130,42 @@ func getDeviceGroupById(ctx context.Context, d *schema.ResourceData, m interface
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
+		return diags
 	}
 
 	respModel := resp.GetPayload()
 	schemata.SetDeviceGroupResourceData(d, respModel)
+	return diags
+}
 
+func getDeviceGroupList(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	params := device_group.NewGetDeviceGroupListParams()
+
+	filterVal, filterIsSet := d.GetOk("filter")
+	if filterIsSet {
+		stringVal := filterVal.(string)
+		params.Filter = &stringVal
+	}
+
+	client := m.(*client.LogicMonitorRESTAPI)
+
+	resp, err := client.DeviceGroup.GetDeviceGroupList(params)
+	log.Printf("[TRACE] response: %v", resp)
+	if err != nil {
+		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
+		return diags
+	}
+
+	respModel := resp.GetPayload()
+	if len(respModel.Items) == 0 {
+		diags = append(diags, diag.Errorf("no DeviceGroup found")...)
+	} else {
+		result := respModel.Items[0]
+		d.SetId(strconv.Itoa(int(result.ID)))
+		schemata.SetDeviceGroupResourceData(d, result)
+	}
 	return diags
 }
 

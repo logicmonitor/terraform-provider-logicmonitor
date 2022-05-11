@@ -205,6 +205,8 @@ func (m *DeviceGroup) validateAwsTestResult(formats strfmt.Registry) error {
 		if err := m.AwsTestResult.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("awsTestResult")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("awsTestResult")
 			}
 			return err
 		}
@@ -222,6 +224,8 @@ func (m *DeviceGroup) validateAzureTestResult(formats strfmt.Registry) error {
 		if err := m.AzureTestResult.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("azureTestResult")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azureTestResult")
 			}
 			return err
 		}
@@ -244,6 +248,8 @@ func (m *DeviceGroup) validateCustomProperties(formats strfmt.Registry) error {
 			if err := m.CustomProperties[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("customProperties" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("customProperties" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -263,6 +269,8 @@ func (m *DeviceGroup) validateExtra(formats strfmt.Registry) error {
 		if err := m.Extra.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("extra")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("extra")
 			}
 			return err
 		}
@@ -280,6 +288,8 @@ func (m *DeviceGroup) validateGcpTestResult(formats strfmt.Registry) error {
 		if err := m.GcpTestResult.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gcpTestResult")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gcpTestResult")
 			}
 			return err
 		}
@@ -311,6 +321,8 @@ func (m *DeviceGroup) validateSubGroups(formats strfmt.Registry) error {
 			if err := m.SubGroups[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("subGroups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("subGroups" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -450,6 +462,8 @@ func (m *DeviceGroup) contextValidateAwsTestResult(ctx context.Context, formats 
 		if err := m.AwsTestResult.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("awsTestResult")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("awsTestResult")
 			}
 			return err
 		}
@@ -482,6 +496,8 @@ func (m *DeviceGroup) contextValidateAzureTestResult(ctx context.Context, format
 		if err := m.AzureTestResult.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("azureTestResult")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azureTestResult")
 			}
 			return err
 		}
@@ -516,6 +532,8 @@ func (m *DeviceGroup) contextValidateCustomProperties(ctx context.Context, forma
 			if err := m.CustomProperties[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("customProperties" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("customProperties" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -550,6 +568,8 @@ func (m *DeviceGroup) contextValidateExtra(ctx context.Context, formats strfmt.R
 		if err := m.Extra.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("extra")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("extra")
 			}
 			return err
 		}
@@ -582,6 +602,8 @@ func (m *DeviceGroup) contextValidateGcpTestResult(ctx context.Context, formats 
 		if err := m.GcpTestResult.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gcpTestResult")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gcpTestResult")
 			}
 			return err
 		}
@@ -692,6 +714,8 @@ func (m *DeviceGroup) contextValidateSubGroups(ctx context.Context, formats strf
 			if err := m.SubGroups[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("subGroups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("subGroups" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

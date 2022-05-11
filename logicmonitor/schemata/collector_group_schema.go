@@ -66,6 +66,73 @@ func CollectorGroupSchema() map[string]*schema.Schema {
 	}
 }
 
+
+// Schema mapping representing the resource's respective datasource object defined in Terraform configuration
+// Only difference between this and CollectorGroupSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
+func DataSourceCollectorGroupSchema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+		"auto_balance": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"auto_balance_instance_count_threshold": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"auto_balance_strategy": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"create_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"custom_properties": {
+			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Elem: &schema.Resource{
+				Schema: NameAndValueSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"description": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"id": {
+			Type: schema.TypeInt,
+			Computed: true,
+			Optional: true,
+		},
+		
+		"name": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"num_of_collectors": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"user_permission": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"filter": {
+			Type:     schema.TypeString,
+            Optional: true,
+		},
+	}
+}
+
 func SetCollectorGroupResourceData(d *schema.ResourceData, m *models.CollectorGroup) {
 	d.Set("auto_balance", m.AutoBalance)
 	d.Set("auto_balance_instance_count_threshold", m.AutoBalanceInstanceCountThreshold)

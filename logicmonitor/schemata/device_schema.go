@@ -223,6 +223,230 @@ func DeviceSchema() map[string]*schema.Schema {
 	}
 }
 
+
+// Schema mapping representing the resource's respective datasource object defined in Terraform configuration
+// Only difference between this and DeviceSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
+func DataSourceDeviceSchema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+		"auto_balanced_collector_group_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"auto_properties": {
+			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Elem: &schema.Resource{
+				Schema: NameAndValueSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"auto_props_assigned_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"auto_props_updated_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"aws_state": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"azure_state": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"collector_description": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"created_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"current_collector_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"custom_properties": {
+			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Elem: &schema.Resource{
+				Schema: NameAndValueSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"deleted_time_in_ms": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"description": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"device_type": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"disable_alerting": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"display_name": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"enable_netflow": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"gcp_state": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"host_group_ids": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"host_status": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"id": {
+			Type: schema.TypeInt,
+			Computed: true,
+			Optional: true,
+		},
+		
+		"inherited_properties": {
+			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Elem: &schema.Resource{
+				Schema: NameAndValueSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"last_data_time": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"last_rawdata_time": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"link": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"name": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"netflow_collector_description": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"netflow_collector_group_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"netflow_collector_group_name": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"netflow_collector_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"preferred_collector_group_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"preferred_collector_group_name": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"preferred_collector_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"related_device_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"scan_config_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"system_properties": {
+			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Elem: &schema.Resource{
+				Schema: NameAndValueSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"to_delete_time_in_ms": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"up_time_in_seconds": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"updated_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"user_permission": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"filter": {
+			Type:     schema.TypeString,
+            Optional: true,
+		},
+	}
+}
+
 func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("auto_balanced_collector_group_id", m.AutoBalancedCollectorGroupID)
 	d.Set("auto_properties", SetNameAndValueSubResourceData(m.AutoProperties))

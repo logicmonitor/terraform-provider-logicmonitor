@@ -367,6 +367,374 @@ func CollectorSchema() map[string]*schema.Schema {
 	}
 }
 
+
+// Schema mapping representing the resource's respective datasource object defined in Terraform configuration
+// Only difference between this and CollectorSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
+func DataSourceCollectorSchema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+		"ack_comment": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"acked": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"acked_by": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"acked_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"acked_on_local": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"arch": {
+			Type: schema.TypeString,
+			Default: "linux64",
+			Optional: true,
+		},
+		
+		"automatic_upgrade_info": {
+			Type: schema.TypeList, //GoType: AutomaticUpgradeInfo
+			Elem: &schema.Resource{
+				Schema: AutomaticUpgradeInfoSchema(),
+			},
+			Optional: true,
+		},
+		
+		"backup_agent_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"build": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"can_downgrade": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"can_downgrade_reason": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"clear_sent": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"collector_conf": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"collector_device_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"collector_group_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"collector_group_name": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"collector_size": {
+			Type: schema.TypeString,
+			Default: "medium",
+			Optional: true,
+		},
+		
+		"company": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"conf_version": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"created_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"created_on_local": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"custom_properties": {
+			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Elem: &schema.Resource{
+				Schema: NameAndValueSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"description": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"ea": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"enable_fail_back": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"enable_fail_over_on_collector_device": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"escalating_chain_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"has_fail_over_device": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"hostname": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"id": {
+			Type: schema.TypeInt,
+			Computed: true,
+			Optional: true,
+		},
+		
+		"in_s_d_t": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"installer_url_cmds": {
+			Type: schema.TypeMap, //GoType: interface{}
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+			Optional: true,
+		},
+		
+		"is_down": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"last_sent_notification_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"last_sent_notification_on_local": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"monitor_others": {
+			Type: schema.TypeBool,
+			Default: true,
+			Optional: true,
+		},
+		
+		"need_auto_create_collector_device": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"netscan_version": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"next_recipient": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"next_upgrade_info": {
+			Type: schema.TypeList, //GoType: NextUpgradeInfo
+			Elem: &schema.Resource{
+				Schema: NextUpgradeInfoSchema(),
+			},
+			Optional: true,
+		},
+		
+		"number_of_hosts": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"number_of_instances": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"number_of_websites": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"onetime_downgrade_info": {
+			Type: schema.TypeList, //GoType: OnetimeUpgradeInfo
+			Elem: &schema.Resource{
+				Schema: OnetimeUpgradeInfoSchema(),
+			},
+			Optional: true,
+		},
+		
+		"onetime_upgrade_info": {
+			Type: schema.TypeList, //GoType: OnetimeUpgradeInfo
+			Elem: &schema.Resource{
+				Schema: OnetimeUpgradeInfoSchema(),
+			},
+			Optional: true,
+		},
+		
+		"platform": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"predefined_config": {
+			Type: schema.TypeMap, //GoType: interface{}
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+			Optional: true,
+		},
+		
+		"previous_version": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"resend_ival": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"sbproxy_conf": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"specified_collector_device_group_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"status": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"suppress_alert_clear": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"up_time": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"updated_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"updated_on_local": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"user_change_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"user_change_on_local": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"user_permission": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"user_visible_hosts_num": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"user_visible_websites_num": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"watchdog_conf": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"watchdog_updated_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"watchdog_updated_on_local": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"website_conf": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"wrapper_conf": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"filter": {
+			Type:     schema.TypeString,
+            Optional: true,
+		},
+	}
+}
+
 func SetCollectorResourceData(d *schema.ResourceData, m *models.Collector) {
 	d.Set("ack_comment", m.AckComment)
 	d.Set("acked", m.Acked)

@@ -202,6 +202,209 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 	}
 }
 
+
+// Schema mapping representing the resource's respective datasource object defined in Terraform configuration
+// Only difference between this and DeviceGroupSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
+func DataSourceDeviceGroupSchema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+		"applies_to": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"aws_regions_info": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"aws_test_result": {
+			Type: schema.TypeList, //GoType: AwsAccountTestResult
+			Elem: &schema.Resource{
+				Schema: AwsAccountTestResultSchema(),
+			},
+			Optional: true,
+		},
+		
+		"aws_test_result_code": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"azure_regions_info": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"azure_test_result": {
+			Type: schema.TypeList, //GoType: AzureAccountTestResult
+			Elem: &schema.Resource{
+				Schema: AzureAccountTestResultSchema(),
+			},
+			Optional: true,
+		},
+		
+		"azure_test_result_code": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"created_on": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"custom_properties": {
+			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Elem: &schema.Resource{
+				Schema: NameAndValueSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"default_collector_description": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"default_collector_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"description": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"disable_alerting": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"effective_alert_enabled": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"enable_netflow": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"extra": {
+			Type: schema.TypeList, //GoType: CloudAccountExtra
+			Elem: &schema.Resource{
+				Schema: CloudAccountExtraSchema(),
+			},
+			Optional: true,
+		},
+		
+		"full_path": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"gcp_regions_info": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"gcp_test_result": {
+			Type: schema.TypeList, //GoType: GcpAccountTestResult
+			Elem: &schema.Resource{
+				Schema: GcpAccountTestResultSchema(),
+			},
+			Optional: true,
+		},
+		
+		"gcp_test_result_code": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"group_status": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"group_type": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"has_netflow_enabled_devices": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"id": {
+			Type: schema.TypeInt,
+			Computed: true,
+			Optional: true,
+		},
+		
+		"name": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"num_of_a_w_s_devices": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"num_of_azure_devices": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"num_of_direct_devices": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"num_of_direct_sub_groups": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"num_of_gcp_devices": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"num_of_hosts": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"parent_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"sub_groups": {
+			Type: schema.TypeList, //GoType: []*DeviceGroupData 
+			Elem: &schema.Resource{
+				Schema: DeviceGroupDataSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"user_permission": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"filter": {
+			Type:     schema.TypeString,
+            Optional: true,
+		},
+	}
+}
+
 func SetDeviceGroupResourceData(d *schema.ResourceData, m *models.DeviceGroup) {
 	d.Set("applies_to", m.AppliesTo)
 	d.Set("aws_regions_info", m.AwsRegionsInfo)
