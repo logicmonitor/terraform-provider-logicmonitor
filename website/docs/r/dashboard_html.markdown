@@ -40,8 +40,8 @@ The following arguments are **optional**:
 * `widget_tokens` - If useDynamicWidget=true, this field must at least contain tokens defaultDeviceGroup and defaultServiceGroup
   + `name` (required)
   + `value` (required)
-  + `type` (optional) - Need to pass 'null' value
-  + `value` (optional)  - Need to pass 'null' value
+  + `type` (required) - Need to pass 'null' value
+  + `inherit_list` (required)  - Need to pass 'null' value
 * `widgets_config` - Information about widget configuration used by the UI
 
 ## Import

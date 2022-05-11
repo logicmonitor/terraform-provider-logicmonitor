@@ -33,8 +33,8 @@ The following arguments are **optional**:
 * `widget_tokens` - The tokens assigned at the group level
   + `name` (required)
   + `value` (required)
-  + `type` (optional) - Need to pass 'null' value
-  + `value` (optional)  - Need to pass 'null' value
+  + `type` (required) - Need to pass 'null' value
+  + `inherit_list` (required)  - Need to pass 'null' value
 
 ## Import
 

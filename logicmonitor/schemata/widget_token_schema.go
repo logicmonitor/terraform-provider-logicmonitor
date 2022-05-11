@@ -24,7 +24,7 @@ func WidgetTokenSchema() map[string]*schema.Schema {
 
 		"type": {
 			Type:     schema.TypeString,
-			Optional: true,
+			Computed: true,
 		},
 
 		"value": {
@@ -50,17 +50,20 @@ func SetWidgetTokenSubResourceData(m []*models.WidgetToken) (d []*map[string]int
 
 func WidgetTokenModel(d map[string]interface{}) *models.WidgetToken {
 	// assume that the incoming map only contains the relevant resource data
+	inheritList := d["inherit_list"].([]*models.WidgetTokenInheritance)
 	name := d["name"].(string)
 	value := d["value"].(string)
 
 	return &models.WidgetToken{
-		Name:  name,
-		Value: value,
+		InheritList: inheritList,
+		Name:        name,
+		Value:       value,
 	}
 }
 
 func GetWidgetTokenPropertyFields() (t []string) {
 	return []string{
+		"inherit_list",
 		"name",
 		"value",
 	}

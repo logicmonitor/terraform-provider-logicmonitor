@@ -2,6 +2,7 @@ package schemata
 
 import (
 	"strconv"
+	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -209,11 +210,7 @@ func DashboardGroupModel(d *schema.ResourceData) *models.DashboardGroup {
 	name := d.Get("name").(string)
 	parentID := int32(d.Get("parent_id").(int))
 	template := d.Get("template")
-	widgetTokensTempSlice := d.Get("widget_tokens").([]interface{})
-	widgetTokens := []*models.WidgetToken{}
-	for _, val := range widgetTokensTempSlice {
-		widgetTokens = append(widgetTokens, val.(*models.WidgetToken))
-	}
+	widgetTokens := utils.GetPropFromWTMap(d, "widget_tokens")
 	
 	return &models.DashboardGroup {
 		Description: description,
