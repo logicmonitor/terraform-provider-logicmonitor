@@ -196,7 +196,7 @@ func ConvertSetToStringSlice(set *schema.Set) (slice []string) {
 	return
 }
 
-// retrieve resource custom properties from resource structure
+// retrieve resource widget tokens from resource structure
 func GetPropFromWTMap(d *schema.ResourceData, key string) (t []*models.WidgetToken) {
 	if r, ok := d.GetOk(key); ok {
 		return getPropFromWTInterface(r)
