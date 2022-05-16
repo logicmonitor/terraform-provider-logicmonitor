@@ -5,10 +5,10 @@ FEATURES:
 * **New Resource:** `logicmonitor_dashboard_group`
 * **New DataSource:** `logicmonitor_collector` 
 * **New DataSource:** `logicmonitor_collector_group` 
-* **New DataSource:** `logicmonitor_device` 
-* **New DataSource:** `logicmonitor_collector` 
-* **New Datasource:** `logicmonitor_devic`
+* **New Datasource:** `logicmonitor_device`
 * **New Datasource:** `logicmonitor_device_group`
+* **New Datasource:** `logicmonitor_dashboard`
+* **New Datasource:** `logicmonitor_dashboard_group`
 
 ## 2.0.1 (May 6, 2022)
 
