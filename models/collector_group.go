@@ -16,6 +16,7 @@ import (
 )
 
 // CollectorGroup collector group
+// Example: isResource
 //
 // swagger:model CollectorGroup
 type CollectorGroup struct {
@@ -28,7 +29,7 @@ type CollectorGroup struct {
 	// Example: 10000
 	AutoBalanceInstanceCountThreshold int32 `json:"autoBalanceInstanceCountThreshold"`
 
-	// The auto balance strategy
+	// The auto balance strategy. Typically left blank or set to 'none'.
 	// Example: none
 	AutoBalanceStrategy string `json:"autoBalanceStrategy,omitempty"`
 
@@ -93,6 +94,8 @@ func (m *CollectorGroup) validateCustomProperties(formats strfmt.Registry) error
 			if err := m.CustomProperties[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("customProperties" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("customProperties" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -159,6 +162,8 @@ func (m *CollectorGroup) contextValidateCustomProperties(ctx context.Context, fo
 			if err := m.CustomProperties[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("customProperties" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("customProperties" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

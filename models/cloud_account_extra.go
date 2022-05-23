@@ -72,6 +72,8 @@ func (m *CloudAccountExtra) validateAccount(formats strfmt.Registry) error {
 		if err := m.Account.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("account")
 			}
 			return err
 		}
@@ -90,6 +92,8 @@ func (m *CloudAccountExtra) validateDefault(formats strfmt.Registry) error {
 		if err := m.Default.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("default")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("default")
 			}
 			return err
 		}
@@ -107,6 +111,8 @@ func (m *CloudAccountExtra) validateDevices(formats strfmt.Registry) error {
 		if err := m.Devices.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("devices")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("devices")
 			}
 			return err
 		}
@@ -125,6 +131,8 @@ func (m *CloudAccountExtra) validateServices(formats strfmt.Registry) error {
 		if err := m.Services.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("services")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("services")
 			}
 			return err
 		}
@@ -165,6 +173,8 @@ func (m *CloudAccountExtra) contextValidateAccount(ctx context.Context, formats 
 		if err := m.Account.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("account")
 			}
 			return err
 		}
@@ -179,6 +189,8 @@ func (m *CloudAccountExtra) contextValidateDefault(ctx context.Context, formats 
 		if err := m.Default.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("default")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("default")
 			}
 			return err
 		}
@@ -193,6 +205,8 @@ func (m *CloudAccountExtra) contextValidateDevices(ctx context.Context, formats 
 		if err := m.Devices.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("devices")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("devices")
 			}
 			return err
 		}
@@ -207,6 +221,8 @@ func (m *CloudAccountExtra) contextValidateServices(ctx context.Context, formats
 		if err := m.Services.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("services")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("services")
 			}
 			return err
 		}

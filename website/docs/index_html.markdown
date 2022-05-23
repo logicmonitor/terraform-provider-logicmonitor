@@ -30,8 +30,8 @@ provider "logicmonitor" {
 ```hcl
 # create a new LogicMonitor collector
 resource "logicmonitor_collector" "my_collector" {
-  company = "lm"
-  description: "Linux Collector"
+      company = "lm"
+      description: "Linux Collector"
 }
 ```
 
@@ -40,18 +40,39 @@ resource "logicmonitor_collector" "my_collector" {
 ```hcl
 # create a new LogicMonitor collector group
 resource "logicmonitor_collector_group" "my_collector_group" {
-  custom_properties = [
-		{
-			name = "addr"
-      		value = "127.0.0.1"
-		},
-		{
-			name = "host"
-      		value = "localhost"
-		}
-	]
-  description = "Group for collectors dedicated to Network Devices"
-  name = "Collector_Group_(Network Devices)"
+      custom_properties = [
+        {
+          name = "addr"
+              value = "127.0.0.1"
+        },
+        {
+          name = "host"
+              value = "localhost"
+        }
+      ]
+      description = "Group for collectors dedicated to Network Devices"
+      name = "Collector_Group_(Network Devices)"
+}
+```
+
+### Dashboard
+
+```hcl
+# create a new LogicMonitor dashboard
+resource "logicmonitor_dashboard" "my_dashboard" {
+      	description = "my dashboard"
+        name = "test_dashboard"
+        sharable = true
+}
+```
+
+### DashboardGroup
+
+```hcl
+# create a new LogicMonitor dashboard group
+resource "logicmonitor_dashboard_group" "my_dashboard_group" {
+        name = "LogicMonitor Dashboard Group"
+        description  = "LM dashboard group testing"
 }
 ```
 
@@ -68,10 +89,10 @@ resource "logicmonitor_data_resource_aws_external_id" "my_data_resource_aws_exte
 ```hcl
 # create a new LogicMonitor device
 resource "logicmonitor_device" "my_device" {
-  description = "This is a Cisco Router"
-  display_name = "Cisco Router"
-  name = "collector.localhost"
-  preferred_collector_id = 2
+      description = "This is a Cisco Router"
+      display_name = "Cisco Router"
+      name = "collector.localhost"
+      preferred_collector_id = 2
 }
 ```
 
@@ -80,17 +101,17 @@ resource "logicmonitor_device" "my_device" {
 ```hcl
 # create a new LogicMonitor device group
 resource "logicmonitor_device_group" "my_device_group" {
-	description = "my device group"
-	disable_alerting = false
-	enable_netflow = false
-	default_collector_id = 2
-	name = "my device group"
-	parent_id = 1
-	custom_properties { 
-      name = "addr"      
-      value = "127.0.0.1" 
-    }
-	group_type = "Normal"
+      description = "my device group"
+      disable_alerting = false
+      enable_netflow = false
+      default_collector_id = 2
+      name = "my device group"
+      parent_id = 1
+      custom_properties { 
+          name = "addr"      
+          value = "127.0.0.1" 
+        }
+      group_type = "Normal"
 }
 ```
 

@@ -38,10 +38,10 @@ func getAwsExternalId(ctx context.Context, d *schema.ResourceData, m interface{}
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
+		return diags
 	}
 
 	respModel := resp.GetPayload()
 	schemata.SetAwsExternalIDResourceData(d, respModel)
-
 	return diags
 }

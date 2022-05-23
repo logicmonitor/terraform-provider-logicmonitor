@@ -23,6 +23,8 @@ import (
 
 	"terraform-provider-logicmonitor/client/collector"
 	"terraform-provider-logicmonitor/client/collector_group"
+	"terraform-provider-logicmonitor/client/dashboard"
+	"terraform-provider-logicmonitor/client/dashboard_group"
 	"terraform-provider-logicmonitor/client/data_resource_aws_external_id"
 	"terraform-provider-logicmonitor/client/device"
 	"terraform-provider-logicmonitor/client/device_group"
@@ -85,6 +87,10 @@ func New(c *Config) *LogicMonitorRESTAPI {
 
 	cli.CollectorGroup = collector_group.New(transport, strfmt.Default, authInfo)
 
+	cli.Dashboard = dashboard.New(transport, strfmt.Default, authInfo)
+
+	cli.DashboardGroup = dashboard_group.New(transport, strfmt.Default, authInfo)
+
 	cli.DataResourceAwsExternalID = data_resource_aws_external_id.New(transport, strfmt.Default, authInfo)
 
 	cli.Device = device.New(transport, strfmt.Default, authInfo)
@@ -139,6 +145,10 @@ type LogicMonitorRESTAPI struct {
 
 	CollectorGroup *collector_group.Client
 
+	Dashboard *dashboard.Client
+
+	DashboardGroup *dashboard_group.Client
+
 	DataResourceAwsExternalID *data_resource_aws_external_id.Client
 
 	Device *device.Client
@@ -155,6 +165,10 @@ func (c *LogicMonitorRESTAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Collector.SetTransport(transport)
 
 	c.CollectorGroup.SetTransport(transport)
+
+	c.Dashboard.SetTransport(transport)
+
+	c.DashboardGroup.SetTransport(transport)
 
 	c.DataResourceAwsExternalID.SetTransport(transport)
 

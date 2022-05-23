@@ -1,4 +1,16 @@
-## 2.01 (December 28, 2021)
+## 2.0.2 (May 28, 2022)
+
+FEATURES:
+* **New Resource:** `logicmonitor_dashboard` 
+* **New Resource:** `logicmonitor_dashboard_group`
+* **New DataSource:** `logicmonitor_collector` 
+* **New DataSource:** `logicmonitor_collector_group` 
+* **New Datasource:** `logicmonitor_device`
+* **New Datasource:** `logicmonitor_device_group`
+* **New Datasource:** `logicmonitor_dashboard`
+* **New Datasource:** `logicmonitor_dashboard_group`
+
+## 2.0.1 (May 6, 2022)
 
 NOTES:
 

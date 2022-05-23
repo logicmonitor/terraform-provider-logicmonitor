@@ -8,9 +8,9 @@ import (
 func CollectorPaginationResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"items": {
-			Type: schema.TypeList, //GoType: []*CollectorBase 
+			Type: schema.TypeList, //GoType: []*Collector 
 			Elem: &schema.Resource{
-				Schema: CollectorBaseSchema(),
+				Schema: CollectorSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
 			Optional: true,
@@ -33,7 +33,7 @@ func SetCollectorPaginationResponseSubResourceData(m []*models.CollectorPaginati
 	for _, collectorPaginationResponse := range m {
 		if collectorPaginationResponse != nil {
 			properties := make(map[string]interface{})
-			properties["items"] = SetCollectorBaseSubResourceData(collectorPaginationResponse.Items)
+			properties["items"] = SetCollectorSubResourceData(collectorPaginationResponse.Items)
 			properties["search_id"] = collectorPaginationResponse.SearchID
 			properties["total"] = collectorPaginationResponse.Total
 			d = append(d, &properties)
@@ -44,7 +44,7 @@ func SetCollectorPaginationResponseSubResourceData(m []*models.CollectorPaginati
 
 func CollectorPaginationResponseModel(d map[string]interface{}) *models.CollectorPaginationResponse {
 	// assume that the incoming map only contains the relevant resource data
-	items := d["items"].([]*models.CollectorBase)
+	items := d["items"].([]*models.Collector)
 	
 	return &models.CollectorPaginationResponse {
 		Items: items,
