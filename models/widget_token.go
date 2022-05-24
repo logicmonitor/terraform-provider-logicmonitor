@@ -21,8 +21,7 @@ import (
 type WidgetToken struct {
 
 	// inherit list
-	// Read Only: true
-	InheritList []*WidgetTokenInheritance `json:"inheritList"`
+	InheritList []*WidgetTokenInheritance `json:"inheritList,omitempty"`
 
 	// This is the name of the parent group of devices, if there is one established
 	// Example: Default Device Group
@@ -96,10 +95,6 @@ func (m *WidgetToken) ContextValidate(ctx context.Context, formats strfmt.Regist
 }
 
 func (m *WidgetToken) contextValidateInheritList(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := validate.ReadOnly(ctx, "inheritList", "body", []*WidgetTokenInheritance(m.InheritList)); err != nil {
-		return err
-	}
 
 	for i := 0; i < len(m.InheritList); i++ {
 
