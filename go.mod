@@ -11,7 +11,8 @@ require (
 	github.com/go-openapi/swag v0.21.1
 	github.com/go-openapi/validate v0.21.0
 	github.com/google/go-cmp v0.5.6 // indirect
-	github.com/hashicorp/go-hclog v1.0.0 // indirect
+	github.com/hashicorp/go-cleanhttp v0.5.2
+	github.com/hashicorp/go-hclog v1.0.0
 	github.com/hashicorp/go-multierror v1.1.0 // indirect
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.6.1
 	github.com/kr/pretty v0.3.0 // indirect

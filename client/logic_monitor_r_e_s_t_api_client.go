@@ -13,6 +13,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"strconv"
 	"time"
 
@@ -46,6 +47,7 @@ var DefaultSchemes = []string{"https"}
 type Config struct {
 	AccessKey    *string
 	AccessID     *string
+	BulkResource *bool
 	TransportCfg *TransportConfig
 }
 
@@ -75,9 +77,19 @@ func (c *Config) SetAccountDomain(accountDomain *string) {
 	c.TransportCfg = c.TransportCfg.WithHost(domain)
 }
 
+// Set Bulk import feature
+func (c *Config) SetBulkResource(bulkResource *bool) {
+	c.BulkResource = bulkResource
+}
+
 // New creates a new logic monitor r e s t API client
-func New(c *Config) *LogicMonitorRESTAPI {
-	transport := httptransport.New(c.TransportCfg.Host, c.TransportCfg.BasePath, c.TransportCfg.Schemes)
+func New(c *Config, httpClient *http.Client) *LogicMonitorRESTAPI {
+	var transport *httptransport.Runtime
+	if httpClient != nil {
+		transport = httptransport.NewWithClient(c.TransportCfg.Host, c.TransportCfg.BasePath, c.TransportCfg.Schemes, httpClient)
+	} else {
+		transport = httptransport.New(c.TransportCfg.Host, c.TransportCfg.BasePath, c.TransportCfg.Schemes)
+	}
 	authInfo := LMv1Auth(*c.AccessID, *c.AccessKey)
 
 	cli := new(LogicMonitorRESTAPI)
