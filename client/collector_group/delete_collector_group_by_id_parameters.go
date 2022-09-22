@@ -25,7 +25,7 @@ import (
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDeleteCollectorGroupByIDParams() *DeleteCollectorGroupByIDParams {
 	return &DeleteCollectorGroupByIDParams{
-		timeout: cr.DefaultTimeout,
+		timeout: 3 * cr.DefaultTimeout,
 	}
 }
 

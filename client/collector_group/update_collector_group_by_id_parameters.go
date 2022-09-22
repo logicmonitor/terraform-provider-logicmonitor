@@ -27,7 +27,7 @@ import (
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpdateCollectorGroupByIDParams() *UpdateCollectorGroupByIDParams {
 	return &UpdateCollectorGroupByIDParams{
-		timeout: cr.DefaultTimeout,
+		timeout: 3 * cr.DefaultTimeout,
 	}
 }
 

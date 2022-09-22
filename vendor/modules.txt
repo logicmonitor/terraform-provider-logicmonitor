@@ -67,6 +67,9 @@ github.com/golang/protobuf/ptypes/timestamp
 ## explicit
 # github.com/hashicorp/errwrap v1.0.0
 github.com/hashicorp/errwrap
+# github.com/hashicorp/go-cleanhttp v0.5.2
+## explicit
+github.com/hashicorp/go-cleanhttp
 # github.com/hashicorp/go-cty v1.4.1-0.20200414143053-d3edf31b6320
 github.com/hashicorp/go-cty/cty
 github.com/hashicorp/go-cty/cty/convert
@@ -91,6 +94,8 @@ github.com/hashicorp/go-version
 github.com/hashicorp/hcl/v2
 github.com/hashicorp/hcl/v2/ext/customdecode
 github.com/hashicorp/hcl/v2/hclsyntax
+# github.com/hashicorp/logutils v1.0.0
+github.com/hashicorp/logutils
 # github.com/hashicorp/terraform-plugin-go v0.3.0
 github.com/hashicorp/terraform-plugin-go/tfprotov5
 github.com/hashicorp/terraform-plugin-go/tfprotov5/internal/fromproto
@@ -101,6 +106,7 @@ github.com/hashicorp/terraform-plugin-go/tftypes
 # github.com/hashicorp/terraform-plugin-sdk/v2 v2.6.1
 ## explicit
 github.com/hashicorp/terraform-plugin-sdk/v2/diag
+github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging
 github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema
 github.com/hashicorp/terraform-plugin-sdk/v2/internal/addrs
 github.com/hashicorp/terraform-plugin-sdk/v2/internal/configs/configschema

@@ -27,6 +27,12 @@ func Provider() *schema.Provider {
 				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("LM_COMPANY", nil),
 			},
+			"bulk_resource": {
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+				Description: "true if going for bulk resource, default is false",
+			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
 			"logicmonitor_collector":       resources.Collector(),
@@ -56,13 +62,18 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	id := d.Get("api_id").(string)
 	key := d.Get("api_key").(string)
 	company := d.Get("company").(string) + ".logicmonitor.com"
+	bulkResource := d.Get("bulk_resource").(bool)
 	config := client.NewConfig()
 	config.SetAccessKey(&key)
 	config.SetAccessID(&id)
 	config.SetAccountDomain(&company)
+	config.SetBulkResource(&bulkResource)
+
+	c := ValidateClient{}
+	httpClient := c.loadAndValidate(bulkResource)
 
 	//TODO: Find out what errors this can throw and capture them.
-	c := client.New(config)
+	client := client.New(config, httpClient)
 
-	return c, diags
+	return client, diags
 }
