@@ -1,4 +1,4 @@
-## 2.0.3 (May 28, 2022)
+## 2.0.3 (September 26, 2022)
 ENHANCEMENTS:
 * Add experimental `bulk_resource` configuration field to the provider.
 
