@@ -10,9 +10,10 @@ import (
 	"net/http"
 	"time"
 
+	"terraform-provider-logicmonitor/common"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
-	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
@@ -27,7 +28,7 @@ import (
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewAddDeviceParams() *AddDeviceParams {
 	return &AddDeviceParams{
-		timeout: 3 * cr.DefaultTimeout,
+		timeout: common.DefaultTimeout,
 	}
 }
 
