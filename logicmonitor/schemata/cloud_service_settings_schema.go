@@ -44,7 +44,7 @@ func CloudServiceSettingsSchema() map[string]*schema.Schema {
 			Type: schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
-			Computed: true,
+			Optional: true,
 		},
 		
 		"name_filter": {
@@ -114,6 +114,7 @@ func CloudServiceSettingsModel(d map[string]interface{}) *models.CloudServiceSet
 	disableStopTerminateHostMonitor := d["disable_stop_terminate_host_monitor"].(bool)
 	disableTerminatedHostAlerting := d["disable_terminated_host_alerting"].(bool)
 	monitoringRegionInfos := utils.ConvertSetToStringSlice(d["monitoring_region_infos"].(*schema.Set))
+	monitoringRegions := utils.ConvertSetToStringSlice(d["monitoring_regions"].(*schema.Set))
 	nameFilter := utils.ConvertSetToStringSlice(d["name_filter"].(*schema.Set))
 	var normalCollectorConfig *models.CloudNormalCollectorConfig = nil
 	normalCollectorConfigList := d["normal_collector_config"].([]interface{})
@@ -131,6 +132,7 @@ func CloudServiceSettingsModel(d map[string]interface{}) *models.CloudServiceSet
 		DisableStopTerminateHostMonitor: disableStopTerminateHostMonitor,
 		DisableTerminatedHostAlerting: disableTerminatedHostAlerting,
 		MonitoringRegionInfos: monitoringRegionInfos,
+		MonitoringRegions: monitoringRegions,
 		NameFilter: nameFilter,
 		NormalCollectorConfig: normalCollectorConfig,
 		SelectAll: selectAll,
@@ -147,6 +149,7 @@ func GetCloudServiceSettingsPropertyFields() (t []string) {
 		"disable_stop_terminate_host_monitor",
 		"disable_terminated_host_alerting",
 		"monitoring_region_infos",
+		"monitoring_regions",
 		"name_filter",
 		"normal_collector_config",
 		"select_all",

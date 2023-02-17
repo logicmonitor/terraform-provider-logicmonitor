@@ -44,7 +44,6 @@ type CloudServiceSettings struct {
 	MonitoringRegionInfos []string `json:"monitoringRegionInfos"`
 
 	// The regions this group will monitor
-	// Read Only: true
 	// Unique: true
 	MonitoringRegions []string `json:"monitoringRegions"`
 
@@ -58,7 +57,7 @@ type CloudServiceSettings struct {
 	SelectAll bool `json:"selectAll,omitempty"`
 
 	// Tags used to filter whether or not a cloud device is included in this group
-	Tags []*CloudTagFilter `json:"tags"`
+	Tags []*CloudTagFilter `json:"tags,omitempty"`
 
 	// Whether or not to use the default settings for this service. When set to true in a Service's settings, all other fields will be ignored
 	// Required: true
@@ -177,10 +176,6 @@ func (m *CloudServiceSettings) validateUseDefault(formats strfmt.Registry) error
 func (m *CloudServiceSettings) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateMonitoringRegions(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateNormalCollectorConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -192,15 +187,6 @@ func (m *CloudServiceSettings) ContextValidate(ctx context.Context, formats strf
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *CloudServiceSettings) contextValidateMonitoringRegions(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := validate.ReadOnly(ctx, "monitoringRegions", "body", []string(m.MonitoringRegions)); err != nil {
-		return err
-	}
-
 	return nil
 }
 

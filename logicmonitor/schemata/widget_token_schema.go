@@ -53,11 +53,11 @@ func WidgetTokenModel(d map[string]interface{}) *models.WidgetToken {
 	inheritList := d["inherit_list"].([]*models.WidgetTokenInheritance)
 	name := d["name"].(string)
 	value := d["value"].(string)
-
-	return &models.WidgetToken{
+	
+	return &models.WidgetToken {
 		InheritList: inheritList,
-		Name:        name,
-		Value:       value,
+		Name: name,
+		Value: value,
 	}
 }
 
