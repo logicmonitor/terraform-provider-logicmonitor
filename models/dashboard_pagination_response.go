@@ -21,7 +21,7 @@ import (
 type DashboardPaginationResponse struct {
 
 	// items
-	Items []*Dashboard `json:"items"`
+	Items []*Dashboard `json:"items,omitempty"`
 
 	// search Id
 	// Read Only: true

@@ -23,6 +23,30 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"a_p_p_l_i_c_a_t_i_o_n_i_n_s_i_g_h_t_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
+		"a_p_p_s_e_r_v_i_c_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
+		"a_p_p_s_e_r_v_i_c_e_p_l_a_n": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
 		"a_p_p_s_t_r_e_a_m": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -40,6 +64,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 		},
 		
 		"a_u_t_o_s_c_a_l_i_n_g": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
+		"b_l_o_b_s_t_o_r_a_g_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -207,6 +239,22 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"e_v_e_n_t_h_u_b": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
+		"f_i_l_e_s_t_o_r_a_g_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
 		"f_i_r_e_h_o_s_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -248,6 +296,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 		},
 		
 		"l_a_m_b_d_a": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
+		"l_o_g_i_c_a_p_p_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -343,7 +399,31 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"n_e_t_w_o_r_k_i_n_t_e_r_f_a_c_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
 		"o_p_s_w_o_r_k_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
+		"p_u_b_l_i_c_ip": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
+		"q_u_e_u_e_s_t_o_r_a_g_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -415,6 +495,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"sql_d_a_t_a_b_a_s_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
 		"s_q_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -424,6 +512,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 		},
 		
 		"s_t_e_p_f_u_n_c_t_i_o_n_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
+		"s_t_o_r_a_g_e_a_c_c_o_u_n_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -447,7 +543,31 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"t_a_b_l_e_s_t_o_r_a_g_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
 		"t_r_a_n_s_i_t_g_a_t_e_w_a_y": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
+		"v_i_r_t_u_a_l_m_a_c_h_i_n_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+		
+		"v_i_r_t_u_a_l_m_a_c_h_i_n_e_s_c_a_l_e_s_e_t_vm": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -488,9 +608,13 @@ func SetCloudServicesSubResourceData(m []*models.CloudServices) (d []*map[string
 			properties := make(map[string]interface{})
 			properties["api_g_a_t_e_w_a_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APIGATEWAY})
 			properties["a_p_p_l_i_c_a_t_i_o_n_e_l_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPLICATIONELB})
+			properties["a_p_p_l_i_c_a_t_i_o_n_i_n_s_i_g_h_t_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPLICATIONINSIGHTS})
+			properties["a_p_p_s_e_r_v_i_c_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPSERVICE})
+			properties["a_p_p_s_e_r_v_i_c_e_p_l_a_n"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPSERVICEPLAN})
 			properties["a_p_p_s_t_r_e_a_m"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPSTREAM})
 			properties["a_t_h_e_n_a"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ATHENA})
 			properties["a_u_t_o_s_c_a_l_i_n_g"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.AUTOSCALING})
+			properties["b_l_o_b_s_t_o_r_a_g_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.BLOBSTORAGE})
 			properties["c_l_o_u_d_f_r_o_n_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CLOUDFRONT})
 			properties["c_l_o_u_d_s_e_a_r_c_h"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CLOUDSEARCH})
 			properties["c_o_d_e_b_ui_l_d"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CODEBUILD})
@@ -511,12 +635,15 @@ func SetCloudServicesSubResourceData(m []*models.CloudServices) (d []*map[string
 			properties["e_l_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ELB})
 			properties["e_m_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EMR})
 			properties["e_v_e_n_t_b_r_id_g_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EVENTBRIDGE})
+			properties["e_v_e_n_t_h_u_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EVENTHUB})
+			properties["f_i_l_e_s_t_o_r_a_g_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.FILESTORAGE})
 			properties["f_i_r_e_h_o_s_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.FIREHOSE})
 			properties["f_s_x"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.FSX})
 			properties["g_l_u_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.GLUE})
 			properties["k_i_n_e_s_i_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.KINESIS})
 			properties["k_i_n_e_s_i_s_v_id_e_o"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.KINESISVIDEO})
 			properties["l_a_m_b_d_a"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.LAMBDA})
+			properties["l_o_g_i_c_a_p_p_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.LOGICAPPS})
 			properties["m_e_d_i_a_c_o_n_n_e_c_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MEDIACONNECT})
 			properties["m_e_d_i_a_c_o_n_v_e_r_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MEDIACONVERT})
 			properties["m_e_d_i_a_p_a_c_k_a_g_e_l_i_v_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MEDIAPACKAGELIVE})
@@ -528,7 +655,10 @@ func SetCloudServicesSubResourceData(m []*models.CloudServices) (d []*map[string
 			properties["m_s_k_c_l_u_s_t_e_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MSKCLUSTER})
 			properties["n_a_t_g_a_t_e_w_a_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.NATGATEWAY})
 			properties["n_e_t_w_o_r_k_e_l_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.NETWORKELB})
+			properties["n_e_t_w_o_r_k_i_n_t_e_r_f_a_c_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.NETWORKINTERFACE})
 			properties["o_p_s_w_o_r_k_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.OPSWORKS})
+			properties["p_u_b_l_i_c_ip"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.PUBLICIP})
+			properties["q_u_e_u_e_s_t_o_r_a_g_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.QUEUESTORAGE})
 			properties["r_d_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.RDS})
 			properties["r_e_d_s_h_i_f_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.REDSHIFT})
 			properties["r_o_u_t_e53"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ROUTE53})
@@ -537,11 +667,16 @@ func SetCloudServicesSubResourceData(m []*models.CloudServices) (d []*map[string
 			properties["s_a_g_e_m_a_k_e_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SAGEMAKER})
 			properties["s_e_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SES})
 			properties["s_n_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SNS})
+			properties["sql_d_a_t_a_b_a_s_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SQLDATABASE})
 			properties["s_q_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SQS})
 			properties["s_t_e_p_f_u_n_c_t_i_o_n_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.STEPFUNCTIONS})
+			properties["s_t_o_r_a_g_e_a_c_c_o_u_n_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.STORAGEACCOUNT})
 			properties["s_w_f_a_c_t_i_v_i_t_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SWFACTIVITY})
 			properties["s_w_f_w_o_r_k_f_l_o_w"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SWFWORKFLOW})
+			properties["t_a_b_l_e_s_t_o_r_a_g_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.TABLESTORAGE})
 			properties["t_r_a_n_s_i_t_g_a_t_e_w_a_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.TRANSITGATEWAY})
+			properties["v_i_r_t_u_a_l_m_a_c_h_i_n_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VIRTUALMACHINE})
+			properties["v_i_r_t_u_a_l_m_a_c_h_i_n_e_s_c_a_l_e_s_e_t_vm"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VIRTUALMACHINESCALESETVM})
 			properties["v_p_n"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VPN})
 			properties["w_o_r_k_s_p_a_c_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.WORKSPACE})
 			properties["w_o_r_k_s_p_a_c_e_d_i_r_e_c_t_o_r_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.WORKSPACEDIRECTORY})
@@ -563,6 +698,21 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(APPLICATIONELBList) > 0 { // len(nil) = 0
 		aPPLICATIONELB = CloudServiceSettingsModel(APPLICATIONELBList[0].(map[string]interface{}))
 	}
+	var aPPLICATIONINSIGHTS *models.CloudServiceSettings = nil
+	APPLICATIONINSIGHTSList := d["a_p_p_l_i_c_a_t_i_o_n_i_n_s_i_g_h_t_s"].([]interface{})
+	if len(APPLICATIONINSIGHTSList) > 0 { // len(nil) = 0
+		aPPLICATIONINSIGHTS = CloudServiceSettingsModel(APPLICATIONINSIGHTSList[0].(map[string]interface{}))
+	}
+	var aPPSERVICE *models.CloudServiceSettings = nil
+	APPSERVICEList := d["a_p_p_s_e_r_v_i_c_e"].([]interface{})
+	if len(APPSERVICEList) > 0 { // len(nil) = 0
+		aPPSERVICE = CloudServiceSettingsModel(APPSERVICEList[0].(map[string]interface{}))
+	}
+	var aPPSERVICEPLAN *models.CloudServiceSettings = nil
+	APPSERVICEPLANList := d["a_p_p_s_e_r_v_i_c_e_p_l_a_n"].([]interface{})
+	if len(APPSERVICEPLANList) > 0 { // len(nil) = 0
+		aPPSERVICEPLAN = CloudServiceSettingsModel(APPSERVICEPLANList[0].(map[string]interface{}))
+	}
 	var aPPSTREAM *models.CloudServiceSettings = nil
 	APPSTREAMList := d["a_p_p_s_t_r_e_a_m"].([]interface{})
 	if len(APPSTREAMList) > 0 { // len(nil) = 0
@@ -577,6 +727,11 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	AUTOSCALINGList := d["a_u_t_o_s_c_a_l_i_n_g"].([]interface{})
 	if len(AUTOSCALINGList) > 0 { // len(nil) = 0
 		aUTOSCALING = CloudServiceSettingsModel(AUTOSCALINGList[0].(map[string]interface{}))
+	}
+	var bLOBSTORAGE *models.CloudServiceSettings = nil
+	BLOBSTORAGEList := d["b_l_o_b_s_t_o_r_a_g_e"].([]interface{})
+	if len(BLOBSTORAGEList) > 0 { // len(nil) = 0
+		bLOBSTORAGE = CloudServiceSettingsModel(BLOBSTORAGEList[0].(map[string]interface{}))
 	}
 	var cLOUDFRONT *models.CloudServiceSettings = nil
 	CLOUDFRONTList := d["c_l_o_u_d_f_r_o_n_t"].([]interface{})
@@ -678,6 +833,16 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(EVENTBRIDGEList) > 0 { // len(nil) = 0
 		eVENTBRIDGE = CloudServiceSettingsModel(EVENTBRIDGEList[0].(map[string]interface{}))
 	}
+	var eVENTHUB *models.CloudServiceSettings = nil
+	EVENTHUBList := d["e_v_e_n_t_h_u_b"].([]interface{})
+	if len(EVENTHUBList) > 0 { // len(nil) = 0
+		eVENTHUB = CloudServiceSettingsModel(EVENTHUBList[0].(map[string]interface{}))
+	}
+	var fILESTORAGE *models.CloudServiceSettings = nil
+	FILESTORAGEList := d["f_i_l_e_s_t_o_r_a_g_e"].([]interface{})
+	if len(FILESTORAGEList) > 0 { // len(nil) = 0
+		fILESTORAGE = CloudServiceSettingsModel(FILESTORAGEList[0].(map[string]interface{}))
+	}
 	var fIREHOSE *models.CloudServiceSettings = nil
 	FIREHOSEList := d["f_i_r_e_h_o_s_e"].([]interface{})
 	if len(FIREHOSEList) > 0 { // len(nil) = 0
@@ -707,6 +872,11 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	LAMBDAList := d["l_a_m_b_d_a"].([]interface{})
 	if len(LAMBDAList) > 0 { // len(nil) = 0
 		lAMBDA = CloudServiceSettingsModel(LAMBDAList[0].(map[string]interface{}))
+	}
+	var lOGICAPPS *models.CloudServiceSettings = nil
+	LOGICAPPSList := d["l_o_g_i_c_a_p_p_s"].([]interface{})
+	if len(LOGICAPPSList) > 0 { // len(nil) = 0
+		lOGICAPPS = CloudServiceSettingsModel(LOGICAPPSList[0].(map[string]interface{}))
 	}
 	var mEDIACONNECT *models.CloudServiceSettings = nil
 	MEDIACONNECTList := d["m_e_d_i_a_c_o_n_n_e_c_t"].([]interface{})
@@ -763,10 +933,25 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(NETWORKELBList) > 0 { // len(nil) = 0
 		nETWORKELB = CloudServiceSettingsModel(NETWORKELBList[0].(map[string]interface{}))
 	}
+	var nETWORKINTERFACE *models.CloudServiceSettings = nil
+	NETWORKINTERFACEList := d["n_e_t_w_o_r_k_i_n_t_e_r_f_a_c_e"].([]interface{})
+	if len(NETWORKINTERFACEList) > 0 { // len(nil) = 0
+		nETWORKINTERFACE = CloudServiceSettingsModel(NETWORKINTERFACEList[0].(map[string]interface{}))
+	}
 	var oPSWORKS *models.CloudServiceSettings = nil
 	OPSWORKSList := d["o_p_s_w_o_r_k_s"].([]interface{})
 	if len(OPSWORKSList) > 0 { // len(nil) = 0
 		oPSWORKS = CloudServiceSettingsModel(OPSWORKSList[0].(map[string]interface{}))
+	}
+	var pUBLICIP *models.CloudServiceSettings = nil
+	PUBLICIPList := d["p_u_b_l_i_c_ip"].([]interface{})
+	if len(PUBLICIPList) > 0 { // len(nil) = 0
+		pUBLICIP = CloudServiceSettingsModel(PUBLICIPList[0].(map[string]interface{}))
+	}
+	var qUEUESTORAGE *models.CloudServiceSettings = nil
+	QUEUESTORAGEList := d["q_u_e_u_e_s_t_o_r_a_g_e"].([]interface{})
+	if len(QUEUESTORAGEList) > 0 { // len(nil) = 0
+		qUEUESTORAGE = CloudServiceSettingsModel(QUEUESTORAGEList[0].(map[string]interface{}))
 	}
 	var rDS *models.CloudServiceSettings = nil
 	RDSList := d["r_d_s"].([]interface{})
@@ -808,6 +993,11 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(SNSList) > 0 { // len(nil) = 0
 		sNS = CloudServiceSettingsModel(SNSList[0].(map[string]interface{}))
 	}
+	var sQLDATABASE *models.CloudServiceSettings = nil
+	SQLDATABASEList := d["sql_d_a_t_a_b_a_s_e"].([]interface{})
+	if len(SQLDATABASEList) > 0 { // len(nil) = 0
+		sQLDATABASE = CloudServiceSettingsModel(SQLDATABASEList[0].(map[string]interface{}))
+	}
 	var sQS *models.CloudServiceSettings = nil
 	SQSList := d["s_q_s"].([]interface{})
 	if len(SQSList) > 0 { // len(nil) = 0
@@ -817,6 +1007,11 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	STEPFUNCTIONSList := d["s_t_e_p_f_u_n_c_t_i_o_n_s"].([]interface{})
 	if len(STEPFUNCTIONSList) > 0 { // len(nil) = 0
 		sTEPFUNCTIONS = CloudServiceSettingsModel(STEPFUNCTIONSList[0].(map[string]interface{}))
+	}
+	var sTORAGEACCOUNT *models.CloudServiceSettings = nil
+	STORAGEACCOUNTList := d["s_t_o_r_a_g_e_a_c_c_o_u_n_t"].([]interface{})
+	if len(STORAGEACCOUNTList) > 0 { // len(nil) = 0
+		sTORAGEACCOUNT = CloudServiceSettingsModel(STORAGEACCOUNTList[0].(map[string]interface{}))
 	}
 	var sWFACTIVITY *models.CloudServiceSettings = nil
 	SWFACTIVITYList := d["s_w_f_a_c_t_i_v_i_t_y"].([]interface{})
@@ -828,10 +1023,25 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(SWFWORKFLOWList) > 0 { // len(nil) = 0
 		sWFWORKFLOW = CloudServiceSettingsModel(SWFWORKFLOWList[0].(map[string]interface{}))
 	}
+	var tABLESTORAGE *models.CloudServiceSettings = nil
+	TABLESTORAGEList := d["t_a_b_l_e_s_t_o_r_a_g_e"].([]interface{})
+	if len(TABLESTORAGEList) > 0 { // len(nil) = 0
+		tABLESTORAGE = CloudServiceSettingsModel(TABLESTORAGEList[0].(map[string]interface{}))
+	}
 	var tRANSITGATEWAY *models.CloudServiceSettings = nil
 	TRANSITGATEWAYList := d["t_r_a_n_s_i_t_g_a_t_e_w_a_y"].([]interface{})
 	if len(TRANSITGATEWAYList) > 0 { // len(nil) = 0
 		tRANSITGATEWAY = CloudServiceSettingsModel(TRANSITGATEWAYList[0].(map[string]interface{}))
+	}
+	var vIRTUALMACHINE *models.CloudServiceSettings = nil
+	VIRTUALMACHINEList := d["v_i_r_t_u_a_l_m_a_c_h_i_n_e"].([]interface{})
+	if len(VIRTUALMACHINEList) > 0 { // len(nil) = 0
+		vIRTUALMACHINE = CloudServiceSettingsModel(VIRTUALMACHINEList[0].(map[string]interface{}))
+	}
+	var vIRTUALMACHINESCALESETVM *models.CloudServiceSettings = nil
+	VIRTUALMACHINESCALESETVMList := d["v_i_r_t_u_a_l_m_a_c_h_i_n_e_s_c_a_l_e_s_e_t_vm"].([]interface{})
+	if len(VIRTUALMACHINESCALESETVMList) > 0 { // len(nil) = 0
+		vIRTUALMACHINESCALESETVM = CloudServiceSettingsModel(VIRTUALMACHINESCALESETVMList[0].(map[string]interface{}))
 	}
 	var vPN *models.CloudServiceSettings = nil
 	VPNList := d["v_p_n"].([]interface{})
@@ -852,9 +1062,13 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	return &models.CloudServices {
 		APIGATEWAY: aPIGATEWAY,
 		APPLICATIONELB: aPPLICATIONELB,
+		APPLICATIONINSIGHTS: aPPLICATIONINSIGHTS,
+		APPSERVICE: aPPSERVICE,
+		APPSERVICEPLAN: aPPSERVICEPLAN,
 		APPSTREAM: aPPSTREAM,
 		ATHENA: aTHENA,
 		AUTOSCALING: aUTOSCALING,
+		BLOBSTORAGE: bLOBSTORAGE,
 		CLOUDFRONT: cLOUDFRONT,
 		CLOUDSEARCH: cLOUDSEARCH,
 		CODEBUILD: cODEBUILD,
@@ -875,12 +1089,15 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 		ELB: eLB,
 		EMR: eMR,
 		EVENTBRIDGE: eVENTBRIDGE,
+		EVENTHUB: eVENTHUB,
+		FILESTORAGE: fILESTORAGE,
 		FIREHOSE: fIREHOSE,
 		FSX: fSX,
 		GLUE: gLUE,
 		KINESIS: kINESIS,
 		KINESISVIDEO: kINESISVIDEO,
 		LAMBDA: lAMBDA,
+		LOGICAPPS: lOGICAPPS,
 		MEDIACONNECT: mEDIACONNECT,
 		MEDIACONVERT: mEDIACONVERT,
 		MEDIAPACKAGELIVE: mEDIAPACKAGELIVE,
@@ -892,7 +1109,10 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 		MSKCLUSTER: mSKCLUSTER,
 		NATGATEWAY: nATGATEWAY,
 		NETWORKELB: nETWORKELB,
+		NETWORKINTERFACE: nETWORKINTERFACE,
 		OPSWORKS: oPSWORKS,
+		PUBLICIP: pUBLICIP,
+		QUEUESTORAGE: qUEUESTORAGE,
 		RDS: rDS,
 		REDSHIFT: rEDSHIFT,
 		ROUTE53: rOUTE53,
@@ -901,11 +1121,16 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 		SAGEMAKER: sAGEMAKER,
 		SES: sES,
 		SNS: sNS,
+		SQLDATABASE: sQLDATABASE,
 		SQS: sQS,
 		STEPFUNCTIONS: sTEPFUNCTIONS,
+		STORAGEACCOUNT: sTORAGEACCOUNT,
 		SWFACTIVITY: sWFACTIVITY,
 		SWFWORKFLOW: sWFWORKFLOW,
+		TABLESTORAGE: tABLESTORAGE,
 		TRANSITGATEWAY: tRANSITGATEWAY,
+		VIRTUALMACHINE: vIRTUALMACHINE,
+		VIRTUALMACHINESCALESETVM: vIRTUALMACHINESCALESETVM,
 		VPN: vPN,
 		WORKSPACE: wORKSPACE,
 		WORKSPACEDIRECTORY: wORKSPACEDIRECTORY,
@@ -916,9 +1141,13 @@ func GetCloudServicesPropertyFields() (t []string) {
 	return []string{
 		"api_g_a_t_e_w_a_y",
 		"a_p_p_l_i_c_a_t_i_o_n_e_l_b",
+		"a_p_p_l_i_c_a_t_i_o_n_i_n_s_i_g_h_t_s",
+		"a_p_p_s_e_r_v_i_c_e",
+		"a_p_p_s_e_r_v_i_c_e_p_l_a_n",
 		"a_p_p_s_t_r_e_a_m",
 		"a_t_h_e_n_a",
 		"a_u_t_o_s_c_a_l_i_n_g",
+		"b_l_o_b_s_t_o_r_a_g_e",
 		"c_l_o_u_d_f_r_o_n_t",
 		"c_l_o_u_d_s_e_a_r_c_h",
 		"c_o_d_e_b_ui_l_d",
@@ -939,12 +1168,15 @@ func GetCloudServicesPropertyFields() (t []string) {
 		"e_l_b",
 		"e_m_r",
 		"e_v_e_n_t_b_r_id_g_e",
+		"e_v_e_n_t_h_u_b",
+		"f_i_l_e_s_t_o_r_a_g_e",
 		"f_i_r_e_h_o_s_e",
 		"f_s_x",
 		"g_l_u_e",
 		"k_i_n_e_s_i_s",
 		"k_i_n_e_s_i_s_v_id_e_o",
 		"l_a_m_b_d_a",
+		"l_o_g_i_c_a_p_p_s",
 		"m_e_d_i_a_c_o_n_n_e_c_t",
 		"m_e_d_i_a_c_o_n_v_e_r_t",
 		"m_e_d_i_a_p_a_c_k_a_g_e_l_i_v_e",
@@ -956,7 +1188,10 @@ func GetCloudServicesPropertyFields() (t []string) {
 		"m_s_k_c_l_u_s_t_e_r",
 		"n_a_t_g_a_t_e_w_a_y",
 		"n_e_t_w_o_r_k_e_l_b",
+		"n_e_t_w_o_r_k_i_n_t_e_r_f_a_c_e",
 		"o_p_s_w_o_r_k_s",
+		"p_u_b_l_i_c_ip",
+		"q_u_e_u_e_s_t_o_r_a_g_e",
 		"r_d_s",
 		"r_e_d_s_h_i_f_t",
 		"r_o_u_t_e53",
@@ -965,11 +1200,16 @@ func GetCloudServicesPropertyFields() (t []string) {
 		"s_a_g_e_m_a_k_e_r",
 		"s_e_s",
 		"s_n_s",
+		"sql_d_a_t_a_b_a_s_e",
 		"s_q_s",
 		"s_t_e_p_f_u_n_c_t_i_o_n_s",
+		"s_t_o_r_a_g_e_a_c_c_o_u_n_t",
 		"s_w_f_a_c_t_i_v_i_t_y",
 		"s_w_f_w_o_r_k_f_l_o_w",
+		"t_a_b_l_e_s_t_o_r_a_g_e",
 		"t_r_a_n_s_i_t_g_a_t_e_w_a_y",
+		"v_i_r_t_u_a_l_m_a_c_h_i_n_e",
+		"v_i_r_t_u_a_l_m_a_c_h_i_n_e_s_c_a_l_e_s_e_t_vm",
 		"v_p_n",
 		"w_o_r_k_s_p_a_c_e",
 		"w_o_r_k_s_p_a_c_e_d_i_r_e_c_t_o_r_y",

@@ -23,8 +23,7 @@ type CloudAccount struct {
 	AccountID string `json:"accountId,omitempty"`
 
 	// ARN of the role created for LogicMonitor to use while monitoring AWS
-	// Required: true
-	AssumedRoleArn *string `json:"assumedRoleArn"`
+	AssumedRoleArn string `json:"assumedRoleArn,omitempty"`
 
 	// S3 bucket name that houses AWS billing info (deprecated)
 	// Read Only: true
@@ -34,13 +33,21 @@ type CloudAccount struct {
 	// Read Only: true
 	BillingPathPrefix string `json:"billingPathPrefix,omitempty"`
 
+	// client id for azure
+	ClientID string `json:"clientId,omitempty"`
+
+	// collectorDescription
+	CollectorDescription string `json:"collectorDescription,omitempty"`
+
 	// ID of the collector assigned to this group
 	// Read Only: true
 	CollectorID int64 `json:"collectorId,omitempty"`
 
+	// country
+	Country string `json:"country,omitempty"`
+
 	// External ID provide by LM for the creation of the assumed role in AWS
-	// Required: true
-	ExternalID *string `json:"externalId"`
+	ExternalID string `json:"externalId,omitempty"`
 
 	// The NetScan schedule for how frequently the cloud collector should scan/discover new resources in the cloud account. It's format is similar to Linux crontab but doesn't support some complex representations ('-', '/', ',') supported in standard linux crontabs.
 	// Format: '*(minute) *(hour) *(day) *(week of month) *(weekday)'
@@ -49,6 +56,15 @@ type CloudAccount struct {
 	// '50 10 * 1 3' means scheduling at wednesday of the first week per month
 	Schedule string `json:"schedule,omitempty"`
 
+	// secretKey
+	SecretKey string `json:"secretKey,omitempty"`
+
+	// subscriptionIds
+	SubscriptionIds string `json:"subscriptionIds,omitempty"`
+
+	// tenantId
+	TenantID string `json:"tenantId,omitempty"`
+
 	// Type of cloud account
 	// Read Only: true
 	Type string `json:"type,omitempty"`
@@ -56,37 +72,6 @@ type CloudAccount struct {
 
 // Validate validates this cloud account
 func (m *CloudAccount) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateAssumedRoleArn(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateExternalID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *CloudAccount) validateAssumedRoleArn(formats strfmt.Registry) error {
-
-	if err := validate.Required("assumedRoleArn", "body", m.AssumedRoleArn); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *CloudAccount) validateExternalID(formats strfmt.Registry) error {
-
-	if err := validate.Required("externalId", "body", m.ExternalID); err != nil {
-		return err
-	}
-
 	return nil
 }
 
