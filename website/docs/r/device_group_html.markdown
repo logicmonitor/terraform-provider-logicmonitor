@@ -538,10 +538,10 @@ The following arguments are **optional**:
     + `billingPathPrefix` - Path to billing info in billing bucket (deprecated) (computed)
     + `collectorId` - ID of the collector assigned to this group (computed)
     + `externalId` - External ID provide by LM for the creation of the assumed role in AWS (required for AWS)
-    + `clientId`   - Client id received from Azure account (required for Azure)
-    + `secretKey` - Secret key received from Azure Account (required for Azure)
+    + `clientId`   - Client ID from Azure account (required for Azure)
+    + `secretKey` - Secret key  from Azure Account (required for Azure)
     + `subscriptionIds` -  List of subcription ids(comma separated, required for Azure)) 
-    + `tenantId` - Tenant id from Azure accountn (required for Azure)
+    + `tenantId` - Tenant ID from Azure account (required for Azure)
     + `schedule` - The NetScan schedule for how frequently the cloud collector should scan/discover new resources in the cloud account. It's format is similar to Linux crontab but doesn't support some complex representations ('-', '/', ',') supported in standard linux crontabs.\nFormat: '*(minute) *(hour) *(day) *(week of month) *(weekday)'\nExamples: '50 * * * *' means scheduling at 50th minute per hour\n'50 10 20 * *' means scheduling at 10:50 of the 20th day per month\n'50 10 * 1 3' means scheduling at wednesday of the first week per month
     + `type` - Type of cloud account (computed)
   + `default` - default cloud service monitoring settings
