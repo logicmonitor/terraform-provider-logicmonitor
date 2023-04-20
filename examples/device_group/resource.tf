@@ -499,6 +499,346 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         name_filter                         = []
         tags                                = []
       }
+      api_m_a_n_a_g_e_m_e_n_t {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      a_p_p_l_i_c_a_t_i_o_n_g_a_t_e_w_a_y {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      a_u_t_o_m_a_t_i_o_n_a_c_c_o_u_n_t {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      b_a_c_k_u_p_p_r_o_t_e_c_t_e_d_i_t_e_m_s {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      c_o_s_m_o_s_d_b {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      d_a_t_a_f_a_c_t_o_r_y {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      e_x_p_r_e_s_s_r_o_u_t_e_c_i_r_c_ui_t {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      k_e_y_v_a_u_l_t {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      l_o_a_d_b_a_l_a_n_c_e_r_s {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      f_i_r_e_w_a_l_l {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      l_o_a_d_b_a_l_a_n_c_e_r_s {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      l_o_g_a_n_a_l_y_t_i_c_s_w_o_r_k_s_p_a_c_e_s {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      p_o_s_t_g_r_e_sql {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      m_y_sql {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      f_r_o_n_t_d_o_o_r_s {
+        # disable_terminated_host_alerting = true
+        # normal_collector_config {
+        #   collectors = []
+        #   enabled    = false
+        # }
+        # custom_n_s_p_schedule = ""
+        # select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        # device_display_name_template        = ""
+        # disable_stop_terminate_host_monitor = true
+        # dead_operation                      = "KEEP_7_DAYS"
+        use_default = true
+        # name_filter                         = []
+        # tags                                = []
+      }
+      s_y_n_a_p_s_e_w_o_r_k_s_p_a_c_e_s {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      c_o_g_n_i_t_i_v_e_s_e_a_r_c_h {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
 
     }
   }
