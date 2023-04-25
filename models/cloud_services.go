@@ -21,8 +21,14 @@ type CloudServices struct {
 	// APIGATEWAY monitoring settings
 	APIGATEWAY *CloudServiceSettings `json:"APIGATEWAY,omitempty"`
 
+	// API Management
+	APIMANAGEMENT *CloudServiceSettings `json:"APIMANAGEMENT,omitempty"`
+
 	// APPLICATIONELB monitoring settings
 	APPLICATIONELB *CloudServiceSettings `json:"APPLICATIONELB,omitempty"`
+
+	// Application Gateway
+	APPLICATIONGATEWAY *CloudServiceSettings `json:"APPLICATIONGATEWAY,omitempty"`
 
 	// Application insights
 	APPLICATIONINSIGHTS *CloudServiceSettings `json:"APPLICATIONINSIGHTS,omitempty"`
@@ -39,8 +45,14 @@ type CloudServices struct {
 	// ATHENA monitoring settings
 	ATHENA *CloudServiceSettings `json:"ATHENA,omitempty"`
 
+	// Automation Account
+	AUTOMATIONACCOUNT *CloudServiceSettings `json:"AUTOMATIONACCOUNT,omitempty"`
+
 	// AUTOSCALING monitoring settings
 	AUTOSCALING *CloudServiceSettings `json:"AUTOSCALING,omitempty"`
+
+	// Backup protected items
+	BACKUPPROTECTEDITEMS *CloudServiceSettings `json:"BACKUPPROTECTEDITEMS,omitempty"`
 
 	// Blob storage
 	BLOBSTORAGE *CloudServiceSettings `json:"BLOBSTORAGE,omitempty"`
@@ -54,8 +66,20 @@ type CloudServices struct {
 	// CODEBUILD monitoring settings
 	CODEBUILD *CloudServiceSettings `json:"CODEBUILD,omitempty"`
 
+	// CognitiveSearch
+	COGNITIVESEARCH *CloudServiceSettings `json:"COGNITIVESEARCH,omitempty"`
+
+	// Cognitive Services
+	COGNITIVESERVICES *CloudServiceSettings `json:"COGNITIVESERVICES,omitempty"`
+
 	// COGNITO monitoring settings
 	COGNITO *CloudServiceSettings `json:"COGNITO,omitempty"`
+
+	// CosmosDB
+	COSMOSDB *CloudServiceSettings `json:"COSMOSDB,omitempty"`
+
+	// Data Factory
+	DATAFACTORY *CloudServiceSettings `json:"DATAFACTORY,omitempty"`
 
 	// DIRECTCONNECT monitoring settings
 	DIRECTCONNECT *CloudServiceSettings `json:"DIRECTCONNECT,omitempty"`
@@ -108,17 +132,29 @@ type CloudServices struct {
 	// Event Hub
 	EVENTHUB *CloudServiceSettings `json:"EVENTHUB,omitempty"`
 
+	// Express Route Circuit
+	EXPRESSROUTECIRCUIT *CloudServiceSettings `json:"EXPRESSROUTECIRCUIT,omitempty"`
+
 	// File storage
 	FILESTORAGE *CloudServiceSettings `json:"FILESTORAGE,omitempty"`
 
 	// FIREHOSE monitoring settings
 	FIREHOSE *CloudServiceSettings `json:"FIREHOSE,omitempty"`
 
+	// Firewall
+	FIREWALL *CloudServiceSettings `json:"FIREWALL,omitempty"`
+
+	// Front Doors
+	FRONTDOORS *CloudServiceSettings `json:"FRONTDOORS,omitempty"`
+
 	// FSX monitoring settings
 	FSX *CloudServiceSettings `json:"FSX,omitempty"`
 
 	// GLUE monitoring settings
 	GLUE *CloudServiceSettings `json:"GLUE,omitempty"`
+
+	// Key vault
+	KEYVAULT *CloudServiceSettings `json:"KEYVAULT,omitempty"`
 
 	// KINESIS monitoring settings
 	KINESIS *CloudServiceSettings `json:"KINESIS,omitempty"`
@@ -128,6 +164,12 @@ type CloudServices struct {
 
 	// LAMBDA monitoring settings
 	LAMBDA *CloudServiceSettings `json:"LAMBDA,omitempty"`
+
+	// Load balancers
+	LOADBALANCERS *CloudServiceSettings `json:"LOADBALANCERS,omitempty"`
+
+	// Log Analytics Workspaces
+	LOGANALYTICSWORKSPACES *CloudServiceSettings `json:"LOGANALYTICSWORKSPACES,omitempty"`
 
 	// Logic Apps
 	LOGICAPPS *CloudServiceSettings `json:"LOGICAPPS,omitempty"`
@@ -159,6 +201,9 @@ type CloudServices struct {
 	// MSKCLUSTER monitoring settings
 	MSKCLUSTER *CloudServiceSettings `json:"MSKCLUSTER,omitempty"`
 
+	// My sql
+	MYSQL *CloudServiceSettings `json:"MYSQL,omitempty"`
+
 	// NATGATEWAY monitoring settings
 	NATGATEWAY *CloudServiceSettings `json:"NATGATEWAY,omitempty"`
 
@@ -171,6 +216,9 @@ type CloudServices struct {
 	// OPSWORKS monitoring settings
 	OPSWORKS *CloudServiceSettings `json:"OPSWORKS,omitempty"`
 
+	// PostgreSQL
+	POSTGRESQL *CloudServiceSettings `json:"POSTGRESQL,omitempty"`
+
 	// Public IP
 	PUBLICIP *CloudServiceSettings `json:"PUBLICIP,omitempty"`
 
@@ -179,6 +227,15 @@ type CloudServices struct {
 
 	// RDS monitoring settings
 	RDS *CloudServiceSettings `json:"RDS,omitempty"`
+
+	// Recovery Protected Item
+	RECOVERYPROTECTEDITEM *CloudServiceSettings `json:"RECOVERYPROTECTEDITEM,omitempty"`
+
+	// Recovery Services
+	RECOVERYSERVICES *CloudServiceSettings `json:"RECOVERYSERVICES,omitempty"`
+
+	// Redis Cache
+	REDISCACHE *CloudServiceSettings `json:"REDISCACHE,omitempty"`
 
 	// REDSHIFT monitoring settings
 	REDSHIFT *CloudServiceSettings `json:"REDSHIFT,omitempty"`
@@ -195,6 +252,9 @@ type CloudServices struct {
 	// SAGEMAKER monitoring settings
 	SAGEMAKER *CloudServiceSettings `json:"SAGEMAKER,omitempty"`
 
+	// Service Bus
+	SERVICEBUS *CloudServiceSettings `json:"SERVICEBUS,omitempty"`
+
 	// SES monitoring settings
 	SES *CloudServiceSettings `json:"SES,omitempty"`
 
@@ -203,6 +263,12 @@ type CloudServices struct {
 
 	// SQL database
 	SQLDATABASE *CloudServiceSettings `json:"SQLDATABASE,omitempty"`
+
+	// SQL ElasticPool
+	SQLELASTICPOOL *CloudServiceSettings `json:"SQLELASTICPOOL,omitempty"`
+
+	// SQL Managed Instance
+	SQLMANAGEDINSTANCE *CloudServiceSettings `json:"SQLMANAGEDINSTANCE,omitempty"`
 
 	// SQS monitoring settings
 	SQS *CloudServiceSettings `json:"SQS,omitempty"`
@@ -219,17 +285,32 @@ type CloudServices struct {
 	// SWFWORKFLOW monitoring settings
 	SWFWORKFLOW *CloudServiceSettings `json:"SWFWORKFLOW,omitempty"`
 
+	// SynapseWorkSpaces
+	SYNAPSEWORKSPACES *CloudServiceSettings `json:"SYNAPSEWORKSPACES,omitempty"`
+
 	// Table storage
 	TABLESTORAGE *CloudServiceSettings `json:"TABLESTORAGE,omitempty"`
+
+	// TRAFFICMANAGER
+	TRAFFICMANAGER *CloudServiceSettings `json:"TRAFFICMANAGER,omitempty"`
 
 	// TRANSITGATEWAY monitoring settings
 	TRANSITGATEWAY *CloudServiceSettings `json:"TRANSITGATEWAY,omitempty"`
 
+	// Virtual Desktop
+	VIRTUALDESKTOP *CloudServiceSettings `json:"VIRTUALDESKTOP,omitempty"`
+
 	// VIRTUAL machine
 	VIRTUALMACHINE *CloudServiceSettings `json:"VIRTUALMACHINE,omitempty"`
 
+	// Virtual Machine Scale Set
+	VIRTUALMACHINESCALESET *CloudServiceSettings `json:"VIRTUALMACHINESCALESET,omitempty"`
+
 	// Virtual machine scale set VM
 	VIRTUALMACHINESCALESETVM *CloudServiceSettings `json:"VIRTUALMACHINESCALESETVM,omitempty"`
+
+	// Virtual Network Gateway
+	VIRTUALNETWORKGATEWAY *CloudServiceSettings `json:"VIRTUALNETWORKGATEWAY,omitempty"`
 
 	// VPN monitoring settings
 	VPN *CloudServiceSettings `json:"VPN,omitempty"`
@@ -249,7 +330,15 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateAPIMANAGEMENT(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAPPLICATIONELB(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAPPLICATIONGATEWAY(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -273,7 +362,15 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateAUTOMATIONACCOUNT(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAUTOSCALING(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBACKUPPROTECTEDITEMS(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -293,7 +390,23 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCOGNITIVESEARCH(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCOGNITIVESERVICES(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCOGNITO(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCOSMOSDB(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDATAFACTORY(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -365,6 +478,10 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateEXPRESSROUTECIRCUIT(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateFILESTORAGE(formats); err != nil {
 		res = append(res, err)
 	}
@@ -373,11 +490,23 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateFIREWALL(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFRONTDOORS(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateFSX(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateGLUE(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKEYVAULT(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -390,6 +519,14 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLAMBDA(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLOADBALANCERS(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLOGANALYTICSWORKSPACES(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -433,6 +570,10 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateMYSQL(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateNATGATEWAY(formats); err != nil {
 		res = append(res, err)
 	}
@@ -449,6 +590,10 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validatePOSTGRESQL(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePUBLICIP(formats); err != nil {
 		res = append(res, err)
 	}
@@ -458,6 +603,18 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRDS(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRECOVERYPROTECTEDITEM(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRECOVERYSERVICES(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateREDISCACHE(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -481,6 +638,10 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateSERVICEBUS(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSES(formats); err != nil {
 		res = append(res, err)
 	}
@@ -490,6 +651,14 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSQLDATABASE(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSQLELASTICPOOL(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSQLMANAGEDINSTANCE(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -513,7 +682,15 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateSYNAPSEWORKSPACES(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTABLESTORAGE(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTRAFFICMANAGER(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -521,11 +698,23 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateVIRTUALDESKTOP(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateVIRTUALMACHINE(formats); err != nil {
 		res = append(res, err)
 	}
 
+	if err := m.validateVIRTUALMACHINESCALESET(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateVIRTUALMACHINESCALESETVM(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVIRTUALNETWORKGATEWAY(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -566,6 +755,25 @@ func (m *CloudServices) validateAPIGATEWAY(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *CloudServices) validateAPIMANAGEMENT(formats strfmt.Registry) error {
+	if swag.IsZero(m.APIMANAGEMENT) { // not required
+		return nil
+	}
+
+	if m.APIMANAGEMENT != nil {
+		if err := m.APIMANAGEMENT.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("APIMANAGEMENT")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("APIMANAGEMENT")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validateAPPLICATIONELB(formats strfmt.Registry) error {
 	if swag.IsZero(m.APPLICATIONELB) { // not required
 		return nil
@@ -577,6 +785,25 @@ func (m *CloudServices) validateAPPLICATIONELB(formats strfmt.Registry) error {
 				return ve.ValidateName("APPLICATIONELB")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("APPLICATIONELB")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateAPPLICATIONGATEWAY(formats strfmt.Registry) error {
+	if swag.IsZero(m.APPLICATIONGATEWAY) { // not required
+		return nil
+	}
+
+	if m.APPLICATIONGATEWAY != nil {
+		if err := m.APPLICATIONGATEWAY.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("APPLICATIONGATEWAY")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("APPLICATIONGATEWAY")
 			}
 			return err
 		}
@@ -680,6 +907,25 @@ func (m *CloudServices) validateATHENA(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *CloudServices) validateAUTOMATIONACCOUNT(formats strfmt.Registry) error {
+	if swag.IsZero(m.AUTOMATIONACCOUNT) { // not required
+		return nil
+	}
+
+	if m.AUTOMATIONACCOUNT != nil {
+		if err := m.AUTOMATIONACCOUNT.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("AUTOMATIONACCOUNT")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("AUTOMATIONACCOUNT")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validateAUTOSCALING(formats strfmt.Registry) error {
 	if swag.IsZero(m.AUTOSCALING) { // not required
 		return nil
@@ -691,6 +937,25 @@ func (m *CloudServices) validateAUTOSCALING(formats strfmt.Registry) error {
 				return ve.ValidateName("AUTOSCALING")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("AUTOSCALING")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateBACKUPPROTECTEDITEMS(formats strfmt.Registry) error {
+	if swag.IsZero(m.BACKUPPROTECTEDITEMS) { // not required
+		return nil
+	}
+
+	if m.BACKUPPROTECTEDITEMS != nil {
+		if err := m.BACKUPPROTECTEDITEMS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("BACKUPPROTECTEDITEMS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("BACKUPPROTECTEDITEMS")
 			}
 			return err
 		}
@@ -775,6 +1040,44 @@ func (m *CloudServices) validateCODEBUILD(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *CloudServices) validateCOGNITIVESEARCH(formats strfmt.Registry) error {
+	if swag.IsZero(m.COGNITIVESEARCH) { // not required
+		return nil
+	}
+
+	if m.COGNITIVESEARCH != nil {
+		if err := m.COGNITIVESEARCH.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("COGNITIVESEARCH")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("COGNITIVESEARCH")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateCOGNITIVESERVICES(formats strfmt.Registry) error {
+	if swag.IsZero(m.COGNITIVESERVICES) { // not required
+		return nil
+	}
+
+	if m.COGNITIVESERVICES != nil {
+		if err := m.COGNITIVESERVICES.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("COGNITIVESERVICES")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("COGNITIVESERVICES")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validateCOGNITO(formats strfmt.Registry) error {
 	if swag.IsZero(m.COGNITO) { // not required
 		return nil
@@ -786,6 +1089,44 @@ func (m *CloudServices) validateCOGNITO(formats strfmt.Registry) error {
 				return ve.ValidateName("COGNITO")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("COGNITO")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateCOSMOSDB(formats strfmt.Registry) error {
+	if swag.IsZero(m.COSMOSDB) { // not required
+		return nil
+	}
+
+	if m.COSMOSDB != nil {
+		if err := m.COSMOSDB.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("COSMOSDB")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("COSMOSDB")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateDATAFACTORY(formats strfmt.Registry) error {
+	if swag.IsZero(m.DATAFACTORY) { // not required
+		return nil
+	}
+
+	if m.DATAFACTORY != nil {
+		if err := m.DATAFACTORY.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DATAFACTORY")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DATAFACTORY")
 			}
 			return err
 		}
@@ -1117,6 +1458,25 @@ func (m *CloudServices) validateEVENTHUB(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *CloudServices) validateEXPRESSROUTECIRCUIT(formats strfmt.Registry) error {
+	if swag.IsZero(m.EXPRESSROUTECIRCUIT) { // not required
+		return nil
+	}
+
+	if m.EXPRESSROUTECIRCUIT != nil {
+		if err := m.EXPRESSROUTECIRCUIT.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("EXPRESSROUTECIRCUIT")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("EXPRESSROUTECIRCUIT")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validateFILESTORAGE(formats strfmt.Registry) error {
 	if swag.IsZero(m.FILESTORAGE) { // not required
 		return nil
@@ -1155,6 +1515,44 @@ func (m *CloudServices) validateFIREHOSE(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *CloudServices) validateFIREWALL(formats strfmt.Registry) error {
+	if swag.IsZero(m.FIREWALL) { // not required
+		return nil
+	}
+
+	if m.FIREWALL != nil {
+		if err := m.FIREWALL.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("FIREWALL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("FIREWALL")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateFRONTDOORS(formats strfmt.Registry) error {
+	if swag.IsZero(m.FRONTDOORS) { // not required
+		return nil
+	}
+
+	if m.FRONTDOORS != nil {
+		if err := m.FRONTDOORS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("FRONTDOORS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("FRONTDOORS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validateFSX(formats strfmt.Registry) error {
 	if swag.IsZero(m.FSX) { // not required
 		return nil
@@ -1185,6 +1583,25 @@ func (m *CloudServices) validateGLUE(formats strfmt.Registry) error {
 				return ve.ValidateName("GLUE")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("GLUE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateKEYVAULT(formats strfmt.Registry) error {
+	if swag.IsZero(m.KEYVAULT) { // not required
+		return nil
+	}
+
+	if m.KEYVAULT != nil {
+		if err := m.KEYVAULT.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("KEYVAULT")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("KEYVAULT")
 			}
 			return err
 		}
@@ -1242,6 +1659,44 @@ func (m *CloudServices) validateLAMBDA(formats strfmt.Registry) error {
 				return ve.ValidateName("LAMBDA")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("LAMBDA")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateLOADBALANCERS(formats strfmt.Registry) error {
+	if swag.IsZero(m.LOADBALANCERS) { // not required
+		return nil
+	}
+
+	if m.LOADBALANCERS != nil {
+		if err := m.LOADBALANCERS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("LOADBALANCERS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("LOADBALANCERS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateLOGANALYTICSWORKSPACES(formats strfmt.Registry) error {
+	if swag.IsZero(m.LOGANALYTICSWORKSPACES) { // not required
+		return nil
+	}
+
+	if m.LOGANALYTICSWORKSPACES != nil {
+		if err := m.LOGANALYTICSWORKSPACES.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("LOGANALYTICSWORKSPACES")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("LOGANALYTICSWORKSPACES")
 			}
 			return err
 		}
@@ -1440,6 +1895,25 @@ func (m *CloudServices) validateMSKCLUSTER(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *CloudServices) validateMYSQL(formats strfmt.Registry) error {
+	if swag.IsZero(m.MYSQL) { // not required
+		return nil
+	}
+
+	if m.MYSQL != nil {
+		if err := m.MYSQL.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("MYSQL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("MYSQL")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validateNATGATEWAY(formats strfmt.Registry) error {
 	if swag.IsZero(m.NATGATEWAY) { // not required
 		return nil
@@ -1516,6 +1990,25 @@ func (m *CloudServices) validateOPSWORKS(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *CloudServices) validatePOSTGRESQL(formats strfmt.Registry) error {
+	if swag.IsZero(m.POSTGRESQL) { // not required
+		return nil
+	}
+
+	if m.POSTGRESQL != nil {
+		if err := m.POSTGRESQL.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("POSTGRESQL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("POSTGRESQL")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validatePUBLICIP(formats strfmt.Registry) error {
 	if swag.IsZero(m.PUBLICIP) { // not required
 		return nil
@@ -1565,6 +2058,63 @@ func (m *CloudServices) validateRDS(formats strfmt.Registry) error {
 				return ve.ValidateName("RDS")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("RDS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateRECOVERYPROTECTEDITEM(formats strfmt.Registry) error {
+	if swag.IsZero(m.RECOVERYPROTECTEDITEM) { // not required
+		return nil
+	}
+
+	if m.RECOVERYPROTECTEDITEM != nil {
+		if err := m.RECOVERYPROTECTEDITEM.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("RECOVERYPROTECTEDITEM")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("RECOVERYPROTECTEDITEM")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateRECOVERYSERVICES(formats strfmt.Registry) error {
+	if swag.IsZero(m.RECOVERYSERVICES) { // not required
+		return nil
+	}
+
+	if m.RECOVERYSERVICES != nil {
+		if err := m.RECOVERYSERVICES.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("RECOVERYSERVICES")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("RECOVERYSERVICES")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateREDISCACHE(formats strfmt.Registry) error {
+	if swag.IsZero(m.REDISCACHE) { // not required
+		return nil
+	}
+
+	if m.REDISCACHE != nil {
+		if err := m.REDISCACHE.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("REDISCACHE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("REDISCACHE")
 			}
 			return err
 		}
@@ -1668,6 +2218,25 @@ func (m *CloudServices) validateSAGEMAKER(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *CloudServices) validateSERVICEBUS(formats strfmt.Registry) error {
+	if swag.IsZero(m.SERVICEBUS) { // not required
+		return nil
+	}
+
+	if m.SERVICEBUS != nil {
+		if err := m.SERVICEBUS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("SERVICEBUS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SERVICEBUS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validateSES(formats strfmt.Registry) error {
 	if swag.IsZero(m.SES) { // not required
 		return nil
@@ -1717,6 +2286,44 @@ func (m *CloudServices) validateSQLDATABASE(formats strfmt.Registry) error {
 				return ve.ValidateName("SQLDATABASE")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("SQLDATABASE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateSQLELASTICPOOL(formats strfmt.Registry) error {
+	if swag.IsZero(m.SQLELASTICPOOL) { // not required
+		return nil
+	}
+
+	if m.SQLELASTICPOOL != nil {
+		if err := m.SQLELASTICPOOL.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("SQLELASTICPOOL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SQLELASTICPOOL")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateSQLMANAGEDINSTANCE(formats strfmt.Registry) error {
+	if swag.IsZero(m.SQLMANAGEDINSTANCE) { // not required
+		return nil
+	}
+
+	if m.SQLMANAGEDINSTANCE != nil {
+		if err := m.SQLMANAGEDINSTANCE.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("SQLMANAGEDINSTANCE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SQLMANAGEDINSTANCE")
 			}
 			return err
 		}
@@ -1820,6 +2427,25 @@ func (m *CloudServices) validateSWFWORKFLOW(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *CloudServices) validateSYNAPSEWORKSPACES(formats strfmt.Registry) error {
+	if swag.IsZero(m.SYNAPSEWORKSPACES) { // not required
+		return nil
+	}
+
+	if m.SYNAPSEWORKSPACES != nil {
+		if err := m.SYNAPSEWORKSPACES.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("SYNAPSEWORKSPACES")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SYNAPSEWORKSPACES")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validateTABLESTORAGE(formats strfmt.Registry) error {
 	if swag.IsZero(m.TABLESTORAGE) { // not required
 		return nil
@@ -1831,6 +2457,25 @@ func (m *CloudServices) validateTABLESTORAGE(formats strfmt.Registry) error {
 				return ve.ValidateName("TABLESTORAGE")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("TABLESTORAGE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateTRAFFICMANAGER(formats strfmt.Registry) error {
+	if swag.IsZero(m.TRAFFICMANAGER) { // not required
+		return nil
+	}
+
+	if m.TRAFFICMANAGER != nil {
+		if err := m.TRAFFICMANAGER.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("TRAFFICMANAGER")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("TRAFFICMANAGER")
 			}
 			return err
 		}
@@ -1858,6 +2503,25 @@ func (m *CloudServices) validateTRANSITGATEWAY(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *CloudServices) validateVIRTUALDESKTOP(formats strfmt.Registry) error {
+	if swag.IsZero(m.VIRTUALDESKTOP) { // not required
+		return nil
+	}
+
+	if m.VIRTUALDESKTOP != nil {
+		if err := m.VIRTUALDESKTOP.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("VIRTUALDESKTOP")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("VIRTUALDESKTOP")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validateVIRTUALMACHINE(formats strfmt.Registry) error {
 	if swag.IsZero(m.VIRTUALMACHINE) { // not required
 		return nil
@@ -1877,6 +2541,25 @@ func (m *CloudServices) validateVIRTUALMACHINE(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *CloudServices) validateVIRTUALMACHINESCALESET(formats strfmt.Registry) error {
+	if swag.IsZero(m.VIRTUALMACHINESCALESET) { // not required
+		return nil
+	}
+
+	if m.VIRTUALMACHINESCALESET != nil {
+		if err := m.VIRTUALMACHINESCALESET.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("VIRTUALMACHINESCALESET")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("VIRTUALMACHINESCALESET")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validateVIRTUALMACHINESCALESETVM(formats strfmt.Registry) error {
 	if swag.IsZero(m.VIRTUALMACHINESCALESETVM) { // not required
 		return nil
@@ -1888,6 +2571,25 @@ func (m *CloudServices) validateVIRTUALMACHINESCALESETVM(formats strfmt.Registry
 				return ve.ValidateName("VIRTUALMACHINESCALESETVM")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("VIRTUALMACHINESCALESETVM")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateVIRTUALNETWORKGATEWAY(formats strfmt.Registry) error {
+	if swag.IsZero(m.VIRTUALNETWORKGATEWAY) { // not required
+		return nil
+	}
+
+	if m.VIRTUALNETWORKGATEWAY != nil {
+		if err := m.VIRTUALNETWORKGATEWAY.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("VIRTUALNETWORKGATEWAY")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("VIRTUALNETWORKGATEWAY")
 			}
 			return err
 		}
@@ -1961,7 +2663,15 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAPIMANAGEMENT(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateAPPLICATIONELB(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAPPLICATIONGATEWAY(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1985,7 +2695,15 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAUTOMATIONACCOUNT(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateAUTOSCALING(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateBACKUPPROTECTEDITEMS(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2005,7 +2723,23 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCOGNITIVESEARCH(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateCOGNITIVESERVICES(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCOGNITO(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateCOSMOSDB(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDATAFACTORY(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2077,6 +2811,10 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateEXPRESSROUTECIRCUIT(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateFILESTORAGE(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -2085,11 +2823,23 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateFIREWALL(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFRONTDOORS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateFSX(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateGLUE(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateKEYVAULT(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2102,6 +2852,14 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 	}
 
 	if err := m.contextValidateLAMBDA(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLOADBALANCERS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLOGANALYTICSWORKSPACES(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2145,6 +2903,10 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateMYSQL(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateNATGATEWAY(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -2161,6 +2923,10 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidatePOSTGRESQL(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidatePUBLICIP(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -2170,6 +2936,18 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 	}
 
 	if err := m.contextValidateRDS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRECOVERYPROTECTEDITEM(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRECOVERYSERVICES(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateREDISCACHE(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2193,6 +2971,10 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateSERVICEBUS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSES(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -2202,6 +2984,14 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 	}
 
 	if err := m.contextValidateSQLDATABASE(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSQLELASTICPOOL(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSQLMANAGEDINSTANCE(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2225,7 +3015,15 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateSYNAPSEWORKSPACES(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateTABLESTORAGE(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTRAFFICMANAGER(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2233,11 +3031,23 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateVIRTUALDESKTOP(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateVIRTUALMACHINE(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateVIRTUALMACHINESCALESET(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateVIRTUALMACHINESCALESETVM(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVIRTUALNETWORKGATEWAY(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2275,6 +3085,22 @@ func (m *CloudServices) contextValidateAPIGATEWAY(ctx context.Context, formats s
 	return nil
 }
 
+func (m *CloudServices) contextValidateAPIMANAGEMENT(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.APIMANAGEMENT != nil {
+		if err := m.APIMANAGEMENT.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("APIMANAGEMENT")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("APIMANAGEMENT")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidateAPPLICATIONELB(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.APPLICATIONELB != nil {
@@ -2283,6 +3109,22 @@ func (m *CloudServices) contextValidateAPPLICATIONELB(ctx context.Context, forma
 				return ve.ValidateName("APPLICATIONELB")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("APPLICATIONELB")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateAPPLICATIONGATEWAY(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.APPLICATIONGATEWAY != nil {
+		if err := m.APPLICATIONGATEWAY.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("APPLICATIONGATEWAY")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("APPLICATIONGATEWAY")
 			}
 			return err
 		}
@@ -2371,6 +3213,22 @@ func (m *CloudServices) contextValidateATHENA(ctx context.Context, formats strfm
 	return nil
 }
 
+func (m *CloudServices) contextValidateAUTOMATIONACCOUNT(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AUTOMATIONACCOUNT != nil {
+		if err := m.AUTOMATIONACCOUNT.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("AUTOMATIONACCOUNT")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("AUTOMATIONACCOUNT")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidateAUTOSCALING(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AUTOSCALING != nil {
@@ -2379,6 +3237,22 @@ func (m *CloudServices) contextValidateAUTOSCALING(ctx context.Context, formats 
 				return ve.ValidateName("AUTOSCALING")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("AUTOSCALING")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateBACKUPPROTECTEDITEMS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BACKUPPROTECTEDITEMS != nil {
+		if err := m.BACKUPPROTECTEDITEMS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("BACKUPPROTECTEDITEMS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("BACKUPPROTECTEDITEMS")
 			}
 			return err
 		}
@@ -2451,6 +3325,38 @@ func (m *CloudServices) contextValidateCODEBUILD(ctx context.Context, formats st
 	return nil
 }
 
+func (m *CloudServices) contextValidateCOGNITIVESEARCH(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.COGNITIVESEARCH != nil {
+		if err := m.COGNITIVESEARCH.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("COGNITIVESEARCH")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("COGNITIVESEARCH")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateCOGNITIVESERVICES(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.COGNITIVESERVICES != nil {
+		if err := m.COGNITIVESERVICES.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("COGNITIVESERVICES")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("COGNITIVESERVICES")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidateCOGNITO(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.COGNITO != nil {
@@ -2459,6 +3365,38 @@ func (m *CloudServices) contextValidateCOGNITO(ctx context.Context, formats strf
 				return ve.ValidateName("COGNITO")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("COGNITO")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateCOSMOSDB(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.COSMOSDB != nil {
+		if err := m.COSMOSDB.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("COSMOSDB")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("COSMOSDB")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateDATAFACTORY(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DATAFACTORY != nil {
+		if err := m.DATAFACTORY.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DATAFACTORY")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DATAFACTORY")
 			}
 			return err
 		}
@@ -2739,6 +3677,22 @@ func (m *CloudServices) contextValidateEVENTHUB(ctx context.Context, formats str
 	return nil
 }
 
+func (m *CloudServices) contextValidateEXPRESSROUTECIRCUIT(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.EXPRESSROUTECIRCUIT != nil {
+		if err := m.EXPRESSROUTECIRCUIT.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("EXPRESSROUTECIRCUIT")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("EXPRESSROUTECIRCUIT")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidateFILESTORAGE(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.FILESTORAGE != nil {
@@ -2771,6 +3725,38 @@ func (m *CloudServices) contextValidateFIREHOSE(ctx context.Context, formats str
 	return nil
 }
 
+func (m *CloudServices) contextValidateFIREWALL(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.FIREWALL != nil {
+		if err := m.FIREWALL.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("FIREWALL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("FIREWALL")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateFRONTDOORS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.FRONTDOORS != nil {
+		if err := m.FRONTDOORS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("FRONTDOORS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("FRONTDOORS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidateFSX(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.FSX != nil {
@@ -2795,6 +3781,22 @@ func (m *CloudServices) contextValidateGLUE(ctx context.Context, formats strfmt.
 				return ve.ValidateName("GLUE")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("GLUE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateKEYVAULT(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.KEYVAULT != nil {
+		if err := m.KEYVAULT.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("KEYVAULT")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("KEYVAULT")
 			}
 			return err
 		}
@@ -2843,6 +3845,38 @@ func (m *CloudServices) contextValidateLAMBDA(ctx context.Context, formats strfm
 				return ve.ValidateName("LAMBDA")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("LAMBDA")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateLOADBALANCERS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LOADBALANCERS != nil {
+		if err := m.LOADBALANCERS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("LOADBALANCERS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("LOADBALANCERS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateLOGANALYTICSWORKSPACES(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LOGANALYTICSWORKSPACES != nil {
+		if err := m.LOGANALYTICSWORKSPACES.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("LOGANALYTICSWORKSPACES")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("LOGANALYTICSWORKSPACES")
 			}
 			return err
 		}
@@ -3011,6 +4045,22 @@ func (m *CloudServices) contextValidateMSKCLUSTER(ctx context.Context, formats s
 	return nil
 }
 
+func (m *CloudServices) contextValidateMYSQL(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MYSQL != nil {
+		if err := m.MYSQL.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("MYSQL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("MYSQL")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidateNATGATEWAY(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.NATGATEWAY != nil {
@@ -3075,6 +4125,22 @@ func (m *CloudServices) contextValidateOPSWORKS(ctx context.Context, formats str
 	return nil
 }
 
+func (m *CloudServices) contextValidatePOSTGRESQL(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.POSTGRESQL != nil {
+		if err := m.POSTGRESQL.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("POSTGRESQL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("POSTGRESQL")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidatePUBLICIP(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PUBLICIP != nil {
@@ -3115,6 +4181,54 @@ func (m *CloudServices) contextValidateRDS(ctx context.Context, formats strfmt.R
 				return ve.ValidateName("RDS")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("RDS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateRECOVERYPROTECTEDITEM(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RECOVERYPROTECTEDITEM != nil {
+		if err := m.RECOVERYPROTECTEDITEM.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("RECOVERYPROTECTEDITEM")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("RECOVERYPROTECTEDITEM")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateRECOVERYSERVICES(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RECOVERYSERVICES != nil {
+		if err := m.RECOVERYSERVICES.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("RECOVERYSERVICES")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("RECOVERYSERVICES")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateREDISCACHE(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.REDISCACHE != nil {
+		if err := m.REDISCACHE.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("REDISCACHE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("REDISCACHE")
 			}
 			return err
 		}
@@ -3203,6 +4317,22 @@ func (m *CloudServices) contextValidateSAGEMAKER(ctx context.Context, formats st
 	return nil
 }
 
+func (m *CloudServices) contextValidateSERVICEBUS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SERVICEBUS != nil {
+		if err := m.SERVICEBUS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("SERVICEBUS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SERVICEBUS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidateSES(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SES != nil {
@@ -3243,6 +4373,38 @@ func (m *CloudServices) contextValidateSQLDATABASE(ctx context.Context, formats 
 				return ve.ValidateName("SQLDATABASE")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("SQLDATABASE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateSQLELASTICPOOL(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SQLELASTICPOOL != nil {
+		if err := m.SQLELASTICPOOL.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("SQLELASTICPOOL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SQLELASTICPOOL")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateSQLMANAGEDINSTANCE(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SQLMANAGEDINSTANCE != nil {
+		if err := m.SQLMANAGEDINSTANCE.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("SQLMANAGEDINSTANCE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SQLMANAGEDINSTANCE")
 			}
 			return err
 		}
@@ -3331,6 +4493,22 @@ func (m *CloudServices) contextValidateSWFWORKFLOW(ctx context.Context, formats 
 	return nil
 }
 
+func (m *CloudServices) contextValidateSYNAPSEWORKSPACES(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SYNAPSEWORKSPACES != nil {
+		if err := m.SYNAPSEWORKSPACES.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("SYNAPSEWORKSPACES")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SYNAPSEWORKSPACES")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidateTABLESTORAGE(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TABLESTORAGE != nil {
@@ -3339,6 +4517,22 @@ func (m *CloudServices) contextValidateTABLESTORAGE(ctx context.Context, formats
 				return ve.ValidateName("TABLESTORAGE")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("TABLESTORAGE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateTRAFFICMANAGER(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TRAFFICMANAGER != nil {
+		if err := m.TRAFFICMANAGER.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("TRAFFICMANAGER")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("TRAFFICMANAGER")
 			}
 			return err
 		}
@@ -3363,6 +4557,22 @@ func (m *CloudServices) contextValidateTRANSITGATEWAY(ctx context.Context, forma
 	return nil
 }
 
+func (m *CloudServices) contextValidateVIRTUALDESKTOP(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VIRTUALDESKTOP != nil {
+		if err := m.VIRTUALDESKTOP.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("VIRTUALDESKTOP")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("VIRTUALDESKTOP")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidateVIRTUALMACHINE(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.VIRTUALMACHINE != nil {
@@ -3379,6 +4589,22 @@ func (m *CloudServices) contextValidateVIRTUALMACHINE(ctx context.Context, forma
 	return nil
 }
 
+func (m *CloudServices) contextValidateVIRTUALMACHINESCALESET(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VIRTUALMACHINESCALESET != nil {
+		if err := m.VIRTUALMACHINESCALESET.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("VIRTUALMACHINESCALESET")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("VIRTUALMACHINESCALESET")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidateVIRTUALMACHINESCALESETVM(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.VIRTUALMACHINESCALESETVM != nil {
@@ -3387,6 +4613,22 @@ func (m *CloudServices) contextValidateVIRTUALMACHINESCALESETVM(ctx context.Cont
 				return ve.ValidateName("VIRTUALMACHINESCALESETVM")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("VIRTUALMACHINESCALESETVM")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateVIRTUALNETWORKGATEWAY(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VIRTUALNETWORKGATEWAY != nil {
+		if err := m.VIRTUALNETWORKGATEWAY.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("VIRTUALNETWORKGATEWAY")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("VIRTUALNETWORKGATEWAY")
 			}
 			return err
 		}
