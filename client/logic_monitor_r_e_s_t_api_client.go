@@ -29,6 +29,7 @@ import (
 	"terraform-provider-logicmonitor/client/data_resource_aws_external_id"
 	"terraform-provider-logicmonitor/client/device"
 	"terraform-provider-logicmonitor/client/device_group"
+	"terraform-provider-logicmonitor/client/escalation_chain"
 )
 
 const (
@@ -109,6 +110,8 @@ func New(c *Config, httpClient *http.Client) *LogicMonitorRESTAPI {
 
 	cli.DeviceGroup = device_group.New(transport, strfmt.Default, authInfo)
 
+	cli.EscalationChain = escalation_chain.New(transport, strfmt.Default, authInfo)
+
 	return cli
 }
 
@@ -167,6 +170,8 @@ type LogicMonitorRESTAPI struct {
 
 	DeviceGroup *device_group.Client
 
+	EscalationChain *escalation_chain.Client
+
 	Transport runtime.ClientTransport
 }
 
@@ -188,9 +193,11 @@ func (c *LogicMonitorRESTAPI) SetTransport(transport runtime.ClientTransport) {
 
 	c.DeviceGroup.SetTransport(transport)
 
+	c.EscalationChain.SetTransport(transport)
+
 }
 
-//TODO: See if there is a way to move this out of Facade Template and into Main or Provider templates
+// TODO: See if there is a way to move this out of Facade Template and into Main or Provider templates
 func LMv1Auth(accessId, accessKey string) runtime.ClientAuthInfoWriter {
 	return runtime.ClientAuthInfoWriterFunc(func(r runtime.ClientRequest, _ strfmt.Registry) error {
 		// get epoch

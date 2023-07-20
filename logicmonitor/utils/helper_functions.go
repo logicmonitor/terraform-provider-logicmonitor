@@ -218,3 +218,105 @@ func getPropFromWTInterface(r interface{}) (t []*models.WidgetToken) {
 	}
 	return
 }
+
+func ConvertInt32ValueSlice(src []*int32) []int32 {
+	dst := make([]int32, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+
+func GetPropFromCCMap(d *schema.ResourceData, key string) (t []*models.Recipient) {
+	if r, ok := d.GetOk(key); ok {
+		return getPropFromCCInterface(r)
+	}
+	return
+}
+func GetPropFromDesMap(d *schema.ResourceData, key string) (t []*models.Chain) {
+	if r, ok := d.GetOk(key); ok {
+		return getPropFromDesInterface(r)
+	}
+	return
+}
+
+func getPropFromCCInterface(r interface{}) (t []*models.Recipient) {
+	for _, i := range r.([]interface{}) {
+		if m, ok := i.(map[string]interface{}); ok {
+			var addr = m["addr"].(string)
+			var contact = m["contact"].(string)
+			var method = m["method"].(string)
+			var Type = m["type"].(string)
+
+			model := &models.Recipient{
+				Addr:  addr,
+				Contact: contact,
+				Method: &method,
+                Type: &Type,
+			}
+			t = append(t, model)
+		}
+	}
+	return
+}
+
+func getPropFromDesInterface(r interface{}) (t []*models.Chain) {
+    
+
+    for _, i := range r.([]interface{}) {
+    if m, ok := i.(map[string]interface{}); ok {
+      var period = GetPeriod(m["period"].([]interface{}))
+		var stages =  GetRecipient(m["stages"].([]interface{}))
+		var Type = m["type"].(string)
+            
+            model := &models.Chain{
+                Period: &period,
+                Stages: stages,
+				Type: &Type,
+            }
+            t = append(t, model)
+        }
+    }
+
+    return 
+}
+func GetRecipient(d []interface{}) (t [][]*models.Recipient) {
+	for _, i := range d {
+		if m, ok := i.(map[string]interface{}); ok {
+			var addr = m["addr"].(string)
+			var contact = m["contact"].(string)
+			var method = m["method"].(string)
+			var Type = m["type"].(string)
+			
+			model := &models.Recipient{
+				Addr: addr,
+				Contact: contact,
+				Method: &method,
+				Type: &Type,
+			}
+			t = append(t, []*models.Recipient{model})
+		}
+	}
+	return
+}
+func GetPeriod(d []interface{}) (t models.Period) {
+	for _, i := range d {
+		if m, ok := i.(map[string]interface{}); ok {
+			var endMinutes = int32(m["end_minutes"].(int))
+			var startMinutes = int32(m["start_minutes"].(int))
+			var timezone = m["timezone"].(string)
+			var weekDays = []int32{int32(m["week_days"].(int))}
+			
+			model := models.Period{
+				EndMinutes: &endMinutes,
+				StartMinutes: &startMinutes,
+				Timezone: &timezone,
+			    WeekDays: weekDays,
+			}
+			t = model
+		}
+	}
+	return
+}

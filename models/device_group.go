@@ -16,6 +16,7 @@ import (
 )
 
 // DeviceGroup device group
+// Example: isResource
 //
 // swagger:model DeviceGroup
 type DeviceGroup struct {

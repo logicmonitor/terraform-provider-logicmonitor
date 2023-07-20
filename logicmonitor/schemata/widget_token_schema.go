@@ -2,35 +2,35 @@ package schemata
 
 import (
 	"terraform-provider-logicmonitor/models"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func WidgetTokenSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"inherit_list": {
-			Type: schema.TypeList, //GoType: []*WidgetTokenInheritance
+			Type: schema.TypeList, //GoType: []*WidgetTokenInheritance 
 			Elem: &schema.Resource{
 				Schema: WidgetTokenInheritanceSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional:   true,
-		},
-
-		"name": {
-			Type:     schema.TypeString,
 			Optional: true,
 		},
-
+		
+		"name": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
 		"type": {
-			Type:     schema.TypeString,
+			Type: schema.TypeString,
 			Computed: true,
 		},
-
+		
 		"value": {
-			Type:     schema.TypeString,
+			Type: schema.TypeString,
 			Optional: true,
 		},
+		
 	}
 }
 
