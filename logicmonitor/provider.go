@@ -31,7 +31,7 @@ func Provider() *schema.Provider {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
-				Description: "true if going for bulk resource, default is false",
+				Description: "(Experimental) true if going for bulk resource, default is false",
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{

@@ -16,7 +16,6 @@ import (
 )
 
 // Dashboard dashboard
-// Example: isResource
 //
 // swagger:model Dashboard
 type Dashboard struct {

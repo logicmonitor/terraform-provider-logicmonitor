@@ -16,7 +16,6 @@ import (
 )
 
 // Collector collector
-// Example: isResource
 //
 // swagger:model Collector
 type Collector struct {

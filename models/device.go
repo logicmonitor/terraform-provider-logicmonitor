@@ -16,7 +16,6 @@ import (
 )
 
 // Device device
-// Example: isResource
 //
 // swagger:model Device
 type Device struct {

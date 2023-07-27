@@ -2,6 +2,7 @@ package schemata
 
 import (
 	"terraform-provider-logicmonitor/models"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
@@ -14,7 +15,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"api_m_a_n_a_g_e_m_e_n_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -22,7 +23,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"a_p_p_l_i_c_a_t_i_o_n_e_l_b": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -30,7 +31,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"a_p_p_l_i_c_a_t_i_o_n_g_a_t_e_w_a_y": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -38,7 +39,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"a_p_p_l_i_c_a_t_i_o_n_i_n_s_i_g_h_t_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -46,7 +47,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"a_p_p_s_e_r_v_i_c_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -54,7 +55,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"a_p_p_s_e_r_v_i_c_e_p_l_a_n": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -62,7 +63,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"a_p_p_s_t_r_e_a_m": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -70,7 +71,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"a_t_h_e_n_a": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -78,7 +79,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"a_u_t_o_m_a_t_i_o_n_a_c_c_o_u_n_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -86,7 +87,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"a_u_t_o_s_c_a_l_i_n_g": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -94,7 +95,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"b_a_c_k_u_p_p_r_o_t_e_c_t_e_d_i_t_e_m_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -102,7 +103,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"b_l_o_b_s_t_o_r_a_g_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -110,7 +111,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"c_l_o_u_d_f_r_o_n_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -118,7 +119,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"c_l_o_u_d_s_e_a_r_c_h": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -126,7 +127,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"c_o_d_e_b_ui_l_d": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -134,7 +135,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"c_o_g_n_i_t_i_v_e_s_e_a_r_c_h": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -142,7 +143,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"c_o_g_n_i_t_i_v_e_s_e_r_v_i_c_e_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -150,7 +151,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"c_o_g_n_i_t_o": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -158,7 +159,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"c_o_s_m_o_s_d_b": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -166,7 +167,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"d_a_t_a_f_a_c_t_o_r_y": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -174,7 +175,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"d_i_r_e_c_t_c_o_n_n_e_c_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -182,7 +183,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"d_m_s_r_e_p_l_i_c_a_t_i_o_n": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -190,7 +191,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"d_m_s_r_e_p_l_i_c_a_t_i_o_n_t_a_s_k_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -198,7 +199,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"d_o_c_d_b": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -206,7 +207,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"d_y_n_a_m_o_d_b": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -214,7 +215,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_b_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -222,7 +223,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_c2": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -230,7 +231,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_c_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -238,7 +239,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_f_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -246,7 +247,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_l_a_s_t_i_c_a_c_h_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -254,7 +255,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_l_a_s_t_i_c_b_e_a_n_s_t_a_l_k": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -262,7 +263,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_l_a_s_t_i_c_s_e_a_r_c_h": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -270,7 +271,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_l_a_s_t_i_c_t_r_a_n_s_c_o_d_e_r": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -278,7 +279,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_l_b": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -286,7 +287,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_m_r": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -294,7 +295,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_v_e_n_t_b_r_id_g_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -302,7 +303,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_v_e_n_t_h_u_b": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -310,7 +311,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"e_x_p_r_e_s_s_r_o_u_t_e_c_i_r_c_ui_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -318,7 +319,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"f_i_l_e_s_t_o_r_a_g_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -326,7 +327,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"f_i_r_e_h_o_s_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -334,7 +335,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"f_i_r_e_w_a_l_l": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -342,7 +343,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"f_r_o_n_t_d_o_o_r_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -350,7 +351,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"f_s_x": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -358,7 +359,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"g_l_u_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -366,7 +367,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"k_e_y_v_a_u_l_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -374,7 +375,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"k_i_n_e_s_i_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -382,7 +383,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"k_i_n_e_s_i_s_v_id_e_o": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -390,7 +391,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"l_a_m_b_d_a": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -398,7 +399,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"l_o_a_d_b_a_l_a_n_c_e_r_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -406,7 +407,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"l_o_g_a_n_a_l_y_t_i_c_s_w_o_r_k_s_p_a_c_e_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -414,7 +415,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"l_o_g_i_c_a_p_p_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -422,7 +423,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"m_e_d_i_a_c_o_n_n_e_c_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -430,7 +431,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"m_e_d_i_a_c_o_n_v_e_r_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -438,7 +439,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"m_e_d_i_a_p_a_c_k_a_g_e_l_i_v_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -446,7 +447,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"m_e_d_i_a_p_a_c_k_a_g_e_v_o_d": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -454,7 +455,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"m_e_d_i_a_s_t_o_r_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -462,7 +463,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"m_e_d_i_a_t_a_i_l_o_r": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -470,7 +471,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"m_q": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -478,7 +479,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"m_s_k_b_r_o_k_e_r": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -486,7 +487,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"m_s_k_c_l_u_s_t_e_r": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -494,7 +495,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"m_y_sql": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -502,7 +503,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"n_a_t_g_a_t_e_w_a_y": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -510,7 +511,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"n_e_t_w_o_r_k_e_l_b": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -518,7 +519,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"n_e_t_w_o_r_k_i_n_t_e_r_f_a_c_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -526,7 +527,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"o_p_s_w_o_r_k_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -534,7 +535,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"p_o_s_t_g_r_e_sql": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -542,7 +543,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"p_u_b_l_i_c_ip": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -550,7 +551,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"q_u_e_u_e_s_t_o_r_a_g_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -558,7 +559,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"r_d_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -566,7 +567,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"r_e_c_o_v_e_r_y_p_r_o_t_e_c_t_e_d_i_t_e_m": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -574,7 +575,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"r_e_c_o_v_e_r_y_s_e_r_v_i_c_e_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -582,7 +583,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"r_e_d_i_s_c_a_c_h_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -590,7 +591,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"r_e_d_s_h_i_f_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -598,7 +599,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"r_o_u_t_e53": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -606,7 +607,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"r_o_u_t_e53_r_e_s_o_l_v_e_r": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -614,7 +615,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"s3": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -622,7 +623,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"s_a_g_e_m_a_k_e_r": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -630,7 +631,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"s_e_r_v_i_c_e_b_u_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -638,7 +639,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"s_e_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -646,7 +647,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"s_n_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -654,7 +655,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"sql_d_a_t_a_b_a_s_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -662,7 +663,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"sql_e_l_a_s_t_i_c_p_o_o_l": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -670,7 +671,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"sql_m_a_n_a_g_e_d_i_n_s_t_a_n_c_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -678,7 +679,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"s_q_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -686,7 +687,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"s_t_e_p_f_u_n_c_t_i_o_n_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -694,7 +695,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"s_t_o_r_a_g_e_a_c_c_o_u_n_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -702,7 +703,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"s_w_f_a_c_t_i_v_i_t_y": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -710,7 +711,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"s_w_f_w_o_r_k_f_l_o_w": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -718,7 +719,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"s_y_n_a_p_s_e_w_o_r_k_s_p_a_c_e_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -726,7 +727,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"t_a_b_l_e_s_t_o_r_a_g_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -734,7 +735,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"t_r_a_f_f_i_c_m_a_n_a_g_e_r": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -742,7 +743,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"t_r_a_n_s_i_t_g_a_t_e_w_a_y": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -750,7 +751,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"v_i_r_t_u_a_l_d_e_s_k_t_o_p": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -758,7 +759,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"v_i_r_t_u_a_l_m_a_c_h_i_n_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -766,7 +767,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"v_i_r_t_u_a_l_m_a_c_h_i_n_e_s_c_a_l_e_s_e_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -774,7 +775,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"v_i_r_t_u_a_l_m_a_c_h_i_n_e_s_c_a_l_e_s_e_t_vm": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -782,7 +783,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"v_i_r_t_u_a_l_n_e_t_w_o_r_k_g_a_t_e_w_a_y": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -790,7 +791,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"v_p_n": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -798,7 +799,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"w_o_r_k_s_p_a_c_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -806,7 +807,7 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"w_o_r_k_s_p_a_c_e_d_i_r_e_c_t_o_r_y": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -814,7 +815,6 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
 	}
 }
 
@@ -1436,109 +1436,109 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(WORKSPACEDIRECTORYList) > 0 { // len(nil) = 0
 		wORKSPACEDIRECTORY = CloudServiceSettingsModel(WORKSPACEDIRECTORYList[0].(map[string]interface{}))
 	}
-	
-	return &models.CloudServices {
-		APIGATEWAY: aPIGATEWAY,
-		APIMANAGEMENT: aPIMANAGEMENT,
-		APPLICATIONELB: aPPLICATIONELB,
-		APPLICATIONGATEWAY: aPPLICATIONGATEWAY,
-		APPLICATIONINSIGHTS: aPPLICATIONINSIGHTS,
-		APPSERVICE: aPPSERVICE,
-		APPSERVICEPLAN: aPPSERVICEPLAN,
-		APPSTREAM: aPPSTREAM,
-		ATHENA: aTHENA,
-		AUTOMATIONACCOUNT: aUTOMATIONACCOUNT,
-		AUTOSCALING: aUTOSCALING,
-		BACKUPPROTECTEDITEMS: bACKUPPROTECTEDITEMS,
-		BLOBSTORAGE: bLOBSTORAGE,
-		CLOUDFRONT: cLOUDFRONT,
-		CLOUDSEARCH: cLOUDSEARCH,
-		CODEBUILD: cODEBUILD,
-		COGNITIVESEARCH: cOGNITIVESEARCH,
-		COGNITIVESERVICES: cOGNITIVESERVICES,
-		COGNITO: cOGNITO,
-		COSMOSDB: cOSMOSDB,
-		DATAFACTORY: dATAFACTORY,
-		DIRECTCONNECT: dIRECTCONNECT,
-		DMSREPLICATION: dMSREPLICATION,
-		DMSREPLICATIONTASKS: dMSREPLICATIONTASKS,
-		DOCDB: dOCDB,
-		DYNAMODB: dYNAMODB,
-		EBS: eBS,
-		EC2: eC2,
-		ECS: eCS,
-		EFS: eFS,
-		ELASTICACHE: eLASTICACHE,
-		ELASTICBEANSTALK: eLASTICBEANSTALK,
-		ELASTICSEARCH: eLASTICSEARCH,
-		ELASTICTRANSCODER: eLASTICTRANSCODER,
-		ELB: eLB,
-		EMR: eMR,
-		EVENTBRIDGE: eVENTBRIDGE,
-		EVENTHUB: eVENTHUB,
-		EXPRESSROUTECIRCUIT: eXPRESSROUTECIRCUIT,
-		FILESTORAGE: fILESTORAGE,
-		FIREHOSE: fIREHOSE,
-		FIREWALL: fIREWALL,
-		FRONTDOORS: fRONTDOORS,
-		FSX: fSX,
-		GLUE: gLUE,
-		KEYVAULT: kEYVAULT,
-		KINESIS: kINESIS,
-		KINESISVIDEO: kINESISVIDEO,
-		LAMBDA: lAMBDA,
-		LOADBALANCERS: lOADBALANCERS,
-		LOGANALYTICSWORKSPACES: lOGANALYTICSWORKSPACES,
-		LOGICAPPS: lOGICAPPS,
-		MEDIACONNECT: mEDIACONNECT,
-		MEDIACONVERT: mEDIACONVERT,
-		MEDIAPACKAGELIVE: mEDIAPACKAGELIVE,
-		MEDIAPACKAGEVOD: mEDIAPACKAGEVOD,
-		MEDIASTORE: mEDIASTORE,
-		MEDIATAILOR: mEDIATAILOR,
-		MQ: mQ,
-		MSKBROKER: mSKBROKER,
-		MSKCLUSTER: mSKCLUSTER,
-		MYSQL: mYSQL,
-		NATGATEWAY: nATGATEWAY,
-		NETWORKELB: nETWORKELB,
-		NETWORKINTERFACE: nETWORKINTERFACE,
-		OPSWORKS: oPSWORKS,
-		POSTGRESQL: pOSTGRESQL,
-		PUBLICIP: pUBLICIP,
-		QUEUESTORAGE: qUEUESTORAGE,
-		RDS: rDS,
-		RECOVERYPROTECTEDITEM: rECOVERYPROTECTEDITEM,
-		RECOVERYSERVICES: rECOVERYSERVICES,
-		REDISCACHE: rEDISCACHE,
-		REDSHIFT: rEDSHIFT,
-		ROUTE53: rOUTE53,
-		ROUTE53RESOLVER: rOUTE53RESOLVER,
-		S3: s3,
-		SAGEMAKER: sAGEMAKER,
-		SERVICEBUS: sERVICEBUS,
-		SES: sES,
-		SNS: sNS,
-		SQLDATABASE: sQLDATABASE,
-		SQLELASTICPOOL: sQLELASTICPOOL,
-		SQLMANAGEDINSTANCE: sQLMANAGEDINSTANCE,
-		SQS: sQS,
-		STEPFUNCTIONS: sTEPFUNCTIONS,
-		STORAGEACCOUNT: sTORAGEACCOUNT,
-		SWFACTIVITY: sWFACTIVITY,
-		SWFWORKFLOW: sWFWORKFLOW,
-		SYNAPSEWORKSPACES: sYNAPSEWORKSPACES,
-		TABLESTORAGE: tABLESTORAGE,
-		TRAFFICMANAGER: tRAFFICMANAGER,
-		TRANSITGATEWAY: tRANSITGATEWAY,
-		VIRTUALDESKTOP: vIRTUALDESKTOP,
-		VIRTUALMACHINE: vIRTUALMACHINE,
-		VIRTUALMACHINESCALESET: vIRTUALMACHINESCALESET,
+
+	return &models.CloudServices{
+		APIGATEWAY:               aPIGATEWAY,
+		APIMANAGEMENT:            aPIMANAGEMENT,
+		APPLICATIONELB:           aPPLICATIONELB,
+		APPLICATIONGATEWAY:       aPPLICATIONGATEWAY,
+		APPLICATIONINSIGHTS:      aPPLICATIONINSIGHTS,
+		APPSERVICE:               aPPSERVICE,
+		APPSERVICEPLAN:           aPPSERVICEPLAN,
+		APPSTREAM:                aPPSTREAM,
+		ATHENA:                   aTHENA,
+		AUTOMATIONACCOUNT:        aUTOMATIONACCOUNT,
+		AUTOSCALING:              aUTOSCALING,
+		BACKUPPROTECTEDITEMS:     bACKUPPROTECTEDITEMS,
+		BLOBSTORAGE:              bLOBSTORAGE,
+		CLOUDFRONT:               cLOUDFRONT,
+		CLOUDSEARCH:              cLOUDSEARCH,
+		CODEBUILD:                cODEBUILD,
+		COGNITIVESEARCH:          cOGNITIVESEARCH,
+		COGNITIVESERVICES:        cOGNITIVESERVICES,
+		COGNITO:                  cOGNITO,
+		COSMOSDB:                 cOSMOSDB,
+		DATAFACTORY:              dATAFACTORY,
+		DIRECTCONNECT:            dIRECTCONNECT,
+		DMSREPLICATION:           dMSREPLICATION,
+		DMSREPLICATIONTASKS:      dMSREPLICATIONTASKS,
+		DOCDB:                    dOCDB,
+		DYNAMODB:                 dYNAMODB,
+		EBS:                      eBS,
+		EC2:                      eC2,
+		ECS:                      eCS,
+		EFS:                      eFS,
+		ELASTICACHE:              eLASTICACHE,
+		ELASTICBEANSTALK:         eLASTICBEANSTALK,
+		ELASTICSEARCH:            eLASTICSEARCH,
+		ELASTICTRANSCODER:        eLASTICTRANSCODER,
+		ELB:                      eLB,
+		EMR:                      eMR,
+		EVENTBRIDGE:              eVENTBRIDGE,
+		EVENTHUB:                 eVENTHUB,
+		EXPRESSROUTECIRCUIT:      eXPRESSROUTECIRCUIT,
+		FILESTORAGE:              fILESTORAGE,
+		FIREHOSE:                 fIREHOSE,
+		FIREWALL:                 fIREWALL,
+		FRONTDOORS:               fRONTDOORS,
+		FSX:                      fSX,
+		GLUE:                     gLUE,
+		KEYVAULT:                 kEYVAULT,
+		KINESIS:                  kINESIS,
+		KINESISVIDEO:             kINESISVIDEO,
+		LAMBDA:                   lAMBDA,
+		LOADBALANCERS:            lOADBALANCERS,
+		LOGANALYTICSWORKSPACES:   lOGANALYTICSWORKSPACES,
+		LOGICAPPS:                lOGICAPPS,
+		MEDIACONNECT:             mEDIACONNECT,
+		MEDIACONVERT:             mEDIACONVERT,
+		MEDIAPACKAGELIVE:         mEDIAPACKAGELIVE,
+		MEDIAPACKAGEVOD:          mEDIAPACKAGEVOD,
+		MEDIASTORE:               mEDIASTORE,
+		MEDIATAILOR:              mEDIATAILOR,
+		MQ:                       mQ,
+		MSKBROKER:                mSKBROKER,
+		MSKCLUSTER:               mSKCLUSTER,
+		MYSQL:                    mYSQL,
+		NATGATEWAY:               nATGATEWAY,
+		NETWORKELB:               nETWORKELB,
+		NETWORKINTERFACE:         nETWORKINTERFACE,
+		OPSWORKS:                 oPSWORKS,
+		POSTGRESQL:               pOSTGRESQL,
+		PUBLICIP:                 pUBLICIP,
+		QUEUESTORAGE:             qUEUESTORAGE,
+		RDS:                      rDS,
+		RECOVERYPROTECTEDITEM:    rECOVERYPROTECTEDITEM,
+		RECOVERYSERVICES:         rECOVERYSERVICES,
+		REDISCACHE:               rEDISCACHE,
+		REDSHIFT:                 rEDSHIFT,
+		ROUTE53:                  rOUTE53,
+		ROUTE53RESOLVER:          rOUTE53RESOLVER,
+		S3:                       s3,
+		SAGEMAKER:                sAGEMAKER,
+		SERVICEBUS:               sERVICEBUS,
+		SES:                      sES,
+		SNS:                      sNS,
+		SQLDATABASE:              sQLDATABASE,
+		SQLELASTICPOOL:           sQLELASTICPOOL,
+		SQLMANAGEDINSTANCE:       sQLMANAGEDINSTANCE,
+		SQS:                      sQS,
+		STEPFUNCTIONS:            sTEPFUNCTIONS,
+		STORAGEACCOUNT:           sTORAGEACCOUNT,
+		SWFACTIVITY:              sWFACTIVITY,
+		SWFWORKFLOW:              sWFWORKFLOW,
+		SYNAPSEWORKSPACES:        sYNAPSEWORKSPACES,
+		TABLESTORAGE:             tABLESTORAGE,
+		TRAFFICMANAGER:           tRAFFICMANAGER,
+		TRANSITGATEWAY:           tRANSITGATEWAY,
+		VIRTUALDESKTOP:           vIRTUALDESKTOP,
+		VIRTUALMACHINE:           vIRTUALMACHINE,
+		VIRTUALMACHINESCALESET:   vIRTUALMACHINESCALESET,
 		VIRTUALMACHINESCALESETVM: vIRTUALMACHINESCALESETVM,
-		VIRTUALNETWORKGATEWAY: vIRTUALNETWORKGATEWAY,
-		VPN: vPN,
-		WORKSPACE: wORKSPACE,
-		WORKSPACEDIRECTORY: wORKSPACEDIRECTORY,
+		VIRTUALNETWORKGATEWAY:    vIRTUALNETWORKGATEWAY,
+		VPN:                      vPN,
+		WORKSPACE:                wORKSPACE,
+		WORKSPACEDIRECTORY:       wORKSPACEDIRECTORY,
 	}
 }
 
