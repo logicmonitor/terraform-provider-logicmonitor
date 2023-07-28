@@ -115,6 +115,19 @@ resource "logicmonitor_device_group" "my_device_group" {
 }
 ```
 
+### EscalationChain
+
+```hcl
+# create a new LogicMonitor escalation chain
+resource "logicmonitor_escalation_chain" "my_escalation_chain" {
+        name = "LogicMonitor Escalation Chain"
+        description  = "LM Escalation Chain testing"
+        throttling_alerts = 40
+        enable_throttling = true
+        throttling_period = 30
+}
+```
+
 
 ## Argument Reference
 

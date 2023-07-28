@@ -35,12 +35,13 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"logicmonitor_collector":       resources.Collector(),
-			"logicmonitor_collector_group": resources.CollectorGroup(),
-			"logicmonitor_dashboard":       resources.Dashboard(),
-			"logicmonitor_dashboard_group": resources.DashboardGroup(),
-			"logicmonitor_device":          resources.Device(),
-			"logicmonitor_device_group":    resources.DeviceGroup(),
+			"logicmonitor_collector":        resources.Collector(),
+			"logicmonitor_collector_group":  resources.CollectorGroup(),
+			"logicmonitor_dashboard":        resources.Dashboard(),
+			"logicmonitor_dashboard_group":  resources.DashboardGroup(),
+			"logicmonitor_device":           resources.Device(),
+			"logicmonitor_device_group":     resources.DeviceGroup(),
+			"logicmonitor_escalation_chain": resources.EscalationChain(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"logicmonitor_collector":                     resources.DataResourceCollector(),
@@ -49,8 +50,9 @@ func Provider() *schema.Provider {
 			"logicmonitor_dashboard_group":               resources.DataResourceDashboardGroup(),
 			"logicmonitor_data_resource_aws_external_id": resources.DataResourceAwsExternalID(),
 
-			"logicmonitor_device":       resources.DataResourceDevice(),
-			"logicmonitor_device_group": resources.DataResourceDeviceGroup(),
+			"logicmonitor_device":           resources.DataResourceDevice(),
+			"logicmonitor_device_group":     resources.DataResourceDeviceGroup(),
+			"logicmonitor_escalation_chain": resources.DataResourceEscalationChain(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
