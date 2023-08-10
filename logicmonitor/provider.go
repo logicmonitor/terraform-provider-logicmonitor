@@ -35,6 +35,7 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
+			"logicmonitor_alert_rule":       resources.AlertRule(),
 			"logicmonitor_collector":        resources.Collector(),
 			"logicmonitor_collector_group":  resources.CollectorGroup(),
 			"logicmonitor_dashboard":        resources.Dashboard(),
@@ -44,6 +45,7 @@ func Provider() *schema.Provider {
 			"logicmonitor_escalation_chain": resources.EscalationChain(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
+			"logicmonitor_alert_rule":                    resources.DataResourceAlertRule(),
 			"logicmonitor_collector":                     resources.DataResourceCollector(),
 			"logicmonitor_collector_group":               resources.DataResourceCollectorGroup(),
 			"logicmonitor_dashboard":                     resources.DataResourceDashboard(),
