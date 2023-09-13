@@ -219,14 +219,16 @@ func getPropFromWTInterface(r interface{}) (t []*models.WidgetToken) {
 	return
 }
 
-func ConvertInt32ValueSlice(src []*int32) []int32 {
-	dst := make([]int32, len(src))
-	for i := 0; i < len(src); i++ {
-		if src[i] != nil {
-			dst[i] = *(src[i])
-		}
-	}
-	return dst
+func ConvertSetToInt32Slice(set interface{}) (slice []int32) {
+    if set == nil {
+        return
+    }
+    setList := set.([]interface{})
+    slice = make([]int32, len(setList))
+    for i, v := range setList {
+        slice[i] = int32(v.(int))
+    }
+    return slice
 }
 
 func GetPropFromCCMap(d *schema.ResourceData, key string) (t []*models.Recipient) {
@@ -307,7 +309,7 @@ func GetPeriod(d []interface{}) (t models.Period) {
 			var endMinutes = int32(m["end_minutes"].(int))
 			var startMinutes = int32(m["start_minutes"].(int))
 			var timezone = m["timezone"].(string)
-			var weekDays = []int32{int32(m["week_days"].(int))}
+            var weekDays = ConvertSetToInt32Slice(m["week_days"])
 			
 			model := models.Period{
 				EndMinutes: &endMinutes,
@@ -316,6 +318,54 @@ func GetPeriod(d []interface{}) (t models.Period) {
 			    WeekDays: weekDays,
 			}
 			t = model
+		}
+	}
+	return
+}
+
+func GetPropFromSteps(d *schema.ResourceData, key string) (t []*models.WebCheckStep) {
+	if r, ok := d.GetOk(key); ok {
+		return getPropFromStepsInterface(r)
+	}
+	return
+}
+
+func getPropFromStepsInterface(r interface{}) (t []*models.WebCheckStep) {
+	for _, i := range r.([]interface{}) {
+		if m, ok := i.(map[string]interface{}); ok {
+			var schema = m["schema"].(string)
+			var matchType = m["match_type"].(string)
+            var description = m["description"].(string)
+			var httpVersion = m["http_version"].(string)
+			var respType = m["resp_type"].(string)
+			var reqType = m["req_type"].(string)
+			var followRedirection = m["follow_redirection"].(bool)
+			var httpMehod = m["http_method"].(string)
+			var enable = m["enable"].(bool)
+			var name = m["name"].(string)
+			var timeout = int32(m["timeout"].(int))
+			var useDefaultRoot = m["use_default_root"].(bool)
+			var postDataEditType = m["post_data_edit_type"].(string)
+			var fullpageLoad = m["fullpage_load"].(bool)
+
+
+			model := &models.WebCheckStep{
+				Schema:  schema,
+				MatchType: matchType,
+                Description: description,
+                HTTPVersion: httpVersion,
+                RespType: respType,
+				ReqType: reqType,
+				FollowRedirection: followRedirection,
+				HTTPMethod: httpMehod,
+				Enable: enable,
+				Name: name,
+				Timeout: timeout,
+				UseDefaultRoot: useDefaultRoot,
+				PostDataEditType: postDataEditType,
+				FullpageLoad: fullpageLoad,
+			}
+			t = append(t, model)
 		}
 	}
 	return

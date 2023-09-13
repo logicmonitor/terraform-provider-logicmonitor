@@ -31,7 +31,7 @@ func Provider() *schema.Provider {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
-				Description: "(Experimental) true if going for bulk resource, default is false",
+				Description: "true if going for bulk resource, default is false",
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
@@ -43,6 +43,7 @@ func Provider() *schema.Provider {
 			"logicmonitor_device":           resources.Device(),
 			"logicmonitor_device_group":     resources.DeviceGroup(),
 			"logicmonitor_escalation_chain": resources.EscalationChain(),
+			"logicmonitor_website":          resources.Website(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"logicmonitor_alert_rule":                    resources.DataResourceAlertRule(),
@@ -55,6 +56,7 @@ func Provider() *schema.Provider {
 			"logicmonitor_device":           resources.DataResourceDevice(),
 			"logicmonitor_device_group":     resources.DataResourceDeviceGroup(),
 			"logicmonitor_escalation_chain": resources.DataResourceEscalationChain(),
+			"logicmonitor_website":          resources.DataResourceWebsite(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
