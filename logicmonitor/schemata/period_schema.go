@@ -24,7 +24,11 @@ func PeriodSchema() map[string]*schema.Schema {
 		},
 		
 		"week_days": {
-			Type: schema.TypeInt,
+			Type: schema.TypeList, //GoType: []int32
+			Elem: &schema.Schema{
+                 Type: schema.TypeInt,
+            },
+			ConfigMode: schema.SchemaConfigModeAttr,
 			Required: true,
 		},
 		
@@ -50,7 +54,7 @@ func PeriodModel(d map[string]interface{}) *models.Period {
 	endMinutes := int32(d["end_minutes"].(int))
 	startMinutes := int32(d["start_minutes"].(int))
 	timezone := d["timezone"].(string)
-	weekDays := utils.ConvertInt32ValueSlice(d["week_days"].([]*int32))
+	weekDays := utils.ConvertSetToInt32Slice(d["weekDays"].([]interface{}))
 	
 	return &models.Period {
 		EndMinutes: &endMinutes,

@@ -18,7 +18,7 @@ resource "logicmonitor_escalation_chain" "my_escalation_chain" {
   destinations = [
     {
       period = [{
-            week_days = 2
+            week_days = [2,3]
             timezone = "UTC"
             start_minutes = 10
             end_minutes   = 15
