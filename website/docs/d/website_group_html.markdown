@@ -1,23 +1,23 @@
 ---
 layout: "logicmonitor"
-page_title: "LogicMonitor: logicmonitor_website"
-sidebar_current: "docs-logicmonitor-datasources-website"
+page_title: "LogicMonitor: logicmonitor_website_group"
+sidebar_current: "docs-logicmonitor-datasources-website-group"
 description: |-
-  Get information on a LogicMonitor website resource
+  Get information on a LogicMonitor website group resource
 ---
 
-# logicmonitor_website
+# logicmonitor_website_group
 
-This can be used to get information on a LogicMonitor website resource given a filter value from argument list
+This can be used to get information on a LogicMonitor website group resource given a filter value from argument list
 
 ## Example Usage    
-### Website
+### WebsiteGroup
 ```hcl
-# create a new LogicMonitor website
-data "logicmonitor_Website" "my_Website" {
-        filter = "description~\"website test\""
+# create a new LogicMonitor website group
+data "logicmonitor_WebsiteGroup" "my_WebsiteGroup" {
+        filter = "description~\"website group test\""
  	    depends_on = [
-		logicmonitor_website.my_website
+		logicmonitor_website_group.my_website_group
  	    ]
 }
 ```
