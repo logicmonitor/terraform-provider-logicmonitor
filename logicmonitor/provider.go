@@ -44,6 +44,7 @@ func Provider() *schema.Provider {
 			"logicmonitor_device_group":     resources.DeviceGroup(),
 			"logicmonitor_escalation_chain": resources.EscalationChain(),
 			"logicmonitor_website":          resources.Website(),
+			"logicmonitor_website_group":    resources.WebsiteGroup(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"logicmonitor_alert_rule":                    resources.DataResourceAlertRule(),
@@ -57,6 +58,7 @@ func Provider() *schema.Provider {
 			"logicmonitor_device_group":     resources.DataResourceDeviceGroup(),
 			"logicmonitor_escalation_chain": resources.DataResourceEscalationChain(),
 			"logicmonitor_website":          resources.DataResourceWebsite(),
+			"logicmonitor_website_group":    resources.DataResourceWebsiteGroup(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
