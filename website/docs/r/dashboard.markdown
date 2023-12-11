@@ -42,7 +42,7 @@ The following arguments are **optional**:
   + `value` (required)
   + `type` (required) - Need to pass 'null' value
   + `inherit_list` (required)  - Need to pass 'null' value
-* `widgets_config` - Information about widget configuration used by the UI
+* `widgets_config` - Information about widget configuration used by the UI, this field can remain empty for terraform.
 
 ## Import
 

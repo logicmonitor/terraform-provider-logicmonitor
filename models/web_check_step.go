@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -16,6 +17,12 @@ import (
 //
 // swagger:model WebCheckStep
 type WebCheckStep struct {
+
+	// HTTP Body
+	HTTPBody string `json:"HTTPBody,omitempty"`
+
+	// HTTP header
+	HTTPHeaders string `json:"HTTPHeaders,omitempty"`
 
 	// GET | HEAD | POST
 	// Specifies the type of HTTP method
@@ -26,6 +33,9 @@ type WebCheckStep struct {
 	// Specifies HTTP version
 	// Example: 1.1
 	HTTPVersion string `json:"HTTPVersion,omitempty"`
+
+	// Authorization Information
+	Auth *Authentication `json:"auth,omitempty"`
 
 	// The description of the Step
 	Description string `json:"description,omitempty"`
@@ -44,6 +54,17 @@ type WebCheckStep struct {
 	// Example: false
 	FullpageLoad bool `json:"fullpageLoad,omitempty"`
 
+	// true | false
+	// Checks if invert matches or not
+	// Example: false
+	InvertMatch bool `json:"invertMatch,omitempty"`
+
+	// Keyword that matches the body
+	Keyword string `json:"keyword,omitempty"`
+
+	// The Label of the Step
+	Label string `json:"label,omitempty"`
+
 	// Body match type
 	// Example: plain
 	MatchType string `json:"matchType,omitempty"`
@@ -51,14 +72,28 @@ type WebCheckStep struct {
 	// The name of the Step
 	Name string `json:"name,omitempty"`
 
+	// Path for JSON, XPATH
+	Path string `json:"path,omitempty"`
+
 	// Raw | Formatted Data
 	// Specifies POST data type
 	// Example: raw
 	PostDataEditType string `json:"postDataEditType,omitempty"`
 
+	// The Request Script
+	ReqScript string `json:"reqScript,omitempty"`
+
 	// script | config
 	// Step Request Type
 	ReqType string `json:"reqType,omitempty"`
+
+	// true | false
+	// Checks if authorization required or not
+	// Example: false
+	RequireAuth bool `json:"requireAuth,omitempty"`
+
+	// The Step Response Script
+	RespScript string `json:"respScript,omitempty"`
 
 	// Plain Text/String | Glob expression | JSON | XML | Multi line key value pair
 	// Step Response Type
@@ -67,8 +102,20 @@ type WebCheckStep struct {
 	// HTTP schema
 	Schema string `json:"schema,omitempty"`
 
+	// The expected status code
+	StatusCode string `json:"statusCode,omitempty"`
+
 	// Request timeout measured in seconds
 	Timeout int32 `json:"timeout,omitempty"`
+
+	// script | config
+	// The type of service step
+	// Example: config
+	Type string `json:"type,omitempty"`
+
+	// The URL of service step
+	// Example: /
+	URL string `json:"url,omitempty"`
 
 	// true | falseCheck if using the default root
 	// Example: true
@@ -77,11 +124,64 @@ type WebCheckStep struct {
 
 // Validate validates this web check step
 func (m *WebCheckStep) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateAuth(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this web check step based on context it is used
+func (m *WebCheckStep) validateAuth(formats strfmt.Registry) error {
+	if swag.IsZero(m.Auth) { // not required
+		return nil
+	}
+
+	if m.Auth != nil {
+		if err := m.Auth.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("auth")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("auth")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this web check step based on the context it is used
 func (m *WebCheckStep) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAuth(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *WebCheckStep) contextValidateAuth(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Auth != nil {
+		if err := m.Auth.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("auth")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("auth")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

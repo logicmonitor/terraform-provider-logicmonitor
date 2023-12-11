@@ -60,6 +60,7 @@ The following arguments are **optional**:
 * `host_group_ids` - The Id(s) of the groups the device is in, where multiple group ids are comma separated
 * `link` - The URL link associated with the device
 * `netflow_collector_id` - The Id of the netflow collector associated with the device
+* `preferred_collector_group_id` - The id of the Collector Group associated with the device's preferred collector, It can be 0 for auto balanced collector group .
 * `related_device_id` - The Id of the AWS EC2 instance related to this device, if one exists in the LogicMonitor account. This value defaults to -1, which indicates that there are no related devices
 
 ## Import

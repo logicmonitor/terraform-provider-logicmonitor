@@ -31,7 +31,7 @@ func WebsiteSchema() map[string]*schema.Schema {
 		
 		"group_id": {
 			Type: schema.TypeInt,
-			Computed: true,
+			Optional: true,
 		},
 		
 		"host": {
@@ -345,6 +345,7 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 	disableAlerting := d.Get("disable_alerting").(bool)
 	domain := d.Get("domain").(string)
 	globalSmAlertCond := int32(d.Get("global_sm_alert_cond").(int))
+	groupID := int32(d.Get("group_id").(int))
 	host := d.Get("host").(string)
 	id, _ := strconv.Atoi(d.Get("id").(string))
 	individualAlertLevel := d.Get("individual_alert_level").(string)
@@ -367,6 +368,7 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 		DisableAlerting: disableAlerting,
 		Domain: domain,
 		GlobalSmAlertCond: globalSmAlertCond,
+		GroupID: groupID,
 		Host: host,
 		ID: int32(id),
 		IndividualAlertLevel: individualAlertLevel,
@@ -391,6 +393,7 @@ func GetWebsitePropertyFields() (t []string) {
 		"disable_alerting",
 		"domain",
 		"global_sm_alert_cond",
+		"group_id",
 		"host",
 		"id",
 		"individual_alert_level",

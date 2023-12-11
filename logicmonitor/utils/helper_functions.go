@@ -347,8 +347,20 @@ func getPropFromStepsInterface(r interface{}) (t []*models.WebCheckStep) {
 			var useDefaultRoot = m["use_default_root"].(bool)
 			var postDataEditType = m["post_data_edit_type"].(string)
 			var fullpageLoad = m["fullpage_load"].(bool)
-
-
+			var requireAuth = m["require_auth"].(bool)
+			var path = m["path"].(string)
+            var auth = GetAuth(m["auth"].([]interface{}))
+			var httpHeaders = m["http_headers"].(string)
+			var httpBody = m["http_body"].(string)
+            var keyword = m["keyword"].(string)
+			var respScript = m["resp_script"].(string)
+			var label = m["label"].(string)
+			var URL = m["url"].(string)
+			var invertMatch = m["invert_match"].(bool)
+			var reqScript = m["req_script"].(string)
+			var typee = m["type"].(string)
+			var statusCode = m["status_code"].(string)
+            
 			model := &models.WebCheckStep{
 				Schema:  schema,
 				MatchType: matchType,
@@ -364,8 +376,41 @@ func getPropFromStepsInterface(r interface{}) (t []*models.WebCheckStep) {
 				UseDefaultRoot: useDefaultRoot,
 				PostDataEditType: postDataEditType,
 				FullpageLoad: fullpageLoad,
-			}
+				RequireAuth: requireAuth,
+				Path: path,
+				Auth: &auth,
+				HTTPHeaders: httpHeaders,
+				HTTPBody: httpBody, 
+				Keyword: keyword,
+                RespScript: respScript,
+				Label: label,
+				URL: URL,
+				InvertMatch: invertMatch,
+                ReqScript: reqScript,
+				Type: typee,
+				StatusCode: statusCode,
+               }
 			t = append(t, model)
+		}
+	}
+	return
+}
+func GetAuth(d []interface{}) (t models.Authentication) {
+	for _, i := range d {
+		if m, ok := i.(map[string]interface{}); ok {
+			var userName = m["user_name"].(string)
+			var password = m["password"].(string)
+			var typee = m["type"].(string)
+			var domain = m["domain"].(string)
+            
+			
+			model := models.Authentication{
+				Password: &password,
+				UserName: &userName,
+				Type: &typee,
+				Domain: domain,
+			}
+			t = model
 		}
 	}
 	return

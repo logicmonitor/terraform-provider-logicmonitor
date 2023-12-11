@@ -18,6 +18,7 @@ resource "logicmonitor_website" "my_website" {
   disable_alerting = 
   domain = "www.ebay.com"
   global_sm_alert_cond = 0
+  group_id = 1
   host = ""
   individual_alert_level = "warn"
   individual_sm_alert_enable = false
@@ -36,11 +37,29 @@ resource "logicmonitor_website" "my_website" {
     http_method = "GET"
     enable = true
     http_version = "1.1"
+    http_headers = "X-Version:3"
     follow_redirection = true
     post_data_edit_type = "raw"
     name = "string"
     req_type = "config"
     fullpage_load = false
+    require_auth = false
+    path = "string"
+    auth = [{ 
+      password = "string"
+      type = "basic"
+      domain = "string"
+      user_name = "string"
+    }]
+    keyword = "DEVWRT-SANRT-JOB1-9127"
+    http_body = "string"
+    resp_script = "string"
+    req_script = "string"
+    label = "string"
+    url = "/rest/version"
+    type = "string"
+    invert_match = false
+    status_code = "200"
    }
   ]
   stop_monitoring = 
@@ -70,6 +89,7 @@ If stopMonitoring=true, then alerting will also by default be disabled for the w
 1 : half
 2 : more than one
 3 : any
+* `group_id` - The id of the group the website is in
 * `host` - The URL to check, without the scheme or protocol (e.g http or https)
 E.g. if the URL is "http://www.google.com, then the host="www.google.com"
 * `individual_alert_level` - warn | error | critical
@@ -83,7 +103,7 @@ The level of alert to trigger if the website fails the number of checks specifie
 The polling interval for the website, in units of minutes. This value indicates how often the website is checked. The minimum is 1 minute, and the maximum is 10 minutes
 * `steps` - Required for type=webcheck , An object comprising one or more steps, see the table below for the properties included in each step
   + `schema` -  HTTP schema
-  + `matchType` - Body match type
+  + `matchType` - Body match type(plain | JSON | XML | Glob Expression | Multi-line key-value pairs)
   + `description` - The description of the Step
   + `httpVersion` - 1.1 | 1\nSpecifies HTTP version
   + `respType` - Plain Text/String | Glob expression | JSON | XML | Multi line key value pair\nStep Response Type
@@ -96,6 +116,23 @@ The polling interval for the website, in units of minutes. This value indicates 
   + `useDefaultRoot` - true | falseCheck if using the default root
   + `postDataEditType` - Raw | Formatted Data\nSpecifies POST data type
   + `fullpageLoad` - true | false\nChecks if full page should be loaded or not
+  + `requireAuth` - true | false\nChecks if authorization required or not
+  + `path` - Path for JSON, XPATH
+  + `auth`- Authorization Information
+    + `password` - NTLM authentication password
+    + `type` - Authentication type
+    + `userName` - NTLM  authentication userName
+    + `domain` - NTLM domain (if auth type is NTLM)
+  + `httpHeaders` - HTTP header
+  + `httpBody` - HTTP Body
+  + `keyword` - Keyword that matches the body
+  + `respScript` - The Step Response Script
+  + `reqScript` - The Request Script
+  + `label` - The Label of the Step
+  + `url` - The URL of service step
+  + `invertMatch` - true | false\nChecks if invert matches or not
+  + `type` - script | config\nThe type of service step
+  + `statusCode` - The expected status code
 * `stop_monitoring` - true: monitoring is disabled for the website
 false: monitoring is enabled for the website
 If stopMonitoring=true, then alerting will also by default be disabled for the website
