@@ -25,7 +25,7 @@ data "logicmonitor_DeviceGroup" "my_DeviceGroup" {
 ## Argument Reference
 
 The following arguments are supported:
+* `filter` - (Optional) Filters the response according to the operator and value specified.More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/v1/device-groups/about-the-device-group-resource. Please refer the filter arguments from resources tab.
 
-* `filter` - (Optional) Filters the response according to the operator and value specified.More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/v1/device-groups/. Please refer the filter arguments from resources tab.
 * `depends_on` - (Optional) meta-argument within data blocks defers reading of the data source until after all changes to the dependencies have been applied.
 

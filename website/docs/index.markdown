@@ -182,6 +182,7 @@ resource "logicmonitor_website" "my_website" {
           disable_alerting = true
           stop_monitoring = true
           user_permission = "string"
+          group_id = 8
           individual_sm_alert_enable = false
           steps = [
           {
@@ -194,11 +195,29 @@ resource "logicmonitor_website" "my_website" {
           http_method = "GET"
           enable = true
           http_version = "1.1"
+          http_headers = "X-Version:3"
           follow_redirection = true
           post_data_edit_type = "raw"
           name = "string"
           req_type = "config"
           fullpage_load = false
+          require_auth = false
+           auth = [{ 
+           password = "string"
+           type = "basic"
+           user_name = "string"
+           domain = "string"
+           }]
+           path = "string"
+           keyword = "DEVWRT-SANRT-JOB1-9127"
+           http_body = "string"
+           resp_script = "string"
+           req_script = "string"
+           label = "string"
+           url = "/rest/version"
+           type = "string"
+           invert_match = false
+           status_code = "200"
           }
           ]
          transition = 1

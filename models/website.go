@@ -44,7 +44,6 @@ type Website struct {
 
 	// The id of the group the website is in
 	// Example: 1
-	// Read Only: true
 	GroupID int32 `json:"groupId,omitempty"`
 
 	// The URL to check, without the scheme or protocol (e.g http or https)
@@ -202,10 +201,6 @@ func (m *Website) validateType(formats strfmt.Registry) error {
 func (m *Website) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateGroupID(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateID(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -229,15 +224,6 @@ func (m *Website) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *Website) contextValidateGroupID(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := validate.ReadOnly(ctx, "groupId", "body", int32(m.GroupID)); err != nil {
-		return err
-	}
-
 	return nil
 }
 
