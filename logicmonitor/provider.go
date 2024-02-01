@@ -1,4 +1,4 @@
-package logicmonitor
+package logicmonitor 
 
 import (
 	"context"
@@ -31,34 +31,36 @@ func Provider() *schema.Provider {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
-				Description: "(Experimental) true if going for bulk resource, default is false",
+				Description: "true if going for bulk resource, default is false",
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"logicmonitor_alert_rule":       resources.AlertRule(),
-			"logicmonitor_collector":        resources.Collector(),
-			"logicmonitor_collector_group":  resources.CollectorGroup(),
-			"logicmonitor_dashboard":        resources.Dashboard(),
-			"logicmonitor_dashboard_group":  resources.DashboardGroup(),
-			"logicmonitor_device":           resources.Device(),
-			"logicmonitor_device_group":     resources.DeviceGroup(),
+			"logicmonitor_alert_rule": resources.AlertRule(),
+			"logicmonitor_collector": resources.Collector(),
+			"logicmonitor_collector_group": resources.CollectorGroup(),
+			"logicmonitor_dashboard": resources.Dashboard(),
+			"logicmonitor_dashboard_group": resources.DashboardGroup(),
+			"logicmonitor_datasource": resources.Datasource(),
+			"logicmonitor_device": resources.Device(),
+			"logicmonitor_device_group": resources.DeviceGroup(),
 			"logicmonitor_escalation_chain": resources.EscalationChain(),
-			"logicmonitor_website":          resources.Website(),
-			"logicmonitor_website_group":    resources.WebsiteGroup(),
+			"logicmonitor_website": resources.Website(),
+			"logicmonitor_website_group": resources.WebsiteGroup(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"logicmonitor_alert_rule":                    resources.DataResourceAlertRule(),
-			"logicmonitor_collector":                     resources.DataResourceCollector(),
-			"logicmonitor_collector_group":               resources.DataResourceCollectorGroup(),
-			"logicmonitor_dashboard":                     resources.DataResourceDashboard(),
-			"logicmonitor_dashboard_group":               resources.DataResourceDashboardGroup(),
-			"logicmonitor_data_resource_aws_external_id": resources.DataResourceAwsExternalID(),
-
-			"logicmonitor_device":           resources.DataResourceDevice(),
-			"logicmonitor_device_group":     resources.DataResourceDeviceGroup(),
-			"logicmonitor_escalation_chain": resources.DataResourceEscalationChain(),
-			"logicmonitor_website":          resources.DataResourceWebsite(),
-			"logicmonitor_website_group":    resources.DataResourceWebsiteGroup(),
+						"logicmonitor_alert_rule": resources.DataResourceAlertRule(),
+						"logicmonitor_collector": resources.DataResourceCollector(),
+						"logicmonitor_collector_group": resources.DataResourceCollectorGroup(),
+						"logicmonitor_dashboard": resources.DataResourceDashboard(),
+						"logicmonitor_dashboard_group": resources.DataResourceDashboardGroup(),
+					"logicmonitor_data_resource_aws_external_id": resources.DataResourceAwsExternalID(),
+				
+						"logicmonitor_datasource": resources.DataResourceDatasource(),
+						"logicmonitor_device": resources.DataResourceDevice(),
+						"logicmonitor_device_group": resources.DataResourceDeviceGroup(),
+						"logicmonitor_escalation_chain": resources.DataResourceEscalationChain(),
+						"logicmonitor_website": resources.DataResourceWebsite(),
+						"logicmonitor_website_group": resources.DataResourceWebsiteGroup(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
@@ -67,9 +69,9 @@ func Provider() *schema.Provider {
 func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
-	id := d.Get("api_id").(string)
-	key := d.Get("api_key").(string)
-	company := d.Get("company").(string) + ".logicmonitor.com"
+ 	id := d.Get("api_id").(string)
+ 	key := d.Get("api_key").(string)
+ 	company := d.Get("company").(string) + ".logicmonitor.com"
 	bulkResource := d.Get("bulk_resource").(bool)
 	config := client.NewConfig()
 	config.SetAccessKey(&key)

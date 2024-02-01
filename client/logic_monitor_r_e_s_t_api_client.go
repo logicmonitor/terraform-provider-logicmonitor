@@ -28,6 +28,7 @@ import (
 	"terraform-provider-logicmonitor/client/dashboard"
 	"terraform-provider-logicmonitor/client/dashboard_group"
 	"terraform-provider-logicmonitor/client/data_resource_aws_external_id"
+	"terraform-provider-logicmonitor/client/datasource"
 	"terraform-provider-logicmonitor/client/device"
 	"terraform-provider-logicmonitor/client/device_group"
 	"terraform-provider-logicmonitor/client/escalation_chain"
@@ -111,6 +112,8 @@ func New(c *Config, httpClient *http.Client) *LogicMonitorRESTAPI {
 
 	cli.DataResourceAwsExternalID = data_resource_aws_external_id.New(transport, strfmt.Default, authInfo)
 
+	cli.Datasource = datasource.New(transport, strfmt.Default, authInfo)
+
 	cli.Device = device.New(transport, strfmt.Default, authInfo)
 
 	cli.DeviceGroup = device_group.New(transport, strfmt.Default, authInfo)
@@ -177,6 +180,8 @@ type LogicMonitorRESTAPI struct {
 
 	DataResourceAwsExternalID *data_resource_aws_external_id.Client
 
+	Datasource *datasource.Client
+
 	Device *device.Client
 
 	DeviceGroup *device_group.Client
@@ -205,6 +210,8 @@ func (c *LogicMonitorRESTAPI) SetTransport(transport runtime.ClientTransport) {
 	c.DashboardGroup.SetTransport(transport)
 
 	c.DataResourceAwsExternalID.SetTransport(transport)
+
+	c.Datasource.SetTransport(transport)
 
 	c.Device.SetTransport(transport)
 

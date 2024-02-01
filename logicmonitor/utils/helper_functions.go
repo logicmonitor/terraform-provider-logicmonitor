@@ -415,3 +415,63 @@ func GetAuth(d []interface{}) (t models.Authentication) {
 	}
 	return
 }
+func GetCollectorAttribute(d []interface{}) (t models.CollectorAttribute) {
+	for _, i := range d {
+		if m, ok := i.(map[string]interface{}); ok {
+           var name = m["name"].(string)
+           model := models.CollectorAttribute{
+              Name: &name,
+			}
+			t = model
+		}
+	}
+	return
+}
+func GetPropFromDatapoint(d *schema.ResourceData, key string) (t []*models.DataPoint) {
+	if r, ok := d.GetOk(key); ok {
+		return getPropFromDPInterface(r)
+	}
+	return
+}
+func getPropFromDPInterface(r interface{}) (t []*models.DataPoint ) {
+	for _, i := range r.([]interface{}) {
+		if m, ok := i.(map[string]interface{}); ok {
+		   var name = m["name"].(string)
+		   var postProcessorMethod = m["post_processor_method"].(string)
+		   var alertForNoData = int32(m["alert_for_no_data"].(int))
+           var postProcessorParam = m["post_processor_param"].(string)
+		   var maxDigits = int32(m["max_digits"].(int))
+		   var description = m["description"].(string)
+		   var alertClearTransitionInterval = int32(m["alert_clear_transition_interval"].(int))
+		   var alertTransitionInterval = int32(m["alert_transition_interval"].(int))
+		   var dataType = int32(m["data_type"].(int))
+		   var maxValue = m["max_value"].(string)
+		   var minValue = m["min_value"].(string)
+		   var alertBody = m["alert_body"].(string)
+		   var alertSubject = m["alert_subject"].(string)
+		   var alertExpr = m["alert_expr"].(string)
+		   var alertExprNote = m["alert_expr_note"].(string)
+		   var typee = int32(m["type"].(int))
+         model := &models.DataPoint{
+				Name: &name,
+				Description: description,
+				AlertForNoData: alertForNoData,
+				PostProcessorParam: postProcessorParam,
+				PostProcessorMethod: postProcessorMethod,
+				MaxDigits: maxDigits,
+				AlertClearTransitionInterval: alertClearTransitionInterval,
+				AlertTransitionInterval: alertTransitionInterval,
+				DataType: dataType,
+				MaxValue: maxValue,
+                MinValue: minValue,
+				AlertBody: alertBody,
+				AlertSubject: alertSubject,
+				AlertExpr: alertExpr,
+				AlertExprNote: alertExprNote,
+				Type: typee,
+             }
+			t = append(t, model)
+		}
+	}
+	return
+}
