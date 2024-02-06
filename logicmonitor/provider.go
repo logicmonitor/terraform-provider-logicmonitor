@@ -40,6 +40,7 @@ func Provider() *schema.Provider {
 			"logicmonitor_collector_group":  resources.CollectorGroup(),
 			"logicmonitor_dashboard":        resources.Dashboard(),
 			"logicmonitor_dashboard_group":  resources.DashboardGroup(),
+			"logicmonitor_datasource":       resources.Datasource(),
 			"logicmonitor_device":           resources.Device(),
 			"logicmonitor_device_group":     resources.DeviceGroup(),
 			"logicmonitor_escalation_chain": resources.EscalationChain(),
@@ -54,6 +55,7 @@ func Provider() *schema.Provider {
 			"logicmonitor_dashboard_group":               resources.DataResourceDashboardGroup(),
 			"logicmonitor_data_resource_aws_external_id": resources.DataResourceAwsExternalID(),
 
+			"logicmonitor_datasource":       resources.DataResourceDatasource(),
 			"logicmonitor_device":           resources.DataResourceDevice(),
 			"logicmonitor_device_group":     resources.DataResourceDeviceGroup(),
 			"logicmonitor_escalation_chain": resources.DataResourceEscalationChain(),
