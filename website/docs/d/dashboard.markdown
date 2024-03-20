@@ -13,7 +13,7 @@ This can be used to get information on a LogicMonitor dashboard resource given a
 ## Example Usage    
 ### Dashboard
 ```hcl
-# create a new LogicMonitor dashboard
+# Datasource to get information of LogicMonitor dashboard
 data "logicmonitor_Dashboard" "my_Dashboard" {
         filter = "description~\"my dashboard\""
         depends_on = [

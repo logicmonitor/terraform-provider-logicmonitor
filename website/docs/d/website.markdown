@@ -13,7 +13,7 @@ This can be used to get information on a LogicMonitor website resource given a f
 ## Example Usage    
 ### Website
 ```hcl
-# create a new LogicMonitor website
+# Datasource to get information of LogicMonitor website
 data "logicmonitor_Website" "my_Website" {
         filter = "description~\"website test\""
  	    depends_on = [

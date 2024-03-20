@@ -13,7 +13,7 @@ This can be used to get information on a LogicMonitor collector resource given a
 ## Example Usage    
 ### Collector
 ```hcl
-# create a new LogicMonitor collector
+# Datasource to get information of LogicMonitor collector
 data "logicmonitor_Collector" "my_Collector" {
         filter = "description~\"Linux Collector\""
         depends_on = [

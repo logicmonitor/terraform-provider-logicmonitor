@@ -13,7 +13,7 @@ This can be used to get information on a LogicMonitor dashboard group resource g
 ## Example Usage    
 ### DashboardGroup
 ```hcl
-# create a new LogicMonitor dashboard group
+# Datasource to get information of LogicMonitor dashboard group
 data "logicmonitor_DashboardGroup" "my_DashboardGroup" {
         filter = "description~\"LM dashboard group testing\""
         depends_on = [

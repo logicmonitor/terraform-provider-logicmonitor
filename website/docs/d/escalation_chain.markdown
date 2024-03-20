@@ -13,7 +13,7 @@ This can be used to get information on a LogicMonitor escalation chain resource 
 ## Example Usage    
 ### EscalationChain
 ```hcl
-# create a new LogicMonitor escalation chain
+# Datasource to get information of LogicMonitor escalation chain
 data "logicmonitor_EscalationChain" "my_EscalationChain" {
         filter = "description~\"LM Escalation Chain testing\""
         depends_on = [
