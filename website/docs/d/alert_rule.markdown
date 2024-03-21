@@ -13,7 +13,7 @@ This can be used to get information on a LogicMonitor alert rule resource given 
 ## Example Usage    
 ### AlertRule
 ```hcl
-# create a new LogicMonitor alert rule
+# Datasource to get information of LogicMonitor alert rule
 data "logicmonitor_AlertRule" "my_AlertRule" {
         filter = "name~\"Alert Rule Testing\""
         depends_on = [

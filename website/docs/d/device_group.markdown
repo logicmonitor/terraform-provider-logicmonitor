@@ -13,7 +13,7 @@ This can be used to get information on a LogicMonitor device group resource give
 ## Example Usage    
 ### DeviceGroup
 ```hcl
-# create a new LogicMonitor device group
+# Datasource to get information of LogicMonitor device group
 data "logicmonitor_DeviceGroup" "my_DeviceGroup" {
         filter = "description~\"normal device group test\""
         depends_on = [

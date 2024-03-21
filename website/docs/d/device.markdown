@@ -13,7 +13,7 @@ This can be used to get information on a LogicMonitor device resource given a fi
 ## Example Usage    
 ### Device
 ```hcl
-# create a new LogicMonitor device
+# Datasource to get information of LogicMonitor device
 data "logicmonitor_Device" "my_Device" {
         filter = "displayName~\"Cisco Router Test\""
         depends_on = [

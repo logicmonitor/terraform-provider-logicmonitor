@@ -13,7 +13,7 @@ This can be used to get information on a LogicMonitor collector group resource g
 ## Example Usage    
 ### CollectorGroup
 ```hcl
-# create a new LogicMonitor collector group
+# Datasource to get information of LogicMonitor collector group
 data "logicmonitor_CollectorGroup" "my_CollectorGroup" {
         filter = "description~\"Group for collectors dedicated to testing purpose\""
         depends_on = [

@@ -13,7 +13,7 @@ This can be used to get information on a LogicMonitor website group resource giv
 ## Example Usage    
 ### WebsiteGroup
 ```hcl
-# create a new LogicMonitor website group
+# Datasource to get information of LogicMonitor website group
 data "logicmonitor_WebsiteGroup" "my_WebsiteGroup" {
         filter = "description~\"website group test\""
  	    depends_on = [
