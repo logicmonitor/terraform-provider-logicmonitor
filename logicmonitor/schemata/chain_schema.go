@@ -19,8 +19,9 @@ func ChainSchema() map[string]*schema.Schema {
 		
 		"stages": {
 			Type: schema.TypeList, //GoType: [][]*Recipient 
-			Elem: &schema.Resource{
-				Schema: RecipientSchema(),
+			Elem: &schema.Schema{
+				Type: schema.TypeList,
+				Elem: &schema.Resource{Schema: RecipientSchema()},
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
 			Required: true,

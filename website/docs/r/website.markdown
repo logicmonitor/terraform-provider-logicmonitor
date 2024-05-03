@@ -64,6 +64,14 @@ resource "logicmonitor_website" "my_website" {
   ]
   stop_monitoring = 
   template = 
+  test_location = [
+    {
+      all = false
+      collector_ids = [1, 2, 3]
+      collectors = null
+      smg_ids = [85, 90]
+    }
+  ]
   transition = 1
   type = "webcheck"
   use_default_alert_setting = true
@@ -137,6 +145,17 @@ The polling interval for the website, in units of minutes. This value indicates 
 false: monitoring is enabled for the website
 If stopMonitoring=true, then alerting will also by default be disabled for the website
 * `template` - The website template
+* `test_location` - The locations from which the website is monitored. If the website is internal, this field should include Collectors. If Non-Internal, possible test locations are:
+1 : US - LA
+2 : US - DC
+3 : US - SF
+4 : Europe - Dublin
+5 : Asia - Singapore
+6 : Australia - Sydney
+  + `all` - (true | false) Indicates that the service will be monitored from all checkpoint locations
+  + `collectorIds` - indicates that the service will be monitored from checkpoint locations 1, 2 and 3
+  + `collectors` - Need to pass 'null' value
+  + `smgIds` - indicates that the service will be monitored by Collectors 85 and 90
 * `transition` - 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 30 | 60
 The number of checks that must fail before an alert is triggered
 * `use_default_alert_setting` - true: The alert settings configured in the website Default Settings will be used

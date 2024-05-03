@@ -107,6 +107,15 @@ type Website struct {
 	// The website template
 	Template interface{} `json:"template,omitempty"`
 
+	// The locations from which the website is monitored. If the website is internal, this field should include Collectors. If Non-Internal, possible test locations are:
+	// 1 : US - LA
+	// 2 : US - DC
+	// 3 : US - SF
+	// 4 : Europe - Dublin
+	// 5 : Asia - Singapore
+	// 6 : Australia - Sydney
+	TestLocation *WebsiteLocation `json:"testLocation,omitempty"`
+
 	// 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 30 | 60
 	// The number of checks that must fail before an alert is triggered
 	// Example: 1
@@ -140,6 +149,10 @@ func (m *Website) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSteps(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTestLocation(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -188,6 +201,25 @@ func (m *Website) validateSteps(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Website) validateTestLocation(formats strfmt.Registry) error {
+	if swag.IsZero(m.TestLocation) { // not required
+		return nil
+	}
+
+	if m.TestLocation != nil {
+		if err := m.TestLocation.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("testLocation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("testLocation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Website) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
@@ -218,6 +250,10 @@ func (m *Website) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 	}
 
 	if err := m.contextValidateStopMonitoringByFolder(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTestLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -278,6 +314,22 @@ func (m *Website) contextValidateStopMonitoringByFolder(ctx context.Context, for
 
 	if err := validate.ReadOnly(ctx, "stopMonitoringByFolder", "body", m.StopMonitoringByFolder); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Website) contextValidateTestLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TestLocation != nil {
+		if err := m.TestLocation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("testLocation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("testLocation")
+			}
+			return err
+		}
 	}
 
 	return nil

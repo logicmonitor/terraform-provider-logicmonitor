@@ -189,16 +189,38 @@ resource "logicmonitor_escalation_chain" "my_escalation_chain" {
             start_minutes = 10
             end_minutes   = 15
          }],
-          stages = [{
-            type    = "Admin"
-            addr    = "unicornsparkles@rainbow.io"
-            method  = "EMAIL"
-            contact = "78362637"
-         }]
+          stages = [
+          [{
+          type    = "Admin"
+          addr    = "unicornsparkles@rainbow.io"
+          method  = "EMAIL"
+          contact = "78362637"
+          },
+          {
+          type    = "Admin"
+          addr    = "unicornsparkles@rainbow.io"
+          method  = "EMAIL"
+          contact = "78362637"
+          }],
+          [{
+          type    = "Admin"
+          addr    = "unicornsparkles@rainbow.io"
+          method  = "EMAIL"
+          contact = "78362637"
+          }]
+        ]
           type = "timebased"
          }
         ]
         description  = "LM Escalation Chain testing"
+        cc_destinations = [
+         {
+         method = "EMAIL"
+         contact = "string"
+         type = "Admin"
+         addr = "unicornsparkles@rainbow.io"
+         }
+        ]
         throttling_alerts = 40
         enable_throttling = true
         throttling_period = 30
@@ -218,6 +240,14 @@ resource "logicmonitor_website" "my_website" {
           disable_alerting = true
           stop_monitoring = true
           user_permission = "string"
+          test_location = [
+          {
+          all = false
+          collector_ids = [1, 2, 3]
+          collectors = null
+          smg_ids = [85, 90]
+          }
+          ]
           group_id = 8
           individual_sm_alert_enable = false
           steps = [

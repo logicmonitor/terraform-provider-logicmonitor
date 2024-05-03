@@ -285,21 +285,31 @@ func getPropFromDesInterface(r interface{}) (t []*models.Chain) {
     return 
 }
 func GetRecipient(d []interface{}) (t [][]*models.Recipient) {
-	for _, i := range d {
-		if m, ok := i.(map[string]interface{}); ok {
-			var addr = m["addr"].(string)
-			var contact = m["contact"].(string)
-			var method = m["method"].(string)
-			var Type = m["type"].(string)
-			
-			model := &models.Recipient{
-				Addr: addr,
-				Contact: contact,
-				Method: &method,
-				Type: &Type,
-			}
-			t = append(t, []*models.Recipient{model})
+	for _, stageData := range d {
+		stage, ok := stageData.([]interface{})
+		if !ok {
+			continue
 		}
+		var stageRecipients []*models.Recipient
+		for _, recipientData := range stage {
+			recipient, ok := recipientData.(map[string]interface{})
+			if !ok {
+				continue
+			}
+			var addr = recipient["addr"].(string)
+			var contact = recipient["contact"].(string)
+			var method = recipient["method"].(string)
+			var Type = recipient["type"].(string)
+
+			model := &models.Recipient{
+				Addr:    addr,
+				Contact: contact,
+				Method:  &method,
+				Type:    &Type,
+			}
+			stageRecipients = append(stageRecipients, model)
+		}
+		t = append(t, stageRecipients)
 	}
 	return
 }
@@ -474,4 +484,26 @@ func getPropFromDPInterface(r interface{}) (t []*models.DataPoint ) {
 		}
 	}
 	return
+}
+func GetPropFromLocationMap(d *schema.ResourceData, key string) (t *models.WebsiteLocation) {
+	if r, ok := d.GetOk(key); ok {
+		return getPropFromLocInterface(r)
+	}
+	return
+}
+func getPropFromLocInterface(r interface{}) (t *models.WebsiteLocation) {
+    for _, i := range r.([]interface{}) {
+    if m, ok := i.(map[string]interface{}); ok {
+        var smgIds = ConvertSetToInt32Slice(m["smg_ids"])
+		var collectorIds = ConvertSetToInt32Slice(m["collector_ids"])
+		var all = m["all"].(bool)
+          model := &models.WebsiteLocation{
+                CollectorIds: collectorIds,
+                SmgIds: smgIds,
+				All: all,
+				}
+            t = model
+        }
+    }
+ return 
 }
