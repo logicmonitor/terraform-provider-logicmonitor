@@ -111,6 +111,15 @@ func WebsiteSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"test_location": {
+			Type: schema.TypeList, //GoType: WebsiteLocation 
+            Elem: &schema.Resource{
+				Schema: WebsiteLocationSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
 		"transition": {
 			Type: schema.TypeInt,
 			Optional: true,
@@ -247,6 +256,14 @@ func DataSourceWebsiteSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"test_location": {
+			Type: schema.TypeList, //GoType: WebsiteLocation
+			Elem: &schema.Resource{
+				Schema: WebsiteLocationSchema(),
+			},
+			Optional: true,
+		},
+		
 		"transition": {
 			Type: schema.TypeInt,
 			Optional: true,
@@ -299,6 +316,7 @@ func SetWebsiteResourceData(d *schema.ResourceData, m *models.Website) {
 	d.Set("stop_monitoring", m.StopMonitoring)
 	d.Set("stop_monitoring_by_folder", m.StopMonitoringByFolder)
 	d.Set("template", m.Template)
+	d.Set("test_location", SetWebsiteLocationSubResourceData([]*models.WebsiteLocation{m.TestLocation}))
 	d.Set("transition", m.Transition)
 	d.Set("type", m.Type)
 	d.Set("use_default_alert_setting", m.UseDefaultAlertSetting)
@@ -329,6 +347,7 @@ func SetWebsiteSubResourceData(m []*models.Website) (d []*map[string]interface{}
 			properties["stop_monitoring"] = website.StopMonitoring
 			properties["stop_monitoring_by_folder"] = website.StopMonitoringByFolder
 			properties["template"] = website.Template
+			properties["test_location"] = SetWebsiteLocationSubResourceData([]*models.WebsiteLocation{website.TestLocation})
 			properties["transition"] = website.Transition
 			properties["type"] = website.Type
 			properties["use_default_alert_setting"] = website.UseDefaultAlertSetting
@@ -357,6 +376,7 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 	steps := utils.GetPropFromSteps(d, "steps")
 	stopMonitoring := d.Get("stop_monitoring").(bool)
 	template := d.Get("template")
+    testLocation := utils.GetPropFromLocationMap(d, "test_location")
 	transition := int32(d.Get("transition").(int))
 	typeVar := d.Get("type").(string)
 	useDefaultAlertSetting := d.Get("use_default_alert_setting").(bool)
@@ -380,6 +400,7 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 		Steps: steps,
 		StopMonitoring: stopMonitoring,
 		Template: template,
+		TestLocation: testLocation,
 		Transition: transition,
 		Type: &typeVar,
 		UseDefaultAlertSetting: useDefaultAlertSetting,
@@ -405,6 +426,7 @@ func GetWebsitePropertyFields() (t []string) {
 		"steps",
 		"stop_monitoring",
 		"template",
+		"test_location",
 		"transition",
 		"type",
 		"use_default_alert_setting",
