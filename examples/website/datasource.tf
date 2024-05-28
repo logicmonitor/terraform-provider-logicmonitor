@@ -7,6 +7,14 @@ resource "logicmonitor_website" "my_website"{
    disable_alerting = true
    stop_monitoring = true
    user_permission = "string"
+   test_location = [
+    {
+      all = false
+      collector_ids = [1, 2, 3]
+      collectors = null
+      smg_ids = [85, 90]
+    }
+   ]
    group_id = 8
    individual_sm_alert_enable = false
    steps = [
@@ -53,6 +61,10 @@ resource "logicmonitor_website" "my_website"{
   use_default_location_setting = false
   use_default_alert_setting = true
   individual_alert_level = "warn"
+  trigger_s_s_l_expiration_alert = true
+  trigger_s_s_l_status_alert = true
+  ignore_s_s_l = false
+  alert_expr = "< 100"
 } 
 data "logicmonitor_website" "my_website" {
    filter = "description~\"website test\""

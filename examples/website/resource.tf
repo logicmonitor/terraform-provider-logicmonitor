@@ -61,4 +61,8 @@ resource "logicmonitor_website" "my_website"{
   use_default_location_setting = false
   use_default_alert_setting = true
   individual_alert_level = "warn"
+  trigger_s_s_l_expiration_alert = true
+  trigger_s_s_l_status_alert = true
+  ignore_s_s_l = false
+  alert_expr = "< 100"
 } 

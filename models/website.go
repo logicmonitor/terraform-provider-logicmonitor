@@ -21,6 +21,10 @@ import (
 // swagger:model Website
 type Website struct {
 
+	// The threshold (in days) for triggering SSL certification alerts
+	// Example: \u003c 200 100 50
+	AlertExpr string `json:"alertExpr,omitempty"`
+
 	// The description of the website
 	// Example: Monitor Ebay site response times
 	Description string `json:"description,omitempty"`
@@ -53,6 +57,10 @@ type Website struct {
 	// The id of the website
 	// Read Only: true
 	ID int32 `json:"id,omitempty"`
+
+	// Whether or not SSL should be ignored, the default value is true
+	// Example: true
+	IgnoreSSL bool `json:"ignoreSSL,omitempty"`
 
 	// warn | error | critical
 	// The level of alert to trigger if the website fails a check from an individual test location
@@ -120,6 +128,14 @@ type Website struct {
 	// The number of checks that must fail before an alert is triggered
 	// Example: 1
 	Transition int32 `json:"transition,omitempty"`
+
+	// Whether or not SSL expiration alerts should be triggered
+	// Example: false
+	TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert,omitempty"`
+
+	// Whether or not SSL status alerts should be triggered
+	// Example: false
+	TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert,omitempty"`
 
 	// The type of the website. Acceptable values are: pingcheck, webcheck
 	// Example: webcheck

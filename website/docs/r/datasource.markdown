@@ -14,12 +14,12 @@ Provides a LogicMonitor datasource resource. This can be used to create and mana
 ```hcl
 # Create a LogicMonitor datasource
 resource "logicmonitor_datasource" "my_datasource" {
-  applies_to = "system.deviceId == \"22\"
+  applies_to = "system.deviceId == \"22\""
   collect_interval = 100
-  collect_method = ""
-  collector_attribute = [{
-    name = "aggregate"
-   }]
+  collect_method = "script"
+  collector_attribute {
+  name = "script"
+  }
   data_points = [
    {
     name = "CallCountTotal_mean8"
