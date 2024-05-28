@@ -39,6 +39,7 @@ type Datasource struct {
 	CollectInterval *int32 `json:"collectInterval"`
 
 	// The  method to collect data. The values can be snmp|ping|exs|webpage|wmi|cim|datadump|dns|ipmi|jdbb|script|udp|tcp|xen
+	// Example: script
 	// Required: true
 	CollectMethod *string `json:"collectMethod"`
 

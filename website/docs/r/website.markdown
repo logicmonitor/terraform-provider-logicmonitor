@@ -14,12 +14,14 @@ Provides a LogicMonitor website resource. This can be used to create and manage 
 ```hcl
 # Create a LogicMonitor website
 resource "logicmonitor_website" "my_website" {
+  alert_expr = "\u003c 200 100 50"
   description = "Monitor Ebay site response times"
   disable_alerting = 
   domain = "www.ebay.com"
   global_sm_alert_cond = 0
   group_id = 1
   host = ""
+  ignore_s_s_l = true
   individual_alert_level = "warn"
   individual_sm_alert_enable = false
   is_internal = false
@@ -73,6 +75,8 @@ resource "logicmonitor_website" "my_website" {
     }
   ]
   transition = 1
+  trigger_s_s_l_expiration_alert = false
+  trigger_s_s_l_status_alert = false
   type = "webcheck"
   use_default_alert_setting = true
   use_default_location_setting = false
@@ -87,6 +91,7 @@ The following arguments are **required**:
 * `type` - The type of the website. Acceptable values are: pingcheck, webcheck
 
 The following arguments are **optional**:
+* `alert_expr` - The threshold (in days) for triggering SSL certification alerts
 * `description` - The description of the website
 * `disable_alerting` - true: alerting is disabled for the website
 false: alerting is enabled for the website
@@ -100,6 +105,7 @@ If stopMonitoring=true, then alerting will also by default be disabled for the w
 * `group_id` - The id of the group the website is in
 * `host` - The URL to check, without the scheme or protocol (e.g http or https)
 E.g. if the URL is "http://www.google.com, then the host="www.google.com"
+* `ignore_s_s_l` - Whether or not SSL should be ignored, the default value is true
 * `individual_alert_level` - warn | error | critical
 The level of alert to trigger if the website fails a check from an individual test location
 * `individual_sm_alert_enable` - true: an alert will be triggered if a check fails from an individual test location
@@ -158,6 +164,8 @@ If stopMonitoring=true, then alerting will also by default be disabled for the w
   + `smgIds` - indicates that the service will be monitored by Collectors 85 and 90
 * `transition` - 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 30 | 60
 The number of checks that must fail before an alert is triggered
+* `trigger_s_s_l_expiration_alert` - Whether or not SSL expiration alerts should be triggered
+* `trigger_s_s_l_status_alert` - Whether or not SSL status alerts should be triggered
 * `use_default_alert_setting` - true: The alert settings configured in the website Default Settings will be used
 false: Service Default Settings will not be used, and you will need to specify individualSMAlertEnable, individualAlertLevel, globalSmAlertConf, overallAlertLevel and pollingInterval
 * `use_default_location_setting` - true: The checkpoint locations configured in the website Default Settings will be used

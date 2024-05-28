@@ -9,6 +9,11 @@ import (
 
 func WebsiteSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
+		"alert_expr": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
 		"description": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -42,6 +47,11 @@ func WebsiteSchema() map[string]*schema.Schema {
 		"id": {
 			Type: schema.TypeString,
 			Computed: true,
+		},
+		
+		"ignore_s_s_l": {
+			Type: schema.TypeBool,
+			Optional: true,
 		},
 		
 		"individual_alert_level": {
@@ -125,6 +135,16 @@ func WebsiteSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"trigger_s_s_l_expiration_alert": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"trigger_s_s_l_status_alert": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
 		"type": {
 			Type: schema.TypeString,
 			Required: true,
@@ -153,6 +173,11 @@ func WebsiteSchema() map[string]*schema.Schema {
 // Only difference between this and WebsiteSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
 func DataSourceWebsiteSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
+		"alert_expr": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
 		"description": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -186,6 +211,11 @@ func DataSourceWebsiteSchema() map[string]*schema.Schema {
 		"id": {
 			Type: schema.TypeInt,
 			Computed: true,
+			Optional: true,
+		},
+		
+		"ignore_s_s_l": {
+			Type: schema.TypeBool,
 			Optional: true,
 		},
 		
@@ -269,6 +299,16 @@ func DataSourceWebsiteSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"trigger_s_s_l_expiration_alert": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"trigger_s_s_l_status_alert": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
 		"type": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -297,6 +337,7 @@ func DataSourceWebsiteSchema() map[string]*schema.Schema {
 }
 
 func SetWebsiteResourceData(d *schema.ResourceData, m *models.Website) {
+	d.Set("alert_expr", m.AlertExpr)
 	d.Set("description", m.Description)
 	d.Set("disable_alerting", m.DisableAlerting)
 	d.Set("domain", m.Domain)
@@ -304,6 +345,7 @@ func SetWebsiteResourceData(d *schema.ResourceData, m *models.Website) {
 	d.Set("group_id", m.GroupID)
 	d.Set("host", m.Host)
 	d.Set("id", strconv.Itoa(int(m.ID)))
+	d.Set("ignore_s_s_l", m.IgnoreSSL)
 	d.Set("individual_alert_level", m.IndividualAlertLevel)
 	d.Set("individual_sm_alert_enable", m.IndividualSmAlertEnable)
 	d.Set("is_internal", m.IsInternal)
@@ -318,6 +360,8 @@ func SetWebsiteResourceData(d *schema.ResourceData, m *models.Website) {
 	d.Set("template", m.Template)
 	d.Set("test_location", SetWebsiteLocationSubResourceData([]*models.WebsiteLocation{m.TestLocation}))
 	d.Set("transition", m.Transition)
+	d.Set("trigger_s_s_l_expiration_alert", m.TriggerSSLExpirationAlert)
+	d.Set("trigger_s_s_l_status_alert", m.TriggerSSLStatusAlert)
 	d.Set("type", m.Type)
 	d.Set("use_default_alert_setting", m.UseDefaultAlertSetting)
 	d.Set("use_default_location_setting", m.UseDefaultLocationSetting)
@@ -328,6 +372,7 @@ func SetWebsiteSubResourceData(m []*models.Website) (d []*map[string]interface{}
 	for _, website := range m {
 		if website != nil {
 			properties := make(map[string]interface{})
+			properties["alert_expr"] = website.AlertExpr
 			properties["description"] = website.Description
 			properties["disable_alerting"] = website.DisableAlerting
 			properties["domain"] = website.Domain
@@ -335,6 +380,7 @@ func SetWebsiteSubResourceData(m []*models.Website) (d []*map[string]interface{}
 			properties["group_id"] = website.GroupID
 			properties["host"] = website.Host
 			properties["id"] = website.ID
+			properties["ignore_s_s_l"] = website.IgnoreSSL
 			properties["individual_alert_level"] = website.IndividualAlertLevel
 			properties["individual_sm_alert_enable"] = website.IndividualSmAlertEnable
 			properties["is_internal"] = website.IsInternal
@@ -349,6 +395,8 @@ func SetWebsiteSubResourceData(m []*models.Website) (d []*map[string]interface{}
 			properties["template"] = website.Template
 			properties["test_location"] = SetWebsiteLocationSubResourceData([]*models.WebsiteLocation{website.TestLocation})
 			properties["transition"] = website.Transition
+			properties["trigger_s_s_l_expiration_alert"] = website.TriggerSSLExpirationAlert
+			properties["trigger_s_s_l_status_alert"] = website.TriggerSSLStatusAlert
 			properties["type"] = website.Type
 			properties["use_default_alert_setting"] = website.UseDefaultAlertSetting
 			properties["use_default_location_setting"] = website.UseDefaultLocationSetting
@@ -360,6 +408,7 @@ func SetWebsiteSubResourceData(m []*models.Website) (d []*map[string]interface{}
 }
 
 func WebsiteModel(d *schema.ResourceData) *models.Website {
+	alertExpr := d.Get("alert_expr").(string)
 	description := d.Get("description").(string)
 	disableAlerting := d.Get("disable_alerting").(bool)
 	domain := d.Get("domain").(string)
@@ -367,6 +416,7 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 	groupID := int32(d.Get("group_id").(int))
 	host := d.Get("host").(string)
 	id, _ := strconv.Atoi(d.Get("id").(string))
+	ignoreSSL := d.Get("ignore_s_s_l").(bool)
 	individualAlertLevel := d.Get("individual_alert_level").(string)
 	individualSmAlertEnable := d.Get("individual_sm_alert_enable").(bool)
 	isInternal := d.Get("is_internal").(bool)
@@ -378,12 +428,15 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 	template := d.Get("template")
     testLocation := utils.GetPropFromLocationMap(d, "test_location")
 	transition := int32(d.Get("transition").(int))
+	triggerSSLExpirationAlert := d.Get("trigger_s_s_l_expiration_alert").(bool)
+	triggerSSLStatusAlert := d.Get("trigger_s_s_l_status_alert").(bool)
 	typeVar := d.Get("type").(string)
 	useDefaultAlertSetting := d.Get("use_default_alert_setting").(bool)
 	useDefaultLocationSetting := d.Get("use_default_location_setting").(bool)
 	userPermission := d.Get("user_permission").(string)
 	
 	return &models.Website {
+		AlertExpr: alertExpr,
 		Description: description,
 		DisableAlerting: disableAlerting,
 		Domain: domain,
@@ -391,6 +444,7 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 		GroupID: groupID,
 		Host: host,
 		ID: int32(id),
+		IgnoreSSL: ignoreSSL,
 		IndividualAlertLevel: individualAlertLevel,
 		IndividualSmAlertEnable: individualSmAlertEnable,
 		IsInternal: isInternal,
@@ -402,6 +456,8 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 		Template: template,
 		TestLocation: testLocation,
 		Transition: transition,
+		TriggerSSLExpirationAlert: triggerSSLExpirationAlert,
+		TriggerSSLStatusAlert: triggerSSLStatusAlert,
 		Type: &typeVar,
 		UseDefaultAlertSetting: useDefaultAlertSetting,
 		UseDefaultLocationSetting: useDefaultLocationSetting,
@@ -410,6 +466,7 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 }
 func GetWebsitePropertyFields() (t []string) {
 	return []string{
+		"alert_expr",
 		"description",
 		"disable_alerting",
 		"domain",
@@ -417,6 +474,7 @@ func GetWebsitePropertyFields() (t []string) {
 		"group_id",
 		"host",
 		"id",
+		"ignore_s_s_l",
 		"individual_alert_level",
 		"individual_sm_alert_enable",
 		"is_internal",
@@ -428,6 +486,8 @@ func GetWebsitePropertyFields() (t []string) {
 		"template",
 		"test_location",
 		"transition",
+		"trigger_s_s_l_expiration_alert",
+		"trigger_s_s_l_status_alert",
 		"type",
 		"use_default_alert_setting",
 		"use_default_location_setting",

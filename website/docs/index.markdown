@@ -116,7 +116,9 @@ resource "logicmonitor_datasource" "my_datasource" {
         collect_interval = 100
         applies_to = "system.deviceId == \"22\""
         description = "test"
-        collect_method = "aggregate"
+        collect_method = "script"
+        eri_discovery_interval = 1
+        enable_eri_discovery = true
         name = "Amazon Website test"
         data_points = [{
           name = "CallCountTotal_mean8"
@@ -138,9 +140,9 @@ resource "logicmonitor_datasource" "my_datasource" {
           post_processor_param = "{\"version\":\"1.0\",\"expression\":{\"funcName\":\"mean\",\"dataSourceName\":\"AWS_Cognito_GlobalAPICallStats\",\"dataPointName\":\"CallCountTotal\"},\"dataLack\":\"ignore\"}"
         }]
         display_name = "Test demo"
-        collector_attribute = [{
-          name = "aggregate"
-        }]
+        collector_attribute {
+         name = "script"
+        }
 }
 ```
 
@@ -294,6 +296,10 @@ resource "logicmonitor_website" "my_website" {
          use_default_location_setting = false
          use_default_alert_setting = true
          individual_alert_level = "warn"
+         trigger_s_s_l_expiration_alert = true
+         trigger_s_s_l_status_alert = true
+         ignore_s_s_l = false
+         alert_expr = "< 100"
 }
 ```
 
