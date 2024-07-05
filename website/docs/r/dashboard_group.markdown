@@ -25,12 +25,13 @@ resource "logicmonitor_dashboard_group" "my_dashboard_group" {
 
 The following arguments are **required**:
 * `name` - The name of the dashboard group
+   (string)
 
 The following arguments are **optional**:
-* `description` - This is a description of the dashboard group
-* `parent_id` - The Id of the parent dashboard group
-* `template` - The template which is used for import dashboard group
-* `widget_tokens` - The tokens assigned at the group level
+* `description` - This is a description of the dashboard group (string)
+* `parent_id` - The Id of the parent dashboard group (int32)
+* `template` - The template which is used for import dashboard group (interface{})
+* `widget_tokens` - The tokens assigned at the group level ([]*WidgetToken)
   + `name` (required)
   + `value` (required)
   + `type` (required) - Need to pass 'null' value

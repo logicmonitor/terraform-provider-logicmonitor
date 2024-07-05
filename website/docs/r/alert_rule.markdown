@@ -37,19 +37,27 @@ resource "logicmonitor_alert_rule" "my_alert_rule" {
 
 The following arguments are **required**:
 * `datapoint` - The datapoint the alert rule is configured to match
+   (string)
 * `datasource` - The datasource the alert rule is configured to match
+   (string)
 * `device_groups` - The device groups and service groups the alert rule is configured to match
+   ([]string)
 * `devices` - The device names and service names the alert rule is configured to match
+   ([]string)
 * `escalating_chain_id` - The id of the escalation chain associated with the alert rule
+   (int32)
 * `instance` - The instance the alert rule is configured to match
+   (string)
 * `name` - The name of the alert rule
+   (string)
 * `priority` - The priority associated with the alert rule
+   (int32)
 
 The following arguments are **optional**:
-* `escalation_interval` - The escalation interval associated with the alert rule, in minutes
-* `level_str` - The alert severity levels the alert rule is configured to match. Acceptable values are: All, Warn, Error, Critical
-* `suppress_alert_ack_sdt` - Whether or not status notifications for acknowledgements and SDTs should be sent to the alert rule
-* `suppress_alert_clear` - Whether or not alert clear notifications should be sent to the alert rule
+* `escalation_interval` - The escalation interval associated with the alert rule, in minutes (int32)
+* `level_str` - The alert severity levels the alert rule is configured to match. Acceptable values are: All, Warn, Error, Critical (string)
+* `suppress_alert_ack_sdt` - Whether or not status notifications for acknowledgements and SDTs should be sent to the alert rule (bool)
+* `suppress_alert_clear` - Whether or not alert clear notifications should be sent to the alert rule (bool)
 
 ## Import
 

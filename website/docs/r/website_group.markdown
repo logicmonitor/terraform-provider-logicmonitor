@@ -32,19 +32,20 @@ resource "logicmonitor_website_group" "my_website_group" {
 
 The following arguments are **required**:
 * `name` - The name of the group
+   (string)
 
 The following arguments are **optional**:
-* `description` - The description of the group
+* `description` - The description of the group (string)
 * `disable_alerting` - true: alerting is disabled for the websites in the group
 false: alerting is enabled for the websites in the group
-If stopMonitoring=true, then alerting will also by default be disabled for the websites in the group
-* `parent_id` - The Id of the parent group. If parentId=1 then the group exists under the root  group
-* `properties` - 
+If stopMonitoring=true, then alerting will also by default be disabled for the websites in the group (bool)
+* `parent_id` - The Id of the parent group. If parentId=1 then the group exists under the root  group (int32)
+* `properties` -  ([]*NameAndValue)
   + `name` - The name of a property (required)
   + `value` - The value of a property (required)
 * `stop_monitoring` - true: monitoring is disabled for the websites in the group
 false: monitoring is enabled for the websites in the group
-If stopMonitoring=true, then alerting will also by default be disabled for the websites in the group
+If stopMonitoring=true, then alerting will also by default be disabled for the websites in the group (bool)
 
 ## Import
 

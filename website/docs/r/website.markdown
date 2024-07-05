@@ -28,6 +28,7 @@ resource "logicmonitor_website" "my_website" {
   name = "Ebay"
   overall_alert_level = "warn"
   polling_interval = 5
+  schema = "https"
   steps = [
    {
     schema = "https"
@@ -88,34 +89,37 @@ resource "logicmonitor_website" "my_website" {
 
 The following arguments are **required**:
 * `name` - The name of the website
+   (string)
 * `type` - The type of the website. Acceptable values are: pingcheck, webcheck
+   (string)
 
 The following arguments are **optional**:
-* `alert_expr` - The threshold (in days) for triggering SSL certification alerts
-* `description` - The description of the website
+* `alert_expr` - The threshold (in days) for triggering SSL certification alerts (string)
+* `description` - The description of the website (string)
 * `disable_alerting` - true: alerting is disabled for the website
 false: alerting is enabled for the website
-If stopMonitoring=true, then alerting will also by default be disabled for the website
-* `domain` - Required for type=webcheck , The domain of the service. This is the base URL of the service
+If stopMonitoring=true, then alerting will also by default be disabled for the website (bool)
+* `domain` - Required for type=webcheck , The domain of the service. This is the base URL of the service (string)
 * `global_sm_alert_cond` - The number of test locations that checks must fail at to trigger an alert, where the alert triggered will be consistent with the value of overallAlertLevel. Possible values and corresponding number of Site Monitor locations are
 0 : all
 1 : half
 2 : more than one
-3 : any
-* `group_id` - The id of the group the website is in
+3 : any (int32)
+* `group_id` - The id of the group the website is in (int32)
 * `host` - The URL to check, without the scheme or protocol (e.g http or https)
-E.g. if the URL is "http://www.google.com, then the host="www.google.com"
-* `ignore_s_s_l` - Whether or not SSL should be ignored, the default value is true
+E.g. if the URL is "http://www.google.com, then the host="www.google.com" (string)
+* `ignore_s_s_l` - Whether or not SSL should be ignored, the default value is true (bool)
 * `individual_alert_level` - warn | error | critical
-The level of alert to trigger if the website fails a check from an individual test location
+The level of alert to trigger if the website fails a check from an individual test location (string)
 * `individual_sm_alert_enable` - true: an alert will be triggered if a check fails from an individual test location
-false: an alert will not be triggered if a check fails from an individual test location
-* `is_internal` - Whether or not the website is internal
+false: an alert will not be triggered if a check fails from an individual test location (bool)
+* `is_internal` - Whether or not the website is internal (bool)
 * `overall_alert_level` - warn | error | critical
-The level of alert to trigger if the website fails the number of checks specified by transition from the test locations specified by globalSmAlertCond
+The level of alert to trigger if the website fails the number of checks specified by transition from the test locations specified by globalSmAlertCond (string)
 * `polling_interval` - 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
-The polling interval for the website, in units of minutes. This value indicates how often the website is checked. The minimum is 1 minute, and the maximum is 10 minutes
-* `steps` - Required for type=webcheck , An object comprising one or more steps, see the table below for the properties included in each step
+The polling interval for the website, in units of minutes. This value indicates how often the website is checked. The minimum is 1 minute, and the maximum is 10 minutes (int32)
+* `schema` - The scheme or protocol associated with the URL to check. Acceptable values are: http, https (string)
+* `steps` - Required for type=webcheck , An object comprising one or more steps, see the table below for the properties included in each step ([]*WebCheckStep)
   + `schema` -  HTTP schema
   + `matchType` - Body match type(plain | JSON | XML | Glob Expression | Multi-line key-value pairs)
   + `description` - The description of the Step
@@ -149,28 +153,28 @@ The polling interval for the website, in units of minutes. This value indicates 
   + `statusCode` - The expected status code
 * `stop_monitoring` - true: monitoring is disabled for the website
 false: monitoring is enabled for the website
-If stopMonitoring=true, then alerting will also by default be disabled for the website
-* `template` - The website template
+If stopMonitoring=true, then alerting will also by default be disabled for the website (bool)
+* `template` - The website template (interface{})
 * `test_location` - The locations from which the website is monitored. If the website is internal, this field should include Collectors. If Non-Internal, possible test locations are:
 1 : US - LA
 2 : US - DC
 3 : US - SF
 4 : Europe - Dublin
 5 : Asia - Singapore
-6 : Australia - Sydney
+6 : Australia - Sydney (WebsiteLocation)
   + `all` - (true | false) Indicates that the service will be monitored from all checkpoint locations
   + `collectorIds` - indicates that the service will be monitored from checkpoint locations 1, 2 and 3
   + `collectors` - Need to pass 'null' value
   + `smgIds` - indicates that the service will be monitored by Collectors 85 and 90
 * `transition` - 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 30 | 60
-The number of checks that must fail before an alert is triggered
-* `trigger_s_s_l_expiration_alert` - Whether or not SSL expiration alerts should be triggered
-* `trigger_s_s_l_status_alert` - Whether or not SSL status alerts should be triggered
+The number of checks that must fail before an alert is triggered (int32)
+* `trigger_s_s_l_expiration_alert` - Whether or not SSL expiration alerts should be triggered (bool)
+* `trigger_s_s_l_status_alert` - Whether or not SSL status alerts should be triggered (bool)
 * `use_default_alert_setting` - true: The alert settings configured in the website Default Settings will be used
-false: Service Default Settings will not be used, and you will need to specify individualSMAlertEnable, individualAlertLevel, globalSmAlertConf, overallAlertLevel and pollingInterval
+false: Service Default Settings will not be used, and you will need to specify individualSMAlertEnable, individualAlertLevel, globalSmAlertConf, overallAlertLevel and pollingInterval (bool)
 * `use_default_location_setting` - true: The checkpoint locations configured in the website Default Settings will be used
-false: The checkpoint locations specified in the testLocation will be used
-* `user_permission` - write | read | ack. The permission level of the user that made the API request
+false: The checkpoint locations specified in the testLocation will be used (bool)
+* `user_permission` - write | read | ack. The permission level of the user that made the API request (string)
 
 ## Import
 

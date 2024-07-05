@@ -154,17 +154,18 @@ resource "logicmonitor_device_group" "my_aws_device_group" {
 
 The following arguments are **required**:
 * `name` - The name of the device group
+   (string)
 
 The following arguments are **optional**:
-* `applies_to` - The Applies to custom query for this group (only for dynamic groups)
-* `custom_properties` - The properties associated with this device group
+* `applies_to` - The Applies to custom query for this group (only for dynamic groups) (string)
+* `custom_properties` - The properties associated with this device group ([]*NameAndValue)
   + `name` - The name of a property (required)
   + `value` - The value of a property (required)
-* `default_collector_id` - The Id of the default collector assigned to the device group
-* `description` - The description of the device group
-* `disable_alerting` - Indicates whether alerting is disabled (true) or enabled (false) for this device group
-* `enable_netflow` - Indicates whether Netflow is enabled (true) or disabled (false) for the device group, the default value is true
-* `extra` - The extra setting for cloud group
+* `default_collector_id` - The Id of the default collector assigned to the device group (int32)
+* `description` - The description of the device group (string)
+* `disable_alerting` - Indicates whether alerting is disabled (true) or enabled (false) for this device group (bool)
+* `enable_netflow` - Indicates whether Netflow is enabled (true) or disabled (false) for the device group, the default value is true (bool)
+* `extra` - The extra setting for cloud group (CloudAccountExtra)
   + `account` - cloud account information (currently only supports AWS)
     + `accountId` - LogicMonitor's Account ID
     + `assumedRoleArn` - ARN of the role created for LogicMonitor to use while monitoring AWS (required)
@@ -199,8 +200,8 @@ The following arguments are **optional**:
     + `deviceType` - Cloud device type (2 for AWS Device) (int)
     + `requiredProps` - Required device properties (array of strings)
   + `services` - Cloud account services to monitor. This is an object with keys for each AWS service that have the same arguments as `default`. See example above (all service keys alternate letters and underscores, but not numbers; SQS=s_q_s, SAGEMAKER=s_a_g_e_m_a_k_e_r, EC2=e_c2 etc.)
-* `group_type` - The type of device group: normal and dynamic device groups will have groupType=Normal, and AWS groups will have a groupType value of AWS/SERVICE (e.g. AWS/AwsRoot, AWS/S3, etc.)
-* `parent_id` - The id of the parent group for this device group (the root device group has an Id of 1)
+* `group_type` - The type of device group: normal and dynamic device groups will have groupType=Normal, and AWS groups will have a groupType value of AWS/SERVICE (e.g. AWS/AwsRoot, AWS/S3, etc.) (string)
+* `parent_id` - The id of the parent group for this device group (the root device group has an Id of 1) (int32)
 
 ## Import
 

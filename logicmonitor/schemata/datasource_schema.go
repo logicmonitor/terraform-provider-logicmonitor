@@ -19,6 +19,14 @@ func DatasourceSchema() map[string]*schema.Schema {
 			Computed: true,
 		},
 		
+		"auto_discovery_config": {
+			Type: schema.TypeList, //GoType: AutoDiscoveryConfiguration
+			Elem: &schema.Resource{
+				Schema: AutoDiscoveryConfigurationSchema(),
+			},
+			Optional: true,
+		},
+		
 		"checksum": {
 			Type: schema.TypeString,
 			Computed: true,
@@ -72,6 +80,14 @@ func DatasourceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"eri_discovery_config": {
+			Type: schema.TypeList, //GoType: ScriptERIDiscoveryAttributeV2
+			Elem: &schema.Resource{
+				Schema: ScriptERIDiscoveryAttributeV2Schema(),
+			},
+			Optional: true,
+		},
+		
 		"eri_discovery_interval": {
 			Type: schema.TypeInt,
 			Optional: true,
@@ -84,7 +100,7 @@ func DatasourceSchema() map[string]*schema.Schema {
 		
 		"has_multi_instances": {
 			Type: schema.TypeBool,
-			Computed: true,
+			Optional: true,
 		},
 		
 		"id": {
@@ -145,6 +161,14 @@ func DataSourceDatasourceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"auto_discovery_config": {
+			Type: schema.TypeList, //GoType: AutoDiscoveryConfiguration
+			Elem: &schema.Resource{
+				Schema: AutoDiscoveryConfigurationSchema(),
+			},
+			Optional: true,
+		},
+		
 		"checksum": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -194,6 +218,14 @@ func DataSourceDatasourceSchema() map[string]*schema.Schema {
 		
 		"enable_eri_discovery": {
 			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
+		"eri_discovery_config": {
+			Type: schema.TypeList, //GoType: ScriptERIDiscoveryAttributeV2
+			Elem: &schema.Resource{
+				Schema: ScriptERIDiscoveryAttributeV2Schema(),
+			},
 			Optional: true,
 		},
 		
@@ -263,6 +295,7 @@ func DataSourceDatasourceSchema() map[string]*schema.Schema {
 func SetDatasourceResourceData(d *schema.ResourceData, m *models.Datasource) {
 	d.Set("applies_to", m.AppliesTo)
 	d.Set("audit_version", m.AuditVersion)
+	d.Set("auto_discovery_config", SetAutoDiscoveryConfigurationSubResourceData([]*models.AutoDiscoveryConfiguration{m.AutoDiscoveryConfig}))
 	d.Set("checksum", m.Checksum)
 	d.Set("collect_interval", m.CollectInterval)
 	d.Set("collect_method", m.CollectMethod)
@@ -272,6 +305,7 @@ func SetDatasourceResourceData(d *schema.ResourceData, m *models.Datasource) {
 	d.Set("display_name", m.DisplayName)
 	d.Set("enable_auto_discovery", m.EnableAutoDiscovery)
 	d.Set("enable_eri_discovery", m.EnableEriDiscovery)
+	d.Set("eri_discovery_config", SetScriptERIDiscoveryAttributeV2SubResourceData([]*models.ScriptERIDiscoveryAttributeV2{m.EriDiscoveryConfig}))
 	d.Set("eri_discovery_interval", m.EriDiscoveryInterval)
 	d.Set("group", m.Group)
 	d.Set("has_multi_instances", m.HasMultiInstances)
@@ -291,6 +325,7 @@ func SetDatasourceSubResourceData(m []*models.Datasource) (d []*map[string]inter
 			properties := make(map[string]interface{})
 			properties["applies_to"] = datasource.AppliesTo
 			properties["audit_version"] = datasource.AuditVersion
+			properties["auto_discovery_config"] = SetAutoDiscoveryConfigurationSubResourceData([]*models.AutoDiscoveryConfiguration{datasource.AutoDiscoveryConfig})
 			properties["checksum"] = datasource.Checksum
 			properties["collect_interval"] = datasource.CollectInterval
 			properties["collect_method"] = datasource.CollectMethod
@@ -300,6 +335,7 @@ func SetDatasourceSubResourceData(m []*models.Datasource) (d []*map[string]inter
 			properties["display_name"] = datasource.DisplayName
 			properties["enable_auto_discovery"] = datasource.EnableAutoDiscovery
 			properties["enable_eri_discovery"] = datasource.EnableEriDiscovery
+			properties["eri_discovery_config"] = SetScriptERIDiscoveryAttributeV2SubResourceData([]*models.ScriptERIDiscoveryAttributeV2{datasource.EriDiscoveryConfig})
 			properties["eri_discovery_interval"] = datasource.EriDiscoveryInterval
 			properties["group"] = datasource.Group
 			properties["has_multi_instances"] = datasource.HasMultiInstances
@@ -319,6 +355,12 @@ func SetDatasourceSubResourceData(m []*models.Datasource) (d []*map[string]inter
 
 func DatasourceModel(d *schema.ResourceData) *models.Datasource {
 	appliesTo := d.Get("applies_to").(string)
+	var autoDiscoveryConfig *models.AutoDiscoveryConfiguration = nil
+	autoDiscoveryConfigInterface, autoDiscoveryConfigIsSet := d.GetOk("auto_discovery_config")
+	if autoDiscoveryConfigIsSet {
+		autoDiscoveryConfigMap := autoDiscoveryConfigInterface.([]interface{})[0].(map[string]interface{})
+		autoDiscoveryConfig = AutoDiscoveryConfigurationModel(autoDiscoveryConfigMap)
+	}
 	collectInterval := int32(d.Get("collect_interval").(int))
 	collectMethod := d.Get("collect_method").(string)
 	var collectorAttribute *models.CollectorAttribute = nil
@@ -332,8 +374,15 @@ func DatasourceModel(d *schema.ResourceData) *models.Datasource {
 	displayName := d.Get("display_name").(string)
 	enableAutoDiscovery := d.Get("enable_auto_discovery").(bool)
 	enableEriDiscovery := d.Get("enable_eri_discovery").(bool)
+	var eriDiscoveryConfig *models.ScriptERIDiscoveryAttributeV2 = nil
+	eriDiscoveryConfigInterface, eriDiscoveryConfigIsSet := d.GetOk("eri_discovery_config")
+	if eriDiscoveryConfigIsSet {
+		eriDiscoveryConfigMap := eriDiscoveryConfigInterface.([]interface{})[0].(map[string]interface{})
+		eriDiscoveryConfig = ScriptERIDiscoveryAttributeV2Model(eriDiscoveryConfigMap)
+	}
 	eriDiscoveryInterval := int32(d.Get("eri_discovery_interval").(int))
 	group := d.Get("group").(string)
+	hasMultiInstances := d.Get("has_multi_instances").(bool)
 	id, _ := strconv.Atoi(d.Get("id").(string))
 	name := d.Get("name").(string)
 	tags := d.Get("tags").(string)
@@ -341,6 +390,7 @@ func DatasourceModel(d *schema.ResourceData) *models.Datasource {
 	
 	return &models.Datasource {
 		AppliesTo: appliesTo,
+		AutoDiscoveryConfig: autoDiscoveryConfig,
 		CollectInterval: &collectInterval,
 		CollectMethod: &collectMethod,
 		CollectorAttribute: collectorAttribute,
@@ -349,8 +399,10 @@ func DatasourceModel(d *schema.ResourceData) *models.Datasource {
 		DisplayName: displayName,
 		EnableAutoDiscovery: enableAutoDiscovery,
 		EnableEriDiscovery: enableEriDiscovery,
+		EriDiscoveryConfig: eriDiscoveryConfig,
 		EriDiscoveryInterval: eriDiscoveryInterval,
 		Group: group,
+		HasMultiInstances: hasMultiInstances,
 		ID: int32(id),
 		Name: &name,
 		Tags: tags,
@@ -360,6 +412,7 @@ func DatasourceModel(d *schema.ResourceData) *models.Datasource {
 func GetDatasourcePropertyFields() (t []string) {
 	return []string{
 		"applies_to",
+		"auto_discovery_config",
 		"collect_interval",
 		"collect_method",
 		"collector_attribute",
@@ -368,8 +421,10 @@ func GetDatasourcePropertyFields() (t []string) {
 		"display_name",
 		"enable_auto_discovery",
 		"enable_eri_discovery",
+		"eri_discovery_config",
 		"eri_discovery_interval",
 		"group",
+		"has_multi_instances",
 		"id",
 		"name",
 		"tags",

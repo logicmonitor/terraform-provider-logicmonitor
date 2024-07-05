@@ -15,6 +15,24 @@ Provides a LogicMonitor datasource resource. This can be used to create and mana
 # Create a LogicMonitor datasource
 resource "logicmonitor_datasource" "my_datasource" {
   applies_to = "system.deviceId == \"22\""
+  auto_discovery_config {
+    persistent_instance = false
+    schedule_interval = 0
+    delete_inactive_instance = true
+    method {
+    name = "ad_script"
+    }
+    instance_auto_group_method = "none"
+    instance_auto_group_method_params = ""
+    filters = [
+    {
+     comment = "test"
+     value = "test"
+     operation = "string"
+     attribute = "string"
+    }]
+    disable_instance = true
+  }
   collect_interval = 100
   collect_method = "script"
   collector_attribute {
@@ -46,8 +64,18 @@ resource "logicmonitor_datasource" "my_datasource" {
   display_name = "test"
   enable_auto_discovery = false
   enable_eri_discovery = false
+  eri_discovery_config {
+    name = "ad_script"
+    win_script = "string"
+    groovy_script = "string"
+    type = "string"
+    linux_cmdline = "string"
+    linux_script = "string"
+    win_cmdline = "string"
+  }
   eri_discovery_interval = 10
   group = "string"
+  has_multi_instances = 
   name = "datasource test"
   tags = "string"
   technology = "string"
@@ -58,15 +86,20 @@ resource "logicmonitor_datasource" "my_datasource" {
 
 The following arguments are **required**:
 * `collect_interval` - The DataSource data collect interval
+   (int32)
 * `collect_method` - The  method to collect data. The values can be snmp|ping|exs|webpage|wmi|cim|datadump|dns|ipmi|jdbb|script|udp|tcp|xen
+   (string)
 * `collector_attribute` - Data collector's attributes to collector data. e.g. a ping data source has a ping collector attribute. 
  PingCollectorAttributeV1 has two fields. the ip to ping, the data size send to ping
+   (CollectorAttribute)
   + `name` - The data collectors name
 * `name` - The data source name
+   (string)
 
 The following arguments are **optional**:
-* `applies_to` - The Applies To for the LMModule
-* `data_points` - The data point list
+* `applies_to` - The Applies To for the LMModule (string)
+* `auto_discovery_config` -  (AutoDiscoveryConfiguration)
+* `data_points` - The data point list ([]*DataPoint)
   + `alertForNoData` - The triggered alert level if we cannot collect data for this datapoint. The values can be 0-4 (0:unused alert, 1:alert ok, 2:warn alert, 2:error alert, 4:critical alert)
   + `postProcessorParam` - The post processor parameter, e.g. dataPoint1*2
   + `postProcessorMethod` - The post processor method for the data value. Currently support complex expression and groovy.
@@ -84,14 +117,16 @@ The following arguments are **optional**:
   + `alertExprNote` - alert expression note
   + `name` - The datapoint name
   + `alertExpr` - The alert threshold define for the datapoint. e.g.  60 80 90 mean it will: trigger warn alert if value  60 trigger error alert if value  80 trigger critical alert if value  90
-* `description` - The description for the LMModule
-* `display_name` - The data source display name
-* `enable_auto_discovery` - Enable Auto Discovery or not when this data source has multi instance: false|true
-* `enable_eri_discovery` - Enable ERI Discovery or not: false|true
-* `eri_discovery_interval` - The DataSource data collect interval
-* `group` - The group the LMModule is in
-* `tags` - The Tags for the LMModule
-* `technology` - The Technical Notes for the LMModule
+* `description` - The description for the LMModule (string)
+* `display_name` - The data source display name (string)
+* `enable_auto_discovery` - Enable Auto Discovery or not when this data source has multi instance: false|true (bool)
+* `enable_eri_discovery` - Enable ERI Discovery or not: false|true (bool)
+* `eri_discovery_config` -  (ScriptERIDiscoveryAttributeV2)
+* `eri_discovery_interval` - The DataSource data collect interval (int32)
+* `group` - The group the LMModule is in (string)
+* `has_multi_instances` - If the DataSource has multi instance: true|false (bool)
+* `tags` - The Tags for the LMModule (string)
+* `technology` - The Technical Notes for the LMModule (string)
 
 ## Import
 

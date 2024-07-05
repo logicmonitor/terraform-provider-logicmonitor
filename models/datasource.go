@@ -29,6 +29,9 @@ type Datasource struct {
 	// Read Only: true
 	AuditVersion int64 `json:"auditVersion,omitempty"`
 
+	// auto discovery config
+	AutoDiscoveryConfig *AutoDiscoveryConfiguration `json:"autoDiscoveryConfig,omitempty"`
+
 	// The metadata checksum for the LMModule content
 	// Read Only: true
 	Checksum string `json:"checksum,omitempty"`
@@ -67,6 +70,9 @@ type Datasource struct {
 	// Example: false
 	EnableEriDiscovery bool `json:"enableEriDiscovery,omitempty"`
 
+	// eri discovery config
+	EriDiscoveryConfig *ScriptERIDiscoveryAttributeV2 `json:"eriDiscoveryConfig,omitempty"`
+
 	// The DataSource data collect interval
 	// Example: 10
 	EriDiscoveryInterval int32 `json:"eriDiscoveryInterval,omitempty"`
@@ -76,8 +82,7 @@ type Datasource struct {
 	Group string `json:"group,omitempty"`
 
 	// If the DataSource has multi instance: true|false
-	// Read Only: true
-	HasMultiInstances *bool `json:"hasMultiInstances,omitempty"`
+	HasMultiInstances bool `json:"hasMultiInstances,omitempty"`
 
 	// The ID of the LMModule
 	// Read Only: true
@@ -117,6 +122,10 @@ type Datasource struct {
 func (m *Datasource) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAutoDiscoveryConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCollectInterval(formats); err != nil {
 		res = append(res, err)
 	}
@@ -133,6 +142,10 @@ func (m *Datasource) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateEriDiscoveryConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -140,6 +153,25 @@ func (m *Datasource) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Datasource) validateAutoDiscoveryConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.AutoDiscoveryConfig) { // not required
+		return nil
+	}
+
+	if m.AutoDiscoveryConfig != nil {
+		if err := m.AutoDiscoveryConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("autoDiscoveryConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("autoDiscoveryConfig")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -207,6 +239,25 @@ func (m *Datasource) validateDataPoints(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Datasource) validateEriDiscoveryConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.EriDiscoveryConfig) { // not required
+		return nil
+	}
+
+	if m.EriDiscoveryConfig != nil {
+		if err := m.EriDiscoveryConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("eriDiscoveryConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("eriDiscoveryConfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Datasource) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
@@ -224,6 +275,10 @@ func (m *Datasource) ContextValidate(ctx context.Context, formats strfmt.Registr
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAutoDiscoveryConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateChecksum(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -236,7 +291,7 @@ func (m *Datasource) ContextValidate(ctx context.Context, formats strfmt.Registr
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateHasMultiInstances(ctx, formats); err != nil {
+	if err := m.contextValidateEriDiscoveryConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -270,6 +325,22 @@ func (m *Datasource) contextValidateAuditVersion(ctx context.Context, formats st
 
 	if err := validate.ReadOnly(ctx, "auditVersion", "body", int64(m.AuditVersion)); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Datasource) contextValidateAutoDiscoveryConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AutoDiscoveryConfig != nil {
+		if err := m.AutoDiscoveryConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("autoDiscoveryConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("autoDiscoveryConfig")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -320,10 +391,17 @@ func (m *Datasource) contextValidateDataPoints(ctx context.Context, formats strf
 	return nil
 }
 
-func (m *Datasource) contextValidateHasMultiInstances(ctx context.Context, formats strfmt.Registry) error {
+func (m *Datasource) contextValidateEriDiscoveryConfig(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "hasMultiInstances", "body", m.HasMultiInstances); err != nil {
-		return err
+	if m.EriDiscoveryConfig != nil {
+		if err := m.EriDiscoveryConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("eriDiscoveryConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("eriDiscoveryConfig")
+			}
+			return err
+		}
 	}
 
 	return nil
