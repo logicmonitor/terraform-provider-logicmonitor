@@ -66,6 +66,7 @@ resource "logicmonitor_escalation_chain" "my_escalation_chain" {
 
 The following arguments are **required**:
 * `destinations` - 
+   ([]*Chain)
   + `period` -  
     + `weekDays` - the list of week day of this period (required)
     + `timezone` - the timezone for this period (required)
@@ -78,17 +79,18 @@ The following arguments are **required**:
     + `type` (required) - email | sms | voice, where type must be email if method = arbitrary
   + `type` - single (required)
 * `name` - the chain name
+   (string)
 
 The following arguments are **optional**:
-* `cc_destinations` - 
+* `cc_destinations` -  ([]*Recipient)
   + `addr` - the user name if method = admin, or the email address if method = arbitrary
   + `contact` - contact details, email address or phone number
   + `method` (required) - Admin | Arbitrary, where Admin = a user, and Arbitrary = an arbitrary email
   + `type` (required) - email | sms | voice, where type must be email if method = arbitrary
-* `description` - 
-* `enable_throttling` - if throttle needs to be enabled then true if not then false.
-* `throttling_alerts` - max number of alert can send during a throttle period
-* `throttling_period` - the throttle period
+* `description` -  (string)
+* `enable_throttling` - if throttle needs to be enabled then true if not then false. (bool)
+* `throttling_alerts` - max number of alert can send during a throttle period (int32)
+* `throttling_period` - the throttle period (int32)
 
 ## Import
 

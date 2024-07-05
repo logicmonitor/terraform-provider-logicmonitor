@@ -36,15 +36,16 @@ resource "logicmonitor_collector_group" "my_collector_group" {
 
 The following arguments are **required**:
 * `name` - The name of the Collector Group
+   (string)
 
 The following arguments are **optional**:
-* `auto_balance` - Denotes whether or not the collector group should be auto balanced
-* `auto_balance_instance_count_threshold` - Threshold for instance count strategy to check if a collector has high load
-* `auto_balance_strategy` - The auto balance strategy. Typically left blank or set to 'none'.
-* `custom_properties` - The custom properties defined for the Collector group
+* `auto_balance` - Denotes whether or not the collector group should be auto balanced (bool)
+* `auto_balance_instance_count_threshold` - Threshold for instance count strategy to check if a collector has high load (int32)
+* `auto_balance_strategy` - The auto balance strategy. Typically left blank or set to 'none'. (string)
+* `custom_properties` - The custom properties defined for the Collector group ([]*NameAndValue)
   + `name` - The name of a property (required)
   + `value` - The value of a property (required)
-* `description` - The description of the Collector Group
+* `description` - The description of the Collector Group (string)
 
 ## Import
 

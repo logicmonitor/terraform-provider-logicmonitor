@@ -462,6 +462,7 @@ func getPropFromDPInterface(r interface{}) (t []*models.DataPoint ) {
 		   var alertExpr = m["alert_expr"].(string)
 		   var alertExprNote = m["alert_expr_note"].(string)
 		   var typee = int32(m["type"].(int))
+		   var rawDataFieldName = m["raw_data_field_name"].(string)
          model := &models.DataPoint{
 				Name: &name,
 				Description: description,
@@ -479,6 +480,7 @@ func getPropFromDPInterface(r interface{}) (t []*models.DataPoint ) {
 				AlertExpr: alertExpr,
 				AlertExprNote: alertExprNote,
 				Type: typee,
+				RawDataFieldName: rawDataFieldName,
              }
 			t = append(t, model)
 		}
@@ -507,3 +509,24 @@ func getPropFromLocInterface(r interface{}) (t *models.WebsiteLocation) {
     }
  return 
 }
+func GetFilters(d []interface{}) []*models.AutoDiscoveryFilter {
+	var filters []*models.AutoDiscoveryFilter
+	for _, i := range d {
+		if m, ok := i.(map[string]interface{}); ok {
+			attribute := m["attribute"].(string)
+			comment := m["comment"].(string)
+			operation := m["operation"].(string)
+			value := m["value"].(string)
+
+			model := &models.AutoDiscoveryFilter{
+				Attribute: &attribute,
+				Comment:   comment,
+				Operation: &operation,
+				Value:     value,
+			}
+			filters = append(filters, model)
+		}
+	}
+	return filters
+}
+

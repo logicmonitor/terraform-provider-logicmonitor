@@ -74,6 +74,8 @@ provider "logicmonitor" {
   api_id = var.logicmonitor_api_id
   api_key = var.logicmonitor_api_key
   company = var.logicmonitor_company
+  bulk_resource = true/false
+  "When working with bulk resources, this feature is optional to handle the API's rate limit"
 }
 ```
 Example usage can be found in the /terraform-integration/examples directory.

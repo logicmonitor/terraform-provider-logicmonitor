@@ -6,6 +6,7 @@ resource "logicmonitor_website" "my_website"{
    description = "website test"
    disable_alerting = true
    stop_monitoring = true
+   schema = "http"
    user_permission = "string"
    test_location = [
     {

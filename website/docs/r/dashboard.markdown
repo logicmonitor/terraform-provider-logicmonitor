@@ -29,20 +29,21 @@ resource "logicmonitor_dashboard" "my_dashboard" {
 
 The following arguments are **required**:
 * `name` - The name of the dashboard
+   (string)
 
 The following arguments are **optional**:
-* `description` - The description of the dashboard
-* `group_id` - The id of the group the dashboard belongs to
-* `group_name` - The name of group where created dashboard will reside
-* `owner` - This field will be empty unless the dashboard is a private dashboard, in which case the owner will be listed
-* `sharable` - Whether or not the dashboard is sharable. This value will always be true unless the dashboard is a private dashboard
-* `template` - The template which is used for import dashboard
-* `widget_tokens` - If useDynamicWidget=true, this field must at least contain tokens defaultDeviceGroup and defaultServiceGroup
+* `description` - The description of the dashboard (string)
+* `group_id` - The id of the group the dashboard belongs to (int32)
+* `group_name` - The name of group where created dashboard will reside (string)
+* `owner` - This field will be empty unless the dashboard is a private dashboard, in which case the owner will be listed (string)
+* `sharable` - Whether or not the dashboard is sharable. This value will always be true unless the dashboard is a private dashboard (bool)
+* `template` - The template which is used for import dashboard (interface{})
+* `widget_tokens` - If useDynamicWidget=true, this field must at least contain tokens defaultDeviceGroup and defaultServiceGroup ([]*WidgetToken)
   + `name` (required)
   + `value` (required)
   + `type` (required) - Need to pass 'null' value
   + `inherit_list` (required)  - Need to pass 'null' value
-* `widgets_config` - Information about widget configuration used by the UI, this field can remain empty for terraform.
+* `widgets_config` - Information about widget configuration used by the UI (interface{}), this field can remain empty for terraform.
 
 ## Import
 

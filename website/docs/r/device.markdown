@@ -44,24 +44,27 @@ resource "logicmonitor_device" "my_device" {
 
 The following arguments are **required**:
 * `display_name` - The display name of the device
+   (string)
 * `name` - The host name or IP address of the device
+   (string)
 * `preferred_collector_id` - The Id of the preferred collector assigned to monitor the device
+   (int32)
 
 The following arguments are **optional**:
-* `auto_balanced_collector_group_id` - The Auto Balanced Collector Group id. 0 means not monitored by ABCG
-* `current_collector_id` - The id of the collector currently monitoring the device and discovering instances
-* `custom_properties` - Any non-system properties (aside from system.categories) defined for this device
+* `auto_balanced_collector_group_id` - The Auto Balanced Collector Group id. 0 means not monitored by ABCG (int32)
+* `current_collector_id` - The id of the collector currently monitoring the device and discovering instances (int32)
+* `custom_properties` - Any non-system properties (aside from system.categories) defined for this device ([]*NameAndValue)
   + `name` - The name of a property (required)
   + `value` - The value of a property (required)
-* `description` - The device description
-* `device_type` - The type of device: 0 indicates a regular device, 2 indicates an AWS device, 4 indicates an Azure device
-* `disable_alerting` - Indicates whether alerting is disabled (true) or enabled (false) for this device
-* `enable_netflow` - Indicates whether Netflow is enabled (true) or disabled (false) for the device
-* `host_group_ids` - The Id(s) of the groups the device is in, where multiple group ids are comma separated
-* `link` - The URL link associated with the device
-* `netflow_collector_id` - The Id of the netflow collector associated with the device
-* `preferred_collector_group_id` - The id of the Collector Group associated with the device's preferred collector, It can be 0 for auto balanced collector group .
-* `related_device_id` - The Id of the AWS EC2 instance related to this device, if one exists in the LogicMonitor account. This value defaults to -1, which indicates that there are no related devices
+* `description` - The device description (string)
+* `device_type` - The type of device: 0 indicates a regular device, 2 indicates an AWS device, 4 indicates an Azure device (int32)
+* `disable_alerting` - Indicates whether alerting is disabled (true) or enabled (false) for this device (bool)
+* `enable_netflow` - Indicates whether Netflow is enabled (true) or disabled (false) for the device (bool)
+* `host_group_ids` - The Id(s) of the groups the device is in, where multiple group ids are comma separated (string)
+* `link` - The URL link associated with the device (string)
+* `netflow_collector_id` - The Id of the netflow collector associated with the device (int32)
+* `preferred_collector_group_id` - The id of the Collector Group associated with the device's preferred collector (int32), It can be 0 for auto balanced collector group .
+* `related_device_id` - The Id of the AWS EC2 instance related to this device, if one exists in the LogicMonitor account. This value defaults to -1, which indicates that there are no related devices (int32)
 
 ## Import
 
