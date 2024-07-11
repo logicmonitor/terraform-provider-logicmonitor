@@ -383,7 +383,7 @@ func getPropFromStepsInterface(r interface{}) (t []*models.WebCheckStep) {
 				Enable: enable,
 				Name: name,
 				Timeout: timeout,
-				UseDefaultRoot: useDefaultRoot,
+				UseDefaultRoot: &useDefaultRoot,
 				PostDataEditType: postDataEditType,
 				FullpageLoad: fullpageLoad,
 				RequireAuth: requireAuth,

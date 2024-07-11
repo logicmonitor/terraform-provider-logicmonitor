@@ -143,7 +143,7 @@ func WebCheckStepSchema() map[string]*schema.Schema {
 		
 		"use_default_root": {
 			Type: schema.TypeBool,
-			Optional: true,
+			Required: true,
 		},
 		
 	}
@@ -247,7 +247,7 @@ func WebCheckStepModel(d map[string]interface{}) *models.WebCheckStep {
 		Timeout: timeout,
 		Type: typeVar,
 		URL: url,
-		UseDefaultRoot: useDefaultRoot,
+		UseDefaultRoot: &useDefaultRoot,
 	}
 }
 

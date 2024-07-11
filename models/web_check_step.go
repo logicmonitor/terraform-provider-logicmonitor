@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // WebCheckStep web check step
@@ -119,7 +120,8 @@ type WebCheckStep struct {
 
 	// true | falseCheck if using the default root
 	// Example: true
-	UseDefaultRoot bool `json:"useDefaultRoot,omitempty"`
+	// Required: true
+	UseDefaultRoot *bool `json:"useDefaultRoot"`
 }
 
 // Validate validates this web check step
@@ -127,6 +129,10 @@ func (m *WebCheckStep) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAuth(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUseDefaultRoot(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -150,6 +156,15 @@ func (m *WebCheckStep) validateAuth(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *WebCheckStep) validateUseDefaultRoot(formats strfmt.Registry) error {
+
+	if err := validate.Required("useDefaultRoot", "body", m.UseDefaultRoot); err != nil {
+		return err
 	}
 
 	return nil

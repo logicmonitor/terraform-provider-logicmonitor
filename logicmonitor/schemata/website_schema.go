@@ -89,6 +89,11 @@ func WebsiteSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"schema": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
 		"status": {
 			Type: schema.TypeString,
 			Computed: true,
@@ -254,6 +259,11 @@ func DataSourceWebsiteSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"schema": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
 		"status": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -353,6 +363,7 @@ func SetWebsiteResourceData(d *schema.ResourceData, m *models.Website) {
 	d.Set("name", m.Name)
 	d.Set("overall_alert_level", m.OverallAlertLevel)
 	d.Set("polling_interval", m.PollingInterval)
+	d.Set("schema", m.Schema)
 	d.Set("status", m.Status)
 	d.Set("steps", SetWebCheckStepSubResourceData(m.Steps))
 	d.Set("stop_monitoring", m.StopMonitoring)
@@ -388,6 +399,7 @@ func SetWebsiteSubResourceData(m []*models.Website) (d []*map[string]interface{}
 			properties["name"] = website.Name
 			properties["overall_alert_level"] = website.OverallAlertLevel
 			properties["polling_interval"] = website.PollingInterval
+			properties["schema"] = website.Schema
 			properties["status"] = website.Status
 			properties["steps"] = SetWebCheckStepSubResourceData(website.Steps)
 			properties["stop_monitoring"] = website.StopMonitoring
@@ -423,6 +435,7 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 	name := d.Get("name").(string)
 	overallAlertLevel := d.Get("overall_alert_level").(string)
 	pollingInterval := int32(d.Get("polling_interval").(int))
+	schema := d.Get("schema").(string)
 	steps := utils.GetPropFromSteps(d, "steps")
 	stopMonitoring := d.Get("stop_monitoring").(bool)
 	template := d.Get("template")
@@ -451,6 +464,7 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 		Name: &name,
 		OverallAlertLevel: overallAlertLevel,
 		PollingInterval: pollingInterval,
+		Schema: schema,
 		Steps: steps,
 		StopMonitoring: stopMonitoring,
 		Template: template,
@@ -481,6 +495,7 @@ func GetWebsitePropertyFields() (t []string) {
 		"name",
 		"overall_alert_level",
 		"polling_interval",
+		"schema",
 		"steps",
 		"stop_monitoring",
 		"template",
