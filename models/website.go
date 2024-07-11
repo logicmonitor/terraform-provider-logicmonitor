@@ -95,6 +95,10 @@ type Website struct {
 	// Example: 5
 	PollingInterval int32 `json:"pollingInterval,omitempty"`
 
+	// The scheme or protocol associated with the URL to check. Acceptable values are: http, https
+	// Example: https
+	Schema string `json:"schema,omitempty"`
+
 	// Whether is the website dead (the collector is down) or not
 	// Read Only: true
 	Status string `json:"status,omitempty"`

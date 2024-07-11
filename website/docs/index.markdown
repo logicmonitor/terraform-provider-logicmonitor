@@ -266,6 +266,7 @@ resource "logicmonitor_website" "my_website" {
           type = "pingcheck"
           host = "google.com"
           overall_alert_level = "warn"
+          schema = "http"
           polling_interval = 5
           description = "website test"
           disable_alerting = true
