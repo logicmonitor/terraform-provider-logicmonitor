@@ -359,7 +359,10 @@ func getPropFromStepsInterface(r interface{}) (t []*models.WebCheckStep) {
 			var fullpageLoad = m["fullpage_load"].(bool)
 			var requireAuth = m["require_auth"].(bool)
 			var path = m["path"].(string)
-            var auth = GetAuth(m["auth"].([]interface{}))
+            var auth *models.Authentication
+            if requireAuth {
+                auth = GetAuth(m["auth"].([]interface{}))
+            }
 			var httpHeaders = m["http_headers"].(string)
 			var httpBody = m["http_body"].(string)
             var keyword = m["keyword"].(string)
@@ -388,7 +391,6 @@ func getPropFromStepsInterface(r interface{}) (t []*models.WebCheckStep) {
 				FullpageLoad: fullpageLoad,
 				RequireAuth: requireAuth,
 				Path: path,
-				Auth: &auth,
 				HTTPHeaders: httpHeaders,
 				HTTPBody: httpBody, 
 				Keyword: keyword,
@@ -400,21 +402,22 @@ func getPropFromStepsInterface(r interface{}) (t []*models.WebCheckStep) {
 				Type: typee,
 				StatusCode: statusCode,
                }
+			   if requireAuth {
+                model.Auth = auth
+            }
 			t = append(t, model)
 		}
 	}
 	return
 }
-func GetAuth(d []interface{}) (t models.Authentication) {
+func GetAuth(d []interface{}) (t *models.Authentication) {
 	for _, i := range d {
 		if m, ok := i.(map[string]interface{}); ok {
 			var userName = m["user_name"].(string)
 			var password = m["password"].(string)
 			var typee = m["type"].(string)
 			var domain = m["domain"].(string)
-            
-			
-			model := models.Authentication{
+            model := &models.Authentication{
 				Password: &password,
 				UserName: &userName,
 				Type: &typee,

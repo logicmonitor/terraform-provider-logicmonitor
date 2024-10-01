@@ -1,3 +1,8 @@
+variable "require_auth" {
+  description = "Whether authentication is required"
+  type        = bool
+  default     = true
+}
 resource "logicmonitor_website" "my_website"{
    type = "webcheck"
    host = "google.com"
@@ -34,14 +39,14 @@ resource "logicmonitor_website" "my_website"{
     name = "string"
     req_type = "config"
     fullpage_load = false
-    require_auth = true
+    require_auth = var.require_auth
     http_headers = "X-Version:3"
-    auth = [{ 
-      password = "string"
-      type = "ntlm"
-      user_name = "string"
-      domain = "string"
-    }]
+    auth = var.require_auth ? [{
+    password  = "string"
+    type      = "basic"
+    domain    = "string"
+    user_name = "string"
+    }] : []
     path = "$.data.resultKey"
     keyword = "DEVWRT-SANRT-JOB1-9127"
     http_body = "string"

@@ -299,13 +299,13 @@ resource "logicmonitor_website" "my_website" {
           name = "string"
           req_type = "config"
           fullpage_load = false
-          require_auth = false
-           auth = [{ 
-           password = "string"
-           type = "basic"
-           user_name = "string"
-           domain = "string"
-           }]
+          require_auth = var.require_auth
+          auth = var.require_auth ? [{
+            password  = "string"
+            type      = "basic"
+            domain    = "string"
+            user_name = "string"
+           }] : []
            path = "string"
            keyword = "DEVWRT-SANRT-JOB1-9127"
            http_body = "string"

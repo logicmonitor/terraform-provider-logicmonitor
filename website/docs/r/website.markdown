@@ -46,14 +46,14 @@ resource "logicmonitor_website" "my_website" {
     name = "string"
     req_type = "config"
     fullpage_load = false
-    require_auth = false
+    require_auth = var.require_auth
     path = "string"
-    auth = [{ 
-      password = "string"
-      type = "basic"
-      domain = "string"
-      user_name = "string"
-    }]
+    auth = var.require_auth ? [{
+    password  = "string"
+    type      = "basic"
+    domain    = "string"
+    user_name = "string"
+    }] : []
     keyword = "DEVWRT-SANRT-JOB1-9127"
     http_body = "string"
     resp_script = "string"
@@ -135,6 +135,12 @@ The polling interval for the website, in units of minutes. This value indicates 
   + `postDataEditType` - Raw | Formatted Data\nSpecifies POST data type
   + `fullpageLoad` - true | false\nChecks if full page should be loaded or not
   + `requireAuth` - true | false\nChecks if authorization required or not
+     define this variable in .tf configuration -
+     variable "require_auth" {
+     description = "Whether authentication is required"
+     type        = bool
+     default     = true
+    }
   + `path` - Path for JSON, XPATH
   + `auth`- Authorization Information
     + `password` - NTLM authentication password
