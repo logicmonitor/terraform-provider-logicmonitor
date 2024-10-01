@@ -1,3 +1,98 @@
+## 2.0.18 (October 03, 2024)
+
+* Website resource auth block handling
+
+## 2.0.17 (July 11, 2024)
+
+* Auto Discovery Feature Added And Provider Documentation Update
+* Use Default Root and Website schema parameter fix
+
+
+## 2.0.16 (May 30, 2024)
+
+* SSL expiration check added for website and datasource documentation update
+
+## 2.0.15 (May 8, 2024)
+
+* Test location parameter added for website resource
+* Escalation chain resource stage field fix
+
+## 2.0.14 (March 22, 2024)
+
+* Datasource documentation update
+
+## 2.0.13 (February 12, 2024)
+
+* Service insights support added
+* **New Resource:** `logicmonitor_datasource`
+
+## 2.0.12 (December 15, 2023)
+
+* Website resource fields added and documentation update
+
+## 2.0.11 (October 9, 2023)
+
+* **New Resource:** `logicmonitor_website_group`
+
+## 2.0.10 (September 15, 2023)
+
+* **New Resource:** `logicmonitor_website`
+
+* Escaltion chain bug fix for week_days
+
+## 2.0.9 (August 10, 2023)
+
+* **New Resource:** `logicmonitor_alert_rule`
+
+## 2.0.8 (August 1, 2023)
+
+* Escalation chain documentation update
+
+## 2.0.7 (August 1, 2023)
+
+* **New Resource:** `logicmonitor_escalation_chain`
+
+## 2.0.6 (April 26, 2023)
+
+* Added support for the following services:
+
+Azure/KeyVault
+Azure/LoadBalancers
+Azure/BackupProtectedItems
+Azure/RecoveryServices
+Azure/AutomationAccount
+Azure/VirtualMachineScaleSet
+Azure/LogAnalyticsWorkspaces
+Azure/VirtualNetworkGateway
+Azure/ServiceBus
+Azure/DataFactory
+Azure/ApplicationGateway
+Azure/EventHub
+Azure/VirtualDesktop
+Azure/SQLElasticPool
+Azure/TrafficManager
+Azure/RedisCache
+Azure/CosmosDB
+Azure/PostgreSQL
+Azure/RecoveryProtectedItems
+Azure/ApiManagement
+Azure/ExpressRouteCircuit
+Azure/SQLManagedInstance
+Azure/CognitiveServices
+Azure/FrontDoors
+Azure/Firewall
+Azure/MySQL
+Azure/SynapseWorkSpaces
+Azure/CognitiveSearch
+
+## 2.0.5 (February 22, 2023)
+
+* In this release, we are adding functionality to onboard Azure Cloud Accounts in TF Provider.
+
+## 2.0.4 (December 12, 2022)
+
+* In this release license information added.
+
 ## 2.0.3 (September 26, 2022)
 ENHANCEMENTS:
 * Add experimental `bulk_resource` configuration field to the provider.
