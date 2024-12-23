@@ -1,3 +1,8 @@
+## 2.0.19 (December 23, 2024)
+
+* Updated implementation of Alert rule for allowing escalation interval of 0 
+* Documentation update for custom properties
+
 ## 2.0.18 (October 03, 2024)
 
 * Website resource auth block handling
