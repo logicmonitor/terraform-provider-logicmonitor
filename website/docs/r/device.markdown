@@ -54,6 +54,12 @@ The following arguments are **optional**:
 * `auto_balanced_collector_group_id` - The Auto Balanced Collector Group id. 0 means not monitored by ABCG (int32)
 * `current_collector_id` - The id of the collector currently monitoring the device and discovering instances (int32)
 * `custom_properties` - Any non-system properties (aside from system.categories) defined for this device ([]*NameAndValue)
+    Custom properties can be assigned dynamically, so when we update the resource, they might be detected as changes. To prevent Terraform from flagging these changes, we can use the lifecycle block with the ignore_changes attribute, as shown below:
+    lifecycle {
+     ignore_changes = [
+       custom_properties
+     ]
+    }
   + `name` - The name of a property (required)
   + `value` - The value of a property (required)
 * `description` - The device description (string)

@@ -98,6 +98,12 @@ The following arguments are **optional**:
 * `collector_size` - The size of the collector (string), the default value is medium
 * `company` - The user's company (portal) name, this field is required if the environment variable LM_COMPANY is not set (string)
 * `custom_properties` - The custom properties defined for the Collector ([]*NameAndValue)
+    Custom properties can be assigned dynamically, so when we update the resource, they might be detected as changes. To prevent Terraform from flagging these changes, we can use the lifecycle block with the ignore_changes attribute, as shown below:
+    lifecycle {
+     ignore_changes = [
+       custom_properties
+     ]
+    }
   + `name` - The name of a property (required)
   + `value` - The value of a property (required)
 * `description` - The Collector's description (string)

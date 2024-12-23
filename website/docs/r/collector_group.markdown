@@ -43,6 +43,12 @@ The following arguments are **optional**:
 * `auto_balance_instance_count_threshold` - Threshold for instance count strategy to check if a collector has high load (int32)
 * `auto_balance_strategy` - The auto balance strategy. Typically left blank or set to 'none'. (string)
 * `custom_properties` - The custom properties defined for the Collector group ([]*NameAndValue)
+    Custom properties can be assigned dynamically, so when we update the resource, they might be detected as changes. To prevent Terraform from flagging these changes, we can use the lifecycle block with the ignore_changes attribute, as shown below:
+    lifecycle {
+     ignore_changes = [
+       custom_properties
+     ]
+    }
   + `name` - The name of a property (required)
   + `value` - The value of a property (required)
 * `description` - The description of the Collector Group (string)
