@@ -53,7 +53,8 @@ type AlertRule struct {
 
 	// The escalation interval associated with the alert rule, in minutes
 	// Example: 15
-	EscalationInterval int32 `json:"escalationInterval,omitempty"`
+	// Required: true
+	EscalationInterval *int32 `json:"escalationInterval"`
 
 	// The Id of the alert rule
 	// Read Only: true
@@ -108,6 +109,10 @@ func (m *AlertRule) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateEscalatingChainID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEscalationInterval(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -176,6 +181,15 @@ func (m *AlertRule) validateDevices(formats strfmt.Registry) error {
 func (m *AlertRule) validateEscalatingChainID(formats strfmt.Registry) error {
 
 	if err := validate.Required("escalatingChainId", "body", m.EscalatingChainID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AlertRule) validateEscalationInterval(formats strfmt.Registry) error {
+
+	if err := validate.Required("escalationInterval", "body", m.EscalationInterval); err != nil {
 		return err
 	}
 

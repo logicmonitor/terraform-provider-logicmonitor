@@ -48,7 +48,7 @@ func AlertRuleSchema() map[string]*schema.Schema {
 		
 		"escalation_interval": {
 			Type: schema.TypeInt,
-			Optional: true,
+			Required: true,
 		},
 		
 		"id": {
@@ -241,7 +241,7 @@ func AlertRuleModel(d *schema.ResourceData) *models.AlertRule {
 		DeviceGroups: deviceGroups,
 		Devices: devices,
 		EscalatingChainID: &escalatingChainID,
-		EscalationInterval: escalationInterval,
+		EscalationInterval: &escalationInterval,
 		ID: int32(id),
 		Instance: &instance,
 		LevelStr: levelStr,
