@@ -146,6 +146,35 @@ func (a *Client) GetDeviceList(params *GetDeviceListParams) (*GetDeviceListOK, e
 }
 
 /*
+PatchDevice updates a device
+*/
+func (a *Client) PatchDevice(params *PatchDeviceParams) (*PatchDeviceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPatchDeviceParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "patchDevice",
+		Method:             "PATCH",
+		PathPattern:        "/device/devices/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &PatchDeviceReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchDeviceOK), nil
+
+}
+
+/*
 UpdateDevice updates a device
 */
 func (a *Client) UpdateDevice(params *UpdateDeviceParams) (*UpdateDeviceOK, error) {

@@ -4,12 +4,20 @@ resource "logicmonitor_device" "my_device"{
 	custom_properties = [
 		{
 			name = "addr"
-      		value = "127.0.0.1"
+            value = "127.0.0.1"
 		},
 		{
 			name = "host"
-      		value = "localhost"
-		}
+            value = "localhost"
+		},
+        {
+			name = "location"
+            value = "pune"
+		},
+        {
+           name  = "system.categories"
+           value = "" 
+        }, 
 	]
 	description = "This is a Cisco Router"
 	device_type  = 0
@@ -21,4 +29,6 @@ resource "logicmonitor_device" "my_device"{
 	netflow_collector_id = 1
 	preferred_collector_id = 4
 	related_device_id = -1
+	need_stc_grp_and_sorted_c_p = false
+    host_group_ids = 263286
 }

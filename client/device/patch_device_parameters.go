@@ -20,50 +20,50 @@ import (
 	"terraform-provider-logicmonitor/models"
 )
 
-// NewUpdateDeviceParams creates a new UpdateDeviceParams object,
+// NewPatchDeviceParams creates a new PatchDeviceParams object,
 // with the default timeout for this client.
 //
 // Default values are not hydrated, since defaults are normally applied by the API server side.
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
-func NewUpdateDeviceParams() *UpdateDeviceParams {
-	return &UpdateDeviceParams{
+func NewPatchDeviceParams() *PatchDeviceParams {
+	return &PatchDeviceParams{
 		timeout: common.DefaultTimeout,
 	}
 }
 
-// NewUpdateDeviceParamsWithTimeout creates a new UpdateDeviceParams object
+// NewPatchDeviceParamsWithTimeout creates a new PatchDeviceParams object
 // with the ability to set a timeout on a request.
-func NewUpdateDeviceParamsWithTimeout(timeout time.Duration) *UpdateDeviceParams {
-	return &UpdateDeviceParams{
+func NewPatchDeviceParamsWithTimeout(timeout time.Duration) *PatchDeviceParams {
+	return &PatchDeviceParams{
 		timeout: timeout,
 	}
 }
 
-// NewUpdateDeviceParamsWithContext creates a new UpdateDeviceParams object
+// NewPatchDeviceParamsWithContext creates a new PatchDeviceParams object
 // with the ability to set a context for a request.
-func NewUpdateDeviceParamsWithContext(ctx context.Context) *UpdateDeviceParams {
-	return &UpdateDeviceParams{
+func NewPatchDeviceParamsWithContext(ctx context.Context) *PatchDeviceParams {
+	return &PatchDeviceParams{
 		Context: ctx,
 	}
 }
 
-// NewUpdateDeviceParamsWithHTTPClient creates a new UpdateDeviceParams object
+// NewPatchDeviceParamsWithHTTPClient creates a new PatchDeviceParams object
 // with the ability to set a custom HTTPClient for a request.
-func NewUpdateDeviceParamsWithHTTPClient(client *http.Client) *UpdateDeviceParams {
-	return &UpdateDeviceParams{
+func NewPatchDeviceParamsWithHTTPClient(client *http.Client) *PatchDeviceParams {
+	return &PatchDeviceParams{
 		HTTPClient: client,
 	}
 }
 
 /*
-UpdateDeviceParams contains all the parameters to send to the API endpoint
+PatchDeviceParams contains all the parameters to send to the API endpoint
 
-	for the update device operation.
+	for the patch device operation.
 
 	Typically these are written to a http.Request.
 */
-type UpdateDeviceParams struct {
+type PatchDeviceParams struct {
 
 	// Body.
 	Body *models.Device
@@ -99,25 +99,25 @@ type UpdateDeviceParams struct {
 	HTTPClient *http.Client
 }
 
-// WithDefaults hydrates default values in the update device params (not the query body).
+// WithDefaults hydrates default values in the patch device params (not the query body).
 //
 // All values with no default are reset to their zero value.
-func (o *UpdateDeviceParams) WithDefaults() *UpdateDeviceParams {
+func (o *PatchDeviceParams) WithDefaults() *PatchDeviceParams {
 	o.SetDefaults()
 	return o
 }
 
-// SetDefaults hydrates default values in the update device params (not the query body).
+// SetDefaults hydrates default values in the patch device params (not the query body).
 //
 // All values with no default are reset to their zero value.
-func (o *UpdateDeviceParams) SetDefaults() {
+func (o *PatchDeviceParams) SetDefaults() {
 	var (
 		needStcGrpAndSortedCPDefault = bool(false)
 
 		opTypeDefault = string("refresh")
 	)
 
-	val := UpdateDeviceParams{
+	val := PatchDeviceParams{
 		NeedStcGrpAndSortedCP: &needStcGrpAndSortedCPDefault,
 		OpType:                &opTypeDefault,
 	}
@@ -128,118 +128,118 @@ func (o *UpdateDeviceParams) SetDefaults() {
 	*o = val
 }
 
-// WithTimeout adds the timeout to the update device params
-func (o *UpdateDeviceParams) WithTimeout(timeout time.Duration) *UpdateDeviceParams {
+// WithTimeout adds the timeout to the patch device params
+func (o *PatchDeviceParams) WithTimeout(timeout time.Duration) *PatchDeviceParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the update device params
-func (o *UpdateDeviceParams) SetTimeout(timeout time.Duration) {
+// SetTimeout adds the timeout to the patch device params
+func (o *PatchDeviceParams) SetTimeout(timeout time.Duration) {
 	o.timeout = timeout
 }
 
-// WithContext adds the context to the update device params
-func (o *UpdateDeviceParams) WithContext(ctx context.Context) *UpdateDeviceParams {
+// WithContext adds the context to the patch device params
+func (o *PatchDeviceParams) WithContext(ctx context.Context) *PatchDeviceParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the update device params
-func (o *UpdateDeviceParams) SetContext(ctx context.Context) {
+// SetContext adds the context to the patch device params
+func (o *PatchDeviceParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the update device params
-func (o *UpdateDeviceParams) WithHTTPClient(client *http.Client) *UpdateDeviceParams {
+// WithHTTPClient adds the HTTPClient to the patch device params
+func (o *PatchDeviceParams) WithHTTPClient(client *http.Client) *PatchDeviceParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the update device params
-func (o *UpdateDeviceParams) SetHTTPClient(client *http.Client) {
+// SetHTTPClient adds the HTTPClient to the patch device params
+func (o *PatchDeviceParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the update device params
-func (o *UpdateDeviceParams) WithBody(body *models.Device) *UpdateDeviceParams {
+// WithBody adds the body to the patch device params
+func (o *PatchDeviceParams) WithBody(body *models.Device) *PatchDeviceParams {
 	o.SetBody(body)
 	return o
 }
 
-// SetBody adds the body to the update device params
-func (o *UpdateDeviceParams) SetBody(body *models.Device) {
+// SetBody adds the body to the patch device params
+func (o *PatchDeviceParams) SetBody(body *models.Device) {
 	o.Body = body
 }
 
-// WithEnd adds the end to the update device params
-func (o *UpdateDeviceParams) WithEnd(end *int64) *UpdateDeviceParams {
+// WithEnd adds the end to the patch device params
+func (o *PatchDeviceParams) WithEnd(end *int64) *PatchDeviceParams {
 	o.SetEnd(end)
 	return o
 }
 
-// SetEnd adds the end to the update device params
-func (o *UpdateDeviceParams) SetEnd(end *int64) {
+// SetEnd adds the end to the patch device params
+func (o *PatchDeviceParams) SetEnd(end *int64) {
 	o.End = end
 }
 
-// WithID adds the id to the update device params
-func (o *UpdateDeviceParams) WithID(id int32) *UpdateDeviceParams {
+// WithID adds the id to the patch device params
+func (o *PatchDeviceParams) WithID(id int32) *PatchDeviceParams {
 	o.SetID(id)
 	return o
 }
 
-// SetID adds the id to the update device params
-func (o *UpdateDeviceParams) SetID(id int32) {
+// SetID adds the id to the patch device params
+func (o *PatchDeviceParams) SetID(id int32) {
 	o.ID = id
 }
 
-// WithNeedStcGrpAndSortedCP adds the needStcGrpAndSortedCP to the update device params
-func (o *UpdateDeviceParams) WithNeedStcGrpAndSortedCP(needStcGrpAndSortedCP *bool) *UpdateDeviceParams {
+// WithNeedStcGrpAndSortedCP adds the needStcGrpAndSortedCP to the patch device params
+func (o *PatchDeviceParams) WithNeedStcGrpAndSortedCP(needStcGrpAndSortedCP *bool) *PatchDeviceParams {
 	o.SetNeedStcGrpAndSortedCP(needStcGrpAndSortedCP)
 	return o
 }
 
-// SetNeedStcGrpAndSortedCP adds the needStcGrpAndSortedCP to the update device params
-func (o *UpdateDeviceParams) SetNeedStcGrpAndSortedCP(needStcGrpAndSortedCP *bool) {
+// SetNeedStcGrpAndSortedCP adds the needStcGrpAndSortedCP to the patch device params
+func (o *PatchDeviceParams) SetNeedStcGrpAndSortedCP(needStcGrpAndSortedCP *bool) {
 	o.NeedStcGrpAndSortedCP = needStcGrpAndSortedCP
 }
 
-// WithNetflowFilter adds the netflowFilter to the update device params
-func (o *UpdateDeviceParams) WithNetflowFilter(netflowFilter *string) *UpdateDeviceParams {
+// WithNetflowFilter adds the netflowFilter to the patch device params
+func (o *PatchDeviceParams) WithNetflowFilter(netflowFilter *string) *PatchDeviceParams {
 	o.SetNetflowFilter(netflowFilter)
 	return o
 }
 
-// SetNetflowFilter adds the netflowFilter to the update device params
-func (o *UpdateDeviceParams) SetNetflowFilter(netflowFilter *string) {
+// SetNetflowFilter adds the netflowFilter to the patch device params
+func (o *PatchDeviceParams) SetNetflowFilter(netflowFilter *string) {
 	o.NetflowFilter = netflowFilter
 }
 
-// WithOpType adds the opType to the update device params
-func (o *UpdateDeviceParams) WithOpType(opType *string) *UpdateDeviceParams {
+// WithOpType adds the opType to the patch device params
+func (o *PatchDeviceParams) WithOpType(opType *string) *PatchDeviceParams {
 	o.SetOpType(opType)
 	return o
 }
 
-// SetOpType adds the opType to the update device params
-func (o *UpdateDeviceParams) SetOpType(opType *string) {
+// SetOpType adds the opType to the patch device params
+func (o *PatchDeviceParams) SetOpType(opType *string) {
 	o.OpType = opType
 }
 
-// WithStart adds the start to the update device params
-func (o *UpdateDeviceParams) WithStart(start *int64) *UpdateDeviceParams {
+// WithStart adds the start to the patch device params
+func (o *PatchDeviceParams) WithStart(start *int64) *PatchDeviceParams {
 	o.SetStart(start)
 	return o
 }
 
-// SetStart adds the start to the update device params
-func (o *UpdateDeviceParams) SetStart(start *int64) {
+// SetStart adds the start to the patch device params
+func (o *PatchDeviceParams) SetStart(start *int64) {
 	o.Start = start
 }
 
 // WriteToRequest writes these params to a swagger request
-func (o *UpdateDeviceParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
+func (o *PatchDeviceParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
 	if err := r.SetTimeout(o.timeout); err != nil {
 		return err

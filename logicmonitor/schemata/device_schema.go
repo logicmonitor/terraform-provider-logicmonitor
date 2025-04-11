@@ -15,7 +15,7 @@ func DeviceSchema() map[string]*schema.Schema {
 		},
 		
 		"auto_properties": {
-			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Type: schema.TypeSet,
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
@@ -59,7 +59,7 @@ func DeviceSchema() map[string]*schema.Schema {
 		},
 		
 		"custom_properties": {
-			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Type: schema.TypeSet,
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
@@ -118,7 +118,7 @@ func DeviceSchema() map[string]*schema.Schema {
 		},
 		
 		"inherited_properties": {
-			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Type: schema.TypeSet,
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
@@ -144,6 +144,11 @@ func DeviceSchema() map[string]*schema.Schema {
 		"name": {
 			Type: schema.TypeString,
 			Required: true,
+		},
+		
+		"need_stc_grp_and_sorted_c_p": {
+			Type: schema.TypeBool,
+			Optional: true,
 		},
 		
 		"netflow_collector_description": {
@@ -192,7 +197,7 @@ func DeviceSchema() map[string]*schema.Schema {
 		},
 		
 		"system_properties": {
-			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Type: schema.TypeSet,
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
@@ -366,6 +371,11 @@ func DataSourceDeviceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"need_stc_grp_and_sorted_c_p": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
 		"netflow_collector_description": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -473,6 +483,7 @@ func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("last_rawdata_time", m.LastRawdataTime)
 	d.Set("link", m.Link)
 	d.Set("name", m.Name)
+	d.Set("need_stc_grp_and_sorted_c_p", m.NeedStcGrpAndSortedCP)
 	d.Set("netflow_collector_description", m.NetflowCollectorDescription)
 	d.Set("netflow_collector_group_id", m.NetflowCollectorGroupID)
 	d.Set("netflow_collector_group_name", m.NetflowCollectorGroupName)
@@ -518,6 +529,7 @@ func SetDeviceSubResourceData(m []*models.Device) (d []*map[string]interface{}) 
 			properties["last_rawdata_time"] = device.LastRawdataTime
 			properties["link"] = device.Link
 			properties["name"] = device.Name
+			properties["need_stc_grp_and_sorted_c_p"] = device.NeedStcGrpAndSortedCP
 			properties["netflow_collector_description"] = device.NetflowCollectorDescription
 			properties["netflow_collector_group_id"] = device.NetflowCollectorGroupID
 			properties["netflow_collector_group_name"] = device.NetflowCollectorGroupName
@@ -551,6 +563,7 @@ func DeviceModel(d *schema.ResourceData) *models.Device {
 	id, _ := strconv.Atoi(d.Get("id").(string))
 	link := d.Get("link").(string)
 	name := d.Get("name").(string)
+	needStcGrpAndSortedCP := d.Get("need_stc_grp_and_sorted_c_p").(bool)
 	netflowCollectorID := int32(d.Get("netflow_collector_id").(int))
 	preferredCollectorID := int32(d.Get("preferred_collector_id").(int))
 	relatedDeviceID := int32(d.Get("related_device_id").(int))
@@ -568,6 +581,7 @@ func DeviceModel(d *schema.ResourceData) *models.Device {
 		ID: int32(id),
 		Link: link,
 		Name: &name,
+		NeedStcGrpAndSortedCP: &needStcGrpAndSortedCP,
 		NetflowCollectorID: netflowCollectorID,
 		PreferredCollectorID: &preferredCollectorID,
 		RelatedDeviceID: relatedDeviceID,
@@ -587,6 +601,7 @@ func GetDevicePropertyFields() (t []string) {
 		"id",
 		"link",
 		"name",
+		"need_stc_grp_and_sorted_c_p",
 		"netflow_collector_id",
 		"preferred_collector_id",
 		"related_device_id",

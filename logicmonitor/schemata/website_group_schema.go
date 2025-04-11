@@ -60,7 +60,7 @@ func WebsiteGroupSchema() map[string]*schema.Schema {
 		},
 		
 		"properties": {
-			Type: schema.TypeList, //GoType: []*NameAndValue  
+			Type: schema.TypeSet,
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},

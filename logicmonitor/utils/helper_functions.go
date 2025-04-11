@@ -105,7 +105,19 @@ func GetPropertiesFromResource(d *schema.ResourceData, key string) (t []*models.
 }
 
 func getPropertiesFromInterface(r interface{}) (t []*models.NameAndValue) {
-	for _, i := range r.([]interface{}) {
+	// Convert *schema.Set to []interface{} first
+	var list []interface{}
+
+	if set, ok := r.(*schema.Set); ok {
+		list = set.List() // Converts *schema.Set to []interface{}
+	} else if arr, ok := r.([]interface{}); ok {
+		list = arr // Already in expected format
+	} else {
+		return // Return empty if type is unknown
+	}
+
+	// Iterate over the list
+	for _, i := range list {
 		if m, ok := i.(map[string]interface{}); ok {
 			var name = m["name"].(string)
 			var value = m["value"].(string)
@@ -118,7 +130,6 @@ func getPropertiesFromInterface(r interface{}) (t []*models.NameAndValue) {
 	}
 	return
 }
-
 // retrieve resource custom properties (techops version - json object input)
 func GetPropertiesTechops(d *schema.ResourceData) (t []*models.NameAndValue) {
 	// interate through hashmap to get custom/system properties
