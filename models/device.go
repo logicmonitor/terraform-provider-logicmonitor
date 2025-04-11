@@ -16,6 +16,7 @@ import (
 )
 
 // Device device
+// Example: isResource
 //
 // swagger:model Device
 type Device struct {
@@ -120,6 +121,10 @@ type Device struct {
 	// Example: collector.localhost
 	// Required: true
 	Name *string `json:"name"`
+
+	// Indicates whether Static group and sorted Custom properties are needed
+	// Example: true
+	NeedStcGrpAndSortedCP *bool `json:"needStcGrpAndSortedCP,omitempty"`
 
 	// The description/name of the netflow collector for this device
 	// Read Only: true

@@ -56,7 +56,7 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 		},
 		
 		"custom_properties": {
-			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Type: schema.TypeSet,
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
@@ -186,7 +186,7 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 		},
 		
 		"sub_groups": {
-			Type: schema.TypeList, //GoType: []*DeviceGroupData 
+			Type: schema.TypeList, //GoType: []*DeviceGroupData  
 			Elem: &schema.Resource{
 				Schema: DeviceGroupDataSchema(),
 			},

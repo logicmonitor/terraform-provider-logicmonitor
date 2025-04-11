@@ -48,7 +48,35 @@ func addDevice(ctx context.Context, d *schema.ResourceData, m interface{}) diag.
 
 	model := schemata.DeviceModel(d)
 	params := device.NewAddDeviceParams()
+
+	addFromWizardVal, addFromWizardIsSet := d.GetOk("add_from_wizard")
+	if addFromWizardIsSet {
+		addFromWizard := addFromWizardVal.(bool)
+		params.AddFromWizard = &addFromWizard
+	}
+
 	params.SetBody(model)
+
+	endVal, endIsSet := d.GetOk("end")
+	if endIsSet {
+		params.End = endVal.(*int64)
+	}
+
+	needStcGrpAndSortedCPVal, needStcGrpAndSortedCPIsSet := d.GetOk("need_stc_grp_and_sorted_c_p")
+	if needStcGrpAndSortedCPIsSet {
+		needStcGrpAndSortedCP := needStcGrpAndSortedCPVal.(bool)
+		params.NeedStcGrpAndSortedCP = &needStcGrpAndSortedCP
+	}
+
+	netflowFilterVal, netflowFilterIsSet := d.GetOk("netflow_filter")
+	if netflowFilterIsSet {
+		params.NetflowFilter = netflowFilterVal.(*string)
+	}
+
+	startVal, startIsSet := d.GetOk("start")
+	if startIsSet {
+		params.Start = startVal.(*int64)
+	}
 
 	client := m.(*client.LogicMonitorRESTAPI)
 
@@ -216,6 +244,12 @@ func updateDevice(ctx context.Context, d *schema.ResourceData, m interface{}) di
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
 		return diags
+	}
+
+	needStcGrpAndSortedCPVal, needStcGrpAndSortedCPIsSet := d.GetOk("need_stc_grp_and_sorted_c_p")
+	if needStcGrpAndSortedCPIsSet {
+		needStcGrpAndSortedCP := needStcGrpAndSortedCPVal.(bool)
+		params.NeedStcGrpAndSortedCP = &needStcGrpAndSortedCP
 	}
 
 	netflowFilterVal, netflowFilterIsSet := d.GetOk("netflow_filter")

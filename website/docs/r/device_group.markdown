@@ -23,7 +23,11 @@ resource "logicmonitor_device_group" "my_device_group" {
 		{
 			name = "host"
       		value = "localhost"
-		}
+		},
+    {
+      name  = "system.categories"
+      value = "" 
+    }
 	]
   default_collector_id = 1
   description = "Linux Servers"
@@ -159,12 +163,7 @@ The following arguments are **required**:
 The following arguments are **optional**:
 * `applies_to` - The Applies to custom query for this group (only for dynamic groups) (string)
 * `custom_properties` - The properties associated with this device group ([]*NameAndValue)
-    Custom properties can be assigned dynamically, so when we update the resource, they might be detected as changes. To prevent Terraform from flagging these changes, we can use the lifecycle block with the ignore_changes attribute, as shown below:
-    lifecycle {
-     ignore_changes = [
-       custom_properties
-     ]
-    }
+    Provide custom properties in alphabetical order based on their property name.
   + `name` - The name of a property (required)
   + `value` - The value of a property (required)
 * `default_collector_id` - The Id of the default collector assigned to the device group (int32)

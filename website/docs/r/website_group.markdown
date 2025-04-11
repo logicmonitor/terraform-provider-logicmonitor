@@ -41,12 +41,7 @@ false: alerting is enabled for the websites in the group
 If stopMonitoring=true, then alerting will also by default be disabled for the websites in the group (bool)
 * `parent_id` - The Id of the parent group. If parentId=1 then the group exists under the root  group (int32)
 * `properties` -  ([]*NameAndValue)
-    Custom properties can be assigned dynamically, so when we update the resource, they might be detected as changes. To prevent Terraform from flagging these changes, we can use the lifecycle block with the ignore_changes attribute, as shown below:
-    lifecycle {
-     ignore_changes = [
-       custom_properties
-     ]
-    }
+    Provide custom properties in alphabetical order based on their property name.
   + `name` - The name of a property (required)
   + `value` - The value of a property (required)
 * `stop_monitoring` - true: monitoring is disabled for the websites in the group

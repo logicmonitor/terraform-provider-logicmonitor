@@ -120,7 +120,7 @@ func CollectorSchema() map[string]*schema.Schema {
 		},
 		
 		"custom_properties": {
-			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Type: schema.TypeSet,
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
