@@ -74,6 +74,8 @@ provider "logicmonitor" {
   api_id = var.logicmonitor_api_id
   api_key = var.logicmonitor_api_key
   company = var.logicmonitor_company
+  domain = logicmonitor.com
+  "The company domain(optional). Defaults to logicmonitor.com. For gov companies, specify the appropriate domain value (e.g., qa-lmgov.us)"
   bulk_resource = true/false
   "When working with bulk resources, this feature is optional to handle the API's rate limit"
 }
