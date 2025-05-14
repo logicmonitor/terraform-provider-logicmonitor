@@ -360,3 +360,4 @@ The following arguments are supported:
 * `api_key` - (Required) LogicMonitor API key. This can also be set via the `LM_API_KEY` environment variable.
 * `company` - (Required) LogicMonitor company name. This can also be set via the `LM_COMPANY` environment variable.
 * `bulk_resource` - (Optional) True if going for bulk resources that can exceed the rate limit. The default value is false.
+* `domain` - The company domain. Defaults to logicmonitor.com. For gov companies, specify the appropriate domain value (e.g., qa-lmgov.us).

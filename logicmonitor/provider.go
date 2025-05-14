@@ -22,6 +22,11 @@ func Provider() *schema.Provider {
 				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("LM_API_KEY", nil),
 			},
+			"domain": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Default:  "logicmonitor.com",
+			},
 			"company": {
 				Type:        schema.TypeString,
 				Required:    true,
@@ -31,7 +36,7 @@ func Provider() *schema.Provider {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
-				Description: "(Experimental) true if going for bulk resource, default is false",
+				Description: "true if going for bulk resource, default is false",
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
@@ -71,8 +76,10 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 
 	id := d.Get("api_id").(string)
 	key := d.Get("api_key").(string)
-	company := d.Get("company").(string) + ".logicmonitor.com"
+	domain := d.Get("domain").(string)
+	company := d.Get("company").(string) + "." + domain
 	bulkResource := d.Get("bulk_resource").(bool)
+
 	config := client.NewConfig()
 	config.SetAccessKey(&key)
 	config.SetAccessID(&id)
