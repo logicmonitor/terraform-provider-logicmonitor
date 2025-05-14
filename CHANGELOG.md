@@ -1,3 +1,13 @@
+## 2.0.21 (May, 2025)
+
+* Domain field added in provider block to handle gov domains
+* Special handling for 'need_stc_grp_and_sorted_c_p' query param
+
+
+## 2.0.20 (April 11, 2025)
+
+* HostGroupIds and custom properties fix
+
 ## 2.0.19 (December 23, 2024)
 
 * Updated implementation of Alert rule for allowing escalation interval of 0 

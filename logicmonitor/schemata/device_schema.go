@@ -483,7 +483,12 @@ func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("last_rawdata_time", m.LastRawdataTime)
 	d.Set("link", m.Link)
 	d.Set("name", m.Name)
-	d.Set("need_stc_grp_and_sorted_c_p", m.NeedStcGrpAndSortedCP)
+	// Special handling for 'need_stc_grp_and_sorted_c_p' as it is a query param and not returned by API
+	if val, ok := d.GetOk("need_stc_grp_and_sorted_c_p"); ok {
+		d.Set("need_stc_grp_and_sorted_c_p", val)
+	} else {
+		d.Set("need_stc_grp_and_sorted_c_p", m.NeedStcGrpAndSortedCP)
+	}
 	d.Set("netflow_collector_description", m.NetflowCollectorDescription)
 	d.Set("netflow_collector_group_id", m.NetflowCollectorGroupID)
 	d.Set("netflow_collector_group_name", m.NetflowCollectorGroupName)
