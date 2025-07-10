@@ -2,12 +2,16 @@ package logicmonitor
 
 import (
 	"context"
+	"fmt"
+	"net/http"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/logicmonitor/resources"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
+
+var ProviderVersion string
 
 func Provider() *schema.Provider {
 	return &schema.Provider{
@@ -86,11 +90,29 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	config.SetAccountDomain(&company)
 	config.SetBulkResource(&bulkResource)
 
+	// Create the HTTP client with a custom User-Agent
+	httpClient := &http.Client{
+		Transport: &userAgentTransport{
+			underlyingTransport: http.DefaultTransport,
+			userAgent:           fmt.Sprintf("logicmonitor-terraform-provider/v%s", ProviderVersion),
+		},
+	}
 	c := ValidateClient{}
-	httpClient := c.loadAndValidate(bulkResource)
+	httpClient = c.loadAndValidate(httpClient, bulkResource)
 
 	//TODO: Find out what errors this can throw and capture them.
 	client := client.New(config, httpClient)
 
 	return client, diags
+}
+
+// userAgentTransport is a custom HTTP transport to add the User-Agent header
+type userAgentTransport struct {
+	underlyingTransport http.RoundTripper
+	userAgent           string
+}
+
+func (t *userAgentTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	req.Header.Set("User-Agent", t.userAgent)
+	return t.underlyingTransport.RoundTrip(req)
 }

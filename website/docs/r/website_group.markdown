@@ -25,6 +25,14 @@ resource "logicmonitor_website_group" "my_website_group" {
    }  
   ]
   stop_monitoring = false
+  test_location = [
+    {
+      all = false
+      collector_ids = [1, 2, 3]
+      collectors = null
+      smg_ids = [85, 90]
+    }
+  ]
 }
 ```
 
@@ -47,6 +55,12 @@ If stopMonitoring=true, then alerting will also by default be disabled for the w
 * `stop_monitoring` - true: monitoring is disabled for the websites in the group
 false: monitoring is enabled for the websites in the group
 If stopMonitoring=true, then alerting will also by default be disabled for the websites in the group (bool)
+* `test_location` - An object that indicates the websites locations.
+eg. {'all': false, smgId:[1,2,3], collectorIds:[14,16]} (WebsiteLocation)
+  + `all` - (true | false) Indicates that the service will be monitored from all checkpoint locations
+  + `collectorIds` - indicates that the service will be monitored from checkpoint locations 1, 2 and 3
+  + `collectors` - Need to pass 'null' value
+  + `smgIds` - indicates that the service will be monitored by Collectors 85 and 90
 
 ## Import
 

@@ -29,6 +29,7 @@ resource "logicmonitor_device_group" "my_device_group" {
       value = "" 
     }
 	]
+  default_auto_balanced_collector_group_id = 
   default_collector_id = 1
   description = "Linux Servers"
   disable_alerting = true
@@ -166,6 +167,7 @@ The following arguments are **optional**:
     Provide custom properties in alphabetical order based on their property name.
   + `name` - The name of a property (required)
   + `value` - The value of a property (required)
+* `default_auto_balanced_collector_group_id` - The id of the default Auto Balanced Collector Group assigned to the device group (int32)
 * `default_collector_id` - The Id of the default collector assigned to the device group (int32)
 * `description` - The description of the device group (string)
 * `disable_alerting` - Indicates whether alerting is disabled (true) or enabled (false) for this device group (bool)

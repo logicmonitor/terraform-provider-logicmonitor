@@ -194,6 +194,21 @@ func GetCloudTagFilters(d []interface{}) (t []*models.CloudTagFilter) {
 	}
 	return
 }
+func GetResourceProperties(d []interface{}) (t []*models.DeviceProperty ) {
+	for _, i := range d {
+		if m, ok := i.(map[string]interface{}); ok {
+			var name = m["name"].(string)
+			var value = m["value"].(string)
+
+			model := &models.DeviceProperty{
+				Name:      &name,
+				Value:     &value,
+			}
+			t = append(t, model)
+		}
+	}
+	return
+}
 
 func ConvertSetToStringSlice(set *schema.Set) (slice []string) {
 	if set == nil {

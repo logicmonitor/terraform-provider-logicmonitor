@@ -46,6 +46,13 @@ resource "logicmonitor_alert_rule" "my_alert_rule" {
         "Devices by Type"
         ]
         escalation_interval = 15
+        resource_properties = [
+         {
+           name  = "test.pass"
+           value = "string"
+          }
+         ]
+        send_anomaly_suppressed_alert = true
 }
 ```
 
@@ -87,6 +94,14 @@ resource "logicmonitor_dashboard" "my_dashboard" {
       	description = "my dashboard"
         name = "test_dashboard"
         sharable = true
+        widget_tokens = [
+        {
+         name  = "defaultDeviceGroup"
+         value = "*"
+         inherit_list = null
+         type = null
+        }
+      ]
 }
 ```
 
@@ -97,6 +112,14 @@ resource "logicmonitor_dashboard" "my_dashboard" {
 resource "logicmonitor_dashboard_group" "my_dashboard_group" {
         name = "LogicMonitor Dashboard Group"
         description  = "LM dashboard group testing"
+        widget_tokens = [
+        {
+         name  = "defaultDeviceGroup"
+         value = "*"
+         inherit_list = null
+         type = null
+        }
+       ]
 }
 ```
 

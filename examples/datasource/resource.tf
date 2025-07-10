@@ -1,6 +1,17 @@
 // For adding a logicmonitor datasource resource , also use this to configure a datasource for the service resource. For more information refer  README.md file (terraform-provider-logicmonitor/resources_docs/README.md) 
 
 resource "logicmonitor_datasource" "my_datasource"{
+  access_groups {
+    name        = "LinuxGroup"
+    tenant_id   = "tenant-123"
+    description = "Linux servers access group"
+  }
+  access_groups {
+    name        = "WindowsGroup"
+    tenant_id   = "tenant-456"
+    description = "Windows servers access group"
+  }
+  access_group_ids = [123,120]
   collect_interval = 100
   has_multi_instances = true
   applies_to = "system.deviceId == \"22\""
@@ -49,7 +60,7 @@ resource "logicmonitor_datasource" "my_datasource"{
           min_value = ""
           alert_body = "string"
           alert_subject = "string"
-          alert_expr = "string"
+          alert_expr = "< 100"
           alert_expr_note = "string"
           type = 2
           raw_data_field_name = "string"

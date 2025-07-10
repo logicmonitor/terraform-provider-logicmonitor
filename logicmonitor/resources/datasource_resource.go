@@ -48,7 +48,14 @@ func addDatasourceById(ctx context.Context, d *schema.ResourceData, m interface{
 
 	model := schemata.DatasourceModel(d)
 	params := datasource.NewAddDatasourceByIDParams()
+
 	params.SetBody(model)
+
+	createGraphVal, createGraphIsSet := d.GetOk("create_graph")
+	if createGraphIsSet {
+		createGraph := createGraphVal.(bool)
+		params.CreateGraph = &createGraph
+	}
 
 	client := m.(*client.LogicMonitorRESTAPI)
 
@@ -180,7 +187,8 @@ func updateDatasourceById(ctx context.Context, d *schema.ResourceData, m interfa
 
 	forceUniqueIdentifierVal, forceUniqueIdentifierIsSet := d.GetOk("force_unique_identifier")
 	if forceUniqueIdentifierIsSet {
-		params.ForceUniqueIdentifier = forceUniqueIdentifierVal.(*bool)
+		forceUniqueIdentifier := forceUniqueIdentifierVal.(bool)
+		params.ForceUniqueIdentifier = &forceUniqueIdentifier
 	}
 
 	idVal, idIsSet := d.GetOk("id")

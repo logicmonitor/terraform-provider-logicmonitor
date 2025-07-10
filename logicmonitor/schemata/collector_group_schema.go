@@ -43,6 +43,14 @@ func CollectorGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"highest_priority_collector_status": {
+			Type: schema.TypeList, //GoType: RestHighestPriorityCollectorStatus
+			Elem: &schema.Resource{
+				Schema: RestHighestPriorityCollectorStatusSchema(),
+			},
+			Computed: true,
+		},
+		
 		"id": {
 			Type: schema.TypeString,
 			Computed: true,
@@ -105,6 +113,14 @@ func DataSourceCollectorGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"highest_priority_collector_status": {
+			Type: schema.TypeList, //GoType: RestHighestPriorityCollectorStatus
+			Elem: &schema.Resource{
+				Schema: RestHighestPriorityCollectorStatusSchema(),
+			},
+			Optional: true,
+		},
+		
 		"id": {
 			Type: schema.TypeInt,
 			Computed: true,
@@ -140,6 +156,7 @@ func SetCollectorGroupResourceData(d *schema.ResourceData, m *models.CollectorGr
 	d.Set("create_on", m.CreateOn)
 	d.Set("custom_properties", SetNameAndValueSubResourceData(m.CustomProperties))
 	d.Set("description", m.Description)
+	d.Set("highest_priority_collector_status", SetRestHighestPriorityCollectorStatusSubResourceData([]*models.RestHighestPriorityCollectorStatus{m.HighestPriorityCollectorStatus}))
 	d.Set("id", strconv.Itoa(int(m.ID)))
 	d.Set("name", m.Name)
 	d.Set("num_of_collectors", m.NumOfCollectors)
@@ -156,6 +173,7 @@ func SetCollectorGroupSubResourceData(m []*models.CollectorGroup) (d []*map[stri
 			properties["create_on"] = collectorGroup.CreateOn
 			properties["custom_properties"] = SetNameAndValueSubResourceData(collectorGroup.CustomProperties)
 			properties["description"] = collectorGroup.Description
+			properties["highest_priority_collector_status"] = SetRestHighestPriorityCollectorStatusSubResourceData([]*models.RestHighestPriorityCollectorStatus{collectorGroup.HighestPriorityCollectorStatus})
 			properties["id"] = collectorGroup.ID
 			properties["name"] = collectorGroup.Name
 			properties["num_of_collectors"] = collectorGroup.NumOfCollectors
