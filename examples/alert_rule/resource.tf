@@ -1,3 +1,4 @@
+//Test
 resource "logicmonitor_alert_rule" "my_alert_rule"{
   datapoint = "*"
   instance = "*"
