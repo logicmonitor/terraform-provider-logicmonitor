@@ -10,6 +10,7 @@ resource "logicmonitor_device_group" "my_device_group" {
     value = "127.0.0.1"
   }
   group_type = "Normal"
+  default_auto_balanced_collector_group_id = 0
 }
 
 /* AWS Device Group Testing */

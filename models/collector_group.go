@@ -44,6 +44,10 @@ type CollectorGroup struct {
 	// Example: Group for collectors dedicated to Network Devices
 	Description string `json:"description,omitempty"`
 
+	// The status of the highest priority sub collector
+	// Read Only: true
+	HighestPriorityCollectorStatus *RestHighestPriorityCollectorStatus `json:"highestPriorityCollectorStatus,omitempty"`
+
 	// The id of the Collector Group
 	// Read Only: true
 	ID int32 `json:"id,omitempty"`
@@ -67,6 +71,10 @@ func (m *CollectorGroup) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCustomProperties(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHighestPriorityCollectorStatus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -106,6 +114,25 @@ func (m *CollectorGroup) validateCustomProperties(formats strfmt.Registry) error
 	return nil
 }
 
+func (m *CollectorGroup) validateHighestPriorityCollectorStatus(formats strfmt.Registry) error {
+	if swag.IsZero(m.HighestPriorityCollectorStatus) { // not required
+		return nil
+	}
+
+	if m.HighestPriorityCollectorStatus != nil {
+		if err := m.HighestPriorityCollectorStatus.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("highestPriorityCollectorStatus")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("highestPriorityCollectorStatus")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CollectorGroup) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
@@ -124,6 +151,10 @@ func (m *CollectorGroup) ContextValidate(ctx context.Context, formats strfmt.Reg
 	}
 
 	if err := m.contextValidateCustomProperties(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHighestPriorityCollectorStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -169,6 +200,22 @@ func (m *CollectorGroup) contextValidateCustomProperties(ctx context.Context, fo
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *CollectorGroup) contextValidateHighestPriorityCollectorStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HighestPriorityCollectorStatus != nil {
+		if err := m.HighestPriorityCollectorStatus.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("highestPriorityCollectorStatus")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("highestPriorityCollectorStatus")
+			}
+			return err
+		}
 	}
 
 	return nil

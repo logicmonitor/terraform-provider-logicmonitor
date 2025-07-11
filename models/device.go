@@ -49,6 +49,9 @@ type Device struct {
 	// Read Only: true
 	CollectorDescription string `json:"collectorDescription,omitempty"`
 
+	// request contains multi value field
+	ContainsMultiValue bool `json:"containsMultiValue,omitempty"`
+
 	// The time, in epoch seconds format, that the device was added to your LogicMonitor account
 	// Read Only: true
 	CreatedOn int64 `json:"createdOn,omitempty"`
@@ -56,6 +59,10 @@ type Device struct {
 	// The id of the collector currently monitoring the device and discovering instances
 	// Example: 1
 	CurrentCollectorID int32 `json:"currentCollectorId,omitempty"`
+
+	// The id of the Log collector currently collecting logs.
+	// Example: 1
+	CurrentLogCollectorID int32 `json:"currentLogCollectorId,omitempty"`
 
 	// Any non-system properties (aside from system.categories) defined for this device
 	CustomProperties []*NameAndValue `json:"customProperties"`
@@ -105,6 +112,10 @@ type Device struct {
 	// Read Only: true
 	InheritedProperties []*NameAndValue `json:"inheritedProperties"`
 
+	// Indicates whether Preferred Log Collector is configured  (true) or not (false) for the device
+	// Example: true
+	IsPreferredLogCollectorConfigured bool `json:"isPreferredLogCollectorConfigured,omitempty"`
+
 	// The last time, in epoch seconds, that the device received Netflow data
 	// Read Only: true
 	LastDataTime int64 `json:"lastDataTime,omitempty"`
@@ -116,6 +127,10 @@ type Device struct {
 	// The URL link associated with the device
 	// Example: www.ciscorouter.com
 	Link string `json:"link,omitempty"`
+
+	// The Id of the netflow collector associated with the device
+	// Example: 1
+	LogCollectorID int32 `json:"logCollectorId,omitempty"`
 
 	// The host name or IP address of the device
 	// Example: collector.localhost
@@ -142,6 +157,9 @@ type Device struct {
 	// Example: 1
 	NetflowCollectorID int32 `json:"netflowCollectorId,omitempty"`
 
+	// whether to use AND or OR for device matching
+	Op string `json:"op,omitempty"`
+
 	// The id of the Collector Group associated with the device's preferred collector
 	// Read Only: true
 	PreferredCollectorGroupID int32 `json:"preferredCollectorGroupId,omitempty"`
@@ -159,10 +177,18 @@ type Device struct {
 	// Example: -1
 	RelatedDeviceID int32 `json:"relatedDeviceId,omitempty"`
 
+	// Any non-system properties (aside from system.categories) defined for this device
+	ResourceIds []*NameAndValue `json:"resourceIds"`
+
 	// The Id of the netscan configuration which was used to discover this device. 0 indicates that the device was not discovered by a scan
 	// Example: 0
 	// Read Only: true
 	ScanConfigID int32 `json:"scanConfigId,omitempty"`
+
+	// The list of ids of the collectors currently monitoring the resource and discovering instances
+	// Example: 1,4
+	// Unique: true
+	SyntheticsCollectorIds []int32 `json:"syntheticsCollectorIds"`
 
 	// Any system properties (aside from system.categories) defined for this device
 	// Read Only: true
@@ -215,6 +241,14 @@ func (m *Device) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePreferredCollectorID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateResourceIds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSyntheticsCollectorIds(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -333,6 +367,44 @@ func (m *Device) validatePreferredCollectorID(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Device) validateResourceIds(formats strfmt.Registry) error {
+	if swag.IsZero(m.ResourceIds) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ResourceIds); i++ {
+		if swag.IsZero(m.ResourceIds[i]) { // not required
+			continue
+		}
+
+		if m.ResourceIds[i] != nil {
+			if err := m.ResourceIds[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("resourceIds" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("resourceIds" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Device) validateSyntheticsCollectorIds(formats strfmt.Registry) error {
+	if swag.IsZero(m.SyntheticsCollectorIds) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("syntheticsCollectorIds", "body", m.SyntheticsCollectorIds); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Device) validateSystemProperties(formats strfmt.Registry) error {
 	if swag.IsZero(m.SystemProperties) { // not required
 		return nil
@@ -440,6 +512,10 @@ func (m *Device) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	}
 
 	if err := m.contextValidatePreferredCollectorGroupName(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateResourceIds(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -689,6 +765,26 @@ func (m *Device) contextValidatePreferredCollectorGroupName(ctx context.Context,
 
 	if err := validate.ReadOnly(ctx, "preferredCollectorGroupName", "body", string(m.PreferredCollectorGroupName)); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Device) contextValidateResourceIds(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ResourceIds); i++ {
+
+		if m.ResourceIds[i] != nil {
+			if err := m.ResourceIds[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("resourceIds" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("resourceIds" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

@@ -48,6 +48,7 @@ func addCollector(ctx context.Context, d *schema.ResourceData, m interface{}) di
 
 	model := schemata.CollectorModel(d)
 	params := collector.NewAddCollectorParams()
+
 	params.SetBody(model)
 
 	client := m.(*client.LogicMonitorRESTAPI)
@@ -175,7 +176,8 @@ func updateCollectorById(ctx context.Context, d *schema.ResourceData, m interfac
 
 	forceUpdateFailedOverDevicesVal, forceUpdateFailedOverDevicesIsSet := d.GetOk("force_update_failed_over_devices")
 	if forceUpdateFailedOverDevicesIsSet {
-		params.ForceUpdateFailedOverDevices = forceUpdateFailedOverDevicesVal.(*bool)
+		forceUpdateFailedOverDevices := forceUpdateFailedOverDevicesVal.(bool)
+		params.ForceUpdateFailedOverDevices = &forceUpdateFailedOverDevices
 	}
 
 	idVal, idIsSet := d.GetOk("id")

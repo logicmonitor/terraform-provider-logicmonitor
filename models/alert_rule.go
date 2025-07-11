@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -79,6 +80,13 @@ type AlertRule struct {
 	// Required: true
 	Priority *int32 `json:"priority"`
 
+	// The resource property filters list
+	ResourceProperties []*DeviceProperty `json:"resourceProperties"`
+
+	// Whether or not send anomaly suppressed alert
+	// Example: true
+	SendAnomalySuppressedAlert bool `json:"sendAnomalySuppressedAlert,omitempty"`
+
 	// Whether or not status notifications for acknowledgements and SDTs should be sent to the alert rule
 	// Example: true
 	SuppressAlertAckSdt bool `json:"suppressAlertAckSdt,omitempty"`
@@ -125,6 +133,10 @@ func (m *AlertRule) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePriority(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateResourceProperties(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -223,11 +235,41 @@ func (m *AlertRule) validatePriority(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AlertRule) validateResourceProperties(formats strfmt.Registry) error {
+	if swag.IsZero(m.ResourceProperties) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ResourceProperties); i++ {
+		if swag.IsZero(m.ResourceProperties[i]) { // not required
+			continue
+		}
+
+		if m.ResourceProperties[i] != nil {
+			if err := m.ResourceProperties[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("resourceProperties" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("resourceProperties" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this alert rule based on the context it is used
 func (m *AlertRule) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateResourceProperties(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -241,6 +283,26 @@ func (m *AlertRule) contextValidateID(ctx context.Context, formats strfmt.Regist
 
 	if err := validate.ReadOnly(ctx, "id", "body", int32(m.ID)); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *AlertRule) contextValidateResourceProperties(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ResourceProperties); i++ {
+
+		if m.ResourceProperties[i] != nil {
+			if err := m.ResourceProperties[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("resourceProperties" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("resourceProperties" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

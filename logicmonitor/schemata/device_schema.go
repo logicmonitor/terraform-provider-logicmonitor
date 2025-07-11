@@ -48,12 +48,22 @@ func DeviceSchema() map[string]*schema.Schema {
 			Computed: true,
 		},
 		
+		"contains_multi_value": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
 		"created_on": {
 			Type: schema.TypeInt,
 			Computed: true,
 		},
 		
 		"current_collector_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"current_log_collector_id": {
 			Type: schema.TypeInt,
 			Optional: true,
 		},
@@ -126,6 +136,11 @@ func DeviceSchema() map[string]*schema.Schema {
 			Computed: true,
 		},
 		
+		"is_preferred_log_collector_configured": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
 		"last_data_time": {
 			Type: schema.TypeInt,
 			Computed: true,
@@ -138,6 +153,11 @@ func DeviceSchema() map[string]*schema.Schema {
 		
 		"link": {
 			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"log_collector_id": {
+			Type: schema.TypeInt,
 			Optional: true,
 		},
 		
@@ -171,6 +191,11 @@ func DeviceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"op": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
 		"preferred_collector_group_id": {
 			Type: schema.TypeInt,
 			Computed: true,
@@ -191,9 +216,27 @@ func DeviceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"resource_ids": {
+			Type: schema.TypeSet,
+			Elem: &schema.Resource{
+				Schema: NameAndValueSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
 		"scan_config_id": {
 			Type: schema.TypeInt,
 			Computed: true,
+		},
+		
+		"synthetics_collector_ids": {
+			Type: schema.TypeList, //GoType: []int32
+			Elem: &schema.Schema{
+                 Type: schema.TypeInt,
+            },
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
 		},
 		
 		"system_properties": {
@@ -272,12 +315,22 @@ func DataSourceDeviceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"contains_multi_value": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
 		"created_on": {
 			Type: schema.TypeInt,
 			Optional: true,
 		},
 		
 		"current_collector_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"current_log_collector_id": {
 			Type: schema.TypeInt,
 			Optional: true,
 		},
@@ -351,6 +404,11 @@ func DataSourceDeviceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"is_preferred_log_collector_configured": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
 		"last_data_time": {
 			Type: schema.TypeInt,
 			Optional: true,
@@ -363,6 +421,11 @@ func DataSourceDeviceSchema() map[string]*schema.Schema {
 		
 		"link": {
 			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"log_collector_id": {
+			Type: schema.TypeInt,
 			Optional: true,
 		},
 		
@@ -396,6 +459,11 @@ func DataSourceDeviceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"op": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
 		"preferred_collector_group_id": {
 			Type: schema.TypeInt,
 			Optional: true,
@@ -416,7 +484,21 @@ func DataSourceDeviceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"resource_ids": {
+			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Elem: &schema.Resource{
+				Schema: NameAndValueSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
 		"scan_config_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"synthetics_collector_ids": {
 			Type: schema.TypeInt,
 			Optional: true,
 		},
@@ -465,8 +547,10 @@ func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("aws_state", m.AwsState)
 	d.Set("azure_state", m.AzureState)
 	d.Set("collector_description", m.CollectorDescription)
+	d.Set("contains_multi_value", m.ContainsMultiValue)
 	d.Set("created_on", m.CreatedOn)
 	d.Set("current_collector_id", m.CurrentCollectorID)
+	d.Set("current_log_collector_id", m.CurrentLogCollectorID)
 	d.Set("custom_properties", SetNameAndValueSubResourceData(m.CustomProperties))
 	d.Set("deleted_time_in_ms", m.DeletedTimeInMs)
 	d.Set("description", m.Description)
@@ -479,9 +563,11 @@ func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("host_status", m.HostStatus)
 	d.Set("id", strconv.Itoa(int(m.ID)))
 	d.Set("inherited_properties", SetNameAndValueSubResourceData(m.InheritedProperties))
+	d.Set("is_preferred_log_collector_configured", m.IsPreferredLogCollectorConfigured)
 	d.Set("last_data_time", m.LastDataTime)
 	d.Set("last_rawdata_time", m.LastRawdataTime)
 	d.Set("link", m.Link)
+	d.Set("log_collector_id", m.LogCollectorID)
 	d.Set("name", m.Name)
 	// Special handling for 'need_stc_grp_and_sorted_c_p' as it is a query param and not returned by API
 	if val, ok := d.GetOk("need_stc_grp_and_sorted_c_p"); ok {
@@ -493,11 +579,14 @@ func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("netflow_collector_group_id", m.NetflowCollectorGroupID)
 	d.Set("netflow_collector_group_name", m.NetflowCollectorGroupName)
 	d.Set("netflow_collector_id", m.NetflowCollectorID)
+	d.Set("op", m.Op)
 	d.Set("preferred_collector_group_id", m.PreferredCollectorGroupID)
 	d.Set("preferred_collector_group_name", m.PreferredCollectorGroupName)
 	d.Set("preferred_collector_id", m.PreferredCollectorID)
 	d.Set("related_device_id", m.RelatedDeviceID)
+	d.Set("resource_ids", SetNameAndValueSubResourceData(m.ResourceIds))
 	d.Set("scan_config_id", m.ScanConfigID)
+	d.Set("synthetics_collector_ids", m.SyntheticsCollectorIds)
 	d.Set("system_properties", SetNameAndValueSubResourceData(m.SystemProperties))
 	d.Set("to_delete_time_in_ms", m.ToDeleteTimeInMs)
 	d.Set("up_time_in_seconds", m.UpTimeInSeconds)
@@ -516,8 +605,10 @@ func SetDeviceSubResourceData(m []*models.Device) (d []*map[string]interface{}) 
 			properties["aws_state"] = device.AwsState
 			properties["azure_state"] = device.AzureState
 			properties["collector_description"] = device.CollectorDescription
+			properties["contains_multi_value"] = device.ContainsMultiValue
 			properties["created_on"] = device.CreatedOn
 			properties["current_collector_id"] = device.CurrentCollectorID
+			properties["current_log_collector_id"] = device.CurrentLogCollectorID
 			properties["custom_properties"] = SetNameAndValueSubResourceData(device.CustomProperties)
 			properties["deleted_time_in_ms"] = device.DeletedTimeInMs
 			properties["description"] = device.Description
@@ -530,20 +621,25 @@ func SetDeviceSubResourceData(m []*models.Device) (d []*map[string]interface{}) 
 			properties["host_status"] = device.HostStatus
 			properties["id"] = device.ID
 			properties["inherited_properties"] = SetNameAndValueSubResourceData(device.InheritedProperties)
+			properties["is_preferred_log_collector_configured"] = device.IsPreferredLogCollectorConfigured
 			properties["last_data_time"] = device.LastDataTime
 			properties["last_rawdata_time"] = device.LastRawdataTime
 			properties["link"] = device.Link
+			properties["log_collector_id"] = device.LogCollectorID
 			properties["name"] = device.Name
 			properties["need_stc_grp_and_sorted_c_p"] = device.NeedStcGrpAndSortedCP
 			properties["netflow_collector_description"] = device.NetflowCollectorDescription
 			properties["netflow_collector_group_id"] = device.NetflowCollectorGroupID
 			properties["netflow_collector_group_name"] = device.NetflowCollectorGroupName
 			properties["netflow_collector_id"] = device.NetflowCollectorID
+			properties["op"] = device.Op
 			properties["preferred_collector_group_id"] = device.PreferredCollectorGroupID
 			properties["preferred_collector_group_name"] = device.PreferredCollectorGroupName
 			properties["preferred_collector_id"] = device.PreferredCollectorID
 			properties["related_device_id"] = device.RelatedDeviceID
+			properties["resource_ids"] = SetNameAndValueSubResourceData(device.ResourceIds)
 			properties["scan_config_id"] = device.ScanConfigID
+			properties["synthetics_collector_ids"] = device.SyntheticsCollectorIds
 			properties["system_properties"] = SetNameAndValueSubResourceData(device.SystemProperties)
 			properties["to_delete_time_in_ms"] = device.ToDeleteTimeInMs
 			properties["up_time_in_seconds"] = device.UpTimeInSeconds
@@ -557,7 +653,9 @@ func SetDeviceSubResourceData(m []*models.Device) (d []*map[string]interface{}) 
 
 func DeviceModel(d *schema.ResourceData) *models.Device {
 	autoBalancedCollectorGroupID := int32(d.Get("auto_balanced_collector_group_id").(int))
+	containsMultiValue := d.Get("contains_multi_value").(bool)
 	currentCollectorID := int32(d.Get("current_collector_id").(int))
+	currentLogCollectorID := int32(d.Get("current_log_collector_id").(int))
 	customProperties := utils.GetPropertiesFromResource(d, "custom_properties")
 	description := d.Get("description").(string)
 	deviceType := int32(d.Get("device_type").(int))
@@ -566,16 +664,23 @@ func DeviceModel(d *schema.ResourceData) *models.Device {
 	enableNetflow := d.Get("enable_netflow").(bool)
 	hostGroupIds := d.Get("host_group_ids").(string)
 	id, _ := strconv.Atoi(d.Get("id").(string))
+	isPreferredLogCollectorConfigured := d.Get("is_preferred_log_collector_configured").(bool)
 	link := d.Get("link").(string)
+	logCollectorID := int32(d.Get("log_collector_id").(int))
 	name := d.Get("name").(string)
 	needStcGrpAndSortedCP := d.Get("need_stc_grp_and_sorted_c_p").(bool)
 	netflowCollectorID := int32(d.Get("netflow_collector_id").(int))
+	op := d.Get("op").(string)
 	preferredCollectorID := int32(d.Get("preferred_collector_id").(int))
 	relatedDeviceID := int32(d.Get("related_device_id").(int))
+	resourceIds := utils.GetPropertiesFromResource(d, "resource_ids")
+	syntheticsCollectorIds := utils.ConvertSetToInt32Slice(d.Get("synthetics_collector_ids").([]interface{}))
 	
 	return &models.Device {
 		AutoBalancedCollectorGroupID: autoBalancedCollectorGroupID,
+		ContainsMultiValue: containsMultiValue,
 		CurrentCollectorID: currentCollectorID,
+		CurrentLogCollectorID: currentLogCollectorID,
 		CustomProperties: customProperties,
 		Description: description,
 		DeviceType: deviceType,
@@ -584,18 +689,25 @@ func DeviceModel(d *schema.ResourceData) *models.Device {
 		EnableNetflow: enableNetflow,
 		HostGroupIds: hostGroupIds,
 		ID: int32(id),
+		IsPreferredLogCollectorConfigured: isPreferredLogCollectorConfigured,
 		Link: link,
+		LogCollectorID: logCollectorID,
 		Name: &name,
 		NeedStcGrpAndSortedCP: &needStcGrpAndSortedCP,
 		NetflowCollectorID: netflowCollectorID,
+		Op: op,
 		PreferredCollectorID: &preferredCollectorID,
 		RelatedDeviceID: relatedDeviceID,
+		ResourceIds: resourceIds,
+		SyntheticsCollectorIds: syntheticsCollectorIds,
 	}
 }
 func GetDevicePropertyFields() (t []string) {
 	return []string{
 		"auto_balanced_collector_group_id",
+		"contains_multi_value",
 		"current_collector_id",
+		"current_log_collector_id",
 		"custom_properties",
 		"description",
 		"device_type",
@@ -604,11 +716,16 @@ func GetDevicePropertyFields() (t []string) {
 		"enable_netflow",
 		"host_group_ids",
 		"id",
+		"is_preferred_log_collector_configured",
 		"link",
+		"log_collector_id",
 		"name",
 		"need_stc_grp_and_sorted_c_p",
 		"netflow_collector_id",
+		"op",
 		"preferred_collector_id",
 		"related_device_id",
+		"resource_ids",
+		"synthetics_collector_ids",
 	}
 }

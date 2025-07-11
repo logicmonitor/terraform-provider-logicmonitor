@@ -97,6 +97,8 @@ The following arguments are **required**:
    (string)
 
 The following arguments are **optional**:
+* `access_group_ids` - The Access Groups Id's ([]int32)
+* `access_groups` - Module's access groups ([]*AccessGroup)
 * `applies_to` - The Applies To for the LMModule (string)
 * `auto_discovery_config` -  (AutoDiscoveryConfiguration)
 * `data_points` - The data point list ([]*DataPoint)

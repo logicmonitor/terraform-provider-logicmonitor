@@ -48,6 +48,7 @@ func addDashboard(ctx context.Context, d *schema.ResourceData, m interface{}) di
 
 	model := schemata.DashboardModel(d)
 	params := dashboard.NewAddDashboardParams()
+
 	params.SetBody(model)
 
 	client := m.(*client.LogicMonitorRESTAPI)
@@ -190,7 +191,8 @@ func updateDashboardById(ctx context.Context, d *schema.ResourceData, m interfac
 
 	overwriteGroupFieldsVal, overwriteGroupFieldsIsSet := d.GetOk("overwrite_group_fields")
 	if overwriteGroupFieldsIsSet {
-		params.OverwriteGroupFields = overwriteGroupFieldsVal.(*bool)
+		overwriteGroupFields := overwriteGroupFieldsVal.(bool)
+		params.OverwriteGroupFields = &overwriteGroupFields
 	}
 
 	// list of available properties

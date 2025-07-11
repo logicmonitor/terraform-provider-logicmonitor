@@ -30,11 +30,12 @@ type (
 	}
 )
 
-func (c *ValidateClient) loadAndValidate(bulkResource bool) *http.Client {
-	var httpClient *http.Client
-
-	httpClient = cleanhttp.DefaultClient()
-	httpClient.Transport = logging.NewTransport("LogicMonitor", httpClient.Transport)
+func (c *ValidateClient) loadAndValidate(httpClient *http.Client, bulkResource bool) *http.Client {
+	// If no custom client is provided, create a default one
+	if httpClient == nil {
+		httpClient = cleanhttp.DefaultClient()
+		httpClient.Transport = logging.NewTransport("LogicMonitor", httpClient.Transport)
+	}
 
 	if bulkResource {
 		log.Printf("Going to experimental mode for handling resources in bulk")
@@ -43,7 +44,6 @@ func (c *ValidateClient) loadAndValidate(bulkResource bool) *http.Client {
 			log.Printf("[ERROR] Error occured")
 		}
 		httpClient.Transport = transport.NewGovernedTransport(httpClient.Transport, apiMutex)
-		return httpClient
 	}
-	return nil
+	return httpClient
 }

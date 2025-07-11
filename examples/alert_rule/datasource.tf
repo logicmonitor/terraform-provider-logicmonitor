@@ -15,6 +15,13 @@ resource "logicmonitor_alert_rule" "my_alert_rule"{
     "Devices by Type"
   ]
   escalation_interval = 15
+  resource_properties = [
+    {
+      name  = "test.pass"
+      value = "string"
+    }
+  ]
+  send_anomaly_suppressed_alert = true
 }
 data "logicmonitor_alert_rule" "my_alert_rule" {
     filter = "name~\"Alert Rule Test\""

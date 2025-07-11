@@ -9,6 +9,24 @@ import (
 
 func DatasourceSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
+		"access_group_ids": {
+			Type: schema.TypeList, //GoType: []int32
+			Elem: &schema.Schema{
+                 Type: schema.TypeInt,
+            },
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"access_groups": {
+			Type: schema.TypeList, //GoType: []*AccessGroup  
+			Elem: &schema.Resource{
+				Schema: AccessGroupSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
 		"applies_to": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -108,6 +126,14 @@ func DatasourceSchema() map[string]*schema.Schema {
 			Computed: true,
 		},
 		
+		"installation_metadata": {
+			Type: schema.TypeList, //GoType: IntegrationMetadata
+			Elem: &schema.Resource{
+				Schema: IntegrationMetadataSchema(),
+			},
+			Computed: true,
+		},
+		
 		"lineage_id": {
 			Type: schema.TypeString,
 			Computed: true,
@@ -151,6 +177,20 @@ func DatasourceSchema() map[string]*schema.Schema {
 // Only difference between this and DatasourceSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
 func DataSourceDatasourceSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
+		"access_group_ids": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
+		"access_groups": {
+			Type: schema.TypeList, //GoType: []*AccessGroup 
+			Elem: &schema.Resource{
+				Schema: AccessGroupSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
 		"applies_to": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -250,6 +290,14 @@ func DataSourceDatasourceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"installation_metadata": {
+			Type: schema.TypeList, //GoType: IntegrationMetadata
+			Elem: &schema.Resource{
+				Schema: IntegrationMetadataSchema(),
+			},
+			Optional: true,
+		},
+		
 		"lineage_id": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -293,6 +341,8 @@ func DataSourceDatasourceSchema() map[string]*schema.Schema {
 }
 
 func SetDatasourceResourceData(d *schema.ResourceData, m *models.Datasource) {
+	d.Set("access_group_ids", m.AccessGroupIds)
+	d.Set("access_groups", SetAccessGroupSubResourceData(m.AccessGroups))
 	d.Set("applies_to", m.AppliesTo)
 	d.Set("audit_version", m.AuditVersion)
 	d.Set("auto_discovery_config", SetAutoDiscoveryConfigurationSubResourceData([]*models.AutoDiscoveryConfiguration{m.AutoDiscoveryConfig}))
@@ -310,6 +360,7 @@ func SetDatasourceResourceData(d *schema.ResourceData, m *models.Datasource) {
 	d.Set("group", m.Group)
 	d.Set("has_multi_instances", m.HasMultiInstances)
 	d.Set("id", strconv.Itoa(int(m.ID)))
+	d.Set("installation_metadata", SetIntegrationMetadataSubResourceData([]*models.IntegrationMetadata{m.InstallationMetadata}))
 	d.Set("lineage_id", m.LineageID)
 	d.Set("name", m.Name)
 	d.Set("payload_version", m.PayloadVersion)
@@ -323,6 +374,8 @@ func SetDatasourceSubResourceData(m []*models.Datasource) (d []*map[string]inter
 	for _, datasource := range m {
 		if datasource != nil {
 			properties := make(map[string]interface{})
+			properties["access_group_ids"] = datasource.AccessGroupIds
+			properties["access_groups"] = SetAccessGroupSubResourceData(datasource.AccessGroups)
 			properties["applies_to"] = datasource.AppliesTo
 			properties["audit_version"] = datasource.AuditVersion
 			properties["auto_discovery_config"] = SetAutoDiscoveryConfigurationSubResourceData([]*models.AutoDiscoveryConfiguration{datasource.AutoDiscoveryConfig})
@@ -340,6 +393,7 @@ func SetDatasourceSubResourceData(m []*models.Datasource) (d []*map[string]inter
 			properties["group"] = datasource.Group
 			properties["has_multi_instances"] = datasource.HasMultiInstances
 			properties["id"] = datasource.ID
+			properties["installation_metadata"] = SetIntegrationMetadataSubResourceData([]*models.IntegrationMetadata{datasource.InstallationMetadata})
 			properties["lineage_id"] = datasource.LineageID
 			properties["name"] = datasource.Name
 			properties["payload_version"] = datasource.PayloadVersion
@@ -354,6 +408,14 @@ func SetDatasourceSubResourceData(m []*models.Datasource) (d []*map[string]inter
 }
 
 func DatasourceModel(d *schema.ResourceData) *models.Datasource {
+	accessGroupIds := utils.ConvertSetToInt32Slice(d.Get("access_group_ids").([]interface{}))
+     accessGroupsTempSlice := d.Get("access_groups").([]interface{})
+    accessGroups := []*models.AccessGroup{}
+    for _, val := range accessGroupsTempSlice {
+        if m, ok := val.(map[string]interface{}); ok {
+            accessGroups = append(accessGroups, AccessGroupModel(m))
+        }
+    }
 	appliesTo := d.Get("applies_to").(string)
 	var autoDiscoveryConfig *models.AutoDiscoveryConfiguration = nil
 	autoDiscoveryConfigInterface, autoDiscoveryConfigIsSet := d.GetOk("auto_discovery_config")
@@ -389,6 +451,8 @@ func DatasourceModel(d *schema.ResourceData) *models.Datasource {
 	technology := d.Get("technology").(string)
 	
 	return &models.Datasource {
+		AccessGroupIds: accessGroupIds,
+		AccessGroups: accessGroups,
 		AppliesTo: appliesTo,
 		AutoDiscoveryConfig: autoDiscoveryConfig,
 		CollectInterval: &collectInterval,
@@ -411,6 +475,8 @@ func DatasourceModel(d *schema.ResourceData) *models.Datasource {
 }
 func GetDatasourcePropertyFields() (t []string) {
 	return []string{
+		"access_group_ids",
+		"access_groups",
 		"applies_to",
 		"auto_discovery_config",
 		"collect_interval",

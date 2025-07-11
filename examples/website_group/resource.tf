@@ -10,4 +10,12 @@ resource "logicmonitor_website_group" "my_website_group"{
   value : "127.0.0.1"
   }  
   ]
+  test_location = [
+    {
+      all = false
+      collector_ids = [1, 2, 3]
+      collectors = null
+      smg_ids = [85, 90]
+    }
+   ]
 }

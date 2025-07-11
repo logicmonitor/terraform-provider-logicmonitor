@@ -31,6 +31,18 @@ resource "logicmonitor_device" "my_device"{
 	related_device_id = -1
 	need_stc_grp_and_sorted_c_p = false
     host_group_ids = 263286
+	contains_multi_value = true
+    current_log_collector_id = 1
+    log_collector_id = 42707
+    is_preferred_log_collector_configured = true
+    resource_ids = [
+		{
+			name = "addr"
+      value = "127.0.0.1"
+		}
+    ]
+    op = "string"
+    synthetics_collector_ids = [88 , 89]
 }
 
 

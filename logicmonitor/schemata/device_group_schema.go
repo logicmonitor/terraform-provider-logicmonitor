@@ -64,6 +64,11 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"default_auto_balanced_collector_group_id": {
+			Type: schema.TypeInt,
+			Optional: true,
+		},
+		
 		"default_collector_description": {
 			Type: schema.TypeString,
 			Computed: true,
@@ -185,6 +190,14 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"saas_test_result": {
+			Type: schema.TypeList, //GoType: SaasAccountTestResult
+			Elem: &schema.Resource{
+				Schema: SaasAccountTestResultSchema(),
+			},
+			Computed: true,
+		},
+		
 		"sub_groups": {
 			Type: schema.TypeList, //GoType: []*DeviceGroupData  
 			Elem: &schema.Resource{
@@ -259,6 +272,11 @@ func DataSourceDeviceGroupSchema() map[string]*schema.Schema {
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"default_auto_balanced_collector_group_id": {
+			Type: schema.TypeInt,
 			Optional: true,
 		},
 		
@@ -384,6 +402,14 @@ func DataSourceDeviceGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"saas_test_result": {
+			Type: schema.TypeList, //GoType: SaasAccountTestResult
+			Elem: &schema.Resource{
+				Schema: SaasAccountTestResultSchema(),
+			},
+			Optional: true,
+		},
+		
 		"sub_groups": {
 			Type: schema.TypeList, //GoType: []*DeviceGroupData 
 			Elem: &schema.Resource{
@@ -415,6 +441,7 @@ func SetDeviceGroupResourceData(d *schema.ResourceData, m *models.DeviceGroup) {
 	d.Set("azure_test_result_code", m.AzureTestResultCode)
 	d.Set("created_on", m.CreatedOn)
 	d.Set("custom_properties", SetNameAndValueSubResourceData(m.CustomProperties))
+	d.Set("default_auto_balanced_collector_group_id", m.DefaultAutoBalancedCollectorGroupID)
 	d.Set("default_collector_description", m.DefaultCollectorDescription)
 	d.Set("default_collector_id", m.DefaultCollectorID)
 	d.Set("description", m.Description)
@@ -438,6 +465,7 @@ func SetDeviceGroupResourceData(d *schema.ResourceData, m *models.DeviceGroup) {
 	d.Set("num_of_gcp_devices", m.NumOfGcpDevices)
 	d.Set("num_of_hosts", m.NumOfHosts)
 	d.Set("parent_id", m.ParentID)
+	d.Set("saas_test_result", SetSaasAccountTestResultSubResourceData([]*models.SaasAccountTestResult{m.SaasTestResult}))
 	d.Set("sub_groups", SetDeviceGroupDataSubResourceData(m.SubGroups))
 	d.Set("user_permission", m.UserPermission)
 }
@@ -455,6 +483,7 @@ func SetDeviceGroupSubResourceData(m []*models.DeviceGroup) (d []*map[string]int
 			properties["azure_test_result_code"] = deviceGroup.AzureTestResultCode
 			properties["created_on"] = deviceGroup.CreatedOn
 			properties["custom_properties"] = SetNameAndValueSubResourceData(deviceGroup.CustomProperties)
+			properties["default_auto_balanced_collector_group_id"] = deviceGroup.DefaultAutoBalancedCollectorGroupID
 			properties["default_collector_description"] = deviceGroup.DefaultCollectorDescription
 			properties["default_collector_id"] = deviceGroup.DefaultCollectorID
 			properties["description"] = deviceGroup.Description
@@ -478,6 +507,7 @@ func SetDeviceGroupSubResourceData(m []*models.DeviceGroup) (d []*map[string]int
 			properties["num_of_gcp_devices"] = deviceGroup.NumOfGcpDevices
 			properties["num_of_hosts"] = deviceGroup.NumOfHosts
 			properties["parent_id"] = deviceGroup.ParentID
+			properties["saas_test_result"] = SetSaasAccountTestResultSubResourceData([]*models.SaasAccountTestResult{deviceGroup.SaasTestResult})
 			properties["sub_groups"] = SetDeviceGroupDataSubResourceData(deviceGroup.SubGroups)
 			properties["user_permission"] = deviceGroup.UserPermission
 			d = append(d, &properties)
@@ -489,6 +519,7 @@ func SetDeviceGroupSubResourceData(m []*models.DeviceGroup) (d []*map[string]int
 func DeviceGroupModel(d *schema.ResourceData) *models.DeviceGroup {
 	appliesTo := d.Get("applies_to").(string)
 	customProperties := utils.GetPropertiesFromResource(d, "custom_properties")
+	defaultAutoBalancedCollectorGroupID := int32(d.Get("default_auto_balanced_collector_group_id").(int))
 	defaultCollectorID := int32(d.Get("default_collector_id").(int))
 	description := d.Get("description").(string)
 	disableAlerting := d.Get("disable_alerting").(bool)
@@ -507,6 +538,7 @@ func DeviceGroupModel(d *schema.ResourceData) *models.DeviceGroup {
 	return &models.DeviceGroup {
 		AppliesTo: appliesTo,
 		CustomProperties: customProperties,
+		DefaultAutoBalancedCollectorGroupID: defaultAutoBalancedCollectorGroupID,
 		DefaultCollectorID: defaultCollectorID,
 		Description: description,
 		DisableAlerting: disableAlerting,
@@ -522,6 +554,7 @@ func GetDeviceGroupPropertyFields() (t []string) {
 	return []string{
 		"applies_to",
 		"custom_properties",
+		"default_auto_balanced_collector_group_id",
 		"default_collector_id",
 		"description",
 		"disable_alerting",

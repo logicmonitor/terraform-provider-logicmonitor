@@ -73,6 +73,10 @@ type WebsiteGroup struct {
 	// Example: false
 	StopMonitoring bool `json:"stopMonitoring,omitempty"`
 
+	// An object that indicates the websites locations.
+	// eg. {'all': false, smgId:[1,2,3], collectorIds:[14,16]}
+	TestLocation *WebsiteLocation `json:"testLocation,omitempty"`
+
 	// The permission level of the user that made the API request. Acceptable values are: write, read, ack
 	// Read Only: true
 	UserPermission string `json:"userPermission,omitempty"`
@@ -87,6 +91,10 @@ func (m *WebsiteGroup) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateProperties(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTestLocation(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -131,6 +139,25 @@ func (m *WebsiteGroup) validateProperties(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *WebsiteGroup) validateTestLocation(formats strfmt.Registry) error {
+	if swag.IsZero(m.TestLocation) { // not required
+		return nil
+	}
+
+	if m.TestLocation != nil {
+		if err := m.TestLocation.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("testLocation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("testLocation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this website group based on the context it is used
 func (m *WebsiteGroup) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -160,6 +187,10 @@ func (m *WebsiteGroup) ContextValidate(ctx context.Context, formats strfmt.Regis
 	}
 
 	if err := m.contextValidateProperties(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTestLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -242,6 +273,22 @@ func (m *WebsiteGroup) contextValidateProperties(ctx context.Context, formats st
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *WebsiteGroup) contextValidateTestLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TestLocation != nil {
+		if err := m.TestLocation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("testLocation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("testLocation")
+			}
+			return err
+		}
 	}
 
 	return nil

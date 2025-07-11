@@ -28,6 +28,13 @@ resource "logicmonitor_alert_rule" "my_alert_rule" {
   level_str = "Warn"
   name = "Warning"
   priority = 100
+  resource_properties = [
+    {
+      name  = "test.pass"
+      value = "string"
+    }
+  ]
+  send_anomaly_suppressed_alert = true
   suppress_alert_ack_sdt = true
   suppress_alert_clear = true
 }
@@ -57,6 +64,8 @@ The following arguments are **required**:
 
 The following arguments are **optional**:
 * `level_str` - The alert severity levels the alert rule is configured to match. Acceptable values are: All, Warn, Error, Critical (string)
+* `resource_properties` - The resource property filters list ([]*DeviceProperty)
+* `send_anomaly_suppressed_alert` - Whether or not send anomaly suppressed alert (bool)
 * `suppress_alert_ack_sdt` - Whether or not status notifications for acknowledgements and SDTs should be sent to the alert rule (bool)
 * `suppress_alert_clear` - Whether or not alert clear notifications should be sent to the alert rule (bool)
 

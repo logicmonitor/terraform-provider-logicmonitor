@@ -17,7 +17,21 @@ resource "logicmonitor_dashboard_group" "my_dashboard_group" {
   description = "Servers in LA DataCenter"
   name = "LogicMonitor Dashboards"
   parent_id = 1
-  template = 
+  template =   
+  widget_tokens = [
+    {
+      name  = "defaultDeviceGroup"
+      value = "*"
+      inherit_list = null
+      type = null
+    },
+    {
+      name  = "defaultServiceGroup"
+      value = "*"
+      inherit_list = null
+      type = null
+    }
+  ]
 }
 ```
 

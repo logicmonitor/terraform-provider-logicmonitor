@@ -73,6 +73,15 @@ func WebsiteGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"test_location": {
+			Type: schema.TypeList, //GoType: WebsiteLocation 
+            Elem: &schema.Resource{
+				Schema: WebsiteLocationSchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
 		"user_permission": {
 			Type: schema.TypeString,
 			Computed: true,
@@ -151,6 +160,14 @@ func DataSourceWebsiteGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"test_location": {
+			Type: schema.TypeList, //GoType: WebsiteLocation
+			Elem: &schema.Resource{
+				Schema: WebsiteLocationSchema(),
+			},
+			Optional: true,
+		},
+		
 		"user_permission": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -176,6 +193,7 @@ func SetWebsiteGroupResourceData(d *schema.ResourceData, m *models.WebsiteGroup)
 	d.Set("parent_id", m.ParentID)
 	d.Set("properties", SetNameAndValueSubResourceData(m.Properties))
 	d.Set("stop_monitoring", m.StopMonitoring)
+	d.Set("test_location", SetWebsiteLocationSubResourceData([]*models.WebsiteLocation{m.TestLocation}))
 	d.Set("user_permission", m.UserPermission)
 }
 
@@ -195,6 +213,7 @@ func SetWebsiteGroupSubResourceData(m []*models.WebsiteGroup) (d []*map[string]i
 			properties["parent_id"] = websiteGroup.ParentID
 			properties["properties"] = SetNameAndValueSubResourceData(websiteGroup.Properties)
 			properties["stop_monitoring"] = websiteGroup.StopMonitoring
+			properties["test_location"] = SetWebsiteLocationSubResourceData([]*models.WebsiteLocation{websiteGroup.TestLocation})
 			properties["user_permission"] = websiteGroup.UserPermission
 			d = append(d, &properties)
 		}
@@ -210,6 +229,9 @@ func WebsiteGroupModel(d *schema.ResourceData) *models.WebsiteGroup {
 	parentID := int32(d.Get("parent_id").(int))
 	properties := utils.GetPropertiesFromResource(d, "properties")
 	stopMonitoring := d.Get("stop_monitoring").(bool)
+    testLocation := utils.GetPropFromLocationMap(d, "test_location")
+
+	          
 	
 	return &models.WebsiteGroup {
 		Description: description,
@@ -219,6 +241,7 @@ func WebsiteGroupModel(d *schema.ResourceData) *models.WebsiteGroup {
 		ParentID: parentID,
 		Properties: properties,
 		StopMonitoring: stopMonitoring,
+		TestLocation: testLocation,
 	}
 }
 func GetWebsiteGroupPropertyFields() (t []string) {
@@ -230,5 +253,6 @@ func GetWebsiteGroupPropertyFields() (t []string) {
 		"parent_id",
 		"properties",
 		"stop_monitoring",
+		"test_location",
 	}
 }

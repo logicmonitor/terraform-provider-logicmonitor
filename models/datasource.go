@@ -21,6 +21,14 @@ import (
 // swagger:model Datasource
 type Datasource struct {
 
+	// The Access Groups Id's
+	// Example: 1, 2, 3
+	// Unique: true
+	AccessGroupIds []int32 `json:"accessGroupIds"`
+
+	// Module's access groups
+	AccessGroups []*AccessGroup `json:"accessGroups"`
+
 	// The Applies To for the LMModule
 	// Example: system.deviceId == \"22\
 	AppliesTo string `json:"appliesTo,omitempty"`
@@ -88,6 +96,10 @@ type Datasource struct {
 	// Read Only: true
 	ID int32 `json:"id,omitempty"`
 
+	// The local module's IntegrationMetadata, readable for troubleshooting purposes
+	// Read Only: true
+	InstallationMetadata *IntegrationMetadata `json:"installationMetadata,omitempty"`
+
 	// The lineageId the LMModule belongs to
 	// Read Only: true
 	LineageID string `json:"lineageId,omitempty"`
@@ -122,6 +134,14 @@ type Datasource struct {
 func (m *Datasource) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAccessGroupIds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAccessGroups(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAutoDiscoveryConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -146,6 +166,10 @@ func (m *Datasource) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateInstallationMetadata(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -153,6 +177,44 @@ func (m *Datasource) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Datasource) validateAccessGroupIds(formats strfmt.Registry) error {
+	if swag.IsZero(m.AccessGroupIds) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("accessGroupIds", "body", m.AccessGroupIds); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Datasource) validateAccessGroups(formats strfmt.Registry) error {
+	if swag.IsZero(m.AccessGroups) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.AccessGroups); i++ {
+		if swag.IsZero(m.AccessGroups[i]) { // not required
+			continue
+		}
+
+		if m.AccessGroups[i] != nil {
+			if err := m.AccessGroups[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("accessGroups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("accessGroups" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -258,6 +320,25 @@ func (m *Datasource) validateEriDiscoveryConfig(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Datasource) validateInstallationMetadata(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallationMetadata) { // not required
+		return nil
+	}
+
+	if m.InstallationMetadata != nil {
+		if err := m.InstallationMetadata.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("installationMetadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("installationMetadata")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Datasource) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
@@ -270,6 +351,10 @@ func (m *Datasource) validateName(formats strfmt.Registry) error {
 // ContextValidate validate this datasource based on the context it is used
 func (m *Datasource) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.contextValidateAccessGroups(ctx, formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.contextValidateAuditVersion(ctx, formats); err != nil {
 		res = append(res, err)
@@ -299,6 +384,10 @@ func (m *Datasource) ContextValidate(ctx context.Context, formats strfmt.Registr
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateInstallationMetadata(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLineageID(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -318,6 +407,26 @@ func (m *Datasource) ContextValidate(ctx context.Context, formats strfmt.Registr
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Datasource) contextValidateAccessGroups(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.AccessGroups); i++ {
+
+		if m.AccessGroups[i] != nil {
+			if err := m.AccessGroups[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("accessGroups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("accessGroups" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -411,6 +520,22 @@ func (m *Datasource) contextValidateID(ctx context.Context, formats strfmt.Regis
 
 	if err := validate.ReadOnly(ctx, "id", "body", int32(m.ID)); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Datasource) contextValidateInstallationMetadata(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InstallationMetadata != nil {
+		if err := m.InstallationMetadata.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("installationMetadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("installationMetadata")
+			}
+			return err
+		}
 	}
 
 	return nil

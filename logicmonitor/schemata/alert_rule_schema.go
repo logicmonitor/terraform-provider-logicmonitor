@@ -76,6 +76,20 @@ func AlertRuleSchema() map[string]*schema.Schema {
 			Required: true,
 		},
 		
+		"resource_properties": {
+			Type: schema.TypeList, //GoType: []*DeviceProperty  
+			Elem: &schema.Resource{
+				Schema: DevicePropertySchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"send_anomaly_suppressed_alert": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
 		"suppress_alert_ack_sdt": {
 			Type: schema.TypeBool,
 			Optional: true,
@@ -162,6 +176,20 @@ func DataSourceAlertRuleSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"resource_properties": {
+			Type: schema.TypeList, //GoType: []*DeviceProperty 
+			Elem: &schema.Resource{
+				Schema: DevicePropertySchema(),
+			},
+			ConfigMode: schema.SchemaConfigModeAttr,
+			Optional: true,
+		},
+		
+		"send_anomaly_suppressed_alert": {
+			Type: schema.TypeBool,
+			Optional: true,
+		},
+		
 		"suppress_alert_ack_sdt": {
 			Type: schema.TypeBool,
 			Optional: true,
@@ -192,6 +220,8 @@ func SetAlertRuleResourceData(d *schema.ResourceData, m *models.AlertRule) {
 	d.Set("level_str", m.LevelStr)
 	d.Set("name", m.Name)
 	d.Set("priority", m.Priority)
+	d.Set("resource_properties", SetDevicePropertySubResourceData(m.ResourceProperties))
+	d.Set("send_anomaly_suppressed_alert", m.SendAnomalySuppressedAlert)
 	d.Set("suppress_alert_ack_sdt", m.SuppressAlertAckSdt)
 	d.Set("suppress_alert_clear", m.SuppressAlertClear)
 }
@@ -212,6 +242,8 @@ func SetAlertRuleSubResourceData(m []*models.AlertRule) (d []*map[string]interfa
 			properties["level_str"] = alertRule.LevelStr
 			properties["name"] = alertRule.Name
 			properties["priority"] = alertRule.Priority
+			properties["resource_properties"] = SetDevicePropertySubResourceData(alertRule.ResourceProperties)
+			properties["send_anomaly_suppressed_alert"] = alertRule.SendAnomalySuppressedAlert
 			properties["suppress_alert_ack_sdt"] = alertRule.SuppressAlertAckSdt
 			properties["suppress_alert_clear"] = alertRule.SuppressAlertClear
 			d = append(d, &properties)
@@ -232,6 +264,8 @@ func AlertRuleModel(d *schema.ResourceData) *models.AlertRule {
 	levelStr := d.Get("level_str").(string)
 	name := d.Get("name").(string)
 	priority := int32(d.Get("priority").(int))
+	resourceProperties := utils.GetResourceProperties(d.Get("resource_properties").([]interface{}))
+	sendAnomalySuppressedAlert := d.Get("send_anomaly_suppressed_alert").(bool)
 	suppressAlertAckSdt := d.Get("suppress_alert_ack_sdt").(bool)
 	suppressAlertClear := d.Get("suppress_alert_clear").(bool)
 	
@@ -247,6 +281,8 @@ func AlertRuleModel(d *schema.ResourceData) *models.AlertRule {
 		LevelStr: levelStr,
 		Name: &name,
 		Priority: &priority,
+		ResourceProperties: resourceProperties,
+		SendAnomalySuppressedAlert: sendAnomalySuppressedAlert,
 		SuppressAlertAckSdt: suppressAlertAckSdt,
 		SuppressAlertClear: suppressAlertClear,
 	}
@@ -264,6 +300,8 @@ func GetAlertRulePropertyFields() (t []string) {
 		"level_str",
 		"name",
 		"priority",
+		"resource_properties",
+		"send_anomaly_suppressed_alert",
 		"suppress_alert_ack_sdt",
 		"suppress_alert_clear",
 	}

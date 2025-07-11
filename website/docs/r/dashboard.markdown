@@ -20,7 +20,21 @@ resource "logicmonitor_dashboard" "my_dashboard" {
   name = "Default Device Group"
   owner = ""
   sharable = true
-  template = 
+  template =   
+  widget_tokens = [
+    {
+      name  = "defaultDeviceGroup"
+      value = "*"
+      inherit_list = null
+      type = null
+    },
+    {
+      name  = "defaultServiceGroup"
+      value = "*"
+      inherit_list = null
+      type = null
+    }
+  ]
   widgets_config = 
 }
 ```

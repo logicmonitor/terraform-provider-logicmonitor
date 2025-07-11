@@ -16,6 +16,7 @@ import (
 )
 
 // DeviceGroup device group
+// Example: isResource
 //
 // swagger:model DeviceGroup
 type DeviceGroup struct {
@@ -54,6 +55,9 @@ type DeviceGroup struct {
 
 	// The properties associated with this device group
 	CustomProperties []*NameAndValue `json:"customProperties,omitempty"`
+
+	// The id of the default Auto Balanced Collector Group assigned to the device group
+	DefaultAutoBalancedCollectorGroupID int32 `json:"defaultAutoBalancedCollectorGroupId,omitempty"`
 
 	// The description of the default collector assigned to the device group
 	// Read Only: true
@@ -149,6 +153,10 @@ type DeviceGroup struct {
 	// Example: 1
 	ParentID int32 `json:"parentId,omitempty"`
 
+	// The result returned by the transaction that tests the SaaS credentials associated with the Saas group
+	// Read Only: true
+	SaasTestResult *SaasAccountTestResult `json:"saasTestResult,omitempty"`
+
 	// The child device groups within this device group
 	// Read Only: true
 	SubGroups []*DeviceGroupData `json:"subGroups"`
@@ -183,6 +191,10 @@ func (m *DeviceGroup) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSaasTestResult(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -302,6 +314,25 @@ func (m *DeviceGroup) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *DeviceGroup) validateSaasTestResult(formats strfmt.Registry) error {
+	if swag.IsZero(m.SaasTestResult) { // not required
+		return nil
+	}
+
+	if m.SaasTestResult != nil {
+		if err := m.SaasTestResult.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("saasTestResult")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("saasTestResult")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -430,6 +461,10 @@ func (m *DeviceGroup) ContextValidate(ctx context.Context, formats strfmt.Regist
 	}
 
 	if err := m.contextValidateNumOfHosts(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSaasTestResult(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -697,6 +732,22 @@ func (m *DeviceGroup) contextValidateNumOfHosts(ctx context.Context, formats str
 
 	if err := validate.ReadOnly(ctx, "numOfHosts", "body", int64(m.NumOfHosts)); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *DeviceGroup) contextValidateSaasTestResult(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SaasTestResult != nil {
+		if err := m.SaasTestResult.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("saasTestResult")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("saasTestResult")
+			}
+			return err
+		}
 	}
 
 	return nil
