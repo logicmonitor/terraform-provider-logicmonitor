@@ -122,7 +122,8 @@ func getDashboardById(ctx context.Context, d *schema.ResourceData, m interface{}
 
 	templateVal, templateIsSet := d.GetOk("template")
 	if templateIsSet {
-		params.Template = templateVal.(*bool)
+		template := templateVal.(bool)
+		params.Template = &template
 	}
 
 	client := m.(*client.LogicMonitorRESTAPI)

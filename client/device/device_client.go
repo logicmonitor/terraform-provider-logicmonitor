@@ -89,6 +89,8 @@ func (a *Client) DeleteDeviceByID(params *DeleteDeviceByIDParams) (*DeleteDevice
 
 /*
 GetDeviceByID gets device by id
+
+get device by id
 */
 func (a *Client) GetDeviceByID(params *GetDeviceByIDParams) (*GetDeviceByIDOK, error) {
 	// TODO: Validate the params before sending

@@ -167,6 +167,12 @@ func getDeviceById(ctx context.Context, d *schema.ResourceData, m interface{}) d
 		return diags
 	}
 
+	needStcGrpAndSortedCPVal, needStcGrpAndSortedCPIsSet := d.GetOk("need_stc_grp_and_sorted_c_p")
+	if needStcGrpAndSortedCPIsSet {
+		needStcGrpAndSortedCP := needStcGrpAndSortedCPVal.(bool)
+		params.NeedStcGrpAndSortedCP = &needStcGrpAndSortedCP
+	}
+
 	netflowFilterVal, netflowFilterIsSet := d.GetOk("netflow_filter")
 	if netflowFilterIsSet {
 		params.NetflowFilter = netflowFilterVal.(*string)
