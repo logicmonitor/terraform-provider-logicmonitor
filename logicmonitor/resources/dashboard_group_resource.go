@@ -48,6 +48,7 @@ func addDashboardGroup(ctx context.Context, d *schema.ResourceData, m interface{
 
 	model := schemata.DashboardGroupModel(d)
 	params := dashboard_group.NewAddDashboardGroupParams()
+
 	params.SetBody(model)
 
 	client := m.(*client.LogicMonitorRESTAPI)
@@ -126,7 +127,8 @@ func getDashboardGroupById(ctx context.Context, d *schema.ResourceData, m interf
 
 	templateVal, templateIsSet := d.GetOk("template")
 	if templateIsSet {
-		params.Template = templateVal.(*bool)
+		template := templateVal.(bool)
+		params.Template = &template
 	}
 
 	client := m.(*client.LogicMonitorRESTAPI)

@@ -1,31 +1,101 @@
 ---
 layout: "logicmonitor"
 page_title: "LogicMonitor: logicmonitor_escalation_chain"
-sidebar_current: "docs-logicmonitor-datasources-escalation-chain"
+sidebar_current: "docs-logicmonitor-resource-escalation-chain"
 description: |-
-  Get information on a LogicMonitor escalation chain resource
+  Provides a LogicMonitor escalation chain resource. This can be used to create and manage LogicMonitor escalation chains.
 ---
 
 # logicmonitor_escalation_chain
 
-This can be used to get information on a LogicMonitor escalation chain resource given a filter value from argument list
+Provides a LogicMonitor escalation chain resource. This can be used to create and manage LogicMonitor escalation chains.
 
-## Example Usage    
-### EscalationChain
+## Example Usage
 ```hcl
-# Datasource to get information of LogicMonitor escalation chain
-data "logicmonitor_EscalationChain" "my_EscalationChain" {
-        filter = "description~\"LM Escalation Chain testing\""
-        depends_on = [
-            logicmonitor_escalation_chain.myEscalationChain
-        ]
+# Create a LogicMonitor escalation chain
+resource "logicmonitor_escalation_chain" "my_escalation_chain" {
+  description = "For alerts escalated to the NOC Team"
+  destinations = [
+    {
+      period = [{
+            week_days = [2,3]
+            timezone = "UTC"
+            start_minutes = 10
+            end_minutes   = 15
+    }]
+    stages = [
+      [
+        {
+          type    = "Admin"
+          addr    = "unicornsparkles@rainbow.io"
+          method  = "EMAIL"
+          contact = "78362637"
+        },
+        {
+          type    = "Admin"
+          addr    = "unicornsparkles@rainbow.io"
+          method  = "EMAIL"
+          contact = "78362637"
+        }],
+        [{
+          type    = "Admin"
+          addr    = "unicornsparkles@rainbow.io"
+          method  = "EMAIL"
+          contact = "78362637"
+        }]
+      ]
+    type = "timebased"
+   }
+  ]
+  cc_destinations = [
+    {
+      method = "EMAIL"
+      contact = "string"
+      type = "Admin"
+      addr = "unicornsparkles@rainbow.io"
+    }
+  ]
+  enable_throttling = true
+  name = "NOC Team"
+  throttling_alerts = 40
+  throttling_period = 30
 }
 ```
 
 ## Argument Reference
 
-The following arguments are supported:
-* `filter` - (Optional) Filters the response according to the operator and value specified.More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/v1/escalation-chains/escalation-chains-resource. Please refer the filter arguments from resources tab.
+The following arguments are **required**:
+* `destinations` - 
+   ([]*Chain)
+  + `period` -  
+    + `weekDays` - the list of week day of this period (required)
+    + `timezone` - the timezone for this period (required)
+    + `startMinutes` - the start minute of this period (required)
+    + `endMinutes` - the end minute of this period (required)
+  + `stages` - (required) 
+    + `addr` - the user name if method = admin, or the email address if method = arbitrary
+    + `contact` - contact details, email address or phone number
+    + `method` (required) - Admin | Arbitrary, where Admin = a user, and Arbitrary = an arbitrary email
+    + `type` (required) - email | sms | voice, where type must be email if method = arbitrary
+  + `type` - single (required)
+* `name` - the chain name
+   (string)
 
-* `depends_on` - (Optional) meta-argument within data blocks defers reading of the data source until after all changes to the dependencies have been applied.
+The following arguments are **optional**:
+* `cc_destinations` -  ([]*Recipient)
+  + `addr` - the user name if method = admin, or the email address if method = arbitrary
+  + `contact` - contact details, email address or phone number
+  + `method` (required) - Admin | Arbitrary, where Admin = a user, and Arbitrary = an arbitrary email
+  + `type` (required) - email | sms | voice, where type must be email if method = arbitrary
+* `description` -  (string)
+* `enable_throttling` - if throttle needs to be enabled then true if not then false. (bool)
+* `throttling_alerts` - max number of alert can send during a throttle period (int32)
+* `throttling_period` - the throttle period (int32)
 
+## Import
+
+escalation chains can be imported using their escalation chain ID or name
+```
+$ terraform import logicmonitor_escalation_chain.my_escalation_chain 66
+$ terraform import logicmonitor_escalation_chain.my_escalation_chain NOC Team
+```

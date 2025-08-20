@@ -1,31 +1,60 @@
 ---
 layout: "logicmonitor"
 page_title: "LogicMonitor: logicmonitor_dashboard_group"
-sidebar_current: "docs-logicmonitor-datasources-dashboard-group"
+sidebar_current: "docs-logicmonitor-resource-dashboard-group"
 description: |-
-  Get information on a LogicMonitor dashboard group resource
+  Provides a LogicMonitor dashboard group resource. This can be used to create and manage LogicMonitor dashboard groups.
 ---
 
 # logicmonitor_dashboard_group
 
-This can be used to get information on a LogicMonitor dashboard group resource given a filter value from argument list
+Provides a LogicMonitor dashboard group resource. This can be used to create and manage LogicMonitor dashboard groups.
 
-## Example Usage    
-### DashboardGroup
+## Example Usage
 ```hcl
-# Datasource to get information of LogicMonitor dashboard group
-data "logicmonitor_DashboardGroup" "my_DashboardGroup" {
-        filter = "description~\"LM dashboard group testing\""
-        depends_on = [
-            logicmonitor_dashboard_group.myDashboardGroup
-        ]
+# Create a LogicMonitor dashboard group
+resource "logicmonitor_dashboard_group" "my_dashboard_group" {
+  description = "Servers in LA DataCenter"
+  name = "LogicMonitor Dashboards"
+  parent_id = 1
+  template =   
+  widget_tokens = [
+    {
+      name  = "defaultDeviceGroup"
+      value = "*"
+      inherit_list = null
+      type = null
+    },
+    {
+      name  = "defaultServiceGroup"
+      value = "*"
+      inherit_list = null
+      type = null
+    }
+  ]
 }
 ```
 
 ## Argument Reference
 
-The following arguments are supported:
-* `filter` - (Optional) Filters the response according to the operator and value specified.More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/v1/dashboard-groups/about-the-dashboard-groups-resource. Please refer the filter arguments from resources tab.
+The following arguments are **required**:
+* `name` - The name of the dashboard group
+   (string)
 
-* `depends_on` - (Optional) meta-argument within data blocks defers reading of the data source until after all changes to the dependencies have been applied.
+The following arguments are **optional**:
+* `description` - This is a description of the dashboard group (string)
+* `parent_id` - The Id of the parent dashboard group (int32)
+* `template` - The template which is used for import dashboard group (interface{})
+* `widget_tokens` - The tokens assigned at the group level ([]*WidgetToken)
+  + `name` (required)
+  + `value` (required)
+  + `type` (required) - Need to pass 'null' value
+  + `inherit_list` (required)  - Need to pass 'null' value
 
+## Import
+
+dashboard groups can be imported using their dashboard group ID or name
+```
+$ terraform import logicmonitor_dashboard_group.my_dashboard_group 66
+$ terraform import logicmonitor_dashboard_group.my_dashboard_group LogicMonitor Dashboards
+```
