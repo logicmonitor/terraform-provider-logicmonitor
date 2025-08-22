@@ -1,78 +1,31 @@
 ---
 layout: "logicmonitor"
 page_title: "LogicMonitor: logicmonitor_alert_rule"
-sidebar_current: "docs-logicmonitor-resource-alert-rule"
+sidebar_current: "docs-logicmonitor-datasources-alert-rule"
 description: |-
-  Provides a LogicMonitor alert rule resource. This can be used to create and manage LogicMonitor alert rules.
+  Get information on a LogicMonitor alert rule resource
 ---
 
 # logicmonitor_alert_rule
 
-Provides a LogicMonitor alert rule resource. This can be used to create and manage LogicMonitor alert rules.
+This can be used to get information on a LogicMonitor alert rule resource given a filter value from argument list
 
-## Example Usage
+## Example Usage    
+### AlertRule
 ```hcl
-# Create a LogicMonitor alert rule
-resource "logicmonitor_alert_rule" "my_alert_rule" {
-  datapoint = "*"
-  datasource = "Port-"
-  devices = [
-    "Cisco Router"
-  ]
-  device_groups = [
-  "Devices by Type"
-  ]
-  escalating_chain_id = 12
-  escalation_interval = 15
-  instance = "*"
-  level_str = "Warn"
-  name = "Warning"
-  priority = 100
-  resource_properties = [
-    {
-      name  = "test.pass"
-      value = "string"
-    }
-  ]
-  send_anomaly_suppressed_alert = true
-  suppress_alert_ack_sdt = true
-  suppress_alert_clear = true
+# Datasource to get information of LogicMonitor alert rule
+data "logicmonitor_AlertRule" "my_AlertRule" {
+        filter = "name~\"Alert Rule Testing\""
+        depends_on = [
+            logicmonitor_alert_rule.myAlertRule
+        ]
 }
 ```
 
 ## Argument Reference
 
-The following arguments are **required**:
-* `datapoint` - The datapoint the alert rule is configured to match
-   (string)
-* `datasource` - The datasource the alert rule is configured to match
-   (string)
-* `device_groups` - The device groups and service groups the alert rule is configured to match
-   ([]string)
-* `devices` - The device names and service names the alert rule is configured to match
-   ([]string)
-* `escalating_chain_id` - The id of the escalation chain associated with the alert rule
-   (int32)
-* `escalation_interval` - The escalation interval associated with the alert rule, in minutes
-   (int32)
-* `instance` - The instance the alert rule is configured to match
-   (string)
-* `name` - The name of the alert rule
-   (string)
-* `priority` - The priority associated with the alert rule
-   (int32)
+The following arguments are supported:
+* `filter` - (Optional) Filters the response according to the operator and value specified.More Info: https://www.logicmonitor.com/support/adding-alert-rules. Please refer the filter arguments from resources tab.
 
-The following arguments are **optional**:
-* `level_str` - The alert severity levels the alert rule is configured to match. Acceptable values are: All, Warn, Error, Critical (string)
-* `resource_properties` - The resource property filters list ([]*DeviceProperty)
-* `send_anomaly_suppressed_alert` - Whether or not send anomaly suppressed alert (bool)
-* `suppress_alert_ack_sdt` - Whether or not status notifications for acknowledgements and SDTs should be sent to the alert rule (bool)
-* `suppress_alert_clear` - Whether or not alert clear notifications should be sent to the alert rule (bool)
+* `depends_on` - (Optional) meta-argument within data blocks defers reading of the data source until after all changes to the dependencies have been applied.
 
-## Import
-
-alert rules can be imported using their alert rule ID or name
-```
-$ terraform import logicmonitor_alert_rule.my_alert_rule 66
-$ terraform import logicmonitor_alert_rule.my_alert_rule Warning
-```
