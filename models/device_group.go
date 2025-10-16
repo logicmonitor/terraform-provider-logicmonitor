@@ -108,7 +108,7 @@ type DeviceGroup struct {
 	// Read Only: true
 	GroupStatus string `json:"groupStatus,omitempty"`
 
-	// The type of device group: normal and dynamic device groups will have groupType=Normal, and AWS groups will have a groupType value of AWS/SERVICE (e.g. AWS/AwsRoot, AWS/S3, etc.)
+	// The type of device group: normal and dynamic device groups will have groupType=Normal, and AWS groups will have a groupType value of AWS/SERVICE (e.g. AWS/AwsRoot, AWS/S3,Azure/AzureRoot etc.)
 	// Example: Normal
 	GroupType string `json:"groupType,omitempty"`
 

@@ -154,6 +154,372 @@ resource "logicmonitor_device_group" "my_aws_device_group" {
 	]
 }
 ```
+## Example Usage - Azure Cloud Account
+```hcl
+//Auth information for Azure account
+variable "user_info" {
+  type = object({
+    client_id  = string
+    secret_key = string
+    tenant_id  = string
+  })
+  nullable  = false
+  sensitive = true
+}
+
+// Required fields: client_id, secret_key, tenant_id and subscription_ids
+resource "logicmonitor_device_group" "my_azure_device_group" {
+  name             = "Azure test"
+  parent_id        = 1
+  group_type       = "Azure/AzureRoot"
+  description      = "Azure test"
+  disable_alerting = false
+  # enable_netflow = false
+  custom_properties = [
+    {
+      name  = "customer"
+      value = "customerA"
+    }
+  ]
+  extra {
+    account {
+      schedule              = "0 * * * *"
+      country               = "USA"
+      client_id             = var.user_info.client_id
+      secret_key            = var.user_info.secret_key
+      subscription_ids      = ""
+      tenant_id             = var.user_info.tenant_id
+      collector_description = "Cloud Collector"
+      # collector_id = -2
+    }
+    default {
+      disable_terminated_host_alerting = true
+      //normal_collector_config {}
+      custom_n_s_p_schedule = ""
+      select_all            = true
+      monitoring_regions = [
+        "CENTRAL_US",
+        "EAST_US",
+        "EAST_US_2"
+      ]
+      device_display_name_template        = ""
+      disable_stop_terminate_host_monitor = true
+      dead_operation                      = "KEEP_7_DAYS"
+      use_default                         = true
+      name_filter                         = []
+      tags                                = []
+    }
+    services {
+      v_i_r_t_u_a_l_m_a_c_h_i_n_e {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      s_t_o_r_a_g_e_a_c_c_o_u_n_t {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+
+      }
+      e_v_e_n_t_h_u_b {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+
+      }
+      a_p_p_s_e_r_v_i_c_e {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+
+      }
+      a_p_p_s_e_r_v_i_c_e_p_l_a_n {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      v_i_r_t_u_a_l_m_a_c_h_i_n_e_s_c_a_l_e_s_e_t_vm {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      p_u_b_l_i_c_ip {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      sql_d_a_t_a_b_a_s_e {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      t_a_b_l_e_s_t_o_r_a_g_e {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      b_l_o_b_s_t_o_r_a_g_e {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      n_e_t_w_o_r_k_i_n_t_e_r_f_a_c_e {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      f_i_l_e_s_t_o_r_a_g_e {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      q_u_e_u_e_s_t_o_r_a_g_e {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      l_o_g_i_c_a_p_p_s {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+      a_p_p_l_i_c_a_t_i_o_n_i_n_s_i_g_h_t_s {
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enabled    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "CENTRAL_US",
+          "EAST_US_2",
+          "WEST_US"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
+      }
+
+    }
+  }
+}
+
+
+```
 
 ## Argument Reference
 
@@ -180,6 +546,10 @@ The following arguments are **optional**:
     + `billingPathPrefix` - Path to billing info in billing bucket (deprecated) (computed)
     + `collectorId` - ID of the collector assigned to this group (computed)
     + `externalId` - External ID provide by LM for the creation of the assumed role in AWS (required)
+    + `clientId`   - Client ID from Azure account (required for Azure)
+    + `secretKey` - Secret key  from Azure Account (required for Azure)
+    + `subscriptionIds` -  List of subcription ids(comma separated, required for Azure)) 
+    + `tenantId` - Tenant ID from Azure account (required for Azure)
     + `schedule` - The NetScan schedule for how frequently the cloud collector should scan/discover new resources in the cloud account. It's format is similar to Linux crontab but doesn't support some complex representations ('-', '/', ',') supported in standard linux crontabs.\nFormat: '*(minute) *(hour) *(day) *(week of month) *(weekday)'\nExamples: '50 * * * *' means scheduling at 50th minute per hour\n'50 10 20 * *' means scheduling at 10:50 of the 20th day per month\n'50 10 * 1 3' means scheduling at wednesday of the first week per month
     + `type` - Type of cloud account (computed)
   + `default` - default cloud service monitoring settings
@@ -206,8 +576,8 @@ The following arguments are **optional**:
   + `devices` - Cloud devices to monitor in the group (computed)
     + `deviceType` - Cloud device type (2 for AWS Device) (int)
     + `requiredProps` - Required device properties (array of strings)
-  + `services` - Cloud account services to monitor. This is an object with keys for each AWS service that have the same arguments as `default`. See example above (all service keys alternate letters and underscores, but not numbers; SQS=s_q_s, SAGEMAKER=s_a_g_e_m_a_k_e_r, EC2=e_c2 etc.)
-* `group_type` - The type of device group: normal and dynamic device groups will have groupType=Normal, and AWS groups will have a groupType value of AWS/SERVICE (e.g. AWS/AwsRoot, AWS/S3, etc.) (string)
+  + `services` - Cloud account services to monitor. This is an object with keys for each AWS/Azure service that have the same arguments as `default`. See example above (all service keys alternate letters and underscores, but not numbers; SQS=s_q_s, SAGEMAKER=s_a_g_e_m_a_k_e_r, EC2=e_c2 etc.)
+* `group_type` - The type of device group: normal and dynamic device groups will have groupType=Normal, and AWS groups will have a groupType value of AWS/SERVICE (e.g. AWS/AwsRoot, AWS/S3,Azure/AzureRoot etc.) (string)
 * `parent_id` - The id of the parent group for this device group (the root device group has an Id of 1) (int32)
 
 ## Import
