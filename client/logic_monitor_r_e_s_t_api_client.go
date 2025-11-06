@@ -32,6 +32,7 @@ import (
 	"terraform-provider-logicmonitor/client/device"
 	"terraform-provider-logicmonitor/client/device_group"
 	"terraform-provider-logicmonitor/client/escalation_chain"
+	"terraform-provider-logicmonitor/client/sdt"
 	"terraform-provider-logicmonitor/client/website"
 	"terraform-provider-logicmonitor/client/website_group"
 )
@@ -120,6 +121,8 @@ func New(c *Config, httpClient *http.Client) *LogicMonitorRESTAPI {
 
 	cli.EscalationChain = escalation_chain.New(transport, strfmt.Default, authInfo)
 
+	cli.Sdt = sdt.New(transport, strfmt.Default, authInfo)
+
 	cli.Website = website.New(transport, strfmt.Default, authInfo)
 
 	cli.WebsiteGroup = website_group.New(transport, strfmt.Default, authInfo)
@@ -188,6 +191,8 @@ type LogicMonitorRESTAPI struct {
 
 	EscalationChain *escalation_chain.Client
 
+	Sdt *sdt.Client
+
 	Website *website.Client
 
 	WebsiteGroup *website_group.Client
@@ -218,6 +223,8 @@ func (c *LogicMonitorRESTAPI) SetTransport(transport runtime.ClientTransport) {
 	c.DeviceGroup.SetTransport(transport)
 
 	c.EscalationChain.SetTransport(transport)
+
+	c.Sdt.SetTransport(transport)
 
 	c.Website.SetTransport(transport)
 

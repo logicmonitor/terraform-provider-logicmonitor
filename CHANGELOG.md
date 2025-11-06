@@ -1,3 +1,24 @@
+## 2.0.26 (Nov, 2025)
+
+* Sdt support via Terraform Provider
+
+## 2.0.25 (Oct, 2025)
+
+* Azure Example Added for Device group resource
+
+## 2.0.24 (Aug, 2025)
+
+* Datasource Websites doc update
+
+## 2.0.23 (Aug, 2025)
+
+* HostGroupIdsFix And documentation update
+
+## 2.0.22 (July, 2025)
+
+* Provider Gap Fixes as per the Latest Swagger Documentation
+* Usage Tracking 
+
 ## 2.0.21 (May, 2025)
 
 * Domain field added in provider block to handle gov domains
