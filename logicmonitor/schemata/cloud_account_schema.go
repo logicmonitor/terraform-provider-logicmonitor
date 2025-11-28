@@ -1,82 +1,81 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func CloudAccountSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"account_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"assumed_role_arn": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"billing_bucket_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"billing_path_prefix": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"client_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"collector_description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"collector_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"country": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"external_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"schedule": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"secret_key": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"subscription_ids": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"tenant_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -116,18 +115,18 @@ func CloudAccountModel(d map[string]interface{}) *models.CloudAccount {
 	secretKey := d["secret_key"].(string)
 	subscriptionIds := d["subscription_ids"].(string)
 	tenantID := d["tenant_id"].(string)
-	
-	return &models.CloudAccount {
-		AccountID: accountID,
-		AssumedRoleArn: assumedRoleArn,
-		ClientID: clientID,
+
+	return &models.CloudAccount{
+		AccountID:            accountID,
+		AssumedRoleArn:       assumedRoleArn,
+		ClientID:             clientID,
 		CollectorDescription: collectorDescription,
-		Country: country,
-		ExternalID: externalID,
-		Schedule: schedule,
-		SecretKey: secretKey,
-		SubscriptionIds: subscriptionIds,
-		TenantID: tenantID,
+		Country:              country,
+		ExternalID:           externalID,
+		Schedule:             schedule,
+		SecretKey:            secretKey,
+		SubscriptionIds:      subscriptionIds,
+		TenantID:             tenantID,
 	}
 }
 

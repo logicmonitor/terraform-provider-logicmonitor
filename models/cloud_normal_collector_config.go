@@ -25,7 +25,7 @@ type CloudNormalCollectorConfig struct {
 
 	// If the normal collector config is enabled
 	// Required: true
-	Enabled *bool `json:"enabled"`
+	Enable *bool `json:"enable"`
 }
 
 // Validate validates this cloud normal collector config
@@ -74,7 +74,7 @@ func (m *CloudNormalCollectorConfig) validateCollectors(formats strfmt.Registry)
 
 func (m *CloudNormalCollectorConfig) validateEnabled(formats strfmt.Registry) error {
 
-	if err := validate.Required("enabled", "body", m.Enabled); err != nil {
+	if err := validate.Required("enable", "body", m.Enable); err != nil {
 		return err
 	}
 

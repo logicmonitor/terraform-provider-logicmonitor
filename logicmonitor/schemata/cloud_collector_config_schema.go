@@ -1,37 +1,36 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func CloudCollectorConfigSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"applies_to": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"auto_balanced_collector_group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"collector_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"priority": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"use_public_ip": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
 	}
 }
 
@@ -57,13 +56,13 @@ func CloudCollectorConfigModel(d map[string]interface{}) *models.CloudCollectorC
 	collectorID := int32(d["collector_id"].(int))
 	priority := int32(d["priority"].(int))
 	usePublicIP := d["use_public_ip"].(bool)
-	
-	return &models.CloudCollectorConfig {
-		AppliesTo: &appliesTo,
+
+	return &models.CloudCollectorConfig{
+		AppliesTo:                    &appliesTo,
 		AutoBalancedCollectorGroupID: autoBalancedCollectorGroupID,
-		CollectorID: &collectorID,
-		Priority: &priority,
-		UsePublicIP: usePublicIP,
+		CollectorID:                  &collectorID,
+		Priority:                     &priority,
+		UsePublicIP:                  usePublicIP,
 	}
 }
 

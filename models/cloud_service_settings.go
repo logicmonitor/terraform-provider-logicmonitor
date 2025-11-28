@@ -39,6 +39,9 @@ type CloudServiceSettings struct {
 	// If alerting should be disabled when a cloud device is terminated
 	DisableTerminatedHostAlerting bool `json:"disableTerminatedHostAlerting,omitempty"`
 
+	// Whether enhanced monitoring is enabled for this service
+	IsEnhancedMonitoringEnabled bool `json:"isEnhancedMonitoringEnabled,omitempty"`
+
 	// The regions this group will monitor
 	// Unique: true
 	MonitoringRegionInfos []string `json:"monitoringRegionInfos"`

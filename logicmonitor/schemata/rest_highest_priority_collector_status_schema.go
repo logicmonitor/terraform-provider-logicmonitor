@@ -1,32 +1,31 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func RestHighestPriorityCollectorStatusSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"acked": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"in_s_d_t": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"is_down": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"status": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -46,12 +45,10 @@ func SetRestHighestPriorityCollectorStatusSubResourceData(m []*models.RestHighes
 
 func RestHighestPriorityCollectorStatusModel(d map[string]interface{}) *models.RestHighestPriorityCollectorStatus {
 	// assume that the incoming map only contains the relevant resource data
-	
-	return &models.RestHighestPriorityCollectorStatus {
-	}
+
+	return &models.RestHighestPriorityCollectorStatus{}
 }
 
 func GetRestHighestPriorityCollectorStatusPropertyFields() (t []string) {
-	return []string{
-	}
+	return []string{}
 }

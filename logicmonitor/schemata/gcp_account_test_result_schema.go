@@ -1,32 +1,31 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func GcpAccountTestResultSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"detail_link": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"no_permission_services": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Optional: true,
 		},
-		
+
 		"non_permission_errors": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Optional: true,
 		},
-		
 	}
 }
 
@@ -48,11 +47,11 @@ func GcpAccountTestResultModel(d map[string]interface{}) *models.GcpAccountTestR
 	detailLink := d["detail_link"].(string)
 	noPermissionServices := utils.ConvertSetToStringSlice(d["no_permission_services"].(*schema.Set))
 	nonPermissionErrors := utils.ConvertSetToStringSlice(d["non_permission_errors"].(*schema.Set))
-	
-	return &models.GcpAccountTestResult {
-		DetailLink: detailLink,
+
+	return &models.GcpAccountTestResult{
+		DetailLink:           detailLink,
 		NoPermissionServices: noPermissionServices,
-		NonPermissionErrors: nonPermissionErrors,
+		NonPermissionErrors:  nonPermissionErrors,
 	}
 }
 

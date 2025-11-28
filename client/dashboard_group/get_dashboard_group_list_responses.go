@@ -46,7 +46,8 @@ func NewGetDashboardGroupListOK() *GetDashboardGroupListOK {
 	return &GetDashboardGroupListOK{}
 }
 
-/* GetDashboardGroupListOK describes a response with status code 200, with default header values.
+/*
+	GetDashboardGroupListOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewGetDashboardGroupListDefault(code int) *GetDashboardGroupListDefault {
 	}
 }
 
-/* GetDashboardGroupListDefault describes a response with status code -1, with default header values.
+/*
+	GetDashboardGroupListDefault describes a response with status code -1, with default header values.
 
 Error
 */

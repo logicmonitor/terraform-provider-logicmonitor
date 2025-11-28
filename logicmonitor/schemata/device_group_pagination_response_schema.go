@@ -1,31 +1,30 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func DeviceGroupPaginationResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"items": {
-			Type: schema.TypeList, //GoType: []*DeviceGroup 
+			Type: schema.TypeList, //GoType: []*DeviceGroup
 			Elem: &schema.Resource{
 				Schema: DeviceGroupSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"search_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"total": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -45,8 +44,8 @@ func SetDeviceGroupPaginationResponseSubResourceData(m []*models.DeviceGroupPagi
 func DeviceGroupPaginationResponseModel(d map[string]interface{}) *models.DeviceGroupPaginationResponse {
 	// assume that the incoming map only contains the relevant resource data
 	items := d["items"].([]*models.DeviceGroup)
-	
-	return &models.DeviceGroupPaginationResponse {
+
+	return &models.DeviceGroupPaginationResponse{
 		Items: items,
 	}
 }

@@ -1,31 +1,30 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func EscalationChainPaginationResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"items": {
-			Type: schema.TypeList, //GoType: []*EscalationChain  
+			Type: schema.TypeList, //GoType: []*EscalationChain
 			Elem: &schema.Resource{
 				Schema: EscalationChainSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"search_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"total": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -45,8 +44,8 @@ func SetEscalationChainPaginationResponseSubResourceData(m []*models.EscalationC
 func EscalationChainPaginationResponseModel(d map[string]interface{}) *models.EscalationChainPaginationResponse {
 	// assume that the incoming map only contains the relevant resource data
 	items := d["items"].([]*models.EscalationChain)
-	
-	return &models.EscalationChainPaginationResponse {
+
+	return &models.EscalationChainPaginationResponse{
 		Items: items,
 	}
 }

@@ -1,17 +1,17 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func ErrorResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"error_code": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"error_detail": {
 			Type: schema.TypeMap, //GoType: interface{}
 			Elem: &schema.Schema{
@@ -19,12 +19,11 @@ func ErrorResponseSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"error_message": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -43,12 +42,10 @@ func SetErrorResponseSubResourceData(m []*models.ErrorResponse) (d []*map[string
 
 func ErrorResponseModel(d map[string]interface{}) *models.ErrorResponse {
 	// assume that the incoming map only contains the relevant resource data
-	
-	return &models.ErrorResponse {
-	}
+
+	return &models.ErrorResponse{}
 }
 
 func GetErrorResponsePropertyFields() (t []string) {
-	return []string{
-	}
+	return []string{}
 }

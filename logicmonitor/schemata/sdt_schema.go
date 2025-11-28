@@ -2,394 +2,392 @@ package schemata
 
 import (
 	"github.com/go-openapi/strfmt"
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func SdtSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"admin": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"batch_job_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"collector_description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"collector_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"comment": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"data_source_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"data_source_instance_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"data_source_instance_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"data_source_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"default_value": {
-			Type: schema.TypeString, //GoType: strfmt.DateTime
+			Type:     schema.TypeString, //GoType: strfmt.DateTime
 			Optional: true,
 		},
-		
+
 		"device_batch_job_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"device_data_source_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"device_data_source_instance_group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"device_data_source_instance_group_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"device_display_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"device_event_source_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"device_group_full_path": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"device_group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"device_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"duration": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"end_date_time": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"end_date_time_on_local": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"end_hour": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"end_minute": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"event_source_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"hour": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"is_effective": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"minute": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"month_day": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"sdt_type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"start_date_time": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"start_date_time_on_local": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"timezone": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"week_day": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"week_of_month": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
 	}
 }
-
 
 // Schema mapping representing the resource's respective datasource object defined in Terraform configuration
 // Only difference between this and SdtSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
 func DataSourceSdtSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"admin": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"batch_job_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"collector_description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"collector_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"comment": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"data_source_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"data_source_instance_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"data_source_instance_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"data_source_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"default_value": {
-			Type: schema.TypeString, //GoType: strfmt.DateTime
+			Type:     schema.TypeString, //GoType: strfmt.DateTime
 			Optional: true,
 		},
-		
+
 		"device_batch_job_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"device_data_source_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"device_data_source_instance_group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"device_data_source_instance_group_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"device_display_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"device_event_source_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"device_group_full_path": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"device_group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"device_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"duration": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"end_date_time": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"end_date_time_on_local": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"end_hour": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"end_minute": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"event_source_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"hour": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 			Optional: true,
 		},
-		
+
 		"is_effective": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"minute": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"month_day": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"sdt_type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"start_date_time": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"start_date_time_on_local": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"timezone": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"week_day": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"week_of_month": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"filter": {
 			Type:     schema.TypeString,
-            Optional: true,
+			Optional: true,
 		},
 	}
 }
@@ -515,40 +513,40 @@ func SdtModel(d *schema.ResourceData) *models.Sdt {
 	typeVar := d.Get("type").(string)
 	weekDay := d.Get("week_day").(string)
 	weekOfMonth := d.Get("week_of_month").(string)
-	
-	return &models.Sdt {
-		BatchJobName: batchJobName,
-		CollectorID: collectorID,
-		Comment: comment,
-		DataSourceID: dataSourceID,
-		DataSourceInstanceID: dataSourceInstanceID,
-		DataSourceInstanceName: dataSourceInstanceName,
-		DataSourceName: dataSourceName,
-		DefaultValue: defaultValue,
-		DeviceBatchJobID: deviceBatchJobID,
-		DeviceDataSourceID: deviceDataSourceID,
-		DeviceDataSourceInstanceGroupID: deviceDataSourceInstanceGroupID,
+
+	return &models.Sdt{
+		BatchJobName:                      batchJobName,
+		CollectorID:                       collectorID,
+		Comment:                           comment,
+		DataSourceID:                      dataSourceID,
+		DataSourceInstanceID:              dataSourceInstanceID,
+		DataSourceInstanceName:            dataSourceInstanceName,
+		DataSourceName:                    dataSourceName,
+		DefaultValue:                      defaultValue,
+		DeviceBatchJobID:                  deviceBatchJobID,
+		DeviceDataSourceID:                deviceDataSourceID,
+		DeviceDataSourceInstanceGroupID:   deviceDataSourceInstanceGroupID,
 		DeviceDataSourceInstanceGroupName: deviceDataSourceInstanceGroupName,
-		DeviceDisplayName: deviceDisplayName,
-		DeviceEventSourceID: deviceEventSourceID,
-		DeviceGroupFullPath: deviceGroupFullPath,
-		DeviceGroupID: deviceGroupID,
-		DeviceID: deviceID,
-		Duration: duration,
-		EndDateTime: endDateTime,
-		EndHour: endHour,
-		EndMinute: endMinute,
-		EventSourceName: eventSourceName,
-		Hour: hour,
-		ID: id,
-		Minute: minute,
-		MonthDay: monthDay,
-		SdtType: sdtType,
-		StartDateTime: startDateTime,
-		Timezone: timezone,
-		Type: &typeVar,
-		WeekDay: weekDay,
-		WeekOfMonth: weekOfMonth,
+		DeviceDisplayName:                 deviceDisplayName,
+		DeviceEventSourceID:               deviceEventSourceID,
+		DeviceGroupFullPath:               deviceGroupFullPath,
+		DeviceGroupID:                     deviceGroupID,
+		DeviceID:                          deviceID,
+		Duration:                          duration,
+		EndDateTime:                       endDateTime,
+		EndHour:                           endHour,
+		EndMinute:                         endMinute,
+		EventSourceName:                   eventSourceName,
+		Hour:                              hour,
+		ID:                                id,
+		Minute:                            minute,
+		MonthDay:                          monthDay,
+		SdtType:                           sdtType,
+		StartDateTime:                     startDateTime,
+		Timezone:                          timezone,
+		Type:                              &typeVar,
+		WeekDay:                           weekDay,
+		WeekOfMonth:                       weekOfMonth,
 	}
 }
 func GetSdtPropertyFields() (t []string) {

@@ -1,31 +1,30 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func AlertRulePaginationResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"items": {
-			Type: schema.TypeList, //GoType: []*AlertRule 
+			Type: schema.TypeList, //GoType: []*AlertRule
 			Elem: &schema.Resource{
 				Schema: AlertRuleSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"search_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"total": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -45,8 +44,8 @@ func SetAlertRulePaginationResponseSubResourceData(m []*models.AlertRulePaginati
 func AlertRulePaginationResponseModel(d map[string]interface{}) *models.AlertRulePaginationResponse {
 	// assume that the incoming map only contains the relevant resource data
 	items := d["items"].([]*models.AlertRule)
-	
-	return &models.AlertRulePaginationResponse {
+
+	return &models.AlertRulePaginationResponse{
 		Items: items,
 	}
 }

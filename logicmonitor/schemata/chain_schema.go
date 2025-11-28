@@ -1,37 +1,36 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func ChainSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"period": {
-			Type: schema.TypeList, //GoType: Period 
-            Elem: &schema.Resource{
+			Type: schema.TypeList, //GoType: Period
+			Elem: &schema.Resource{
 				Schema: PeriodSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"stages": {
-			Type: schema.TypeList, //GoType: [][]*Recipient 
+			Type: schema.TypeList, //GoType: [][]*Recipient
 			Elem: &schema.Schema{
 				Type: schema.TypeList,
 				Elem: &schema.Resource{Schema: RecipientSchema()},
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Required: true,
+			Required:   true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
 	}
 }
 
@@ -40,7 +39,7 @@ func SetChainSubResourceData(m []*models.Chain) (d []*map[string]interface{}) {
 		if chain != nil {
 			properties := make(map[string]interface{})
 			properties["period"] = SetPeriodSubResourceData([]*models.Period{chain.Period})
-            properties["stages"] = SetRecipientSubResourceData(chain.Stages[0])
+			properties["stages"] = SetRecipientSubResourceData(chain.Stages[0])
 			properties["type"] = chain.Type
 			d = append(d, &properties)
 		}
@@ -57,11 +56,11 @@ func ChainModel(d map[string]interface{}) *models.Chain {
 	}
 	stages := utils.GetRecipient(d["stages"].([]interface{}))
 	typeVar := d["type"].(string)
-	
-	return &models.Chain {
+
+	return &models.Chain{
 		Period: period,
 		Stages: stages,
-		Type: &typeVar,
+		Type:   &typeVar,
 	}
 }
 

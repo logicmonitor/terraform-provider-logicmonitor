@@ -46,7 +46,8 @@ func NewGetDeviceGroupListOK() *GetDeviceGroupListOK {
 	return &GetDeviceGroupListOK{}
 }
 
-/* GetDeviceGroupListOK describes a response with status code 200, with default header values.
+/*
+	GetDeviceGroupListOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewGetDeviceGroupListDefault(code int) *GetDeviceGroupListDefault {
 	}
 }
 
-/* GetDeviceGroupListDefault describes a response with status code -1, with default header values.
+/*
+	GetDeviceGroupListDefault describes a response with status code -1, with default header values.
 
 Error
 */

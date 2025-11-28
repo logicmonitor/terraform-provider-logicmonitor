@@ -55,10 +55,12 @@ func NewAddCollectorGroupParamsWithHTTPClient(client *http.Client) *AddCollector
 	}
 }
 
-/* AddCollectorGroupParams contains all the parameters to send to the API endpoint
-   for the add collector group operation.
+/*
+AddCollectorGroupParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the add collector group operation.
+
+	Typically these are written to a http.Request.
 */
 type AddCollectorGroupParams struct {
 

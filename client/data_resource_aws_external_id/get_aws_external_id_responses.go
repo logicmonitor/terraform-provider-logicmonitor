@@ -46,7 +46,8 @@ func NewGetAwsExternalIDOK() *GetAwsExternalIDOK {
 	return &GetAwsExternalIDOK{}
 }
 
-/* GetAwsExternalIDOK describes a response with status code 200, with default header values.
+/*
+	GetAwsExternalIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewGetAwsExternalIDDefault(code int) *GetAwsExternalIDDefault {
 	}
 }
 
-/* GetAwsExternalIDDefault describes a response with status code -1, with default header values.
+/*
+	GetAwsExternalIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

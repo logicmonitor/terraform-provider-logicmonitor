@@ -7,6 +7,8 @@ VERSION=2.0.21
 OS_ARCH=darwin_amd64
 LDFLAGS = -ldflags "-X terraform-provider-logicmonitor/logicmonitor.ProviderVersion=$(VERSION)"
 
+.PHONY: default build release fmt test testacc
+
 default: build
 
 build:
@@ -27,6 +29,9 @@ release:
 	GOOS=solaris GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_solaris_amd64
 	GOOS=windows GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_windows_386
 	GOOS=windows GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_windows_amd64
+
+fmt:
+	go fmt ./...
 
 test:
 	go test -i $(TEST) || exit 1

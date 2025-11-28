@@ -1,32 +1,31 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func AutoDiscoveryFilterSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"attribute": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"comment": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"operation": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"value": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
 	}
 }
 
@@ -50,12 +49,12 @@ func AutoDiscoveryFilterModel(d map[string]interface{}) *models.AutoDiscoveryFil
 	comment := d["comment"].(string)
 	operation := d["operation"].(string)
 	value := d["value"].(string)
-	
-	return &models.AutoDiscoveryFilter {
+
+	return &models.AutoDiscoveryFilter{
 		Attribute: &attribute,
-		Comment: comment,
+		Comment:   comment,
 		Operation: &operation,
-		Value: value,
+		Value:     value,
 	}
 }
 

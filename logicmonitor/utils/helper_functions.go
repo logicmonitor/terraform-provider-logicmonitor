@@ -130,6 +130,7 @@ func getPropertiesFromInterface(r interface{}) (t []*models.NameAndValue) {
 	}
 	return
 }
+
 // retrieve resource custom properties (techops version - json object input)
 func GetPropertiesTechops(d *schema.ResourceData) (t []*models.NameAndValue) {
 	// interate through hashmap to get custom/system properties
@@ -194,15 +195,15 @@ func GetCloudTagFilters(d []interface{}) (t []*models.CloudTagFilter) {
 	}
 	return
 }
-func GetResourceProperties(d []interface{}) (t []*models.DeviceProperty ) {
+func GetResourceProperties(d []interface{}) (t []*models.DeviceProperty) {
 	for _, i := range d {
 		if m, ok := i.(map[string]interface{}); ok {
 			var name = m["name"].(string)
 			var value = m["value"].(string)
 
 			model := &models.DeviceProperty{
-				Name:      &name,
-				Value:     &value,
+				Name:  &name,
+				Value: &value,
 			}
 			t = append(t, model)
 		}
@@ -246,15 +247,15 @@ func getPropFromWTInterface(r interface{}) (t []*models.WidgetToken) {
 }
 
 func ConvertSetToInt32Slice(set interface{}) (slice []int32) {
-    if set == nil {
-        return
-    }
-    setList := set.([]interface{})
-    slice = make([]int32, len(setList))
-    for i, v := range setList {
-        slice[i] = int32(v.(int))
-    }
-    return slice
+	if set == nil {
+		return
+	}
+	setList := set.([]interface{})
+	slice = make([]int32, len(setList))
+	for i, v := range setList {
+		slice[i] = int32(v.(int))
+	}
+	return slice
 }
 
 func GetPropFromCCMap(d *schema.ResourceData, key string) (t []*models.Recipient) {
@@ -279,10 +280,10 @@ func getPropFromCCInterface(r interface{}) (t []*models.Recipient) {
 			var Type = m["type"].(string)
 
 			model := &models.Recipient{
-				Addr:  addr,
+				Addr:    addr,
 				Contact: contact,
-				Method: &method,
-                Type: &Type,
+				Method:  &method,
+				Type:    &Type,
 			}
 			t = append(t, model)
 		}
@@ -291,24 +292,23 @@ func getPropFromCCInterface(r interface{}) (t []*models.Recipient) {
 }
 
 func getPropFromDesInterface(r interface{}) (t []*models.Chain) {
-    
 
-    for _, i := range r.([]interface{}) {
-    if m, ok := i.(map[string]interface{}); ok {
-      var period = GetPeriod(m["period"].([]interface{}))
-		var stages =  GetRecipient(m["stages"].([]interface{}))
-		var Type = m["type"].(string)
-            
-            model := &models.Chain{
-                Period: &period,
-                Stages: stages,
-				Type: &Type,
-            }
-            t = append(t, model)
-        }
-    }
+	for _, i := range r.([]interface{}) {
+		if m, ok := i.(map[string]interface{}); ok {
+			var period = GetPeriod(m["period"].([]interface{}))
+			var stages = GetRecipient(m["stages"].([]interface{}))
+			var Type = m["type"].(string)
 
-    return 
+			model := &models.Chain{
+				Period: &period,
+				Stages: stages,
+				Type:   &Type,
+			}
+			t = append(t, model)
+		}
+	}
+
+	return
 }
 func GetRecipient(d []interface{}) (t [][]*models.Recipient) {
 	for _, stageData := range d {
@@ -345,13 +345,13 @@ func GetPeriod(d []interface{}) (t models.Period) {
 			var endMinutes = int32(m["end_minutes"].(int))
 			var startMinutes = int32(m["start_minutes"].(int))
 			var timezone = m["timezone"].(string)
-            var weekDays = ConvertSetToInt32Slice(m["week_days"])
-			
+			var weekDays = ConvertSetToInt32Slice(m["week_days"])
+
 			model := models.Period{
-				EndMinutes: &endMinutes,
+				EndMinutes:   &endMinutes,
 				StartMinutes: &startMinutes,
-				Timezone: &timezone,
-			    WeekDays: weekDays,
+				Timezone:     &timezone,
+				WeekDays:     weekDays,
 			}
 			t = model
 		}
@@ -371,7 +371,7 @@ func getPropFromStepsInterface(r interface{}) (t []*models.WebCheckStep) {
 		if m, ok := i.(map[string]interface{}); ok {
 			var schema = m["schema"].(string)
 			var matchType = m["match_type"].(string)
-            var description = m["description"].(string)
+			var description = m["description"].(string)
 			var httpVersion = m["http_version"].(string)
 			var respType = m["resp_type"].(string)
 			var reqType = m["req_type"].(string)
@@ -385,13 +385,13 @@ func getPropFromStepsInterface(r interface{}) (t []*models.WebCheckStep) {
 			var fullpageLoad = m["fullpage_load"].(bool)
 			var requireAuth = m["require_auth"].(bool)
 			var path = m["path"].(string)
-            var auth *models.Authentication
-            if requireAuth {
-                auth = GetAuth(m["auth"].([]interface{}))
-            }
+			var auth *models.Authentication
+			if requireAuth {
+				auth = GetAuth(m["auth"].([]interface{}))
+			}
 			var httpHeaders = m["http_headers"].(string)
 			var httpBody = m["http_body"].(string)
-            var keyword = m["keyword"].(string)
+			var keyword = m["keyword"].(string)
 			var respScript = m["resp_script"].(string)
 			var label = m["label"].(string)
 			var URL = m["url"].(string)
@@ -399,38 +399,38 @@ func getPropFromStepsInterface(r interface{}) (t []*models.WebCheckStep) {
 			var reqScript = m["req_script"].(string)
 			var typee = m["type"].(string)
 			var statusCode = m["status_code"].(string)
-            
+
 			model := &models.WebCheckStep{
-				Schema:  schema,
-				MatchType: matchType,
-                Description: description,
-                HTTPVersion: httpVersion,
-                RespType: respType,
-				ReqType: reqType,
+				Schema:            schema,
+				MatchType:         matchType,
+				Description:       description,
+				HTTPVersion:       httpVersion,
+				RespType:          respType,
+				ReqType:           reqType,
 				FollowRedirection: followRedirection,
-				HTTPMethod: httpMehod,
-				Enable: enable,
-				Name: name,
-				Timeout: timeout,
-				UseDefaultRoot: &useDefaultRoot,
-				PostDataEditType: postDataEditType,
-				FullpageLoad: fullpageLoad,
-				RequireAuth: requireAuth,
-				Path: path,
-				HTTPHeaders: httpHeaders,
-				HTTPBody: httpBody, 
-				Keyword: keyword,
-                RespScript: respScript,
-				Label: label,
-				URL: URL,
-				InvertMatch: invertMatch,
-                ReqScript: reqScript,
-				Type: typee,
-				StatusCode: statusCode,
-               }
-			   if requireAuth {
-                model.Auth = auth
-            }
+				HTTPMethod:        httpMehod,
+				Enable:            enable,
+				Name:              name,
+				Timeout:           timeout,
+				UseDefaultRoot:    &useDefaultRoot,
+				PostDataEditType:  postDataEditType,
+				FullpageLoad:      fullpageLoad,
+				RequireAuth:       requireAuth,
+				Path:              path,
+				HTTPHeaders:       httpHeaders,
+				HTTPBody:          httpBody,
+				Keyword:           keyword,
+				RespScript:        respScript,
+				Label:             label,
+				URL:               URL,
+				InvertMatch:       invertMatch,
+				ReqScript:         reqScript,
+				Type:              typee,
+				StatusCode:        statusCode,
+			}
+			if requireAuth {
+				model.Auth = auth
+			}
 			t = append(t, model)
 		}
 	}
@@ -443,11 +443,11 @@ func GetAuth(d []interface{}) (t *models.Authentication) {
 			var password = m["password"].(string)
 			var typee = m["type"].(string)
 			var domain = m["domain"].(string)
-            model := &models.Authentication{
+			model := &models.Authentication{
 				Password: &password,
 				UserName: &userName,
-				Type: &typee,
-				Domain: domain,
+				Type:     &typee,
+				Domain:   domain,
 			}
 			t = model
 		}
@@ -457,9 +457,9 @@ func GetAuth(d []interface{}) (t *models.Authentication) {
 func GetCollectorAttribute(d []interface{}) (t models.CollectorAttribute) {
 	for _, i := range d {
 		if m, ok := i.(map[string]interface{}); ok {
-           var name = m["name"].(string)
-           model := models.CollectorAttribute{
-              Name: &name,
+			var name = m["name"].(string)
+			model := models.CollectorAttribute{
+				Name: &name,
 			}
 			t = model
 		}
@@ -472,45 +472,45 @@ func GetPropFromDatapoint(d *schema.ResourceData, key string) (t []*models.DataP
 	}
 	return
 }
-func getPropFromDPInterface(r interface{}) (t []*models.DataPoint ) {
+func getPropFromDPInterface(r interface{}) (t []*models.DataPoint) {
 	for _, i := range r.([]interface{}) {
 		if m, ok := i.(map[string]interface{}); ok {
-		   var name = m["name"].(string)
-		   var postProcessorMethod = m["post_processor_method"].(string)
-		   var alertForNoData = int32(m["alert_for_no_data"].(int))
-           var postProcessorParam = m["post_processor_param"].(string)
-		   var maxDigits = int32(m["max_digits"].(int))
-		   var description = m["description"].(string)
-		   var alertClearTransitionInterval = int32(m["alert_clear_transition_interval"].(int))
-		   var alertTransitionInterval = int32(m["alert_transition_interval"].(int))
-		   var dataType = int32(m["data_type"].(int))
-		   var maxValue = m["max_value"].(string)
-		   var minValue = m["min_value"].(string)
-		   var alertBody = m["alert_body"].(string)
-		   var alertSubject = m["alert_subject"].(string)
-		   var alertExpr = m["alert_expr"].(string)
-		   var alertExprNote = m["alert_expr_note"].(string)
-		   var typee = int32(m["type"].(int))
-		   var rawDataFieldName = m["raw_data_field_name"].(string)
-         model := &models.DataPoint{
-				Name: &name,
-				Description: description,
-				AlertForNoData: alertForNoData,
-				PostProcessorParam: postProcessorParam,
-				PostProcessorMethod: postProcessorMethod,
-				MaxDigits: maxDigits,
+			var name = m["name"].(string)
+			var postProcessorMethod = m["post_processor_method"].(string)
+			var alertForNoData = int32(m["alert_for_no_data"].(int))
+			var postProcessorParam = m["post_processor_param"].(string)
+			var maxDigits = int32(m["max_digits"].(int))
+			var description = m["description"].(string)
+			var alertClearTransitionInterval = int32(m["alert_clear_transition_interval"].(int))
+			var alertTransitionInterval = int32(m["alert_transition_interval"].(int))
+			var dataType = int32(m["data_type"].(int))
+			var maxValue = m["max_value"].(string)
+			var minValue = m["min_value"].(string)
+			var alertBody = m["alert_body"].(string)
+			var alertSubject = m["alert_subject"].(string)
+			var alertExpr = m["alert_expr"].(string)
+			var alertExprNote = m["alert_expr_note"].(string)
+			var typee = int32(m["type"].(int))
+			var rawDataFieldName = m["raw_data_field_name"].(string)
+			model := &models.DataPoint{
+				Name:                         &name,
+				Description:                  description,
+				AlertForNoData:               alertForNoData,
+				PostProcessorParam:           postProcessorParam,
+				PostProcessorMethod:          postProcessorMethod,
+				MaxDigits:                    maxDigits,
 				AlertClearTransitionInterval: alertClearTransitionInterval,
-				AlertTransitionInterval: alertTransitionInterval,
-				DataType: dataType,
-				MaxValue: maxValue,
-                MinValue: minValue,
-				AlertBody: alertBody,
-				AlertSubject: alertSubject,
-				AlertExpr: alertExpr,
-				AlertExprNote: alertExprNote,
-				Type: typee,
-				RawDataFieldName: rawDataFieldName,
-             }
+				AlertTransitionInterval:      alertTransitionInterval,
+				DataType:                     dataType,
+				MaxValue:                     maxValue,
+				MinValue:                     minValue,
+				AlertBody:                    alertBody,
+				AlertSubject:                 alertSubject,
+				AlertExpr:                    alertExpr,
+				AlertExprNote:                alertExprNote,
+				Type:                         typee,
+				RawDataFieldName:             rawDataFieldName,
+			}
 			t = append(t, model)
 		}
 	}
@@ -523,20 +523,20 @@ func GetPropFromLocationMap(d *schema.ResourceData, key string) (t *models.Websi
 	return
 }
 func getPropFromLocInterface(r interface{}) (t *models.WebsiteLocation) {
-    for _, i := range r.([]interface{}) {
-    if m, ok := i.(map[string]interface{}); ok {
-        var smgIds = ConvertSetToInt32Slice(m["smg_ids"])
-		var collectorIds = ConvertSetToInt32Slice(m["collector_ids"])
-		var all = m["all"].(bool)
-          model := &models.WebsiteLocation{
-                CollectorIds: collectorIds,
-                SmgIds: smgIds,
-				All: all,
-				}
-            t = model
-        }
-    }
- return 
+	for _, i := range r.([]interface{}) {
+		if m, ok := i.(map[string]interface{}); ok {
+			var smgIds = ConvertSetToInt32Slice(m["smg_ids"])
+			var collectorIds = ConvertSetToInt32Slice(m["collector_ids"])
+			var all = m["all"].(bool)
+			model := &models.WebsiteLocation{
+				CollectorIds: collectorIds,
+				SmgIds:       smgIds,
+				All:          all,
+			}
+			t = model
+		}
+	}
+	return
 }
 func GetFilters(d []interface{}) []*models.AutoDiscoveryFilter {
 	var filters []*models.AutoDiscoveryFilter
@@ -558,4 +558,3 @@ func GetFilters(d []interface{}) []*models.AutoDiscoveryFilter {
 	}
 	return filters
 }
-

@@ -54,10 +54,12 @@ func NewDeleteCollectorByIDParamsWithHTTPClient(client *http.Client) *DeleteColl
 	}
 }
 
-/* DeleteCollectorByIDParams contains all the parameters to send to the API endpoint
-   for the delete collector by Id operation.
+/*
+DeleteCollectorByIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete collector by Id operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteCollectorByIDParams struct {
 

@@ -1,59 +1,59 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"strconv"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func DashboardSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"full_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"group_full_path": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"group_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"owner": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"sharable": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"template": {
 			Type: schema.TypeMap, //GoType: interface{}
 			Elem: &schema.Schema{
@@ -61,21 +61,21 @@ func DashboardSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"widget_tokens": {
-			Type: schema.TypeList, //GoType: []*WidgetToken 
+			Type: schema.TypeList, //GoType: []*WidgetToken
 			Elem: &schema.Resource{
 				Schema: WidgetTokenSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"widgets_config": {
 			Type: schema.TypeMap, //GoType: interface{}
 			Elem: &schema.Schema{
@@ -83,61 +83,59 @@ func DashboardSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
 	}
 }
-
 
 // Schema mapping representing the resource's respective datasource object defined in Terraform configuration
 // Only difference between this and DashboardSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
 func DataSourceDashboardSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"full_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"group_full_path": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"group_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"owner": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"sharable": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"template": {
 			Type: schema.TypeMap, //GoType: interface{}
 			Elem: &schema.Schema{
@@ -145,21 +143,21 @@ func DataSourceDashboardSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"widget_tokens": {
-			Type: schema.TypeList, //GoType: []*WidgetToken 
+			Type: schema.TypeList, //GoType: []*WidgetToken
 			Elem: &schema.Resource{
 				Schema: WidgetTokenSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"widgets_config": {
 			Type: schema.TypeMap, //GoType: interface{}
 			Elem: &schema.Schema{
@@ -167,10 +165,10 @@ func DataSourceDashboardSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"filter": {
 			Type:     schema.TypeString,
-            Optional: true,
+			Optional: true,
 		},
 	}
 }
@@ -225,17 +223,17 @@ func DashboardModel(d *schema.ResourceData) *models.Dashboard {
 	template := d.Get("template")
 	widgetTokens := utils.GetPropFromWTMap(d, "widget_tokens")
 	widgetsConfig := d.Get("widgets_config")
-	
-	return &models.Dashboard {
-		Description: description,
-		GroupID: groupID,
-		GroupName: groupName,
-		ID: int32(id),
-		Name: &name,
-		Owner: owner,
-		Sharable: sharable,
-		Template: template,
-		WidgetTokens: widgetTokens,
+
+	return &models.Dashboard{
+		Description:   description,
+		GroupID:       groupID,
+		GroupName:     groupName,
+		ID:            int32(id),
+		Name:          &name,
+		Owner:         owner,
+		Sharable:      sharable,
+		Template:      template,
+		WidgetTokens:  widgetTokens,
 		WidgetsConfig: widgetsConfig,
 	}
 }

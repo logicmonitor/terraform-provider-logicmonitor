@@ -46,7 +46,8 @@ func NewUpdateDeviceGroupByIDOK() *UpdateDeviceGroupByIDOK {
 	return &UpdateDeviceGroupByIDOK{}
 }
 
-/* UpdateDeviceGroupByIDOK describes a response with status code 200, with default header values.
+/*
+	UpdateDeviceGroupByIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewUpdateDeviceGroupByIDDefault(code int) *UpdateDeviceGroupByIDDefault {
 	}
 }
 
-/* UpdateDeviceGroupByIDDefault describes a response with status code -1, with default header values.
+/*
+	UpdateDeviceGroupByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

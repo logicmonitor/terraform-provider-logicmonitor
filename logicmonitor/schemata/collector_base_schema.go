@@ -1,43 +1,43 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func CollectorBaseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"ack_comment": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"acked": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"acked_by": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"acked_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"acked_on_local": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"arch": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"automatic_upgrade_info": {
 			Type: schema.TypeList, //GoType: AutomaticUpgradeInfo
 			Elem: &schema.Resource{
@@ -45,156 +45,156 @@ func CollectorBaseSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"backup_agent_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"build": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"can_downgrade": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"can_downgrade_reason": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"clear_sent": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"collector_conf": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"collector_device_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"collector_group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"collector_group_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"collector_size": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"conf_version": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"created_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"created_on_local": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"custom_properties": {
 			Type: schema.TypeSet,
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"ea": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"enable_fail_back": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"enable_fail_over_on_collector_device": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"escalating_chain_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"has_fail_over_device": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"hostname": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"in_s_d_t": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"is_down": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"last_sent_notification_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"last_sent_notification_on_local": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"need_auto_create_collector_device": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"netscan_version": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"next_recipient": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"next_upgrade_info": {
 			Type: schema.TypeList, //GoType: NextUpgradeInfo
 			Elem: &schema.Resource{
@@ -202,17 +202,17 @@ func CollectorBaseSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"number_of_hosts": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"number_of_instances": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"onetime_downgrade_info": {
 			Type: schema.TypeList, //GoType: OnetimeUpgradeInfo
 			Elem: &schema.Resource{
@@ -220,7 +220,7 @@ func CollectorBaseSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"onetime_upgrade_info": {
 			Type: schema.TypeList, //GoType: OnetimeUpgradeInfo
 			Elem: &schema.Resource{
@@ -228,12 +228,12 @@ func CollectorBaseSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"platform": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"predefined_config": {
 			Type: schema.TypeMap, //GoType: interface{}
 			Elem: &schema.Schema{
@@ -241,92 +241,91 @@ func CollectorBaseSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"previous_version": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"resend_ival": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"sbproxy_conf": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"specified_collector_device_group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"status": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"suppress_alert_clear": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"up_time": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"updated_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"updated_on_local": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"user_change_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"user_change_on_local": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"user_visible_hosts_num": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"watchdog_conf": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"watchdog_updated_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"watchdog_updated_on_local": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"wrapper_conf": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -430,24 +429,24 @@ func CollectorBaseModel(d map[string]interface{}) *models.CollectorBase {
 	resendIval := int32(d["resend_ival"].(int))
 	specifiedCollectorDeviceGroupID := int32(d["specified_collector_device_group_id"].(int))
 	suppressAlertClear := d["suppress_alert_clear"].(bool)
-	
-	return &models.CollectorBase {
-		AutomaticUpgradeInfo: automaticUpgradeInfo,
-		BackupAgentID: backupAgentID,
-		CollectorGroupID: collectorGroupID,
-		CustomProperties: customProperties,
-		Description: description,
-		EnableFailBack: enableFailBack,
+
+	return &models.CollectorBase{
+		AutomaticUpgradeInfo:            automaticUpgradeInfo,
+		BackupAgentID:                   backupAgentID,
+		CollectorGroupID:                collectorGroupID,
+		CustomProperties:                customProperties,
+		Description:                     description,
+		EnableFailBack:                  enableFailBack,
 		EnableFailOverOnCollectorDevice: enableFailOverOnCollectorDevice,
-		EscalatingChainID: escalatingChainID,
-		ID: id,
-		NeedAutoCreateCollectorDevice: needAutoCreateCollectorDevice,
-		NumberOfInstances: numberOfInstances,
-		OnetimeDowngradeInfo: onetimeDowngradeInfo,
-		OnetimeUpgradeInfo: onetimeUpgradeInfo,
-		ResendIval: resendIval,
+		EscalatingChainID:               escalatingChainID,
+		ID:                              id,
+		NeedAutoCreateCollectorDevice:   needAutoCreateCollectorDevice,
+		NumberOfInstances:               numberOfInstances,
+		OnetimeDowngradeInfo:            onetimeDowngradeInfo,
+		OnetimeUpgradeInfo:              onetimeUpgradeInfo,
+		ResendIval:                      resendIval,
 		SpecifiedCollectorDeviceGroupID: specifiedCollectorDeviceGroupID,
-		SuppressAlertClear: suppressAlertClear,
+		SuppressAlertClear:              suppressAlertClear,
 	}
 }
 

@@ -1,33 +1,32 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func AuthenticationSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"domain": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"password": {
-			Type: schema.TypeString,
+			Type:      schema.TypeString,
 			Sensitive: true,
-			Required: true,
+			Required:  true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"user_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
 	}
 }
 
@@ -51,11 +50,11 @@ func AuthenticationModel(d map[string]interface{}) *models.Authentication {
 	password := d["password"].(string)
 	typeVar := d["type"].(string)
 	userName := d["user_name"].(string)
-	
-	return &models.Authentication {
-		Domain: domain,
+
+	return &models.Authentication{
+		Domain:   domain,
 		Password: &password,
-		Type: &typeVar,
+		Type:     &typeVar,
 		UserName: &userName,
 	}
 }

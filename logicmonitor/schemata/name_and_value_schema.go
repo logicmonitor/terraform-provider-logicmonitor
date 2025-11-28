@@ -1,22 +1,21 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func NameAndValueSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"value": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
 	}
 }
 
@@ -36,9 +35,9 @@ func NameAndValueModel(d map[string]interface{}) *models.NameAndValue {
 	// assume that the incoming map only contains the relevant resource data
 	name := d["name"].(string)
 	value := d["value"].(string)
-	
-	return &models.NameAndValue {
-		Name: &name,
+
+	return &models.NameAndValue{
+		Name:  &name,
 		Value: &value,
 	}
 }

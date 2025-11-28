@@ -1,24 +1,23 @@
 package schemata
 
 import (
-	"strconv"
-	"time"
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"strconv"
+	"terraform-provider-logicmonitor/models"
+	"time"
 )
 
 func AwsExternalIDSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"created_at": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"external_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
 	}
 }
 
@@ -44,9 +43,9 @@ func AwsExternalIDModel(d map[string]interface{}) *models.AwsExternalID {
 	// assume that the incoming map only contains the relevant resource data
 	createdAt := d["created_at"].(string)
 	externalID := d["external_id"].(string)
-	
-	return &models.AwsExternalID {
-		CreatedAt: createdAt,
+
+	return &models.AwsExternalID{
+		CreatedAt:  createdAt,
 		ExternalID: externalID,
 	}
 }

@@ -46,7 +46,8 @@ func NewPatchDashboardGroupByIDOK() *PatchDashboardGroupByIDOK {
 	return &PatchDashboardGroupByIDOK{}
 }
 
-/* PatchDashboardGroupByIDOK describes a response with status code 200, with default header values.
+/*
+	PatchDashboardGroupByIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewPatchDashboardGroupByIDDefault(code int) *PatchDashboardGroupByIDDefault
 	}
 }
 
-/* PatchDashboardGroupByIDDefault describes a response with status code -1, with default header values.
+/*
+	PatchDashboardGroupByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

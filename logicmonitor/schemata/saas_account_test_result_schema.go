@@ -1,47 +1,46 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func SaasAccountTestResultSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"detail_link": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"invalid_status_urls": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"no_permission_apis": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Optional: true,
 		},
-		
+
 		"no_permission_service": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"non_permission_apis_errors": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Optional: true,
 		},
-		
+
 		"result_code": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
 	}
 }
 
@@ -69,14 +68,14 @@ func SaasAccountTestResultModel(d map[string]interface{}) *models.SaasAccountTes
 	noPermissionService := d["no_permission_service"].(string)
 	nonPermissionApisErrors := utils.ConvertSetToStringSlice(d["non_permission_apis_errors"].(*schema.Set))
 	resultCode := int32(d["result_code"].(int))
-	
-	return &models.SaasAccountTestResult {
-		DetailLink: detailLink,
-		InvalidStatusUrls: invalidStatusUrls,
-		NoPermissionApis: noPermissionApis,
-		NoPermissionService: noPermissionService,
+
+	return &models.SaasAccountTestResult{
+		DetailLink:              detailLink,
+		InvalidStatusUrls:       invalidStatusUrls,
+		NoPermissionApis:        noPermissionApis,
+		NoPermissionService:     noPermissionService,
 		NonPermissionApisErrors: nonPermissionApisErrors,
-		ResultCode: resultCode,
+		ResultCode:              resultCode,
 	}
 }
 

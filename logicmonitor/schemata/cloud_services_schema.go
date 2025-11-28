@@ -8,7 +8,47 @@ import (
 
 func CloudServicesSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
+		"a_c_m": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"a_k_s_m_a_n_a_g_e_d_c_l_u_s_t_e_r": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"a_l_a_r_m_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"a_n_a_l_y_s_i_s_s_e_r_v_i_c_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"api_g_a_t_e_w_a_y": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"api_g_a_t_e_w_a_y_v2": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -48,6 +88,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"a_p_p_l_i_c_a_t_i_o_n_m_i_g_r_a_t_i_o_n_s_e_r_v_i_c_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"a_p_p_s_e_r_v_i_c_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -57,6 +105,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 		},
 
 		"a_p_p_s_e_r_v_i_c_e_p_l_a_n": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"a_p_p_s_e_r_v_i_c_e_e_n_v_i_r_o_n_m_e_n_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -96,7 +152,55 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"b_a_c_k_u_p": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"b_a_c_k_u_p_p_r_o_t_e_c_t_e_d_i_t_e_m_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"b_a_c_k_u_p_p_r_o_t_e_c_t_e_d_r_e_s_o_u_r_c_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"b_a_c_k_u_p_v_a_u_l_t": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"b_a_t_c_h": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"b_a_t_c_h_a_c_c_o_u_n_t": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"b_e_d_r_o_c_k": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -112,6 +216,22 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"b_o_t_s_e_r_v_i_c_e_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"c_d_n_p_r_o_f_i_l_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"c_l_o_u_d_f_r_o_n_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -120,7 +240,47 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"c_l_i_e_n_t_v_p_n": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"c_l_o_u_d_s_e_a_r_c_h": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"c_l_o_u_d_t_r_a_i_l": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"c_l_o_u_d_w_a_t_c_h_e_v_e_n_t_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"c_l_o_u_d_w_a_t_c_h_l_o_g_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"c_l_o_u_d_w_a_t_c_h_s_y_n_t_h_e_t_i_c_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -160,6 +320,30 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"c_o_n_t_a_i_n_e_r_a_p_p_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"c_o_n_t_a_i_n_e_r_i_n_s_t_a_n_c_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"c_o_n_t_a_i_n_e_r_r_e_g_i_s_t_r_y": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"c_o_s_m_o_s_d_b": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -176,7 +360,63 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"d_a_t_a_l_a_k_e_a_n_a_l_y_t_i_c_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"d_a_t_a_l_a_k_e_s_t_o_r_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"d_a_t_a_b_r_i_c_k_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"d_b_c_l_u_s_t_e_r": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"d_e_t_e_c_t_i_v_e_g_r_a_p_h": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"d_i_r_e_c_t_c_o_n_n_e_c_t": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"d_i_r_e_c_t_c_o_n_n_e_c_t_v_i_r_t_u_a_l_i_n_t_e_r_f_a_c_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"d_i_s_k_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -232,6 +472,22 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"e_c_r": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"e_l_a_s_t_i_c_ip": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"e_c_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -241,6 +497,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 		},
 
 		"e_f_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"e_k_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -304,6 +568,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"e_v_e_n_t_g_r_i_d": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"e_v_e_n_t_h_u_b": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -360,6 +632,30 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"f_u_n_c_t_i_o_n": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"g_a_t_e_w_a_y_e_l_b": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"g_l_o_b_a_l_n_e_t_w_o_r_k_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"g_l_u_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -368,7 +664,63 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"h_e_a_l_t_h_c_h_e_c_k": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"h_d_i_n_s_i_g_h_t": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"h_o_s_t_e_d_z_o_n_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"i_a_m_r_o_l_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"i_n_t_e_r_n_e_t_g_a_t_e_w_a_y": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"i_o_t_h_u_b": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"k_e_y_v_a_u_l_t": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"k_m_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -393,6 +745,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 		},
 
 		"l_a_m_b_d_a": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"l_i_g_h_t_s_a_i_l": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -472,6 +832,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"m_l_w_o_r_k_s_p_a_c_e_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"m_q": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -496,7 +864,23 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"m_a_r_i_a_d_b": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"m_y_sql": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"m_y_sql_f_l_e_x_i_b_l_e": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -520,7 +904,55 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"n_e_t_w_o_r_k_f_i_r_e_w_a_l_l": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"n_a_t_g_a_t_e_w_a_y_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"n_e_t_a_p_p_p_o_o_l_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"n_e_t_w_o_r_k_i_n_t_e_r_f_a_c_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"n_l_b_t_a_r_g_e_t_g_r_o_u_p": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"n_o_t_i_f_i_c_a_t_i_o_n_h_u_b_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"o_p_e_n_a_i_s_e_r_v_i_c_e_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -544,6 +976,30 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"p_o_s_t_g_r_e_sql_c_i_t_u_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"p_o_s_t_g_r_e_sql_f_l_e_x_i_b_l_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"p_o_w_e_r_b_i_e_m_b_e_d_d_e_d": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"p_u_b_l_i_c_ip": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -552,7 +1008,55 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"p_r_i_v_a_t_e_l_i_n_k_e_n_d_p_o_i_n_t_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"p_r_i_v_a_t_e_l_i_n_k_s_e_r_v_i_c_e_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"q_b_u_s_i_n_e_s_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"q_u_o_t_a": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"q_u_e_u_e_s_t_o_r_a_g_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"q_u_i_c_k_s_i_g_h_t_d_a_s_h_b_o_a_r_d_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"q_u_i_c_k_s_i_g_h_t_d_a_t_a_s_e_t_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -576,6 +1080,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"r_e_c_o_v_e_r_y_p_r_o_t_e_c_t_e_d_i_t_e_m_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"r_e_c_o_v_e_r_y_s_e_r_v_i_c_e_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -592,6 +1104,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"r_e_d_i_s_c_a_c_h_e_e_n_t_e_r_p_r_i_s_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"r_e_d_s_h_i_f_t": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -600,7 +1120,31 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"r_e_d_s_h_i_f_t_s_e_r_v_e_r_l_e_s_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"r_o_u_t_e53": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"r_o_u_t_e53_h_o_s_t_e_d_z_o_n_e": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"r_e_l_a_y_n_a_m_e_s_p_a_c_e_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -640,7 +1184,31 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"s_e_r_v_i_c_e_f_a_b_r_i_c_m_e_s_h": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"s_e_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"s_i_g_n_a_l_r": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"s_i_t_e2_s_i_t_e_v_p_n": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -704,6 +1272,22 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"s_t_o_r_a_g_e_g_a_t_e_w_a_y": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"s_t_r_e_a_m_a_n_a_l_y_t_i_c_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"s_w_f_a_c_t_i_v_i_t_y": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -744,6 +1328,14 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"t_r_a_n_s_f_e_r": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"t_r_a_n_s_i_t_g_a_t_e_w_a_y": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -752,7 +1344,23 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"t_r_a_n_s_i_t_g_a_t_e_w_a_y_a_t_t_a_c_h_m_e_n_t": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"v_i_r_t_u_a_l_d_e_s_k_t_o_p": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"v_i_r_t_u_a_l_h_u_b_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -792,7 +1400,47 @@ func CloudServicesSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 
+		"v_i_r_t_u_a_l_n_e_t_w_o_r_k_s": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"v_p_c": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"v_p_c_e_n_d_p_o_i_n_t": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"v_p_c_p_e_e_r_i_n_g": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
 		"v_p_n": {
+			Type: schema.TypeList, //GoType: CloudServiceSettings
+			Elem: &schema.Resource{
+				Schema: CloudServiceSettingsSchema(),
+			},
+			Optional: true,
+		},
+
+		"v_p_n_g_a_t_e_w_a_y_s": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
 				Schema: CloudServiceSettingsSchema(),
@@ -822,36 +1470,69 @@ func SetCloudServicesSubResourceData(m []*models.CloudServices) (d []*map[string
 	for _, cloudServices := range m {
 		if cloudServices != nil {
 			properties := make(map[string]interface{})
+			properties["a_c_m"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ACM})
+			properties["a_k_s_m_a_n_a_g_e_d_c_l_u_s_t_e_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.AKSMANAGEDCLUSTER})
+			properties["a_l_a_r_m_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ALARMS})
+			properties["a_n_a_l_y_s_i_s_s_e_r_v_i_c_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ANALYSISSERVICE})
 			properties["api_g_a_t_e_w_a_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APIGATEWAY})
+			properties["api_g_a_t_e_w_a_y_v2"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APIGATEWAYV2})
 			properties["api_m_a_n_a_g_e_m_e_n_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APIMANAGEMENT})
 			properties["a_p_p_l_i_c_a_t_i_o_n_e_l_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPLICATIONELB})
 			properties["a_p_p_l_i_c_a_t_i_o_n_g_a_t_e_w_a_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPLICATIONGATEWAY})
 			properties["a_p_p_l_i_c_a_t_i_o_n_i_n_s_i_g_h_t_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPLICATIONINSIGHTS})
+			properties["a_p_p_l_i_c_a_t_i_o_n_m_i_g_r_a_t_i_o_n_s_e_r_v_i_c_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPLICATIONMIGRATIONSERVICE})
 			properties["a_p_p_s_e_r_v_i_c_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPSERVICE})
 			properties["a_p_p_s_e_r_v_i_c_e_p_l_a_n"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPSERVICEPLAN})
+			properties["a_p_p_s_e_r_v_i_c_e_e_n_v_i_r_o_n_m_e_n_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPSERVICEENVIRONMENT})
 			properties["a_p_p_s_t_r_e_a_m"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.APPSTREAM})
 			properties["a_t_h_e_n_a"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ATHENA})
 			properties["a_u_t_o_m_a_t_i_o_n_a_c_c_o_u_n_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.AUTOMATIONACCOUNT})
 			properties["a_u_t_o_s_c_a_l_i_n_g"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.AUTOSCALING})
+			properties["b_a_c_k_u_p"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.BACKUP})
 			properties["b_a_c_k_u_p_p_r_o_t_e_c_t_e_d_i_t_e_m_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.BACKUPPROTECTEDITEMS})
+			properties["b_a_c_k_u_p_p_r_o_t_e_c_t_e_d_r_e_s_o_u_r_c_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.BACKUPPROTECTEDRESOURCE})
+			properties["b_a_c_k_u_p_v_a_u_l_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.BACKUPVAULT})
+			properties["b_a_t_c_h"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.BATCH})
+			properties["b_a_t_c_h_a_c_c_o_u_n_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.BATCHACCOUNT})
+			properties["b_e_d_r_o_c_k"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.BEDROCK})
 			properties["b_l_o_b_s_t_o_r_a_g_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.BLOBSTORAGE})
+			properties["b_o_t_s_e_r_v_i_c_e_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.BOTSERVICES})
+			properties["c_d_n_p_r_o_f_i_l_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CDNPROFILE})
+			properties["c_l_i_e_n_t_v_p_n"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CLIENTVPN})
 			properties["c_l_o_u_d_f_r_o_n_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CLOUDFRONT})
 			properties["c_l_o_u_d_s_e_a_r_c_h"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CLOUDSEARCH})
+			properties["c_l_o_u_d_t_r_a_i_l"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CLOUDTRAIL})
+			properties["c_l_o_u_d_w_a_t_c_h_e_v_e_n_t_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CLOUDWATCHEVENTS})
+			properties["c_l_o_u_d_w_a_t_c_h_l_o_g_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CLOUDWATCHLOGS})
+			properties["c_l_o_u_d_w_a_t_c_h_s_y_n_t_h_e_t_i_c_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CLOUDWATCHSYNTHETICS})
 			properties["c_o_d_e_b_ui_l_d"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CODEBUILD})
 			properties["c_o_g_n_i_t_i_v_e_s_e_a_r_c_h"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.COGNITIVESEARCH})
 			properties["c_o_g_n_i_t_i_v_e_s_e_r_v_i_c_e_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.COGNITIVESERVICES})
 			properties["c_o_g_n_i_t_o"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.COGNITO})
+			properties["c_o_n_t_a_i_n_e_r_a_p_p_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CONTAINERAPPS})
+			properties["c_o_n_t_a_i_n_e_r_i_n_s_t_a_n_c_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CONTAINERINSTANCE})
+			properties["c_o_n_t_a_i_n_e_r_r_e_g_i_s_t_r_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.CONTAINERREGISTRY})
 			properties["c_o_s_m_o_s_d_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.COSMOSDB})
 			properties["d_a_t_a_f_a_c_t_o_r_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DATAFACTORY})
+			properties["d_a_t_a_l_a_k_e_a_n_a_l_y_t_i_c_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DATALAKEANALYTICS})
+			properties["d_a_t_a_l_a_k_e_s_t_o_r_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DATALAKESTORE})
+			properties["d_a_t_a_b_r_i_c_k_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DATABRICKS})
+			properties["d_b_c_l_u_s_t_e_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DBCLUSTER})
+			properties["d_e_t_e_c_t_i_v_e_g_r_a_p_h"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DETECTIVEGRAPH})
 			properties["d_i_r_e_c_t_c_o_n_n_e_c_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DIRECTCONNECT})
+			properties["d_i_r_e_c_t_c_o_n_n_e_c_t_v_i_r_t_u_a_l_i_n_t_e_r_f_a_c_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DIRECTCONNECTVIRTUALINTERFACE})
+			properties["d_i_s_k_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DISKS})
 			properties["d_m_s_r_e_p_l_i_c_a_t_i_o_n"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DMSREPLICATION})
 			properties["d_m_s_r_e_p_l_i_c_a_t_i_o_n_t_a_s_k_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DMSREPLICATIONTASKS})
 			properties["d_o_c_d_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DOCDB})
 			properties["d_y_n_a_m_o_d_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.DYNAMODB})
 			properties["e_b_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EBS})
 			properties["e_c2"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EC2})
+			properties["e_c_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ECR})
 			properties["e_c_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ECS})
+			properties["e_l_a_s_t_i_c_ip"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ELASTICIP})
 			properties["e_f_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EFS})
+			properties["e_k_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EKS})
 			properties["e_l_a_s_t_i_c_a_c_h_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ELASTICACHE})
 			properties["e_l_a_s_t_i_c_b_e_a_n_s_t_a_l_k"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ELASTICBEANSTALK})
 			properties["e_l_a_s_t_i_c_s_e_a_r_c_h"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ELASTICSEARCH})
@@ -859,6 +1540,7 @@ func SetCloudServicesSubResourceData(m []*models.CloudServices) (d []*map[string
 			properties["e_l_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ELB})
 			properties["e_m_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EMR})
 			properties["e_v_e_n_t_b_r_id_g_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EVENTBRIDGE})
+			properties["e_v_e_n_t_g_r_i_d"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EVENTGRID})
 			properties["e_v_e_n_t_h_u_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EVENTHUB})
 			properties["e_x_p_r_e_s_s_r_o_u_t_e_c_i_r_c_ui_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.EXPRESSROUTECIRCUIT})
 			properties["f_i_l_e_s_t_o_r_a_g_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.FILESTORAGE})
@@ -866,11 +1548,22 @@ func SetCloudServicesSubResourceData(m []*models.CloudServices) (d []*map[string
 			properties["f_i_r_e_w_a_l_l"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.FIREWALL})
 			properties["f_r_o_n_t_d_o_o_r_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.FRONTDOORS})
 			properties["f_s_x"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.FSX})
+			properties["f_u_n_c_t_i_o_n"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.FUNCTION})
+			properties["g_a_t_e_w_a_y_e_l_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.GATEWAYELB})
+			properties["g_l_o_b_a_l_n_e_t_w_o_r_k_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.GLOBALNETWORKS})
 			properties["g_l_u_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.GLUE})
+			properties["h_e_a_l_t_h_c_h_e_c_k"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.HEALTHCHECK})
+			properties["h_d_i_n_s_i_g_h_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.HDINSIGHT})
+			properties["h_o_s_t_e_d_z_o_n_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.HOSTEDZONE})
+			properties["i_a_m_r_o_l_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.IAMROLE})
+			properties["i_n_t_e_r_n_e_t_g_a_t_e_w_a_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.INTERNETGATEWAY})
+			properties["i_o_t_h_u_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.IOTHUB})
 			properties["k_e_y_v_a_u_l_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.KEYVAULT})
+			properties["k_m_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.KMS})
 			properties["k_i_n_e_s_i_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.KINESIS})
 			properties["k_i_n_e_s_i_s_v_id_e_o"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.KINESISVIDEO})
 			properties["l_a_m_b_d_a"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.LAMBDA})
+			properties["l_i_g_h_t_s_a_i_l"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.LIGHTSAIL})
 			properties["l_o_a_d_b_a_l_a_n_c_e_r_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.LOADBALANCERS})
 			properties["l_o_g_a_n_a_l_y_t_i_c_s_w_o_r_k_s_p_a_c_e_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.LOGANALYTICSWORKSPACES})
 			properties["l_o_g_i_c_a_p_p_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.LOGICAPPS})
@@ -880,28 +1573,54 @@ func SetCloudServicesSubResourceData(m []*models.CloudServices) (d []*map[string
 			properties["m_e_d_i_a_p_a_c_k_a_g_e_v_o_d"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MEDIAPACKAGEVOD})
 			properties["m_e_d_i_a_s_t_o_r_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MEDIASTORE})
 			properties["m_e_d_i_a_t_a_i_l_o_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MEDIATAILOR})
+			properties["m_l_w_o_r_k_s_p_a_c_e_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MLWORKSPACES})
 			properties["m_q"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MQ})
+			properties["m_a_r_i_a_d_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MARIADB})
 			properties["m_s_k_b_r_o_k_e_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MSKBROKER})
 			properties["m_s_k_c_l_u_s_t_e_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MSKCLUSTER})
 			properties["m_y_sql"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MYSQL})
+			properties["m_y_sql_f_l_e_x_i_b_l_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.MYSQLFLEXIBLE})
 			properties["n_a_t_g_a_t_e_w_a_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.NATGATEWAY})
 			properties["n_e_t_w_o_r_k_e_l_b"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.NETWORKELB})
+			properties["n_e_t_w_o_r_k_f_i_r_e_w_a_l_l"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.NETWORKFIREWALL})
+			properties["n_a_t_g_a_t_e_w_a_y_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.NATGATEWAYS})
+			properties["n_e_t_a_p_p_p_o_o_l_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.NETAPPPOOLS})
 			properties["n_e_t_w_o_r_k_i_n_t_e_r_f_a_c_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.NETWORKINTERFACE})
+			properties["n_l_b_t_a_r_g_e_t_g_r_o_u_p"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.NLBTARGETGROUP})
+			properties["n_o_t_i_f_i_c_a_t_i_o_n_h_u_b_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.NOTIFICATIONHUBS})
+			properties["o_p_e_n_a_i_s_e_r_v_i_c_e_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.OPENAISERVICES})
 			properties["o_p_s_w_o_r_k_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.OPSWORKS})
 			properties["p_o_s_t_g_r_e_sql"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.POSTGRESQL})
+			properties["p_o_s_t_g_r_e_sql_c_i_t_u_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.POSTGRESQLCITUS})
+			properties["p_o_s_t_g_r_e_sql_f_l_e_x_i_b_l_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.POSTGRESQLFLEXIBLE})
+			properties["p_o_w_e_r_b_i_e_m_b_e_d_d_e_d"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.POWERBIEMBEDDED})
 			properties["p_u_b_l_i_c_ip"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.PUBLICIP})
+			properties["p_r_i_v_a_t_e_l_i_n_k_e_n_d_p_o_i_n_t_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.PRIVATELINKENDPOINTS})
+			properties["p_r_i_v_a_t_e_l_i_n_k_s_e_r_v_i_c_e_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.PRIVATELINKSERVICES})
+			properties["q_b_u_s_i_n_e_s_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.QBUSINESS})
+			properties["q_u_o_t_a"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.QUOTA})
 			properties["q_u_e_u_e_s_t_o_r_a_g_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.QUEUESTORAGE})
+			properties["q_u_i_c_k_s_i_g_h_t_d_a_s_h_b_o_a_r_d_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.QUICKSIGHTDASHBOARDS})
+			properties["q_u_i_c_k_s_i_g_h_t_d_a_t_a_s_e_t_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.QUICKSIGHTDATASETS})
 			properties["r_d_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.RDS})
 			properties["r_e_c_o_v_e_r_y_p_r_o_t_e_c_t_e_d_i_t_e_m"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.RECOVERYPROTECTEDITEM})
+			properties["r_e_c_o_v_e_r_y_p_r_o_t_e_c_t_e_d_i_t_e_m_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.RECOVERYPROTECTEDITEMS})
 			properties["r_e_c_o_v_e_r_y_s_e_r_v_i_c_e_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.RECOVERYSERVICES})
 			properties["r_e_d_i_s_c_a_c_h_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.REDISCACHE})
+			properties["r_e_d_i_s_c_a_c_h_e_e_n_t_e_r_p_r_i_s_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.REDISCACHEENTERPRISE})
 			properties["r_e_d_s_h_i_f_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.REDSHIFT})
+			properties["r_e_d_s_h_i_f_t_s_e_r_v_e_r_l_e_s_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.REDSHIFTSERVERLESS})
+			properties["r_e_l_a_y_n_a_m_e_s_p_a_c_e_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.RELAYNAMESPACES})
 			properties["r_o_u_t_e53"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ROUTE53})
+			properties["r_o_u_t_e53_h_o_s_t_e_d_z_o_n_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ROUTE53HOSTEDZONE})
 			properties["r_o_u_t_e53_r_e_s_o_l_v_e_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.ROUTE53RESOLVER})
 			properties["s3"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.S3})
 			properties["s_a_g_e_m_a_k_e_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SAGEMAKER})
 			properties["s_e_r_v_i_c_e_b_u_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SERVICEBUS})
+			properties["s_e_r_v_i_c_e_f_a_b_r_i_c_m_e_s_h"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SERVICEFABRICMESH})
 			properties["s_e_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SES})
+			properties["s_i_g_n_a_l_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SIGNALR})
+			properties["s_i_t_e2_s_i_t_e_v_p_n"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SITE2SITEVPN})
 			properties["s_n_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SNS})
 			properties["sql_d_a_t_a_b_a_s_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SQLDATABASE})
 			properties["sql_e_l_a_s_t_i_c_p_o_o_l"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SQLELASTICPOOL})
@@ -909,18 +1628,28 @@ func SetCloudServicesSubResourceData(m []*models.CloudServices) (d []*map[string
 			properties["s_q_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SQS})
 			properties["s_t_e_p_f_u_n_c_t_i_o_n_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.STEPFUNCTIONS})
 			properties["s_t_o_r_a_g_e_a_c_c_o_u_n_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.STORAGEACCOUNT})
+			properties["s_t_o_r_a_g_e_g_a_t_e_w_a_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.STORAGEGATEWAY})
+			properties["s_t_r_e_a_m_a_n_a_l_y_t_i_c_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.STREAMANALYTICS})
 			properties["s_w_f_a_c_t_i_v_i_t_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SWFACTIVITY})
 			properties["s_w_f_w_o_r_k_f_l_o_w"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SWFWORKFLOW})
 			properties["s_y_n_a_p_s_e_w_o_r_k_s_p_a_c_e_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.SYNAPSEWORKSPACES})
 			properties["t_a_b_l_e_s_t_o_r_a_g_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.TABLESTORAGE})
 			properties["t_r_a_f_f_i_c_m_a_n_a_g_e_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.TRAFFICMANAGER})
+			properties["t_r_a_n_s_f_e_r"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.TRANSFER})
 			properties["t_r_a_n_s_i_t_g_a_t_e_w_a_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.TRANSITGATEWAY})
+			properties["t_r_a_n_s_i_t_g_a_t_e_w_a_y_a_t_t_a_c_h_m_e_n_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.TRANSITGATEWAYATTACHMENT})
 			properties["v_i_r_t_u_a_l_d_e_s_k_t_o_p"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VIRTUALDESKTOP})
+			properties["v_i_r_t_u_a_l_h_u_b_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VIRTUALHUBS})
 			properties["v_i_r_t_u_a_l_m_a_c_h_i_n_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VIRTUALMACHINE})
 			properties["v_i_r_t_u_a_l_m_a_c_h_i_n_e_s_c_a_l_e_s_e_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VIRTUALMACHINESCALESET})
 			properties["v_i_r_t_u_a_l_m_a_c_h_i_n_e_s_c_a_l_e_s_e_t_vm"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VIRTUALMACHINESCALESETVM})
 			properties["v_i_r_t_u_a_l_n_e_t_w_o_r_k_g_a_t_e_w_a_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VIRTUALNETWORKGATEWAY})
+			properties["v_i_r_t_u_a_l_n_e_t_w_o_r_k_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VIRTUALNETWORKS})
+			properties["v_p_c"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VPC})
+			properties["v_p_c_e_n_d_p_o_i_n_t"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VPCENDPOINT})
+			properties["v_p_c_p_e_e_r_i_n_g"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VPCPEERING})
 			properties["v_p_n"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VPN})
+			properties["v_p_n_g_a_t_e_w_a_y_s"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.VPNGATEWAYS})
 			properties["w_o_r_k_s_p_a_c_e"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.WORKSPACE})
 			properties["w_o_r_k_s_p_a_c_e_d_i_r_e_c_t_o_r_y"] = SetCloudServiceSettingsSubResourceData([]*models.CloudServiceSettings{cloudServices.WORKSPACEDIRECTORY})
 			d = append(d, &properties)
@@ -931,10 +1660,35 @@ func SetCloudServicesSubResourceData(m []*models.CloudServices) (d []*map[string
 
 func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	// assume that the incoming map only contains the relevant resource data
+	var aCM *models.CloudServiceSettings = nil
+	ACMList := d["a_c_m"].([]interface{})
+	if len(ACMList) > 0 { // len(nil) = 0
+		aCM = CloudServiceSettingsModel(ACMList[0].(map[string]interface{}))
+	}
+	var aKSMANAGEDCLUSTER *models.CloudServiceSettings = nil
+	AKSMANAGEDCLUSTERList := d["a_k_s_m_a_n_a_g_e_d_c_l_u_s_t_e_r"].([]interface{})
+	if len(AKSMANAGEDCLUSTERList) > 0 { // len(nil) = 0
+		aKSMANAGEDCLUSTER = CloudServiceSettingsModel(AKSMANAGEDCLUSTERList[0].(map[string]interface{}))
+	}
+	var aLARMS *models.CloudServiceSettings = nil
+	ALARMSList := d["a_l_a_r_m_s"].([]interface{})
+	if len(ALARMSList) > 0 { // len(nil) = 0
+		aLARMS = CloudServiceSettingsModel(ALARMSList[0].(map[string]interface{}))
+	}
+	var aNALYSISSERVICE *models.CloudServiceSettings = nil
+	ANALYSISSERVICEList := d["a_n_a_l_y_s_i_s_s_e_r_v_i_c_e"].([]interface{})
+	if len(ANALYSISSERVICEList) > 0 { // len(nil) = 0
+		aNALYSISSERVICE = CloudServiceSettingsModel(ANALYSISSERVICEList[0].(map[string]interface{}))
+	}
 	var aPIGATEWAY *models.CloudServiceSettings = nil
 	APIGATEWAYList := d["api_g_a_t_e_w_a_y"].([]interface{})
 	if len(APIGATEWAYList) > 0 { // len(nil) = 0
 		aPIGATEWAY = CloudServiceSettingsModel(APIGATEWAYList[0].(map[string]interface{}))
+	}
+	var aPIGATEWAYV2 *models.CloudServiceSettings = nil
+	APIGATEWAYV2List := d["api_g_a_t_e_w_a_y_v2"].([]interface{})
+	if len(APIGATEWAYV2List) > 0 { // len(nil) = 0
+		aPIGATEWAYV2 = CloudServiceSettingsModel(APIGATEWAYV2List[0].(map[string]interface{}))
 	}
 	var aPIMANAGEMENT *models.CloudServiceSettings = nil
 	APIMANAGEMENTList := d["api_m_a_n_a_g_e_m_e_n_t"].([]interface{})
@@ -956,6 +1710,11 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(APPLICATIONINSIGHTSList) > 0 { // len(nil) = 0
 		aPPLICATIONINSIGHTS = CloudServiceSettingsModel(APPLICATIONINSIGHTSList[0].(map[string]interface{}))
 	}
+	var aPPLICATIONMIGRATIONSERVICE *models.CloudServiceSettings = nil
+	APPLICATIONMIGRATIONSERVICEList := d["a_p_p_l_i_c_a_t_i_o_n_m_i_g_r_a_t_i_o_n_s_e_r_v_i_c_e"].([]interface{})
+	if len(APPLICATIONMIGRATIONSERVICEList) > 0 { // len(nil) = 0
+		aPPLICATIONMIGRATIONSERVICE = CloudServiceSettingsModel(APPLICATIONMIGRATIONSERVICEList[0].(map[string]interface{}))
+	}
 	var aPPSERVICE *models.CloudServiceSettings = nil
 	APPSERVICEList := d["a_p_p_s_e_r_v_i_c_e"].([]interface{})
 	if len(APPSERVICEList) > 0 { // len(nil) = 0
@@ -965,6 +1724,11 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	APPSERVICEPLANList := d["a_p_p_s_e_r_v_i_c_e_p_l_a_n"].([]interface{})
 	if len(APPSERVICEPLANList) > 0 { // len(nil) = 0
 		aPPSERVICEPLAN = CloudServiceSettingsModel(APPSERVICEPLANList[0].(map[string]interface{}))
+	}
+	var aPPSERVICEENVIRONMENT *models.CloudServiceSettings = nil
+	APPSERVICEENVIRONMENTList := d["a_p_p_s_e_r_v_i_c_e_e_n_v_i_r_o_n_m_e_n_t"].([]interface{})
+	if len(APPSERVICEENVIRONMENTList) > 0 { // len(nil) = 0
+		aPPSERVICEENVIRONMENT = CloudServiceSettingsModel(APPSERVICEENVIRONMENTList[0].(map[string]interface{}))
 	}
 	var aPPSTREAM *models.CloudServiceSettings = nil
 	APPSTREAMList := d["a_p_p_s_t_r_e_a_m"].([]interface{})
@@ -986,15 +1750,60 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(AUTOSCALINGList) > 0 { // len(nil) = 0
 		aUTOSCALING = CloudServiceSettingsModel(AUTOSCALINGList[0].(map[string]interface{}))
 	}
+	var bACKUP *models.CloudServiceSettings = nil
+	BACKUPList := d["b_a_c_k_u_p"].([]interface{})
+	if len(BACKUPList) > 0 { // len(nil) = 0
+		bACKUP = CloudServiceSettingsModel(BACKUPList[0].(map[string]interface{}))
+	}
 	var bACKUPPROTECTEDITEMS *models.CloudServiceSettings = nil
 	BACKUPPROTECTEDITEMSList := d["b_a_c_k_u_p_p_r_o_t_e_c_t_e_d_i_t_e_m_s"].([]interface{})
 	if len(BACKUPPROTECTEDITEMSList) > 0 { // len(nil) = 0
 		bACKUPPROTECTEDITEMS = CloudServiceSettingsModel(BACKUPPROTECTEDITEMSList[0].(map[string]interface{}))
 	}
+	var bACKUPPROTECTEDRESOURCE *models.CloudServiceSettings = nil
+	BACKUPPROTECTEDRESOURCEList := d["b_a_c_k_u_p_p_r_o_t_e_c_t_e_d_r_e_s_o_u_r_c_e"].([]interface{})
+	if len(BACKUPPROTECTEDRESOURCEList) > 0 { // len(nil) = 0
+		bACKUPPROTECTEDRESOURCE = CloudServiceSettingsModel(BACKUPPROTECTEDRESOURCEList[0].(map[string]interface{}))
+	}
+	var bACKUPVAULT *models.CloudServiceSettings = nil
+	BACKUPVAULTList := d["b_a_c_k_u_p_v_a_u_l_t"].([]interface{})
+	if len(BACKUPVAULTList) > 0 { // len(nil) = 0
+		bACKUPVAULT = CloudServiceSettingsModel(BACKUPVAULTList[0].(map[string]interface{}))
+	}
+	var bATCH *models.CloudServiceSettings = nil
+	BATCHList := d["b_a_t_c_h"].([]interface{})
+	if len(BATCHList) > 0 { // len(nil) = 0
+		bATCH = CloudServiceSettingsModel(BATCHList[0].(map[string]interface{}))
+	}
+	var bATCHACCOUNT *models.CloudServiceSettings = nil
+	BATCHACCOUNTList := d["b_a_t_c_h_a_c_c_o_u_n_t"].([]interface{})
+	if len(BATCHACCOUNTList) > 0 { // len(nil) = 0
+		bATCHACCOUNT = CloudServiceSettingsModel(BATCHACCOUNTList[0].(map[string]interface{}))
+	}
+	var bEDROCK *models.CloudServiceSettings = nil
+	BEDROCKList := d["b_e_d_r_o_c_k"].([]interface{})
+	if len(BEDROCKList) > 0 { // len(nil) = 0
+		bEDROCK = CloudServiceSettingsModel(BEDROCKList[0].(map[string]interface{}))
+	}
 	var bLOBSTORAGE *models.CloudServiceSettings = nil
 	BLOBSTORAGEList := d["b_l_o_b_s_t_o_r_a_g_e"].([]interface{})
 	if len(BLOBSTORAGEList) > 0 { // len(nil) = 0
 		bLOBSTORAGE = CloudServiceSettingsModel(BLOBSTORAGEList[0].(map[string]interface{}))
+	}
+	var bOTSERVICES *models.CloudServiceSettings = nil
+	BOTSERVICESList := d["b_o_t_s_e_r_v_i_c_e_s"].([]interface{})
+	if len(BOTSERVICESList) > 0 { // len(nil) = 0
+		bOTSERVICES = CloudServiceSettingsModel(BOTSERVICESList[0].(map[string]interface{}))
+	}
+	var cDNPROFILE *models.CloudServiceSettings = nil
+	CDNPROFILEList := d["c_d_n_p_r_o_f_i_l_e"].([]interface{})
+	if len(CDNPROFILEList) > 0 { // len(nil) = 0
+		cDNPROFILE = CloudServiceSettingsModel(CDNPROFILEList[0].(map[string]interface{}))
+	}
+	var cLIENTVPN *models.CloudServiceSettings = nil
+	CLIENTVPNList := d["c_l_i_e_n_t_v_p_n"].([]interface{})
+	if len(CLIENTVPNList) > 0 { // len(nil) = 0
+		cLIENTVPN = CloudServiceSettingsModel(CLIENTVPNList[0].(map[string]interface{}))
 	}
 	var cLOUDFRONT *models.CloudServiceSettings = nil
 	CLOUDFRONTList := d["c_l_o_u_d_f_r_o_n_t"].([]interface{})
@@ -1005,6 +1814,26 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	CLOUDSEARCHList := d["c_l_o_u_d_s_e_a_r_c_h"].([]interface{})
 	if len(CLOUDSEARCHList) > 0 { // len(nil) = 0
 		cLOUDSEARCH = CloudServiceSettingsModel(CLOUDSEARCHList[0].(map[string]interface{}))
+	}
+	var cLOUDTRAIL *models.CloudServiceSettings = nil
+	CLOUDTRAILList := d["c_l_o_u_d_t_r_a_i_l"].([]interface{})
+	if len(CLOUDTRAILList) > 0 { // len(nil) = 0
+		cLOUDTRAIL = CloudServiceSettingsModel(CLOUDTRAILList[0].(map[string]interface{}))
+	}
+	var cLOUDWATCHEVENTS *models.CloudServiceSettings = nil
+	CLOUDWATCHEVENTSList := d["c_l_o_u_d_w_a_t_c_h_e_v_e_n_t_s"].([]interface{})
+	if len(CLOUDWATCHEVENTSList) > 0 { // len(nil) = 0
+		cLOUDWATCHEVENTS = CloudServiceSettingsModel(CLOUDWATCHEVENTSList[0].(map[string]interface{}))
+	}
+	var cLOUDWATCHLOGS *models.CloudServiceSettings = nil
+	CLOUDWATCHLOGSList := d["c_l_o_u_d_w_a_t_c_h_l_o_g_s"].([]interface{})
+	if len(CLOUDWATCHLOGSList) > 0 { // len(nil) = 0
+		cLOUDWATCHLOGS = CloudServiceSettingsModel(CLOUDWATCHLOGSList[0].(map[string]interface{}))
+	}
+	var cLOUDWATCHSYNTHETICS *models.CloudServiceSettings = nil
+	CLOUDWATCHSYNTHETICSList := d["c_l_o_u_d_w_a_t_c_h_s_y_n_t_h_e_t_i_c_s"].([]interface{})
+	if len(CLOUDWATCHSYNTHETICSList) > 0 { // len(nil) = 0
+		cLOUDWATCHSYNTHETICS = CloudServiceSettingsModel(CLOUDWATCHSYNTHETICSList[0].(map[string]interface{}))
 	}
 	var cODEBUILD *models.CloudServiceSettings = nil
 	CODEBUILDList := d["c_o_d_e_b_ui_l_d"].([]interface{})
@@ -1027,6 +1856,21 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 		cOGNITO = CloudServiceSettingsModel(COGNITOList[0].(map[string]interface{}))
 	}
 	var cOSMOSDB *models.CloudServiceSettings = nil
+	var cONTAINERAPPS *models.CloudServiceSettings = nil
+	CONTAINERAPPSList := d["c_o_n_t_a_i_n_e_r_a_p_p_s"].([]interface{})
+	if len(CONTAINERAPPSList) > 0 { // len(nil) = 0
+		cONTAINERAPPS = CloudServiceSettingsModel(CONTAINERAPPSList[0].(map[string]interface{}))
+	}
+	var cONTAINERINSTANCE *models.CloudServiceSettings = nil
+	CONTAINERINSTANCEList := d["c_o_n_t_a_i_n_e_r_i_n_s_t_a_n_c_e"].([]interface{})
+	if len(CONTAINERINSTANCEList) > 0 { // len(nil) = 0
+		cONTAINERINSTANCE = CloudServiceSettingsModel(CONTAINERINSTANCEList[0].(map[string]interface{}))
+	}
+	var cONTAINERREGISTRY *models.CloudServiceSettings = nil
+	CONTAINERREGISTRYList := d["c_o_n_t_a_i_n_e_r_r_e_g_i_s_t_r_y"].([]interface{})
+	if len(CONTAINERREGISTRYList) > 0 { // len(nil) = 0
+		cONTAINERREGISTRY = CloudServiceSettingsModel(CONTAINERREGISTRYList[0].(map[string]interface{}))
+	}
 	COSMOSDBList := d["c_o_s_m_o_s_d_b"].([]interface{})
 	if len(COSMOSDBList) > 0 { // len(nil) = 0
 		cOSMOSDB = CloudServiceSettingsModel(COSMOSDBList[0].(map[string]interface{}))
@@ -1036,10 +1880,45 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(DATAFACTORYList) > 0 { // len(nil) = 0
 		dATAFACTORY = CloudServiceSettingsModel(DATAFACTORYList[0].(map[string]interface{}))
 	}
+	var dATALAKEANALYTICS *models.CloudServiceSettings = nil
+	DATALAKEANALYTICSList := d["d_a_t_a_l_a_k_e_a_n_a_l_y_t_i_c_s"].([]interface{})
+	if len(DATALAKEANALYTICSList) > 0 { // len(nil) = 0
+		dATALAKEANALYTICS = CloudServiceSettingsModel(DATALAKEANALYTICSList[0].(map[string]interface{}))
+	}
+	var dATALAKESTORE *models.CloudServiceSettings = nil
+	DATALAKESTOREList := d["d_a_t_a_l_a_k_e_s_t_o_r_e"].([]interface{})
+	if len(DATALAKESTOREList) > 0 { // len(nil) = 0
+		dATALAKESTORE = CloudServiceSettingsModel(DATALAKESTOREList[0].(map[string]interface{}))
+	}
+	var dATABRICKS *models.CloudServiceSettings = nil
+	DATABRICKSList := d["d_a_t_a_b_r_i_c_k_s"].([]interface{})
+	if len(DATABRICKSList) > 0 { // len(nil) = 0
+		dATABRICKS = CloudServiceSettingsModel(DATABRICKSList[0].(map[string]interface{}))
+	}
+	var dBCLUSTER *models.CloudServiceSettings = nil
+	DBCLUSTERList := d["d_b_c_l_u_s_t_e_r"].([]interface{})
+	if len(DBCLUSTERList) > 0 { // len(nil) = 0
+		dBCLUSTER = CloudServiceSettingsModel(DBCLUSTERList[0].(map[string]interface{}))
+	}
+	var dETECTIVEGRAPH *models.CloudServiceSettings = nil
+	DETECTIVEGRAPHList := d["d_e_t_e_c_t_i_v_e_g_r_a_p_h"].([]interface{})
+	if len(DETECTIVEGRAPHList) > 0 { // len(nil) = 0
+		dETECTIVEGRAPH = CloudServiceSettingsModel(DETECTIVEGRAPHList[0].(map[string]interface{}))
+	}
 	var dIRECTCONNECT *models.CloudServiceSettings = nil
 	DIRECTCONNECTList := d["d_i_r_e_c_t_c_o_n_n_e_c_t"].([]interface{})
 	if len(DIRECTCONNECTList) > 0 { // len(nil) = 0
 		dIRECTCONNECT = CloudServiceSettingsModel(DIRECTCONNECTList[0].(map[string]interface{}))
+	}
+	var dIRECTCONNECTVIRTUALINTERFACE *models.CloudServiceSettings = nil
+	DIRECTCONNECTVIRTUALINTERFACEList := d["d_i_r_e_c_t_c_o_n_n_e_c_t_v_i_r_t_u_a_l_i_n_t_e_r_f_a_c_e"].([]interface{})
+	if len(DIRECTCONNECTVIRTUALINTERFACEList) > 0 { // len(nil) = 0
+		dIRECTCONNECTVIRTUALINTERFACE = CloudServiceSettingsModel(DIRECTCONNECTVIRTUALINTERFACEList[0].(map[string]interface{}))
+	}
+	var dISKS *models.CloudServiceSettings = nil
+	DISKSList := d["d_i_s_k_s"].([]interface{})
+	if len(DISKSList) > 0 { // len(nil) = 0
+		dISKS = CloudServiceSettingsModel(DISKSList[0].(map[string]interface{}))
 	}
 	var dMSREPLICATION *models.CloudServiceSettings = nil
 	DMSREPLICATIONList := d["d_m_s_r_e_p_l_i_c_a_t_i_o_n"].([]interface{})
@@ -1071,15 +1950,30 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(EC2List) > 0 { // len(nil) = 0
 		eC2 = CloudServiceSettingsModel(EC2List[0].(map[string]interface{}))
 	}
+	var eCR *models.CloudServiceSettings = nil
+	ECRList := d["e_c_r"].([]interface{})
+	if len(ECRList) > 0 { // len(nil) = 0
+		eCR = CloudServiceSettingsModel(ECRList[0].(map[string]interface{}))
+	}
 	var eCS *models.CloudServiceSettings = nil
 	ECSList := d["e_c_s"].([]interface{})
 	if len(ECSList) > 0 { // len(nil) = 0
 		eCS = CloudServiceSettingsModel(ECSList[0].(map[string]interface{}))
 	}
+	var eLASTICIP *models.CloudServiceSettings = nil
+	ELASTICIPList := d["e_l_a_s_t_i_c_ip"].([]interface{})
+	if len(ELASTICIPList) > 0 { // len(nil) = 0
+		eLASTICIP = CloudServiceSettingsModel(ELASTICIPList[0].(map[string]interface{}))
+	}
 	var eFS *models.CloudServiceSettings = nil
 	EFSList := d["e_f_s"].([]interface{})
 	if len(EFSList) > 0 { // len(nil) = 0
 		eFS = CloudServiceSettingsModel(EFSList[0].(map[string]interface{}))
+	}
+	var eKS *models.CloudServiceSettings = nil
+	EKSList := d["e_k_s"].([]interface{})
+	if len(EKSList) > 0 { // len(nil) = 0
+		eKS = CloudServiceSettingsModel(EKSList[0].(map[string]interface{}))
 	}
 	var eLASTICACHE *models.CloudServiceSettings = nil
 	ELASTICACHEList := d["e_l_a_s_t_i_c_a_c_h_e"].([]interface{})
@@ -1116,6 +2010,11 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(EVENTBRIDGEList) > 0 { // len(nil) = 0
 		eVENTBRIDGE = CloudServiceSettingsModel(EVENTBRIDGEList[0].(map[string]interface{}))
 	}
+	var eVENTGRID *models.CloudServiceSettings = nil
+	EVENTGRIDList := d["e_v_e_n_t_g_r_i_d"].([]interface{})
+	if len(EVENTGRIDList) > 0 { // len(nil) = 0
+		eVENTGRID = CloudServiceSettingsModel(EVENTGRIDList[0].(map[string]interface{}))
+	}
 	var eVENTHUB *models.CloudServiceSettings = nil
 	EVENTHUBList := d["e_v_e_n_t_h_u_b"].([]interface{})
 	if len(EVENTHUBList) > 0 { // len(nil) = 0
@@ -1151,15 +2050,65 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(FSXList) > 0 { // len(nil) = 0
 		fSX = CloudServiceSettingsModel(FSXList[0].(map[string]interface{}))
 	}
+	var fUNCTION *models.CloudServiceSettings = nil
+	FUNCTIONList := d["f_u_n_c_t_i_o_n"].([]interface{})
+	if len(FUNCTIONList) > 0 { // len(nil) = 0
+		fUNCTION = CloudServiceSettingsModel(FUNCTIONList[0].(map[string]interface{}))
+	}
+	var gATEWAYELB *models.CloudServiceSettings = nil
+	GATEWAYELBList := d["g_a_t_e_w_a_y_e_l_b"].([]interface{})
+	if len(GATEWAYELBList) > 0 { // len(nil) = 0
+		gATEWAYELB = CloudServiceSettingsModel(GATEWAYELBList[0].(map[string]interface{}))
+	}
+	var gLOBALNETWORKS *models.CloudServiceSettings = nil
+	GLOBALNETWORKSList := d["g_l_o_b_a_l_n_e_t_w_o_r_k_s"].([]interface{})
+	if len(GLOBALNETWORKSList) > 0 { // len(nil) = 0
+		gLOBALNETWORKS = CloudServiceSettingsModel(GLOBALNETWORKSList[0].(map[string]interface{}))
+	}
 	var gLUE *models.CloudServiceSettings = nil
 	GLUEList := d["g_l_u_e"].([]interface{})
 	if len(GLUEList) > 0 { // len(nil) = 0
 		gLUE = CloudServiceSettingsModel(GLUEList[0].(map[string]interface{}))
 	}
+	var hEALTHCHECK *models.CloudServiceSettings = nil
+	HEALTHCHECKList := d["h_e_a_l_t_h_c_h_e_c_k"].([]interface{})
+	if len(HEALTHCHECKList) > 0 { // len(nil) = 0
+		hEALTHCHECK = CloudServiceSettingsModel(HEALTHCHECKList[0].(map[string]interface{}))
+	}
+	var hDINSIGHT *models.CloudServiceSettings = nil
+	HDINSIGHTList := d["h_d_i_n_s_i_g_h_t"].([]interface{})
+	if len(HDINSIGHTList) > 0 { // len(nil) = 0
+		hDINSIGHT = CloudServiceSettingsModel(HDINSIGHTList[0].(map[string]interface{}))
+	}
+	var hOSTEDZONE *models.CloudServiceSettings = nil
+	HOSTEDZONEList := d["h_o_s_t_e_d_z_o_n_e"].([]interface{})
+	if len(HOSTEDZONEList) > 0 { // len(nil) = 0
+		hOSTEDZONE = CloudServiceSettingsModel(HOSTEDZONEList[0].(map[string]interface{}))
+	}
+	var iAMROLE *models.CloudServiceSettings = nil
+	IAMROLEList := d["i_a_m_r_o_l_e"].([]interface{})
+	if len(IAMROLEList) > 0 { // len(nil) = 0
+		iAMROLE = CloudServiceSettingsModel(IAMROLEList[0].(map[string]interface{}))
+	}
+	var iNTERNETGATEWAY *models.CloudServiceSettings = nil
+	INTERNETGATEWAYList := d["i_n_t_e_r_n_e_t_g_a_t_e_w_a_y"].([]interface{})
+	if len(INTERNETGATEWAYList) > 0 { // len(nil) = 0
+		iNTERNETGATEWAY = CloudServiceSettingsModel(INTERNETGATEWAYList[0].(map[string]interface{}))
+	}
+	var iOTHUB *models.CloudServiceSettings = nil
+	IOTHUBList := d["i_o_t_h_u_b"].([]interface{})
+	if len(IOTHUBList) > 0 { // len(nil) = 0
+		iOTHUB = CloudServiceSettingsModel(IOTHUBList[0].(map[string]interface{}))
+	}
 	var kEYVAULT *models.CloudServiceSettings = nil
 	KEYVAULTList := d["k_e_y_v_a_u_l_t"].([]interface{})
 	if len(KEYVAULTList) > 0 { // len(nil) = 0
 		kEYVAULT = CloudServiceSettingsModel(KEYVAULTList[0].(map[string]interface{}))
+	}
+	var kMS *models.CloudServiceSettings = nil
+	KMSList := d["k_m_s"].([]interface{})
+	if len(KMSList) > 0 { // len(nil) = 0
+		kMS = CloudServiceSettingsModel(KMSList[0].(map[string]interface{}))
 	}
 	var kINESIS *models.CloudServiceSettings = nil
 	KINESISList := d["k_i_n_e_s_i_s"].([]interface{})
@@ -1175,6 +2124,11 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	LAMBDAList := d["l_a_m_b_d_a"].([]interface{})
 	if len(LAMBDAList) > 0 { // len(nil) = 0
 		lAMBDA = CloudServiceSettingsModel(LAMBDAList[0].(map[string]interface{}))
+	}
+	var lIGHTSAIL *models.CloudServiceSettings = nil
+	LIGHTSAILList := d["l_i_g_h_t_s_a_i_l"].([]interface{})
+	if len(LIGHTSAILList) > 0 { // len(nil) = 0
+		lIGHTSAIL = CloudServiceSettingsModel(LIGHTSAILList[0].(map[string]interface{}))
 	}
 	var lOADBALANCERS *models.CloudServiceSettings = nil
 	LOADBALANCERSList := d["l_o_a_d_b_a_l_a_n_c_e_r_s"].([]interface{})
@@ -1221,10 +2175,20 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(MEDIATAILORList) > 0 { // len(nil) = 0
 		mEDIATAILOR = CloudServiceSettingsModel(MEDIATAILORList[0].(map[string]interface{}))
 	}
+	var mLWORKSPACES *models.CloudServiceSettings = nil
+	MLWORKSPACESList := d["m_l_w_o_r_k_s_p_a_c_e_s"].([]interface{})
+	if len(MLWORKSPACESList) > 0 { // len(nil) = 0
+		mLWORKSPACES = CloudServiceSettingsModel(MLWORKSPACESList[0].(map[string]interface{}))
+	}
 	var mQ *models.CloudServiceSettings = nil
 	MQList := d["m_q"].([]interface{})
 	if len(MQList) > 0 { // len(nil) = 0
 		mQ = CloudServiceSettingsModel(MQList[0].(map[string]interface{}))
+	}
+	var mARIADB *models.CloudServiceSettings = nil
+	MARIADBList := d["m_a_r_i_a_d_b"].([]interface{})
+	if len(MARIADBList) > 0 { // len(nil) = 0
+		mARIADB = CloudServiceSettingsModel(MARIADBList[0].(map[string]interface{}))
 	}
 	var mSKBROKER *models.CloudServiceSettings = nil
 	MSKBROKERList := d["m_s_k_b_r_o_k_e_r"].([]interface{})
@@ -1241,6 +2205,11 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(MYSQLList) > 0 { // len(nil) = 0
 		mYSQL = CloudServiceSettingsModel(MYSQLList[0].(map[string]interface{}))
 	}
+	var mYSQLFLEXIBLE *models.CloudServiceSettings = nil
+	MYSQLFLEXIBLEList := d["m_y_sql_f_l_e_x_i_b_l_e"].([]interface{})
+	if len(MYSQLFLEXIBLEList) > 0 { // len(nil) = 0
+		mYSQLFLEXIBLE = CloudServiceSettingsModel(MYSQLFLEXIBLEList[0].(map[string]interface{}))
+	}
 	var nATGATEWAY *models.CloudServiceSettings = nil
 	NATGATEWAYList := d["n_a_t_g_a_t_e_w_a_y"].([]interface{})
 	if len(NATGATEWAYList) > 0 { // len(nil) = 0
@@ -1251,10 +2220,40 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(NETWORKELBList) > 0 { // len(nil) = 0
 		nETWORKELB = CloudServiceSettingsModel(NETWORKELBList[0].(map[string]interface{}))
 	}
+	var nETWORKFIREWALL *models.CloudServiceSettings = nil
+	NETWORKFIREWALLList := d["n_e_t_w_o_r_k_f_i_r_e_w_a_l_l"].([]interface{})
+	if len(NETWORKFIREWALLList) > 0 { // len(nil) = 0
+		nETWORKFIREWALL = CloudServiceSettingsModel(NETWORKFIREWALLList[0].(map[string]interface{}))
+	}
 	var nETWORKINTERFACE *models.CloudServiceSettings = nil
+	var nATGATEWAYS *models.CloudServiceSettings = nil
+	NATGATEWAYSList := d["n_a_t_g_a_t_e_w_a_y_s"].([]interface{})
+	if len(NATGATEWAYSList) > 0 { // len(nil) = 0
+		nATGATEWAYS = CloudServiceSettingsModel(NATGATEWAYSList[0].(map[string]interface{}))
+	}
+	var nETAPPPOOLS *models.CloudServiceSettings = nil
+	NETAPPPOOLSList := d["n_e_t_a_p_p_p_o_o_l_s"].([]interface{})
+	if len(NETAPPPOOLSList) > 0 { // len(nil) = 0
+		nETAPPPOOLS = CloudServiceSettingsModel(NETAPPPOOLSList[0].(map[string]interface{}))
+	}
 	NETWORKINTERFACEList := d["n_e_t_w_o_r_k_i_n_t_e_r_f_a_c_e"].([]interface{})
 	if len(NETWORKINTERFACEList) > 0 { // len(nil) = 0
 		nETWORKINTERFACE = CloudServiceSettingsModel(NETWORKINTERFACEList[0].(map[string]interface{}))
+	}
+	var nLBTARGETGROUP *models.CloudServiceSettings = nil
+	NLBTARGETGROUPList := d["n_l_b_t_a_r_g_e_t_g_r_o_u_p"].([]interface{})
+	if len(NLBTARGETGROUPList) > 0 { // len(nil) = 0
+		nLBTARGETGROUP = CloudServiceSettingsModel(NLBTARGETGROUPList[0].(map[string]interface{}))
+	}
+	var nOTIFICATIONHUBS *models.CloudServiceSettings = nil
+	NOTIFICATIONHUBSList := d["n_o_t_i_f_i_c_a_t_i_o_n_h_u_b_s"].([]interface{})
+	if len(NOTIFICATIONHUBSList) > 0 { // len(nil) = 0
+		nOTIFICATIONHUBS = CloudServiceSettingsModel(NOTIFICATIONHUBSList[0].(map[string]interface{}))
+	}
+	var oPENAISERVICES *models.CloudServiceSettings = nil
+	OPENAISERVICESList := d["o_p_e_n_a_i_s_e_r_v_i_c_e_s"].([]interface{})
+	if len(OPENAISERVICESList) > 0 { // len(nil) = 0
+		oPENAISERVICES = CloudServiceSettingsModel(OPENAISERVICESList[0].(map[string]interface{}))
 	}
 	var oPSWORKS *models.CloudServiceSettings = nil
 	OPSWORKSList := d["o_p_s_w_o_r_k_s"].([]interface{})
@@ -1266,15 +2265,60 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(POSTGRESQLList) > 0 { // len(nil) = 0
 		pOSTGRESQL = CloudServiceSettingsModel(POSTGRESQLList[0].(map[string]interface{}))
 	}
+	var pOSTGRESQLCITUS *models.CloudServiceSettings = nil
+	POSTGRESQLCITUSList := d["p_o_s_t_g_r_e_sql_c_i_t_u_s"].([]interface{})
+	if len(POSTGRESQLCITUSList) > 0 { // len(nil) = 0
+		pOSTGRESQLCITUS = CloudServiceSettingsModel(POSTGRESQLCITUSList[0].(map[string]interface{}))
+	}
+	var pOSTGRESQLFLEXIBLE *models.CloudServiceSettings = nil
+	POSTGRESQLFLEXIBLEList := d["p_o_s_t_g_r_e_sql_f_l_e_x_i_b_l_e"].([]interface{})
+	if len(POSTGRESQLFLEXIBLEList) > 0 { // len(nil) = 0
+		pOSTGRESQLFLEXIBLE = CloudServiceSettingsModel(POSTGRESQLFLEXIBLEList[0].(map[string]interface{}))
+	}
+	var pOWERBIEMBEDDED *models.CloudServiceSettings = nil
+	POWERBIEMBEDDEDList := d["p_o_w_e_r_b_i_e_m_b_e_d_d_e_d"].([]interface{})
+	if len(POWERBIEMBEDDEDList) > 0 { // len(nil) = 0
+		pOWERBIEMBEDDED = CloudServiceSettingsModel(POWERBIEMBEDDEDList[0].(map[string]interface{}))
+	}
 	var pUBLICIP *models.CloudServiceSettings = nil
 	PUBLICIPList := d["p_u_b_l_i_c_ip"].([]interface{})
 	if len(PUBLICIPList) > 0 { // len(nil) = 0
 		pUBLICIP = CloudServiceSettingsModel(PUBLICIPList[0].(map[string]interface{}))
 	}
+	var pRIVATELINKENDPOINTS *models.CloudServiceSettings = nil
+	PRIVATELINKENDPOINTSList := d["p_r_i_v_a_t_e_l_i_n_k_e_n_d_p_o_i_n_t_s"].([]interface{})
+	if len(PRIVATELINKENDPOINTSList) > 0 { // len(nil) = 0
+		pRIVATELINKENDPOINTS = CloudServiceSettingsModel(PRIVATELINKENDPOINTSList[0].(map[string]interface{}))
+	}
+	var pRIVATELINKSERVICES *models.CloudServiceSettings = nil
+	PRIVATELINKSERVICESList := d["p_r_i_v_a_t_e_l_i_n_k_s_e_r_v_i_c_e_s"].([]interface{})
+	if len(PRIVATELINKSERVICESList) > 0 { // len(nil) = 0
+		pRIVATELINKSERVICES = CloudServiceSettingsModel(PRIVATELINKSERVICESList[0].(map[string]interface{}))
+	}
+	var qBUSINESS *models.CloudServiceSettings = nil
+	QBUSINESSList := d["q_b_u_s_i_n_e_s_s"].([]interface{})
+	if len(QBUSINESSList) > 0 { // len(nil) = 0
+		qBUSINESS = CloudServiceSettingsModel(QBUSINESSList[0].(map[string]interface{}))
+	}
+	var qUOTA *models.CloudServiceSettings = nil
+	QUOTAList := d["q_u_o_t_a"].([]interface{})
+	if len(QUOTAList) > 0 { // len(nil) = 0
+		qUOTA = CloudServiceSettingsModel(QUOTAList[0].(map[string]interface{}))
+	}
 	var qUEUESTORAGE *models.CloudServiceSettings = nil
 	QUEUESTORAGEList := d["q_u_e_u_e_s_t_o_r_a_g_e"].([]interface{})
 	if len(QUEUESTORAGEList) > 0 { // len(nil) = 0
 		qUEUESTORAGE = CloudServiceSettingsModel(QUEUESTORAGEList[0].(map[string]interface{}))
+	}
+	var qUICKSIGHTDASHBOARDS *models.CloudServiceSettings = nil
+	QUICKSIGHTDASHBOARDSList := d["q_u_i_c_k_s_i_g_h_t_d_a_s_h_b_o_a_r_d_s"].([]interface{})
+	if len(QUICKSIGHTDASHBOARDSList) > 0 { // len(nil) = 0
+		qUICKSIGHTDASHBOARDS = CloudServiceSettingsModel(QUICKSIGHTDASHBOARDSList[0].(map[string]interface{}))
+	}
+	var qUICKSIGHTDATASETS *models.CloudServiceSettings = nil
+	QUICKSIGHTDATASETSList := d["q_u_i_c_k_s_i_g_h_t_d_a_t_a_s_e_t_s"].([]interface{})
+	if len(QUICKSIGHTDATASETSList) > 0 { // len(nil) = 0
+		qUICKSIGHTDATASETS = CloudServiceSettingsModel(QUICKSIGHTDATASETSList[0].(map[string]interface{}))
 	}
 	var rDS *models.CloudServiceSettings = nil
 	RDSList := d["r_d_s"].([]interface{})
@@ -1286,6 +2330,11 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(RECOVERYPROTECTEDITEMList) > 0 { // len(nil) = 0
 		rECOVERYPROTECTEDITEM = CloudServiceSettingsModel(RECOVERYPROTECTEDITEMList[0].(map[string]interface{}))
 	}
+	var rECOVERYPROTECTEDITEMS *models.CloudServiceSettings = nil
+	RECOVERYPROTECTEDITEMSList := d["r_e_c_o_v_e_r_y_p_r_o_t_e_c_t_e_d_i_t_e_m_s"].([]interface{})
+	if len(RECOVERYPROTECTEDITEMSList) > 0 { // len(nil) = 0
+		rECOVERYPROTECTEDITEMS = CloudServiceSettingsModel(RECOVERYPROTECTEDITEMSList[0].(map[string]interface{}))
+	}
 	var rECOVERYSERVICES *models.CloudServiceSettings = nil
 	RECOVERYSERVICESList := d["r_e_c_o_v_e_r_y_s_e_r_v_i_c_e_s"].([]interface{})
 	if len(RECOVERYSERVICESList) > 0 { // len(nil) = 0
@@ -1296,15 +2345,35 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(REDISCACHEList) > 0 { // len(nil) = 0
 		rEDISCACHE = CloudServiceSettingsModel(REDISCACHEList[0].(map[string]interface{}))
 	}
+	var rEDISCACHEENTERPRISE *models.CloudServiceSettings = nil
+	REDISCACHEENTERPRISEList := d["r_e_d_i_s_c_a_c_h_e_e_n_t_e_r_p_r_i_s_e"].([]interface{})
+	if len(REDISCACHEENTERPRISEList) > 0 { // len(nil) = 0
+		rEDISCACHEENTERPRISE = CloudServiceSettingsModel(REDISCACHEENTERPRISEList[0].(map[string]interface{}))
+	}
 	var rEDSHIFT *models.CloudServiceSettings = nil
 	REDSHIFTList := d["r_e_d_s_h_i_f_t"].([]interface{})
 	if len(REDSHIFTList) > 0 { // len(nil) = 0
 		rEDSHIFT = CloudServiceSettingsModel(REDSHIFTList[0].(map[string]interface{}))
 	}
+	var rEDSHIFTSERVERLESS *models.CloudServiceSettings = nil
+	REDSHIFTSERVERLESSList := d["r_e_d_s_h_i_f_t_s_e_r_v_e_r_l_e_s_s"].([]interface{})
+	if len(REDSHIFTSERVERLESSList) > 0 { // len(nil) = 0
+		rEDSHIFTSERVERLESS = CloudServiceSettingsModel(REDSHIFTSERVERLESSList[0].(map[string]interface{}))
+	}
+	var rELAYNAMESPACES *models.CloudServiceSettings = nil
+	RELAYNAMESPACESList := d["r_e_l_a_y_n_a_m_e_s_p_a_c_e_s"].([]interface{})
+	if len(RELAYNAMESPACESList) > 0 { // len(nil) = 0
+		rELAYNAMESPACES = CloudServiceSettingsModel(RELAYNAMESPACESList[0].(map[string]interface{}))
+	}
 	var rOUTE53 *models.CloudServiceSettings = nil
 	ROUTE53List := d["r_o_u_t_e53"].([]interface{})
 	if len(ROUTE53List) > 0 { // len(nil) = 0
 		rOUTE53 = CloudServiceSettingsModel(ROUTE53List[0].(map[string]interface{}))
+	}
+	var rOUTE53HOSTEDZONE *models.CloudServiceSettings = nil
+	ROUTE53HOSTEDZONEList := d["r_o_u_t_e53_h_o_s_t_e_d_z_o_n_e"].([]interface{})
+	if len(ROUTE53HOSTEDZONEList) > 0 { // len(nil) = 0
+		rOUTE53HOSTEDZONE = CloudServiceSettingsModel(ROUTE53HOSTEDZONEList[0].(map[string]interface{}))
 	}
 	var rOUTE53RESOLVER *models.CloudServiceSettings = nil
 	ROUTE53RESOLVERList := d["r_o_u_t_e53_r_e_s_o_l_v_e_r"].([]interface{})
@@ -1326,10 +2395,25 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(SERVICEBUSList) > 0 { // len(nil) = 0
 		sERVICEBUS = CloudServiceSettingsModel(SERVICEBUSList[0].(map[string]interface{}))
 	}
+	var sERVICEFABRICMESH *models.CloudServiceSettings = nil
+	SERVICEFABRICMESHList := d["s_e_r_v_i_c_e_f_a_b_r_i_c_m_e_s_h"].([]interface{})
+	if len(SERVICEFABRICMESHList) > 0 { // len(nil) = 0
+		sERVICEFABRICMESH = CloudServiceSettingsModel(SERVICEFABRICMESHList[0].(map[string]interface{}))
+	}
 	var sES *models.CloudServiceSettings = nil
 	SESList := d["s_e_s"].([]interface{})
 	if len(SESList) > 0 { // len(nil) = 0
 		sES = CloudServiceSettingsModel(SESList[0].(map[string]interface{}))
+	}
+	var sIGNALR *models.CloudServiceSettings = nil
+	SIGNALRList := d["s_i_g_n_a_l_r"].([]interface{})
+	if len(SIGNALRList) > 0 { // len(nil) = 0
+		sIGNALR = CloudServiceSettingsModel(SIGNALRList[0].(map[string]interface{}))
+	}
+	var sITE2SITEVPN *models.CloudServiceSettings = nil
+	SITE2SITEVPNList := d["s_i_t_e2_s_i_t_e_v_p_n"].([]interface{})
+	if len(SITE2SITEVPNList) > 0 { // len(nil) = 0
+		sITE2SITEVPN = CloudServiceSettingsModel(SITE2SITEVPNList[0].(map[string]interface{}))
 	}
 	var sNS *models.CloudServiceSettings = nil
 	SNSList := d["s_n_s"].([]interface{})
@@ -1366,6 +2450,16 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(STORAGEACCOUNTList) > 0 { // len(nil) = 0
 		sTORAGEACCOUNT = CloudServiceSettingsModel(STORAGEACCOUNTList[0].(map[string]interface{}))
 	}
+	var sTORAGEGATEWAY *models.CloudServiceSettings = nil
+	STORAGEGATEWAYList := d["s_t_o_r_a_g_e_g_a_t_e_w_a_y"].([]interface{})
+	if len(STORAGEGATEWAYList) > 0 { // len(nil) = 0
+		sTORAGEGATEWAY = CloudServiceSettingsModel(STORAGEGATEWAYList[0].(map[string]interface{}))
+	}
+	var sTREAMANALYTICS *models.CloudServiceSettings = nil
+	STREAMANALYTICSList := d["s_t_r_e_a_m_a_n_a_l_y_t_i_c_s"].([]interface{})
+	if len(STREAMANALYTICSList) > 0 { // len(nil) = 0
+		sTREAMANALYTICS = CloudServiceSettingsModel(STREAMANALYTICSList[0].(map[string]interface{}))
+	}
 	var sWFACTIVITY *models.CloudServiceSettings = nil
 	SWFACTIVITYList := d["s_w_f_a_c_t_i_v_i_t_y"].([]interface{})
 	if len(SWFACTIVITYList) > 0 { // len(nil) = 0
@@ -1391,15 +2485,30 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(TRAFFICMANAGERList) > 0 { // len(nil) = 0
 		tRAFFICMANAGER = CloudServiceSettingsModel(TRAFFICMANAGERList[0].(map[string]interface{}))
 	}
+	var tRANSFER *models.CloudServiceSettings = nil
+	TRANSFERList := d["t_r_a_n_s_f_e_r"].([]interface{})
+	if len(TRANSFERList) > 0 { // len(nil) = 0
+		tRANSFER = CloudServiceSettingsModel(TRANSFERList[0].(map[string]interface{}))
+	}
 	var tRANSITGATEWAY *models.CloudServiceSettings = nil
 	TRANSITGATEWAYList := d["t_r_a_n_s_i_t_g_a_t_e_w_a_y"].([]interface{})
 	if len(TRANSITGATEWAYList) > 0 { // len(nil) = 0
 		tRANSITGATEWAY = CloudServiceSettingsModel(TRANSITGATEWAYList[0].(map[string]interface{}))
 	}
+	var tRANSITGATEWAYATTACHMENT *models.CloudServiceSettings = nil
+	TRANSITGATEWAYATTACHMENTList := d["t_r_a_n_s_i_t_g_a_t_e_w_a_y_a_t_t_a_c_h_m_e_n_t"].([]interface{})
+	if len(TRANSITGATEWAYATTACHMENTList) > 0 { // len(nil) = 0
+		tRANSITGATEWAYATTACHMENT = CloudServiceSettingsModel(TRANSITGATEWAYATTACHMENTList[0].(map[string]interface{}))
+	}
 	var vIRTUALDESKTOP *models.CloudServiceSettings = nil
 	VIRTUALDESKTOPList := d["v_i_r_t_u_a_l_d_e_s_k_t_o_p"].([]interface{})
 	if len(VIRTUALDESKTOPList) > 0 { // len(nil) = 0
 		vIRTUALDESKTOP = CloudServiceSettingsModel(VIRTUALDESKTOPList[0].(map[string]interface{}))
+	}
+	var vIRTUALHUBS *models.CloudServiceSettings = nil
+	VIRTUALHUBSList := d["v_i_r_t_u_a_l_h_u_b_s"].([]interface{})
+	if len(VIRTUALHUBSList) > 0 { // len(nil) = 0
+		vIRTUALHUBS = CloudServiceSettingsModel(VIRTUALHUBSList[0].(map[string]interface{}))
 	}
 	var vIRTUALMACHINE *models.CloudServiceSettings = nil
 	VIRTUALMACHINEList := d["v_i_r_t_u_a_l_m_a_c_h_i_n_e"].([]interface{})
@@ -1421,10 +2530,35 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	if len(VIRTUALNETWORKGATEWAYList) > 0 { // len(nil) = 0
 		vIRTUALNETWORKGATEWAY = CloudServiceSettingsModel(VIRTUALNETWORKGATEWAYList[0].(map[string]interface{}))
 	}
+	var vIRTUALNETWORKS *models.CloudServiceSettings = nil
+	VIRTUALNETWORKSList := d["v_i_r_t_u_a_l_n_e_t_w_o_r_k_s"].([]interface{})
+	if len(VIRTUALNETWORKSList) > 0 { // len(nil) = 0
+		vIRTUALNETWORKS = CloudServiceSettingsModel(VIRTUALNETWORKSList[0].(map[string]interface{}))
+	}
+	var vPC *models.CloudServiceSettings = nil
+	VPCList := d["v_p_c"].([]interface{})
+	if len(VPCList) > 0 { // len(nil) = 0
+		vPC = CloudServiceSettingsModel(VPCList[0].(map[string]interface{}))
+	}
+	var vPCENDPOINT *models.CloudServiceSettings = nil
+	VPCENDPOINTList := d["v_p_c_e_n_d_p_o_i_n_t"].([]interface{})
+	if len(VPCENDPOINTList) > 0 { // len(nil) = 0
+		vPCENDPOINT = CloudServiceSettingsModel(VPCENDPOINTList[0].(map[string]interface{}))
+	}
+	var vPCPEERING *models.CloudServiceSettings = nil
+	VPCPEERINGList := d["v_p_c_p_e_e_r_i_n_g"].([]interface{})
+	if len(VPCPEERINGList) > 0 { // len(nil) = 0
+		vPCPEERING = CloudServiceSettingsModel(VPCPEERINGList[0].(map[string]interface{}))
+	}
 	var vPN *models.CloudServiceSettings = nil
 	VPNList := d["v_p_n"].([]interface{})
 	if len(VPNList) > 0 { // len(nil) = 0
 		vPN = CloudServiceSettingsModel(VPNList[0].(map[string]interface{}))
+	}
+	var vPNGATEWAYS *models.CloudServiceSettings = nil
+	VPNGATEWAYSList := d["v_p_n_g_a_t_e_w_a_y_s"].([]interface{})
+	if len(VPNGATEWAYSList) > 0 { // len(nil) = 0
+		vPNGATEWAYS = CloudServiceSettingsModel(VPNGATEWAYSList[0].(map[string]interface{}))
 	}
 	var wORKSPACE *models.CloudServiceSettings = nil
 	WORKSPACEList := d["w_o_r_k_s_p_a_c_e"].([]interface{})
@@ -1438,142 +2572,256 @@ func CloudServicesModel(d map[string]interface{}) *models.CloudServices {
 	}
 
 	return &models.CloudServices{
-		APIGATEWAY:               aPIGATEWAY,
-		APIMANAGEMENT:            aPIMANAGEMENT,
-		APPLICATIONELB:           aPPLICATIONELB,
-		APPLICATIONGATEWAY:       aPPLICATIONGATEWAY,
-		APPLICATIONINSIGHTS:      aPPLICATIONINSIGHTS,
-		APPSERVICE:               aPPSERVICE,
-		APPSERVICEPLAN:           aPPSERVICEPLAN,
-		APPSTREAM:                aPPSTREAM,
-		ATHENA:                   aTHENA,
-		AUTOMATIONACCOUNT:        aUTOMATIONACCOUNT,
-		AUTOSCALING:              aUTOSCALING,
-		BACKUPPROTECTEDITEMS:     bACKUPPROTECTEDITEMS,
-		BLOBSTORAGE:              bLOBSTORAGE,
-		CLOUDFRONT:               cLOUDFRONT,
-		CLOUDSEARCH:              cLOUDSEARCH,
-		CODEBUILD:                cODEBUILD,
-		COGNITIVESEARCH:          cOGNITIVESEARCH,
-		COGNITIVESERVICES:        cOGNITIVESERVICES,
-		COGNITO:                  cOGNITO,
-		COSMOSDB:                 cOSMOSDB,
-		DATAFACTORY:              dATAFACTORY,
-		DIRECTCONNECT:            dIRECTCONNECT,
-		DMSREPLICATION:           dMSREPLICATION,
-		DMSREPLICATIONTASKS:      dMSREPLICATIONTASKS,
-		DOCDB:                    dOCDB,
-		DYNAMODB:                 dYNAMODB,
-		EBS:                      eBS,
-		EC2:                      eC2,
-		ECS:                      eCS,
-		EFS:                      eFS,
-		ELASTICACHE:              eLASTICACHE,
-		ELASTICBEANSTALK:         eLASTICBEANSTALK,
-		ELASTICSEARCH:            eLASTICSEARCH,
-		ELASTICTRANSCODER:        eLASTICTRANSCODER,
-		ELB:                      eLB,
-		EMR:                      eMR,
-		EVENTBRIDGE:              eVENTBRIDGE,
-		EVENTHUB:                 eVENTHUB,
-		EXPRESSROUTECIRCUIT:      eXPRESSROUTECIRCUIT,
-		FILESTORAGE:              fILESTORAGE,
-		FIREHOSE:                 fIREHOSE,
-		FIREWALL:                 fIREWALL,
-		FRONTDOORS:               fRONTDOORS,
-		FSX:                      fSX,
-		GLUE:                     gLUE,
-		KEYVAULT:                 kEYVAULT,
-		KINESIS:                  kINESIS,
-		KINESISVIDEO:             kINESISVIDEO,
-		LAMBDA:                   lAMBDA,
-		LOADBALANCERS:            lOADBALANCERS,
-		LOGANALYTICSWORKSPACES:   lOGANALYTICSWORKSPACES,
-		LOGICAPPS:                lOGICAPPS,
-		MEDIACONNECT:             mEDIACONNECT,
-		MEDIACONVERT:             mEDIACONVERT,
-		MEDIAPACKAGELIVE:         mEDIAPACKAGELIVE,
-		MEDIAPACKAGEVOD:          mEDIAPACKAGEVOD,
-		MEDIASTORE:               mEDIASTORE,
-		MEDIATAILOR:              mEDIATAILOR,
-		MQ:                       mQ,
-		MSKBROKER:                mSKBROKER,
-		MSKCLUSTER:               mSKCLUSTER,
-		MYSQL:                    mYSQL,
-		NATGATEWAY:               nATGATEWAY,
-		NETWORKELB:               nETWORKELB,
-		NETWORKINTERFACE:         nETWORKINTERFACE,
-		OPSWORKS:                 oPSWORKS,
-		POSTGRESQL:               pOSTGRESQL,
-		PUBLICIP:                 pUBLICIP,
-		QUEUESTORAGE:             qUEUESTORAGE,
-		RDS:                      rDS,
-		RECOVERYPROTECTEDITEM:    rECOVERYPROTECTEDITEM,
-		RECOVERYSERVICES:         rECOVERYSERVICES,
-		REDISCACHE:               rEDISCACHE,
-		REDSHIFT:                 rEDSHIFT,
-		ROUTE53:                  rOUTE53,
-		ROUTE53RESOLVER:          rOUTE53RESOLVER,
-		S3:                       s3,
-		SAGEMAKER:                sAGEMAKER,
-		SERVICEBUS:               sERVICEBUS,
-		SES:                      sES,
-		SNS:                      sNS,
-		SQLDATABASE:              sQLDATABASE,
-		SQLELASTICPOOL:           sQLELASTICPOOL,
-		SQLMANAGEDINSTANCE:       sQLMANAGEDINSTANCE,
-		SQS:                      sQS,
-		STEPFUNCTIONS:            sTEPFUNCTIONS,
-		STORAGEACCOUNT:           sTORAGEACCOUNT,
-		SWFACTIVITY:              sWFACTIVITY,
-		SWFWORKFLOW:              sWFWORKFLOW,
-		SYNAPSEWORKSPACES:        sYNAPSEWORKSPACES,
-		TABLESTORAGE:             tABLESTORAGE,
-		TRAFFICMANAGER:           tRAFFICMANAGER,
-		TRANSITGATEWAY:           tRANSITGATEWAY,
-		VIRTUALDESKTOP:           vIRTUALDESKTOP,
-		VIRTUALMACHINE:           vIRTUALMACHINE,
-		VIRTUALMACHINESCALESET:   vIRTUALMACHINESCALESET,
-		VIRTUALMACHINESCALESETVM: vIRTUALMACHINESCALESETVM,
-		VIRTUALNETWORKGATEWAY:    vIRTUALNETWORKGATEWAY,
-		VPN:                      vPN,
-		WORKSPACE:                wORKSPACE,
-		WORKSPACEDIRECTORY:       wORKSPACEDIRECTORY,
+		ACM:                           aCM,
+		AKSMANAGEDCLUSTER:             aKSMANAGEDCLUSTER,
+		ALARMS:                        aLARMS,
+		ANALYSISSERVICE:               aNALYSISSERVICE,
+		APIGATEWAY:                    aPIGATEWAY,
+		APIGATEWAYV2:                  aPIGATEWAYV2,
+		APIMANAGEMENT:                 aPIMANAGEMENT,
+		APPLICATIONELB:                aPPLICATIONELB,
+		APPLICATIONGATEWAY:            aPPLICATIONGATEWAY,
+		APPLICATIONINSIGHTS:           aPPLICATIONINSIGHTS,
+		APPLICATIONMIGRATIONSERVICE:   aPPLICATIONMIGRATIONSERVICE,
+		APPSERVICE:                    aPPSERVICE,
+		APPSERVICEPLAN:                aPPSERVICEPLAN,
+		APPSERVICEENVIRONMENT:         aPPSERVICEENVIRONMENT,
+		APPSTREAM:                     aPPSTREAM,
+		ATHENA:                        aTHENA,
+		AUTOMATIONACCOUNT:             aUTOMATIONACCOUNT,
+		AUTOSCALING:                   aUTOSCALING,
+		BACKUP:                        bACKUP,
+		BACKUPPROTECTEDITEMS:          bACKUPPROTECTEDITEMS,
+		BACKUPPROTECTEDRESOURCE:       bACKUPPROTECTEDRESOURCE,
+		BACKUPVAULT:                   bACKUPVAULT,
+		BATCH:                         bATCH,
+		BATCHACCOUNT:                  bATCHACCOUNT,
+		BEDROCK:                       bEDROCK,
+		BLOBSTORAGE:                   bLOBSTORAGE,
+		BOTSERVICES:                   bOTSERVICES,
+		CDNPROFILE:                    cDNPROFILE,
+		CLIENTVPN:                     cLIENTVPN,
+		CLOUDFRONT:                    cLOUDFRONT,
+		CLOUDSEARCH:                   cLOUDSEARCH,
+		CLOUDTRAIL:                    cLOUDTRAIL,
+		CLOUDWATCHEVENTS:              cLOUDWATCHEVENTS,
+		CLOUDWATCHLOGS:                cLOUDWATCHLOGS,
+		CLOUDWATCHSYNTHETICS:          cLOUDWATCHSYNTHETICS,
+		CODEBUILD:                     cODEBUILD,
+		COGNITIVESEARCH:               cOGNITIVESEARCH,
+		COGNITIVESERVICES:             cOGNITIVESERVICES,
+		COGNITO:                       cOGNITO,
+		CONTAINERAPPS:                 cONTAINERAPPS,
+		CONTAINERINSTANCE:             cONTAINERINSTANCE,
+		CONTAINERREGISTRY:             cONTAINERREGISTRY,
+		COSMOSDB:                      cOSMOSDB,
+		DATAFACTORY:                   dATAFACTORY,
+		DATALAKEANALYTICS:             dATALAKEANALYTICS,
+		DATALAKESTORE:                 dATALAKESTORE,
+		DATABRICKS:                    dATABRICKS,
+		DBCLUSTER:                     dBCLUSTER,
+		DETECTIVEGRAPH:                dETECTIVEGRAPH,
+		DIRECTCONNECT:                 dIRECTCONNECT,
+		DIRECTCONNECTVIRTUALINTERFACE: dIRECTCONNECTVIRTUALINTERFACE,
+		DISKS:                         dISKS,
+		DMSREPLICATION:                dMSREPLICATION,
+		DMSREPLICATIONTASKS:           dMSREPLICATIONTASKS,
+		DOCDB:                         dOCDB,
+		DYNAMODB:                      dYNAMODB,
+		EBS:                           eBS,
+		EC2:                           eC2,
+		ECR:                           eCR,
+		ECS:                           eCS,
+		ELASTICIP:                     eLASTICIP,
+		EFS:                           eFS,
+		EKS:                           eKS,
+		ELASTICACHE:                   eLASTICACHE,
+		ELASTICBEANSTALK:              eLASTICBEANSTALK,
+		ELASTICSEARCH:                 eLASTICSEARCH,
+		ELASTICTRANSCODER:             eLASTICTRANSCODER,
+		ELB:                           eLB,
+		EMR:                           eMR,
+		EVENTBRIDGE:                   eVENTBRIDGE,
+		EVENTGRID:                     eVENTGRID,
+		EVENTHUB:                      eVENTHUB,
+		EXPRESSROUTECIRCUIT:           eXPRESSROUTECIRCUIT,
+		FILESTORAGE:                   fILESTORAGE,
+		FIREHOSE:                      fIREHOSE,
+		FIREWALL:                      fIREWALL,
+		FRONTDOORS:                    fRONTDOORS,
+		FSX:                           fSX,
+		FUNCTION:                      fUNCTION,
+		GATEWAYELB:                    gATEWAYELB,
+		GLOBALNETWORKS:                gLOBALNETWORKS,
+		GLUE:                          gLUE,
+		HEALTHCHECK:                   hEALTHCHECK,
+		HDINSIGHT:                     hDINSIGHT,
+		HOSTEDZONE:                    hOSTEDZONE,
+		IAMROLE:                       iAMROLE,
+		INTERNETGATEWAY:               iNTERNETGATEWAY,
+		IOTHUB:                        iOTHUB,
+		KEYVAULT:                      kEYVAULT,
+		KMS:                           kMS,
+		KINESIS:                       kINESIS,
+		KINESISVIDEO:                  kINESISVIDEO,
+		LAMBDA:                        lAMBDA,
+		LIGHTSAIL:                     lIGHTSAIL,
+		LOADBALANCERS:                 lOADBALANCERS,
+		LOGANALYTICSWORKSPACES:        lOGANALYTICSWORKSPACES,
+		LOGICAPPS:                     lOGICAPPS,
+		MEDIACONNECT:                  mEDIACONNECT,
+		MEDIACONVERT:                  mEDIACONVERT,
+		MEDIAPACKAGELIVE:              mEDIAPACKAGELIVE,
+		MEDIAPACKAGEVOD:               mEDIAPACKAGEVOD,
+		MEDIASTORE:                    mEDIASTORE,
+		MEDIATAILOR:                   mEDIATAILOR,
+		MLWORKSPACES:                  mLWORKSPACES,
+		MQ:                            mQ,
+		MARIADB:                       mARIADB,
+		MSKBROKER:                     mSKBROKER,
+		MSKCLUSTER:                    mSKCLUSTER,
+		MYSQL:                         mYSQL,
+		MYSQLFLEXIBLE:                 mYSQLFLEXIBLE,
+		NATGATEWAY:                    nATGATEWAY,
+		NATGATEWAYS:                   nATGATEWAYS,
+		NETAPPPOOLS:                   nETAPPPOOLS,
+		NETWORKELB:                    nETWORKELB,
+		NETWORKFIREWALL:               nETWORKFIREWALL,
+		NETWORKINTERFACE:              nETWORKINTERFACE,
+		NLBTARGETGROUP:                nLBTARGETGROUP,
+		NOTIFICATIONHUBS:              nOTIFICATIONHUBS,
+		OPENAISERVICES:                oPENAISERVICES,
+		OPSWORKS:                      oPSWORKS,
+		POSTGRESQL:                    pOSTGRESQL,
+		POSTGRESQLCITUS:               pOSTGRESQLCITUS,
+		POSTGRESQLFLEXIBLE:            pOSTGRESQLFLEXIBLE,
+		POWERBIEMBEDDED:               pOWERBIEMBEDDED,
+		PUBLICIP:                      pUBLICIP,
+		PRIVATELINKENDPOINTS:          pRIVATELINKENDPOINTS,
+		PRIVATELINKSERVICES:           pRIVATELINKSERVICES,
+		QBUSINESS:                     qBUSINESS,
+		QUOTA:                         qUOTA,
+		QUEUESTORAGE:                  qUEUESTORAGE,
+		QUICKSIGHTDASHBOARDS:          qUICKSIGHTDASHBOARDS,
+		QUICKSIGHTDATASETS:            qUICKSIGHTDATASETS,
+		RDS:                           rDS,
+		RECOVERYPROTECTEDITEM:         rECOVERYPROTECTEDITEM,
+		RECOVERYPROTECTEDITEMS:        rECOVERYPROTECTEDITEMS,
+		RECOVERYSERVICES:              rECOVERYSERVICES,
+		REDISCACHE:                    rEDISCACHE,
+		REDISCACHEENTERPRISE:          rEDISCACHEENTERPRISE,
+		REDSHIFT:                      rEDSHIFT,
+		REDSHIFTSERVERLESS:            rEDSHIFTSERVERLESS,
+		RELAYNAMESPACES:               rELAYNAMESPACES,
+		ROUTE53:                       rOUTE53,
+		ROUTE53HOSTEDZONE:             rOUTE53HOSTEDZONE,
+		ROUTE53RESOLVER:               rOUTE53RESOLVER,
+		S3:                            s3,
+		SAGEMAKER:                     sAGEMAKER,
+		SERVICEBUS:                    sERVICEBUS,
+		SERVICEFABRICMESH:             sERVICEFABRICMESH,
+		SES:                           sES,
+		SIGNALR:                       sIGNALR,
+		SITE2SITEVPN:                  sITE2SITEVPN,
+		SNS:                           sNS,
+		SQLDATABASE:                   sQLDATABASE,
+		SQLELASTICPOOL:                sQLELASTICPOOL,
+		SQLMANAGEDINSTANCE:            sQLMANAGEDINSTANCE,
+		SQS:                           sQS,
+		STEPFUNCTIONS:                 sTEPFUNCTIONS,
+		STORAGEACCOUNT:                sTORAGEACCOUNT,
+		STORAGEGATEWAY:                sTORAGEGATEWAY,
+		STREAMANALYTICS:               sTREAMANALYTICS,
+		SWFACTIVITY:                   sWFACTIVITY,
+		SWFWORKFLOW:                   sWFWORKFLOW,
+		SYNAPSEWORKSPACES:             sYNAPSEWORKSPACES,
+		TABLESTORAGE:                  tABLESTORAGE,
+		TRAFFICMANAGER:                tRAFFICMANAGER,
+		TRANSFER:                      tRANSFER,
+		TRANSITGATEWAY:                tRANSITGATEWAY,
+		TRANSITGATEWAYATTACHMENT:      tRANSITGATEWAYATTACHMENT,
+		VIRTUALDESKTOP:                vIRTUALDESKTOP,
+		VIRTUALHUBS:                   vIRTUALHUBS,
+		VIRTUALMACHINE:                vIRTUALMACHINE,
+		VIRTUALMACHINESCALESET:        vIRTUALMACHINESCALESET,
+		VIRTUALMACHINESCALESETVM:      vIRTUALMACHINESCALESETVM,
+		VIRTUALNETWORKGATEWAY:         vIRTUALNETWORKGATEWAY,
+		VIRTUALNETWORKS:               vIRTUALNETWORKS,
+		VPC:                           vPC,
+		VPCENDPOINT:                   vPCENDPOINT,
+		VPCPEERING:                    vPCPEERING,
+		VPN:                           vPN,
+		VPNGATEWAYS:                   vPNGATEWAYS,
+		WORKSPACE:                     wORKSPACE,
+		WORKSPACEDIRECTORY:            wORKSPACEDIRECTORY,
 	}
 }
 
 func GetCloudServicesPropertyFields() (t []string) {
 	return []string{
+		"a_c_m",
+		"a_k_s_m_a_n_a_g_e_d_c_l_u_s_t_e_r",
+		"a_l_a_r_m_s",
+		"a_n_a_l_y_s_i_s_s_e_r_v_i_c_e",
 		"api_g_a_t_e_w_a_y",
+		"api_g_a_t_e_w_a_y_v2",
 		"api_m_a_n_a_g_e_m_e_n_t",
 		"a_p_p_l_i_c_a_t_i_o_n_e_l_b",
 		"a_p_p_l_i_c_a_t_i_o_n_g_a_t_e_w_a_y",
 		"a_p_p_l_i_c_a_t_i_o_n_i_n_s_i_g_h_t_s",
+		"a_p_p_l_i_c_a_t_i_o_n_m_i_g_r_a_t_i_o_n_s_e_r_v_i_c_e",
 		"a_p_p_s_e_r_v_i_c_e",
 		"a_p_p_s_e_r_v_i_c_e_p_l_a_n",
+		"a_p_p_s_e_r_v_i_c_e_e_n_v_i_r_o_n_m_e_n_t",
 		"a_p_p_s_t_r_e_a_m",
 		"a_t_h_e_n_a",
 		"a_u_t_o_m_a_t_i_o_n_a_c_c_o_u_n_t",
 		"a_u_t_o_s_c_a_l_i_n_g",
+		"b_a_c_k_u_p",
 		"b_a_c_k_u_p_p_r_o_t_e_c_t_e_d_i_t_e_m_s",
+		"b_a_c_k_u_p_p_r_o_t_e_c_t_e_d_r_e_s_o_u_r_c_e",
+		"b_a_c_k_u_p_v_a_u_l_t",
+		"b_a_t_c_h",
+		"b_a_t_c_h_a_c_c_o_u_n_t",
+		"b_e_d_r_o_c_k",
 		"b_l_o_b_s_t_o_r_a_g_e",
+		"b_o_t_s_e_r_v_i_c_e_s",
+		"c_d_n_p_r_o_f_i_l_e",
+		"c_l_i_e_n_t_v_p_n",
 		"c_l_o_u_d_f_r_o_n_t",
 		"c_l_o_u_d_s_e_a_r_c_h",
+		"c_l_o_u_d_t_r_a_i_l",
+		"c_l_o_u_d_w_a_t_c_h_e_v_e_n_t_s",
+		"c_l_o_u_d_w_a_t_c_h_l_o_g_s",
+		"c_l_o_u_d_w_a_t_c_h_s_y_n_t_h_e_t_i_c_s",
 		"c_o_d_e_b_ui_l_d",
 		"c_o_g_n_i_t_i_v_e_s_e_a_r_c_h",
 		"c_o_g_n_i_t_i_v_e_s_e_r_v_i_c_e_s",
 		"c_o_g_n_i_t_o",
+		"c_o_n_t_a_i_n_e_r_a_p_p_s",
+		"c_o_n_t_a_i_n_e_r_i_n_s_t_a_n_c_e",
+		"c_o_n_t_a_i_n_e_r_r_e_g_i_s_t_r_y",
 		"c_o_s_m_o_s_d_b",
 		"d_a_t_a_f_a_c_t_o_r_y",
+		"d_a_t_a_l_a_k_e_a_n_a_l_y_t_i_c_s",
+		"d_a_t_a_l_a_k_e_s_t_o_r_e",
+		"d_a_t_a_b_r_i_c_k_s",
+		"d_b_c_l_u_s_t_e_r",
+		"d_e_t_e_c_t_i_v_e_g_r_a_p_h",
 		"d_i_r_e_c_t_c_o_n_n_e_c_t",
+		"d_i_r_e_c_t_c_o_n_n_e_c_t_v_i_r_t_u_a_l_i_n_t_e_r_f_a_c_e",
+		"d_i_s_k_s",
 		"d_m_s_r_e_p_l_i_c_a_t_i_o_n",
 		"d_m_s_r_e_p_l_i_c_a_t_i_o_n_t_a_s_k_s",
 		"d_o_c_d_b",
 		"d_y_n_a_m_o_d_b",
 		"e_b_s",
 		"e_c2",
+		"e_c_r",
 		"e_c_s",
+		"e_l_a_s_t_i_c_ip",
 		"e_f_s",
+		"e_k_s",
 		"e_l_a_s_t_i_c_a_c_h_e",
 		"e_l_a_s_t_i_c_b_e_a_n_s_t_a_l_k",
 		"e_l_a_s_t_i_c_s_e_a_r_c_h",
@@ -1581,6 +2829,7 @@ func GetCloudServicesPropertyFields() (t []string) {
 		"e_l_b",
 		"e_m_r",
 		"e_v_e_n_t_b_r_id_g_e",
+		"e_v_e_n_t_g_r_i_d",
 		"e_v_e_n_t_h_u_b",
 		"e_x_p_r_e_s_s_r_o_u_t_e_c_i_r_c_ui_t",
 		"f_i_l_e_s_t_o_r_a_g_e",
@@ -1588,11 +2837,22 @@ func GetCloudServicesPropertyFields() (t []string) {
 		"f_i_r_e_w_a_l_l",
 		"f_r_o_n_t_d_o_o_r_s",
 		"f_s_x",
+		"f_u_n_c_t_i_o_n",
+		"g_a_t_e_w_a_y_e_l_b",
+		"g_l_o_b_a_l_n_e_t_w_o_r_k_s",
 		"g_l_u_e",
+		"h_e_a_l_t_h_c_h_e_c_k",
+		"h_d_i_n_s_i_g_h_t",
+		"h_o_s_t_e_d_z_o_n_e",
+		"i_a_m_r_o_l_e",
+		"i_n_t_e_r_n_e_t_g_a_t_e_w_a_y",
+		"i_o_t_h_u_b",
 		"k_e_y_v_a_u_l_t",
+		"k_m_s",
 		"k_i_n_e_s_i_s",
 		"k_i_n_e_s_i_s_v_id_e_o",
 		"l_a_m_b_d_a",
+		"l_i_g_h_t_s_a_i_l",
 		"l_o_a_d_b_a_l_a_n_c_e_r_s",
 		"l_o_g_a_n_a_l_y_t_i_c_s_w_o_r_k_s_p_a_c_e_s",
 		"l_o_g_i_c_a_p_p_s",
@@ -1602,28 +2862,54 @@ func GetCloudServicesPropertyFields() (t []string) {
 		"m_e_d_i_a_p_a_c_k_a_g_e_v_o_d",
 		"m_e_d_i_a_s_t_o_r_e",
 		"m_e_d_i_a_t_a_i_l_o_r",
+		"m_l_w_o_r_k_s_p_a_c_e_s",
 		"m_q",
+		"m_a_r_i_a_d_b",
 		"m_s_k_b_r_o_k_e_r",
 		"m_s_k_c_l_u_s_t_e_r",
 		"m_y_sql",
+		"m_y_sql_f_l_e_x_i_b_l_e",
 		"n_a_t_g_a_t_e_w_a_y",
+		"n_a_t_g_a_t_e_w_a_y_s",
+		"n_e_t_a_p_p_p_o_o_l_s",
 		"n_e_t_w_o_r_k_e_l_b",
+		"n_e_t_w_o_r_k_f_i_r_e_w_a_l_l",
 		"n_e_t_w_o_r_k_i_n_t_e_r_f_a_c_e",
+		"n_l_b_t_a_r_g_e_t_g_r_o_u_p",
+		"n_o_t_i_f_i_c_a_t_i_o_n_h_u_b_s",
+		"o_p_e_n_a_i_s_e_r_v_i_c_e_s",
 		"o_p_s_w_o_r_k_s",
 		"p_o_s_t_g_r_e_sql",
+		"p_o_s_t_g_r_e_sql_c_i_t_u_s",
+		"p_o_s_t_g_r_e_sql_f_l_e_x_i_b_l_e",
+		"p_o_w_e_r_b_i_e_m_b_e_d_d_e_d",
 		"p_u_b_l_i_c_ip",
+		"p_r_i_v_a_t_e_l_i_n_k_e_n_d_p_o_i_n_t_s",
+		"p_r_i_v_a_t_e_l_i_n_k_s_e_r_v_i_c_e_s",
+		"q_b_u_s_i_n_e_s_s",
+		"q_u_o_t_a",
 		"q_u_e_u_e_s_t_o_r_a_g_e",
+		"q_u_i_c_k_s_i_g_h_t_d_a_s_h_b_o_a_r_d_s",
+		"q_u_i_c_k_s_i_g_h_t_d_a_t_a_s_e_t_s",
 		"r_d_s",
 		"r_e_c_o_v_e_r_y_p_r_o_t_e_c_t_e_d_i_t_e_m",
+		"r_e_c_o_v_e_r_y_p_r_o_t_e_c_t_e_d_i_t_e_m_s",
 		"r_e_c_o_v_e_r_y_s_e_r_v_i_c_e_s",
 		"r_e_d_i_s_c_a_c_h_e",
+		"r_e_d_i_s_c_a_c_h_e_e_n_t_e_r_p_r_i_s_e",
 		"r_e_d_s_h_i_f_t",
+		"r_e_d_s_h_i_f_t_s_e_r_v_e_r_l_e_s_s",
+		"r_e_l_a_y_n_a_m_e_s_p_a_c_e_s",
 		"r_o_u_t_e53",
+		"r_o_u_t_e53_h_o_s_t_e_d_z_o_n_e",
 		"r_o_u_t_e53_r_e_s_o_l_v_e_r",
 		"s3",
 		"s_a_g_e_m_a_k_e_r",
 		"s_e_r_v_i_c_e_b_u_s",
+		"s_e_r_v_i_c_e_f_a_b_r_i_c_m_e_s_h",
 		"s_e_s",
+		"s_i_g_n_a_l_r",
+		"s_i_t_e2_s_i_t_e_v_p_n",
 		"s_n_s",
 		"sql_d_a_t_a_b_a_s_e",
 		"sql_e_l_a_s_t_i_c_p_o_o_l",
@@ -1631,18 +2917,28 @@ func GetCloudServicesPropertyFields() (t []string) {
 		"s_q_s",
 		"s_t_e_p_f_u_n_c_t_i_o_n_s",
 		"s_t_o_r_a_g_e_a_c_c_o_u_n_t",
+		"s_t_o_r_a_g_e_g_a_t_e_w_a_y",
+		"s_t_r_e_a_m_a_n_a_l_y_t_i_c_s",
 		"s_w_f_a_c_t_i_v_i_t_y",
 		"s_w_f_w_o_r_k_f_l_o_w",
 		"s_y_n_a_p_s_e_w_o_r_k_s_p_a_c_e_s",
 		"t_a_b_l_e_s_t_o_r_a_g_e",
 		"t_r_a_f_f_i_c_m_a_n_a_g_e_r",
+		"t_r_a_n_s_f_e_r",
 		"t_r_a_n_s_i_t_g_a_t_e_w_a_y",
+		"t_r_a_n_s_i_t_g_a_t_e_w_a_y_a_t_t_a_c_h_m_e_n_t",
 		"v_i_r_t_u_a_l_d_e_s_k_t_o_p",
+		"v_i_r_t_u_a_l_h_u_b_s",
 		"v_i_r_t_u_a_l_m_a_c_h_i_n_e",
 		"v_i_r_t_u_a_l_m_a_c_h_i_n_e_s_c_a_l_e_s_e_t",
 		"v_i_r_t_u_a_l_m_a_c_h_i_n_e_s_c_a_l_e_s_e_t_vm",
 		"v_i_r_t_u_a_l_n_e_t_w_o_r_k_g_a_t_e_w_a_y",
+		"v_i_r_t_u_a_l_n_e_t_w_o_r_k_s",
+		"v_p_c",
+		"v_p_c_e_n_d_p_o_i_n_t",
+		"v_p_c_p_e_e_r_i_n_g",
 		"v_p_n",
+		"v_p_n_g_a_t_e_w_a_y_s",
 		"w_o_r_k_s_p_a_c_e",
 		"w_o_r_k_s_p_a_c_e_d_i_r_e_c_t_o_r_y",
 	}

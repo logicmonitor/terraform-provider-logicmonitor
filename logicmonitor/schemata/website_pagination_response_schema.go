@@ -1,31 +1,30 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func WebsitePaginationResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"items": {
-			Type: schema.TypeList, //GoType: []*Website  
+			Type: schema.TypeList, //GoType: []*Website
 			Elem: &schema.Resource{
 				Schema: WebsiteSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"search_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"total": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -45,8 +44,8 @@ func SetWebsitePaginationResponseSubResourceData(m []*models.WebsitePaginationRe
 func WebsitePaginationResponseModel(d map[string]interface{}) *models.WebsitePaginationResponse {
 	// assume that the incoming map only contains the relevant resource data
 	items := d["items"].([]*models.Website)
-	
-	return &models.WebsitePaginationResponse {
+
+	return &models.WebsitePaginationResponse{
 		Items: items,
 	}
 }

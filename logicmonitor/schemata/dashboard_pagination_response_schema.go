@@ -1,31 +1,30 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func DashboardPaginationResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"items": {
-			Type: schema.TypeList, //GoType: []*Dashboard 
+			Type: schema.TypeList, //GoType: []*Dashboard
 			Elem: &schema.Resource{
 				Schema: DashboardSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"search_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"total": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -45,8 +44,8 @@ func SetDashboardPaginationResponseSubResourceData(m []*models.DashboardPaginati
 func DashboardPaginationResponseModel(d map[string]interface{}) *models.DashboardPaginationResponse {
 	// assume that the incoming map only contains the relevant resource data
 	items := d["items"].([]*models.Dashboard)
-	
-	return &models.DashboardPaginationResponse {
+
+	return &models.DashboardPaginationResponse{
 		Items: items,
 	}
 }

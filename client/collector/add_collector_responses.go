@@ -46,7 +46,8 @@ func NewAddCollectorOK() *AddCollectorOK {
 	return &AddCollectorOK{}
 }
 
-/* AddCollectorOK describes a response with status code 200, with default header values.
+/*
+	AddCollectorOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewAddCollectorDefault(code int) *AddCollectorDefault {
 	}
 }
 
-/* AddCollectorDefault describes a response with status code -1, with default header values.
+/*
+	AddCollectorDefault describes a response with status code -1, with default header values.
 
 Error
 */

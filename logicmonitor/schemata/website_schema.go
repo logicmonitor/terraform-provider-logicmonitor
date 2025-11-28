@@ -1,123 +1,123 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"strconv"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func WebsiteSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"alert_expr": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"disable_alerting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"domain": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"global_sm_alert_cond": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"host": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"ignore_s_s_l": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"individual_alert_level": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"individual_sm_alert_enable": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"is_internal": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"last_updated": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"overall_alert_level": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"polling_interval": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"schema": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"status": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"steps": {
-			Type: schema.TypeList, //GoType: []*WebCheckStep  
+			Type: schema.TypeList, //GoType: []*WebCheckStep
 			Elem: &schema.Resource{
 				Schema: WebCheckStepSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"stop_monitoring": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"stop_monitoring_by_folder": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"template": {
 			Type: schema.TypeMap, //GoType: interface{}
 			Elem: &schema.Schema{
@@ -125,169 +125,167 @@ func WebsiteSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"test_location": {
-			Type: schema.TypeList, //GoType: WebsiteLocation 
-            Elem: &schema.Resource{
+			Type: schema.TypeList, //GoType: WebsiteLocation
+			Elem: &schema.Resource{
 				Schema: WebsiteLocationSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"transition": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"trigger_s_s_l_expiration_alert": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"trigger_s_s_l_status_alert": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"use_default_alert_setting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"use_default_location_setting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
 	}
 }
-
 
 // Schema mapping representing the resource's respective datasource object defined in Terraform configuration
 // Only difference between this and WebsiteSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
 func DataSourceWebsiteSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"alert_expr": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"disable_alerting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"domain": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"global_sm_alert_cond": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"host": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 			Optional: true,
 		},
-		
+
 		"ignore_s_s_l": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"individual_alert_level": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"individual_sm_alert_enable": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"is_internal": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"last_updated": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"overall_alert_level": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"polling_interval": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"schema": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"status": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"steps": {
-			Type: schema.TypeList, //GoType: []*WebCheckStep 
+			Type: schema.TypeList, //GoType: []*WebCheckStep
 			Elem: &schema.Resource{
 				Schema: WebCheckStepSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"stop_monitoring": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"stop_monitoring_by_folder": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"template": {
 			Type: schema.TypeMap, //GoType: interface{}
 			Elem: &schema.Schema{
@@ -295,7 +293,7 @@ func DataSourceWebsiteSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"test_location": {
 			Type: schema.TypeList, //GoType: WebsiteLocation
 			Elem: &schema.Resource{
@@ -303,45 +301,45 @@ func DataSourceWebsiteSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"transition": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"trigger_s_s_l_expiration_alert": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"trigger_s_s_l_status_alert": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"use_default_alert_setting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"use_default_location_setting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"filter": {
 			Type:     schema.TypeString,
-            Optional: true,
+			Optional: true,
 		},
 	}
 }
@@ -439,7 +437,7 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 	steps := utils.GetPropFromSteps(d, "steps")
 	stopMonitoring := d.Get("stop_monitoring").(bool)
 	template := d.Get("template")
-    testLocation := utils.GetPropFromLocationMap(d, "test_location")
+	testLocation := utils.GetPropFromLocationMap(d, "test_location")
 	transition := int32(d.Get("transition").(int))
 	triggerSSLExpirationAlert := d.Get("trigger_s_s_l_expiration_alert").(bool)
 	triggerSSLStatusAlert := d.Get("trigger_s_s_l_status_alert").(bool)
@@ -447,35 +445,35 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 	useDefaultAlertSetting := d.Get("use_default_alert_setting").(bool)
 	useDefaultLocationSetting := d.Get("use_default_location_setting").(bool)
 	userPermission := d.Get("user_permission").(string)
-	
-	return &models.Website {
-		AlertExpr: alertExpr,
-		Description: description,
-		DisableAlerting: disableAlerting,
-		Domain: domain,
-		GlobalSmAlertCond: globalSmAlertCond,
-		GroupID: groupID,
-		Host: host,
-		ID: int32(id),
-		IgnoreSSL: ignoreSSL,
-		IndividualAlertLevel: individualAlertLevel,
-		IndividualSmAlertEnable: individualSmAlertEnable,
-		IsInternal: isInternal,
-		Name: &name,
-		OverallAlertLevel: overallAlertLevel,
-		PollingInterval: pollingInterval,
-		Schema: schema,
-		Steps: steps,
-		StopMonitoring: stopMonitoring,
-		Template: template,
-		TestLocation: testLocation,
-		Transition: transition,
+
+	return &models.Website{
+		AlertExpr:                 alertExpr,
+		Description:               description,
+		DisableAlerting:           disableAlerting,
+		Domain:                    domain,
+		GlobalSmAlertCond:         globalSmAlertCond,
+		GroupID:                   groupID,
+		Host:                      host,
+		ID:                        int32(id),
+		IgnoreSSL:                 ignoreSSL,
+		IndividualAlertLevel:      individualAlertLevel,
+		IndividualSmAlertEnable:   individualSmAlertEnable,
+		IsInternal:                isInternal,
+		Name:                      &name,
+		OverallAlertLevel:         overallAlertLevel,
+		PollingInterval:           pollingInterval,
+		Schema:                    schema,
+		Steps:                     steps,
+		StopMonitoring:            stopMonitoring,
+		Template:                  template,
+		TestLocation:              testLocation,
+		Transition:                transition,
 		TriggerSSLExpirationAlert: triggerSSLExpirationAlert,
-		TriggerSSLStatusAlert: triggerSSLStatusAlert,
-		Type: &typeVar,
-		UseDefaultAlertSetting: useDefaultAlertSetting,
+		TriggerSSLStatusAlert:     triggerSSLStatusAlert,
+		Type:                      &typeVar,
+		UseDefaultAlertSetting:    useDefaultAlertSetting,
 		UseDefaultLocationSetting: useDefaultLocationSetting,
-		UserPermission: userPermission,
+		UserPermission:            userPermission,
 	}
 }
 func GetWebsitePropertyFields() (t []string) {

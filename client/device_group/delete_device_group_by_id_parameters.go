@@ -54,10 +54,12 @@ func NewDeleteDeviceGroupByIDParamsWithHTTPClient(client *http.Client) *DeleteDe
 	}
 }
 
-/* DeleteDeviceGroupByIDParams contains all the parameters to send to the API endpoint
-   for the delete device group by Id operation.
+/*
+DeleteDeviceGroupByIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete device group by Id operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteDeviceGroupByIDParams struct {
 

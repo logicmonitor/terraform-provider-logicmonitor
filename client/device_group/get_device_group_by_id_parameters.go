@@ -54,10 +54,12 @@ func NewGetDeviceGroupByIDParamsWithHTTPClient(client *http.Client) *GetDeviceGr
 	}
 }
 
-/* GetDeviceGroupByIDParams contains all the parameters to send to the API endpoint
-   for the get device group by Id operation.
+/*
+GetDeviceGroupByIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get device group by Id operation.
+
+	Typically these are written to a http.Request.
 */
 type GetDeviceGroupByIDParams struct {
 

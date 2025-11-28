@@ -1,25 +1,24 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func CloudDeviceSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"device_type": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"required_props": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Required: true,
 		},
-		
 	}
 }
 
@@ -39,9 +38,9 @@ func CloudDeviceModel(d map[string]interface{}) *models.CloudDevice {
 	// assume that the incoming map only contains the relevant resource data
 	deviceType := int32(d["device_type"].(int))
 	requiredProps := utils.ConvertSetToStringSlice(d["required_props"].(*schema.Set))
-	
-	return &models.CloudDevice {
-		DeviceType: &deviceType,
+
+	return &models.CloudDevice{
+		DeviceType:    &deviceType,
 		RequiredProps: requiredProps,
 	}
 }

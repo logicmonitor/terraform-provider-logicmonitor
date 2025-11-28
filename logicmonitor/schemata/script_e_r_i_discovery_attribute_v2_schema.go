@@ -1,47 +1,46 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func ScriptERIDiscoveryAttributeV2Schema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"groovy_script": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"linux_cmdline": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"linux_script": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"win_cmdline": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"win_script": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
 	}
 }
 
@@ -71,15 +70,15 @@ func ScriptERIDiscoveryAttributeV2Model(d map[string]interface{}) *models.Script
 	typeVar := d["type"].(string)
 	winCmdline := d["win_cmdline"].(string)
 	winScript := d["win_script"].(string)
-	
-	return &models.ScriptERIDiscoveryAttributeV2 {
+
+	return &models.ScriptERIDiscoveryAttributeV2{
 		GroovyScript: groovyScript,
 		LinuxCmdline: linuxCmdline,
-		LinuxScript: linuxScript,
-		Name: &name,
-		Type: typeVar,
-		WinCmdline: winCmdline,
-		WinScript: winScript,
+		LinuxScript:  linuxScript,
+		Name:         &name,
+		Type:         typeVar,
+		WinCmdline:   winCmdline,
+		WinScript:    winScript,
 	}
 }
 

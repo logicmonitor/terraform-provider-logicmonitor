@@ -1,22 +1,21 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func DevicePropertySchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"value": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
 	}
 }
 
@@ -36,9 +35,9 @@ func DevicePropertyModel(d map[string]interface{}) *models.DeviceProperty {
 	// assume that the incoming map only contains the relevant resource data
 	name := d["name"].(string)
 	value := d["value"].(string)
-	
-	return &models.DeviceProperty {
-		Name: &name,
+
+	return &models.DeviceProperty{
+		Name:  &name,
 		Value: &value,
 	}
 }

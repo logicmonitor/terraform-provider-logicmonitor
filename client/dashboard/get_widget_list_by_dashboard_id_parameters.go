@@ -53,10 +53,12 @@ func NewGetWidgetListByDashboardIDParamsWithHTTPClient(client *http.Client) *Get
 	}
 }
 
-/* GetWidgetListByDashboardIDParams contains all the parameters to send to the API endpoint
-   for the get widget list by dashboard Id operation.
+/*
+GetWidgetListByDashboardIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get widget list by dashboard Id operation.
+
+	Typically these are written to a http.Request.
 */
 type GetWidgetListByDashboardIDParams struct {
 

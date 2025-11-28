@@ -1,59 +1,64 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func CloudServiceSettingsSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"custom_n_s_p_schedule": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"dead_operation": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"device_display_name_template": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"disable_stop_terminate_host_monitor": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"disable_terminated_host_alerting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
+		"is_enhanced_monitoring_enabled": {
+			Type:     schema.TypeBool,
+			Optional: true,
+		},
+
 		"monitoring_region_infos": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Optional: true,
 		},
-		
+
 		"monitoring_regions": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Optional: true,
 		},
-		
+
 		"name_filter": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Optional: true,
 		},
-		
+
 		"normal_collector_config": {
 			Type: schema.TypeList, //GoType: CloudNormalCollectorConfig
 			Elem: &schema.Resource{
@@ -61,26 +66,25 @@ func CloudServiceSettingsSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"select_all": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"tags": {
-			Type: schema.TypeList, //GoType: []*CloudTagFilter 
+			Type: schema.TypeList, //GoType: []*CloudTagFilter
 			Elem: &schema.Resource{
 				Schema: CloudTagFilterSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"use_default": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Required: true,
 		},
-		
 	}
 }
 
@@ -93,6 +97,7 @@ func SetCloudServiceSettingsSubResourceData(m []*models.CloudServiceSettings) (d
 			properties["device_display_name_template"] = cloudServiceSettings.DeviceDisplayNameTemplate
 			properties["disable_stop_terminate_host_monitor"] = cloudServiceSettings.DisableStopTerminateHostMonitor
 			properties["disable_terminated_host_alerting"] = cloudServiceSettings.DisableTerminatedHostAlerting
+			properties["is_enhanced_monitoring_enabled"] = cloudServiceSettings.IsEnhancedMonitoringEnabled
 			properties["monitoring_region_infos"] = cloudServiceSettings.MonitoringRegionInfos
 			properties["monitoring_regions"] = cloudServiceSettings.MonitoringRegions
 			properties["name_filter"] = cloudServiceSettings.NameFilter
@@ -113,6 +118,7 @@ func CloudServiceSettingsModel(d map[string]interface{}) *models.CloudServiceSet
 	deviceDisplayNameTemplate := d["device_display_name_template"].(string)
 	disableStopTerminateHostMonitor := d["disable_stop_terminate_host_monitor"].(bool)
 	disableTerminatedHostAlerting := d["disable_terminated_host_alerting"].(bool)
+	isEnhancedMonitoringEnabled := d["is_enhanced_monitoring_enabled"].(bool)
 	monitoringRegionInfos := utils.ConvertSetToStringSlice(d["monitoring_region_infos"].(*schema.Set))
 	monitoringRegions := utils.ConvertSetToStringSlice(d["monitoring_regions"].(*schema.Set))
 	nameFilter := utils.ConvertSetToStringSlice(d["name_filter"].(*schema.Set))
@@ -124,20 +130,21 @@ func CloudServiceSettingsModel(d map[string]interface{}) *models.CloudServiceSet
 	selectAll := d["select_all"].(bool)
 	tags := utils.GetCloudTagFilters(d["tags"].([]interface{}))
 	useDefault := d["use_default"].(bool)
-	
-	return &models.CloudServiceSettings {
-		CustomNSPSchedule: customNSPSchedule,
-		DeadOperation: deadOperation,
-		DeviceDisplayNameTemplate: deviceDisplayNameTemplate,
+
+	return &models.CloudServiceSettings{
+		CustomNSPSchedule:               customNSPSchedule,
+		DeadOperation:                   deadOperation,
+		DeviceDisplayNameTemplate:       deviceDisplayNameTemplate,
 		DisableStopTerminateHostMonitor: disableStopTerminateHostMonitor,
-		DisableTerminatedHostAlerting: disableTerminatedHostAlerting,
-		MonitoringRegionInfos: monitoringRegionInfos,
-		MonitoringRegions: monitoringRegions,
-		NameFilter: nameFilter,
-		NormalCollectorConfig: normalCollectorConfig,
-		SelectAll: selectAll,
-		Tags: tags,
-		UseDefault: &useDefault,
+		DisableTerminatedHostAlerting:   disableTerminatedHostAlerting,
+		IsEnhancedMonitoringEnabled:     isEnhancedMonitoringEnabled,
+		MonitoringRegionInfos:           monitoringRegionInfos,
+		MonitoringRegions:               monitoringRegions,
+		NameFilter:                      nameFilter,
+		NormalCollectorConfig:           normalCollectorConfig,
+		SelectAll:                       selectAll,
+		Tags:                            tags,
+		UseDefault:                      &useDefault,
 	}
 }
 
@@ -148,6 +155,7 @@ func GetCloudServiceSettingsPropertyFields() (t []string) {
 		"device_display_name_template",
 		"disable_stop_terminate_host_monitor",
 		"disable_terminated_host_alerting",
+		"is_enhanced_monitoring_enabled",
 		"monitoring_region_infos",
 		"monitoring_regions",
 		"name_filter",

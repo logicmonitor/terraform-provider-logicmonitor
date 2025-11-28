@@ -1,10 +1,10 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"strconv"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func DatasourceSchema() map[string]*schema.Schema {
@@ -12,31 +12,31 @@ func DatasourceSchema() map[string]*schema.Schema {
 		"access_group_ids": {
 			Type: schema.TypeList, //GoType: []int32
 			Elem: &schema.Schema{
-                 Type: schema.TypeInt,
-            },
+				Type: schema.TypeInt,
+			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"access_groups": {
-			Type: schema.TypeList, //GoType: []*AccessGroup  
+			Type: schema.TypeList, //GoType: []*AccessGroup
 			Elem: &schema.Resource{
 				Schema: AccessGroupSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"applies_to": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"audit_version": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"auto_discovery_config": {
 			Type: schema.TypeList, //GoType: AutoDiscoveryConfiguration
 			Elem: &schema.Resource{
@@ -44,60 +44,60 @@ func DatasourceSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"checksum": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"collect_interval": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"collect_method": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"collector_attribute": {
-			Type: schema.TypeList, //GoType: CollectorAttribute 
-            Elem: &schema.Resource{
+			Type: schema.TypeList, //GoType: CollectorAttribute
+			Elem: &schema.Resource{
 				Schema: CollectorAttributeSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Required: true,
+			Required:   true,
 		},
-		
+
 		"data_points": {
-			Type: schema.TypeList, //GoType: []*DataPoint  
+			Type: schema.TypeList, //GoType: []*DataPoint
 			Elem: &schema.Resource{
 				Schema: DataPointSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"display_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"enable_auto_discovery": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"enable_eri_discovery": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"eri_discovery_config": {
 			Type: schema.TypeList, //GoType: ScriptERIDiscoveryAttributeV2
 			Elem: &schema.Resource{
@@ -105,27 +105,27 @@ func DatasourceSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"eri_discovery_interval": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"group": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"has_multi_instances": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"installation_metadata": {
 			Type: schema.TypeList, //GoType: IntegrationMetadata
 			Elem: &schema.Resource{
@@ -133,74 +133,72 @@ func DatasourceSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"lineage_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"payload_version": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"tags": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"technology": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"use_wild_value_as_uuid": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"version": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
 	}
 }
-
 
 // Schema mapping representing the resource's respective datasource object defined in Terraform configuration
 // Only difference between this and DatasourceSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
 func DataSourceDatasourceSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"access_group_ids": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"access_groups": {
-			Type: schema.TypeList, //GoType: []*AccessGroup 
+			Type: schema.TypeList, //GoType: []*AccessGroup
 			Elem: &schema.Resource{
 				Schema: AccessGroupSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"applies_to": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"audit_version": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"auto_discovery_config": {
 			Type: schema.TypeList, //GoType: AutoDiscoveryConfiguration
 			Elem: &schema.Resource{
@@ -208,22 +206,22 @@ func DataSourceDatasourceSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"checksum": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"collect_interval": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"collect_method": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"collector_attribute": {
 			Type: schema.TypeList, //GoType: CollectorAttribute
 			Elem: &schema.Resource{
@@ -231,36 +229,36 @@ func DataSourceDatasourceSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"data_points": {
-			Type: schema.TypeList, //GoType: []*DataPoint 
+			Type: schema.TypeList, //GoType: []*DataPoint
 			Elem: &schema.Resource{
 				Schema: DataPointSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"display_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"enable_auto_discovery": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"enable_eri_discovery": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"eri_discovery_config": {
 			Type: schema.TypeList, //GoType: ScriptERIDiscoveryAttributeV2
 			Elem: &schema.Resource{
@@ -268,28 +266,28 @@ func DataSourceDatasourceSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"eri_discovery_interval": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"group": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"has_multi_instances": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 			Optional: true,
 		},
-		
+
 		"installation_metadata": {
 			Type: schema.TypeList, //GoType: IntegrationMetadata
 			Elem: &schema.Resource{
@@ -297,45 +295,45 @@ func DataSourceDatasourceSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"lineage_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"payload_version": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"tags": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"technology": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"use_wild_value_as_uuid": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"version": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"filter": {
 			Type:     schema.TypeString,
-            Optional: true,
+			Optional: true,
 		},
 	}
 }
@@ -409,13 +407,13 @@ func SetDatasourceSubResourceData(m []*models.Datasource) (d []*map[string]inter
 
 func DatasourceModel(d *schema.ResourceData) *models.Datasource {
 	accessGroupIds := utils.ConvertSetToInt32Slice(d.Get("access_group_ids").([]interface{}))
-     accessGroupsTempSlice := d.Get("access_groups").([]interface{})
-    accessGroups := []*models.AccessGroup{}
-    for _, val := range accessGroupsTempSlice {
-        if m, ok := val.(map[string]interface{}); ok {
-            accessGroups = append(accessGroups, AccessGroupModel(m))
-        }
-    }
+	accessGroupsTempSlice := d.Get("access_groups").([]interface{})
+	accessGroups := []*models.AccessGroup{}
+	for _, val := range accessGroupsTempSlice {
+		if m, ok := val.(map[string]interface{}); ok {
+			accessGroups = append(accessGroups, AccessGroupModel(m))
+		}
+	}
 	appliesTo := d.Get("applies_to").(string)
 	var autoDiscoveryConfig *models.AutoDiscoveryConfiguration = nil
 	autoDiscoveryConfigInterface, autoDiscoveryConfigIsSet := d.GetOk("auto_discovery_config")
@@ -449,28 +447,28 @@ func DatasourceModel(d *schema.ResourceData) *models.Datasource {
 	name := d.Get("name").(string)
 	tags := d.Get("tags").(string)
 	technology := d.Get("technology").(string)
-	
-	return &models.Datasource {
-		AccessGroupIds: accessGroupIds,
-		AccessGroups: accessGroups,
-		AppliesTo: appliesTo,
-		AutoDiscoveryConfig: autoDiscoveryConfig,
-		CollectInterval: &collectInterval,
-		CollectMethod: &collectMethod,
-		CollectorAttribute: collectorAttribute,
-		DataPoints: dataPoints,
-		Description: description,
-		DisplayName: displayName,
-		EnableAutoDiscovery: enableAutoDiscovery,
-		EnableEriDiscovery: enableEriDiscovery,
-		EriDiscoveryConfig: eriDiscoveryConfig,
+
+	return &models.Datasource{
+		AccessGroupIds:       accessGroupIds,
+		AccessGroups:         accessGroups,
+		AppliesTo:            appliesTo,
+		AutoDiscoveryConfig:  autoDiscoveryConfig,
+		CollectInterval:      &collectInterval,
+		CollectMethod:        &collectMethod,
+		CollectorAttribute:   collectorAttribute,
+		DataPoints:           dataPoints,
+		Description:          description,
+		DisplayName:          displayName,
+		EnableAutoDiscovery:  enableAutoDiscovery,
+		EnableEriDiscovery:   enableEriDiscovery,
+		EriDiscoveryConfig:   eriDiscoveryConfig,
 		EriDiscoveryInterval: eriDiscoveryInterval,
-		Group: group,
-		HasMultiInstances: hasMultiInstances,
-		ID: int32(id),
-		Name: &name,
-		Tags: tags,
-		Technology: technology,
+		Group:                group,
+		HasMultiInstances:    hasMultiInstances,
+		ID:                   int32(id),
+		Name:                 &name,
+		Tags:                 tags,
+		Technology:           technology,
 	}
 }
 func GetDatasourcePropertyFields() (t []string) {

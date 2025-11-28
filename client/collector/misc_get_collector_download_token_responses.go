@@ -46,7 +46,8 @@ func NewMiscGetCollectorDownloadTokenOK() *MiscGetCollectorDownloadTokenOK {
 	return &MiscGetCollectorDownloadTokenOK{}
 }
 
-/* MiscGetCollectorDownloadTokenOK describes a response with status code 200, with default header values.
+/*
+	MiscGetCollectorDownloadTokenOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -78,7 +79,8 @@ func NewMiscGetCollectorDownloadTokenDefault(code int) *MiscGetCollectorDownload
 	}
 }
 
-/* MiscGetCollectorDownloadTokenDefault describes a response with status code -1, with default header values.
+/*
+	MiscGetCollectorDownloadTokenDefault describes a response with status code -1, with default header values.
 
 Error
 */

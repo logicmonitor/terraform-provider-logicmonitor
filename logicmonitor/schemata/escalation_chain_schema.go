@@ -1,132 +1,130 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"strconv"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func EscalationChainSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"cc_destinations": {
-			Type: schema.TypeList, //GoType: []*Recipient  
+			Type: schema.TypeList, //GoType: []*Recipient
 			Elem: &schema.Resource{
 				Schema: RecipientSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"destinations": {
-			Type: schema.TypeList, //GoType: []*Chain  
+			Type: schema.TypeList, //GoType: []*Chain
 			Elem: &schema.Resource{
 				Schema: ChainSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Required: true,
+			Required:   true,
 		},
-		
+
 		"enable_throttling": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"in_alerting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"throttling_alerts": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"throttling_period": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
 	}
 }
-
 
 // Schema mapping representing the resource's respective datasource object defined in Terraform configuration
 // Only difference between this and EscalationChainSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
 func DataSourceEscalationChainSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"cc_destinations": {
-			Type: schema.TypeList, //GoType: []*Recipient 
+			Type: schema.TypeList, //GoType: []*Recipient
 			Elem: &schema.Resource{
 				Schema: RecipientSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"destinations": {
-			Type: schema.TypeList, //GoType: []*Chain 
+			Type: schema.TypeList, //GoType: []*Chain
 			Elem: &schema.Resource{
 				Schema: ChainSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"enable_throttling": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 			Optional: true,
 		},
-		
+
 		"in_alerting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"throttling_alerts": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"throttling_period": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"filter": {
 			Type:     schema.TypeString,
-            Optional: true,
+			Optional: true,
 		},
 	}
 }
@@ -165,20 +163,20 @@ func SetEscalationChainSubResourceData(m []*models.EscalationChain) (d []*map[st
 func EscalationChainModel(d *schema.ResourceData) *models.EscalationChain {
 	ccDestinations := utils.GetPropFromCCMap(d, "cc_destinations")
 	description := d.Get("description").(string)
-    destinations := utils.GetPropFromDesMap(d, "destinations")
+	destinations := utils.GetPropFromDesMap(d, "destinations")
 	enableThrottling := d.Get("enable_throttling").(bool)
 	id, _ := strconv.Atoi(d.Get("id").(string))
 	name := d.Get("name").(string)
 	throttlingAlerts := int32(d.Get("throttling_alerts").(int))
 	throttlingPeriod := int32(d.Get("throttling_period").(int))
-	
-	return &models.EscalationChain {
-		CcDestinations: ccDestinations,
-		Description: description,
-		Destinations: destinations,
+
+	return &models.EscalationChain{
+		CcDestinations:   ccDestinations,
+		Description:      description,
+		Destinations:     destinations,
 		EnableThrottling: enableThrottling,
-		ID: int32(id),
-		Name: &name,
+		ID:               int32(id),
+		Name:             &name,
 		ThrottlingAlerts: throttlingAlerts,
 		ThrottlingPeriod: throttlingPeriod,
 	}

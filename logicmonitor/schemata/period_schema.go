@@ -1,37 +1,36 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func PeriodSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"end_minutes": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"start_minutes": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"timezone": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"week_days": {
 			Type: schema.TypeList, //GoType: []int32
 			Elem: &schema.Schema{
-                 Type: schema.TypeInt,
-            },
+				Type: schema.TypeInt,
+			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Required: true,
+			Required:   true,
 		},
-		
 	}
 }
 
@@ -55,12 +54,12 @@ func PeriodModel(d map[string]interface{}) *models.Period {
 	startMinutes := int32(d["start_minutes"].(int))
 	timezone := d["timezone"].(string)
 	weekDays := utils.ConvertSetToInt32Slice(d["weekDays"].([]interface{}))
-	
-	return &models.Period {
-		EndMinutes: &endMinutes,
+
+	return &models.Period{
+		EndMinutes:   &endMinutes,
 		StartMinutes: &startMinutes,
-		Timezone: &timezone,
-		WeekDays: weekDays,
+		Timezone:     &timezone,
+		WeekDays:     weekDays,
 	}
 }
 
