@@ -32,7 +32,7 @@ type Website struct {
 	// true: alerting is disabled for the website
 	// false: alerting is enabled for the website
 	// If stopMonitoring=true, then alerting will also by default be disabled for the website
-	DisableAlerting bool `json:"disableAlerting,omitempty"`
+	DisableAlerting bool `json:"disableAlerting"`
 
 	// Required for type=webcheck , The domain of the service. This is the base URL of the service
 	// Example: www.ebay.com
@@ -60,7 +60,7 @@ type Website struct {
 
 	// Whether or not SSL should be ignored, the default value is true
 	// Example: true
-	IgnoreSSL bool `json:"ignoreSSL,omitempty"`
+	IgnoreSSL bool `json:"ignoreSSL"`
 
 	// warn | error | critical
 	// The level of alert to trigger if the website fails a check from an individual test location
@@ -70,11 +70,11 @@ type Website struct {
 	// true: an alert will be triggered if a check fails from an individual test location
 	// false: an alert will not be triggered if a check fails from an individual test location
 	// Example: false
-	IndividualSmAlertEnable bool `json:"individualSmAlertEnable,omitempty"`
+	IndividualSmAlertEnable bool `json:"individualSmAlertEnable"`
 
 	// Whether or not the website is internal
 	// Example: false
-	IsInternal bool `json:"isInternal,omitempty"`
+	IsInternal bool `json:"isInternal"`
 
 	// The time (in epoch format) that the website was updated
 	// Read Only: true
@@ -109,12 +109,12 @@ type Website struct {
 	// true: monitoring is disabled for the website
 	// false: monitoring is enabled for the website
 	// If stopMonitoring=true, then alerting will also by default be disabled for the website
-	StopMonitoring bool `json:"stopMonitoring,omitempty"`
+	StopMonitoring bool `json:"stopMonitoring"`
 
 	// true: monitoring is disabled for all services in the website's folder
 	// false: monitoring is not disabled for all services in website's folder
 	// Read Only: true
-	StopMonitoringByFolder *bool `json:"stopMonitoringByFolder,omitempty"`
+	StopMonitoringByFolder *bool `json:"stopMonitoringByFolder"`
 
 	// The website template
 	Template interface{} `json:"template,omitempty"`
@@ -135,11 +135,11 @@ type Website struct {
 
 	// Whether or not SSL expiration alerts should be triggered
 	// Example: false
-	TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert,omitempty"`
+	TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert"`
 
 	// Whether or not SSL status alerts should be triggered
 	// Example: false
-	TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert,omitempty"`
+	TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert"`
 
 	// The type of the website. Acceptable values are: pingcheck, webcheck
 	// Example: webcheck
@@ -149,12 +149,12 @@ type Website struct {
 	// true: The alert settings configured in the website Default Settings will be used
 	// false: Service Default Settings will not be used, and you will need to specify individualSMAlertEnable, individualAlertLevel, globalSmAlertConf, overallAlertLevel and pollingInterval
 	// Example: true
-	UseDefaultAlertSetting bool `json:"useDefaultAlertSetting,omitempty"`
+	UseDefaultAlertSetting bool `json:"useDefaultAlertSetting"`
 
 	// true: The checkpoint locations configured in the website Default Settings will be used
 	// false: The checkpoint locations specified in the testLocation will be used
 	// Example: false
-	UseDefaultLocationSetting bool `json:"useDefaultLocationSetting,omitempty"`
+	UseDefaultLocationSetting bool `json:"useDefaultLocationSetting"`
 
 	// write | read | ack. The permission level of the user that made the API request
 	UserPermission string `json:"userPermission,omitempty"`

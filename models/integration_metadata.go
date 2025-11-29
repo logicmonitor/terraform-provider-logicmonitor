@@ -30,11 +30,11 @@ type IntegrationMetadata struct {
 
 	// Specifies if the Applies To function is changed from origin or not
 	// Read Only: true
-	IsChangedFromOrigin *bool `json:"isChangedFromOrigin,omitempty"`
+	IsChangedFromOrigin *bool `json:"isChangedFromOrigin"`
 
 	// Specifies if the Applies To function is changed from target last published or not
 	// Read Only: true
-	IsChangedFromTargetLastPublished *bool `json:"isChangedFromTargetLastPublished,omitempty"`
+	IsChangedFromTargetLastPublished *bool `json:"isChangedFromTargetLastPublished"`
 
 	// The LocalModule Id
 	// Read Only: true

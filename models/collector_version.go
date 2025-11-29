@@ -21,11 +21,11 @@ type CollectorVersion struct {
 
 	// True if Linux collector available
 	// Read Only: true
-	Has32bitLinux *bool `json:"has32bitLinux,omitempty"`
+	Has32bitLinux *bool `json:"has32bitLinux"`
 
 	// True if Windows collector available
 	// Read Only: true
-	Has32bitWindows *bool `json:"has32bitWindows,omitempty"`
+	Has32bitWindows *bool `json:"has32bitWindows"`
 
 	// The collector major version
 	// Read Only: true
@@ -33,7 +33,7 @@ type CollectorVersion struct {
 
 	// True if collector is a required release
 	// Read Only: true
-	Mandatory *bool `json:"mandatory,omitempty"`
+	Mandatory *bool `json:"mandatory"`
 
 	// The collector minor version
 	// Read Only: true
@@ -45,7 +45,7 @@ type CollectorVersion struct {
 
 	// False for early release. True for general release
 	// Read Only: true
-	Stable *bool `json:"stable,omitempty"`
+	Stable *bool `json:"stable"`
 }
 
 // Validate validates this collector version

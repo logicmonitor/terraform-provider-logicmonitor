@@ -50,7 +50,7 @@ type Device struct {
 	CollectorDescription string `json:"collectorDescription,omitempty"`
 
 	// request contains multi value field
-	ContainsMultiValue bool `json:"containsMultiValue,omitempty"`
+	ContainsMultiValue bool `json:"containsMultiValue"`
 
 	// The time, in epoch seconds format, that the device was added to your LogicMonitor account
 	// Read Only: true
@@ -81,7 +81,7 @@ type Device struct {
 
 	// Indicates whether alerting is disabled (true) or enabled (false) for this device
 	// Example: true
-	DisableAlerting bool `json:"disableAlerting,omitempty"`
+	DisableAlerting bool `json:"disableAlerting"`
 
 	// The display name of the device
 	// Example: Cisco Router
@@ -90,7 +90,7 @@ type Device struct {
 
 	// Indicates whether Netflow is enabled (true) or disabled (false) for the device
 	// Example: true
-	EnableNetflow bool `json:"enableNetflow,omitempty"`
+	EnableNetflow bool `json:"enableNetflow"`
 
 	// The Azure instance state (if applicable): 1 indicates that the instance is running, 2 indicates that the instance is stopped and 3 the instance is terminated.
 	// Read Only: true
@@ -114,7 +114,7 @@ type Device struct {
 
 	// Indicates whether Preferred Log Collector is configured  (true) or not (false) for the device
 	// Example: true
-	IsPreferredLogCollectorConfigured bool `json:"isPreferredLogCollectorConfigured,omitempty"`
+	IsPreferredLogCollectorConfigured bool `json:"isPreferredLogCollectorConfigured"`
 
 	// The last time, in epoch seconds, that the device received Netflow data
 	// Read Only: true
@@ -139,7 +139,7 @@ type Device struct {
 
 	// Indicates whether Static group and sorted Custom properties are needed
 	// Example: true
-	NeedStcGrpAndSortedCP *bool `json:"needStcGrpAndSortedCP,omitempty"`
+	NeedStcGrpAndSortedCP *bool `json:"needStcGrpAndSortedCP"`
 
 	// The description/name of the netflow collector for this device
 	// Read Only: true

@@ -29,7 +29,7 @@ type WebsiteGroup struct {
 	// false: alerting is enabled for the websites in the group
 	// If stopMonitoring=true, then alerting will also by default be disabled for the websites in the group
 	// Example: false
-	DisableAlerting bool `json:"disableAlerting,omitempty"`
+	DisableAlerting bool `json:"disableAlerting"`
 
 	// The full path of the group
 	// Read Only: true
@@ -37,7 +37,7 @@ type WebsiteGroup struct {
 
 	// has websites disabled
 	// Read Only: true
-	HasWebsitesDisabled *bool `json:"hasWebsitesDisabled,omitempty"`
+	HasWebsitesDisabled *bool `json:"hasWebsitesDisabled"`
 
 	// The Id of the group
 	// Read Only: true
@@ -71,7 +71,7 @@ type WebsiteGroup struct {
 	// false: monitoring is enabled for the websites in the group
 	// If stopMonitoring=true, then alerting will also by default be disabled for the websites in the group
 	// Example: false
-	StopMonitoring bool `json:"stopMonitoring,omitempty"`
+	StopMonitoring bool `json:"stopMonitoring"`
 
 	// An object that indicates the websites locations.
 	// eg. {'all': false, smgId:[1,2,3], collectorIds:[14,16]}

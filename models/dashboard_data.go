@@ -29,7 +29,7 @@ type DashboardData struct {
 
 	// sharable
 	// Read Only: true
-	Sharable *bool `json:"sharable,omitempty"`
+	Sharable *bool `json:"sharable"`
 
 	// user permission
 	// Read Only: true

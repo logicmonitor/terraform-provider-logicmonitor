@@ -73,11 +73,11 @@ type DeviceGroup struct {
 
 	// Indicates whether alerting is disabled (true) or enabled (false) for this device group
 	// Example: true
-	DisableAlerting bool `json:"disableAlerting,omitempty"`
+	DisableAlerting bool `json:"disableAlerting"`
 
 	// Whether or not alerting is effectively disabled for this device group (alerting may be disabled at a higher level, e.g. parent group)
 	// Read Only: true
-	EffectiveAlertEnabled *bool `json:"effectiveAlertEnabled,omitempty"`
+	EffectiveAlertEnabled *bool `json:"effectiveAlertEnabled"`
 
 	// Indicates whether Netflow is enabled (true) or disabled (false) for the device group, the default value is true
 	// Example: true
@@ -114,7 +114,7 @@ type DeviceGroup struct {
 
 	// Whether if any Netflow enabled devices in this device group
 	// Read Only: true
-	HasNetflowEnabledDevices *bool `json:"hasNetflowEnabledDevices,omitempty"`
+	HasNetflowEnabledDevices *bool `json:"hasNetflowEnabledDevices"`
 
 	// The id of the device group
 	// Read Only: true

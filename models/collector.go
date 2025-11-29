@@ -58,7 +58,7 @@ type Collector struct {
 
 	// Whether the collector can be downgraded to a lower version
 	// Read Only: true
-	CanDowngrade *bool `json:"canDowngrade,omitempty"`
+	CanDowngrade *bool `json:"canDowngrade"`
 
 	// The reason why the collector can be downgraded
 	// Read Only: true
@@ -66,7 +66,7 @@ type Collector struct {
 
 	// Whether or not an alert clear notifcation has been sent for this Collector
 	// Read Only: true
-	ClearSent *bool `json:"clearSent,omitempty"`
+	ClearSent *bool `json:"clearSent"`
 
 	// The Collector's configuration file
 	// Read Only: true
@@ -113,15 +113,15 @@ type Collector struct {
 
 	// Whether the collector is in EA version
 	// Example: false
-	Ea *bool `json:"ea,omitempty"`
+	Ea *bool `json:"ea"`
 
 	// Whether or not automatic failback is enabled for the Collector, the default value is true
 	// Example: true
-	EnableFailBack bool `json:"enableFailBack,omitempty"`
+	EnableFailBack bool `json:"enableFailBack"`
 
 	// Whether or not the device the Collector is installed on is enabled for fail over
 	// Example: true
-	EnableFailOverOnCollectorDevice bool `json:"enableFailOverOnCollectorDevice,omitempty"`
+	EnableFailOverOnCollectorDevice bool `json:"enableFailOverOnCollectorDevice"`
 
 	// The Id of the escalation chain associated with this Collector
 	// Example: 80
@@ -129,7 +129,7 @@ type Collector struct {
 
 	// Whether the collector has failover devices
 	// Read Only: true
-	HasFailOverDevice *bool `json:"hasFailOverDevice,omitempty"`
+	HasFailOverDevice *bool `json:"hasFailOverDevice"`
 
 	// The hostname of the device the Collector is installed on
 	// Read Only: true
@@ -141,7 +141,7 @@ type Collector struct {
 
 	// The SDT status of the collector
 	// Read Only: true
-	InSDT *bool `json:"inSDT,omitempty"`
+	InSDT *bool `json:"inSDT"`
 
 	// A map of the collector urls and (if linux) commands to download the collector installer
 	// Read Only: true
@@ -149,7 +149,7 @@ type Collector struct {
 
 	// Whether or not the Collector is currently down
 	// Read Only: true
-	IsDown *bool `json:"isDown,omitempty"`
+	IsDown *bool `json:"isDown"`
 
 	// The time, in epoch format, that a notification was last sent for the Collector
 	// Read Only: true
@@ -161,11 +161,11 @@ type Collector struct {
 
 	// Check if we shall monitor using local account (for windows)
 	// Example: false
-	MonitorOthers *bool `json:"monitorOthers,omitempty"`
+	MonitorOthers *bool `json:"monitorOthers"`
 
 	// Whether to create a collector device when instance collector, the default value is true
 	// Example: true
-	NeedAutoCreateCollectorDevice bool `json:"needAutoCreateCollectorDevice,omitempty"`
+	NeedAutoCreateCollectorDevice bool `json:"needAutoCreateCollectorDevice"`
 
 	// The Netscan version associated with the Collector
 	// Read Only: true
@@ -227,7 +227,7 @@ type Collector struct {
 
 	// Whether alert clear notifications are suppressed for the Collector
 	// Example: true
-	SuppressAlertClear bool `json:"suppressAlertClear,omitempty"`
+	SuppressAlertClear bool `json:"suppressAlertClear"`
 
 	// The time the Collector has been up, in seconds
 	// Read Only: true

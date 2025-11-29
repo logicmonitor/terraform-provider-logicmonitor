@@ -32,7 +32,7 @@ type WebCheck struct {
 
 	// Whether or not SSL should be ignored, the default value is true
 	// Example: true
-	IgnoreSSL bool `json:"ignoreSSL,omitempty"`
+	IgnoreSSL bool `json:"ignoreSSL"`
 
 	// The time in milliseconds that the page must load within for each step to avoid triggering an alert
 	// Example: 30000
@@ -47,11 +47,11 @@ type WebCheck struct {
 
 	// Whether or not SSL expiration alerts should be triggered
 	// Example: false
-	TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert,omitempty"`
+	TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert"`
 
 	// Whether or not SSL status alerts should be triggered
 	// Example: false
-	TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert,omitempty"`
+	TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert"`
 }
 
 // UnmarshalJSON unmarshals this object from a JSON structure
@@ -69,7 +69,7 @@ func (m *WebCheck) UnmarshalJSON(raw []byte) error {
 
 		Domain *string `json:"domain"`
 
-		IgnoreSSL bool `json:"ignoreSSL,omitempty"`
+		IgnoreSSL bool `json:"ignoreSSL"`
 
 		PageLoadAlertTimeInMS int64 `json:"pageLoadAlertTimeInMS,omitempty"`
 
@@ -77,9 +77,9 @@ func (m *WebCheck) UnmarshalJSON(raw []byte) error {
 
 		Steps []*WebCheckStep `json:"steps"`
 
-		TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert,omitempty"`
+		TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert"`
 
-		TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert,omitempty"`
+		TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert"`
 	}
 	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
 		return err
@@ -118,7 +118,7 @@ func (m WebCheck) MarshalJSON() ([]byte, error) {
 
 		Domain *string `json:"domain"`
 
-		IgnoreSSL bool `json:"ignoreSSL,omitempty"`
+		IgnoreSSL bool `json:"ignoreSSL"`
 
 		PageLoadAlertTimeInMS int64 `json:"pageLoadAlertTimeInMS,omitempty"`
 
@@ -126,9 +126,9 @@ func (m WebCheck) MarshalJSON() ([]byte, error) {
 
 		Steps []*WebCheckStep `json:"steps"`
 
-		TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert,omitempty"`
+		TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert"`
 
-		TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert,omitempty"`
+		TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert"`
 	}
 
 	dataAO1.AlertExpr = m.AlertExpr

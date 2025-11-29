@@ -21,15 +21,15 @@ type RestHighestPriorityCollectorStatus struct {
 
 	// The acked status of the highest priority sub collector
 	// Read Only: true
-	Acked *bool `json:"acked,omitempty"`
+	Acked *bool `json:"acked"`
 
 	// The SDT status of the highest priority sub collector
 	// Read Only: true
-	InSDT *bool `json:"inSDT,omitempty"`
+	InSDT *bool `json:"inSDT"`
 
 	// The down status of the highest priority sub collector
 	// Read Only: true
-	IsDown *bool `json:"isDown,omitempty"`
+	IsDown *bool `json:"isDown"`
 
 	// The status of the highest priority sub collector
 	// Read Only: true
