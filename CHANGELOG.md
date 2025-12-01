@@ -1,3 +1,7 @@
+## 2.0.27 (Dec, 2025)
+
+* Roles and Report Groups via Terraform Provider
+
 ## 2.0.26 (Nov, 2025)
 
 * Sdt support via Terraform Provider
