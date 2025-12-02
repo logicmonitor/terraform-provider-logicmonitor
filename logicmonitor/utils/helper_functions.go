@@ -245,6 +245,30 @@ func getPropFromWTInterface(r interface{}) (t []*models.WidgetToken) {
 	return
 }
 
+// retrieve resource widget tokens from resource structure
+func GetPropFromPriviligeMap(d *schema.ResourceData, key string) (t []*models.Privilege) {
+	if r, ok := d.GetOk(key); ok {
+		return getPropFromPrivilegeInterface(r)
+	}
+	return
+}
+
+func getPropFromPrivilegeInterface(r interface{}) (t []*models.Privilege) {
+	for _, i := range r.([]interface{}) {
+		if m, ok := i.(map[string]interface{}); ok {
+			var objectId = m["object_id"].(string)
+			var objectType = m["object_type"].(string)
+			var operation = m["operation"].(string)
+			model := &models.Privilege{
+				ObjectID:  &objectId,
+				ObjectType: &objectType,
+				Operation: &operation,
+			}
+			t = append(t, model)
+		}
+	}
+	return
+}
 func ConvertSetToInt32Slice(set interface{}) (slice []int32) {
     if set == nil {
         return
