@@ -1,17 +1,16 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func AutoDiscoveryMethodSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
 	}
 }
 
@@ -29,8 +28,8 @@ func SetAutoDiscoveryMethodSubResourceData(m []*models.AutoDiscoveryMethod) (d [
 func AutoDiscoveryMethodModel(d map[string]interface{}) *models.AutoDiscoveryMethod {
 	// assume that the incoming map only contains the relevant resource data
 	name := d["name"].(string)
-	
-	return &models.AutoDiscoveryMethod {
+
+	return &models.AutoDiscoveryMethod{
 		Name: &name,
 	}
 }

@@ -1,62 +1,61 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func AutomaticUpgradeInfoSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"created_by": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"day_of_week": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"hour": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"level": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"minute": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"occurrence": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"timezone": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"version": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
 	}
 }
 
@@ -89,15 +88,15 @@ func AutomaticUpgradeInfoModel(d map[string]interface{}) *models.AutomaticUpgrad
 	occurrence := d["occurrence"].(string)
 	timezone := d["timezone"].(string)
 	version := d["version"].(string)
-	
-	return &models.AutomaticUpgradeInfo {
-		DayOfWeek: &dayOfWeek,
+
+	return &models.AutomaticUpgradeInfo{
+		DayOfWeek:   &dayOfWeek,
 		Description: description,
-		Hour: &hour,
-		Minute: &minute,
-		Occurrence: &occurrence,
-		Timezone: timezone,
-		Version: &version,
+		Hour:        &hour,
+		Minute:      &minute,
+		Occurrence:  &occurrence,
+		Timezone:    timezone,
+		Version:     &version,
 	}
 }
 

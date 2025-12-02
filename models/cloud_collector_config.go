@@ -35,7 +35,7 @@ type CloudCollectorConfig struct {
 	Priority *int32 `json:"priority"`
 
 	// Use cloud device public ip or not
-	UsePublicIP bool `json:"usePublicIP,omitempty"`
+	UsePublicIP bool `json:"usePublicIP"`
 }
 
 // Validate validates this cloud collector config

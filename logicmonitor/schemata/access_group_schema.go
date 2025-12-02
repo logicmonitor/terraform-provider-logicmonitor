@@ -1,47 +1,46 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func AccessGroupSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"created_by": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"created_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"tenant_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"updated_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -68,12 +67,12 @@ func AccessGroupModel(d map[string]interface{}) *models.AccessGroup {
 	id := int32(d["id"].(int))
 	name := d["name"].(string)
 	tenantID := d["tenant_id"].(string)
-	
-	return &models.AccessGroup {
+
+	return &models.AccessGroup{
 		Description: description,
-		ID: id,
-		Name: &name,
-		TenantID: tenantID,
+		ID:          id,
+		Name:        &name,
+		TenantID:    tenantID,
 	}
 }
 

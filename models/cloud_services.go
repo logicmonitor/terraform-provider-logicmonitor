@@ -18,313 +18,560 @@ import (
 // swagger:model CloudServices
 type CloudServices struct {
 
-	// APIGATEWAY monitoring settings
+	// ACM monitoring settings (AWS)
+	ACM *CloudServiceSettings `json:"ACM,omitempty"`
+
+	// AKSMANAGEDCLUSTER monitoring settings (Azure)
+	AKSMANAGEDCLUSTER *CloudServiceSettings `json:"AKSMANAGEDCLUSTER,omitempty"`
+
+	// ALARMS monitoring settings (AWS)
+	ALARMS *CloudServiceSettings `json:"ALARMS,omitempty"`
+
+	// ANALYSISSERVICE monitoring settings (Azure)
+	ANALYSISSERVICE *CloudServiceSettings `json:"ANALYSISSERVICE,omitempty"`
+
+	// APIGATEWAY monitoring settings (AWS)
 	APIGATEWAY *CloudServiceSettings `json:"APIGATEWAY,omitempty"`
 
-	// API Management
+	// APIGATEWAYV2 monitoring settings (AWS)
+	APIGATEWAYV2 *CloudServiceSettings `json:"APIGATEWAYV2,omitempty"`
+
+	// APIMANAGEMENT monitoring settings (Azure)
 	APIMANAGEMENT *CloudServiceSettings `json:"APIMANAGEMENT,omitempty"`
 
-	// APPLICATIONELB monitoring settings
+	// APPLICATIONELB monitoring settings (AWS)
 	APPLICATIONELB *CloudServiceSettings `json:"APPLICATIONELB,omitempty"`
 
-	// Application Gateway
+	// APPLICATIONGATEWAY monitoring settings (Azure)
 	APPLICATIONGATEWAY *CloudServiceSettings `json:"APPLICATIONGATEWAY,omitempty"`
 
-	// Application insights
+	// APPLICATIONINSIGHTS monitoring settings (Azure)
 	APPLICATIONINSIGHTS *CloudServiceSettings `json:"APPLICATIONINSIGHTS,omitempty"`
 
-	// App Service
+	// APPLICATIONMIGRATIONSERVICE monitoring settings (AWS)
+	APPLICATIONMIGRATIONSERVICE *CloudServiceSettings `json:"APPLICATIONMIGRATIONSERVICE,omitempty"`
+
+	// APPSERVICE monitoring settings (Azure)
 	APPSERVICE *CloudServiceSettings `json:"APPSERVICE,omitempty"`
 
-	// App Service plan
+	// APPSERVICEPLAN monitoring settings (Azure)
 	APPSERVICEPLAN *CloudServiceSettings `json:"APPSERVICEPLAN,omitempty"`
 
-	// APPSTREAM monitoring settings
+	// APPSERVICEENVIRONMENT monitoring settings (Azure)
+	APPSERVICEENVIRONMENT *CloudServiceSettings `json:"APPSERVICEENVIRONMENT,omitempty"`
+
+	// APPSTREAM monitoring settings (AWS)
 	APPSTREAM *CloudServiceSettings `json:"APPSTREAM,omitempty"`
 
-	// ATHENA monitoring settings
+	// ATHENA monitoring settings (AWS)
 	ATHENA *CloudServiceSettings `json:"ATHENA,omitempty"`
 
-	// Automation Account
+	// AUTOMATIONACCOUNT monitoring settings (Azure)
 	AUTOMATIONACCOUNT *CloudServiceSettings `json:"AUTOMATIONACCOUNT,omitempty"`
 
-	// AUTOSCALING monitoring settings
+	// AUTOSCALING monitoring settings (AWS)
 	AUTOSCALING *CloudServiceSettings `json:"AUTOSCALING,omitempty"`
 
-	// Backup protected items
+	// BACKUP monitoring settings (AWS)
+	BACKUP *CloudServiceSettings `json:"BACKUP,omitempty"`
+
+	// BACKUPPROTECTEDITEMS monitoring settings (Azure)
 	BACKUPPROTECTEDITEMS *CloudServiceSettings `json:"BACKUPPROTECTEDITEMS,omitempty"`
 
-	// Blob storage
+	// BACKUPPROTECTEDRESOURCE monitoring settings (AWS)
+	BACKUPPROTECTEDRESOURCE *CloudServiceSettings `json:"BACKUPPROTECTEDRESOURCE,omitempty"`
+
+	// BACKUPVAULT monitoring settings (Azure)
+	BACKUPVAULT *CloudServiceSettings `json:"BACKUPVAULT,omitempty"`
+
+	// BATCH monitoring settings (AWS)
+	BATCH *CloudServiceSettings `json:"BATCH,omitempty"`
+
+	// BATCHACCOUNT monitoring settings (Azure)
+	BATCHACCOUNT *CloudServiceSettings `json:"BATCHACCOUNT,omitempty"`
+
+	// BEDROCK monitoring settings (AWS)
+	BEDROCK *CloudServiceSettings `json:"BEDROCK,omitempty"`
+
+	// BLOBSTORAGE monitoring settings (Azure)
 	BLOBSTORAGE *CloudServiceSettings `json:"BLOBSTORAGE,omitempty"`
 
-	// CLOUDFRONT monitoring settings
+	// BOTSERVICES monitoring settings (Azure)
+	BOTSERVICES *CloudServiceSettings `json:"BOTSERVICES,omitempty"`
+
+	// CDNPROFILE monitoring settings (Azure)
+	CDNPROFILE *CloudServiceSettings `json:"CDNPROFILE,omitempty"`
+
+	// CLIENTVPN monitoring settings (AWS)
+	CLIENTVPN *CloudServiceSettings `json:"CLIENTVPN,omitempty"`
+
+	// CLOUDFRONT monitoring settings (AWS)
 	CLOUDFRONT *CloudServiceSettings `json:"CLOUDFRONT,omitempty"`
 
-	// CLOUDSEARCH monitoring settings
+	// CLOUDSEARCH monitoring settings (AWS)
 	CLOUDSEARCH *CloudServiceSettings `json:"CLOUDSEARCH,omitempty"`
 
-	// CODEBUILD monitoring settings
+	// CLOUDTRAIL monitoring settings (AWS)
+	CLOUDTRAIL *CloudServiceSettings `json:"CLOUDTRAIL,omitempty"`
+
+	// CLOUDWATCHEVENTS monitoring settings (AWS)
+	CLOUDWATCHEVENTS *CloudServiceSettings `json:"CLOUDWATCHEVENTS,omitempty"`
+
+	// CLOUDWATCHLOGS monitoring settings (AWS)
+	CLOUDWATCHLOGS *CloudServiceSettings `json:"CLOUDWATCHLOGS,omitempty"`
+
+	// CLOUDWATCHSYNTHETICS monitoring settings (AWS)
+	CLOUDWATCHSYNTHETICS *CloudServiceSettings `json:"CLOUDWATCHSYNTHETICS,omitempty"`
+
+	// CODEBUILD monitoring settings (AWS)
 	CODEBUILD *CloudServiceSettings `json:"CODEBUILD,omitempty"`
 
-	// CognitiveSearch
+	// COGNITIVESEARCH monitoring settings (Azure)
 	COGNITIVESEARCH *CloudServiceSettings `json:"COGNITIVESEARCH,omitempty"`
 
-	// Cognitive Services
+	// COGNITIVESERVICES monitoring settings (Azure)
 	COGNITIVESERVICES *CloudServiceSettings `json:"COGNITIVESERVICES,omitempty"`
 
-	// COGNITO monitoring settings
+	// COGNITO monitoring settings (AWS)
 	COGNITO *CloudServiceSettings `json:"COGNITO,omitempty"`
 
-	// CosmosDB
+	// CONTAINERAPPS monitoring settings (Azure)
+	CONTAINERAPPS *CloudServiceSettings `json:"CONTAINERAPPS,omitempty"`
+
+	// CONTAINERINSTANCE monitoring settings (Azure)
+	CONTAINERINSTANCE *CloudServiceSettings `json:"CONTAINERINSTANCE,omitempty"`
+
+	// CONTAINERREGISTRY monitoring settings (Azure)
+	CONTAINERREGISTRY *CloudServiceSettings `json:"CONTAINERREGISTRY,omitempty"`
+
+	// COSMOSDB monitoring settings (Azure)
 	COSMOSDB *CloudServiceSettings `json:"COSMOSDB,omitempty"`
 
-	// Data Factory
+	// DATAFACTORY monitoring settings (Azure)
 	DATAFACTORY *CloudServiceSettings `json:"DATAFACTORY,omitempty"`
 
-	// DIRECTCONNECT monitoring settings
+	// DATALAKEANALYTICS monitoring settings (Azure)
+	DATALAKEANALYTICS *CloudServiceSettings `json:"DATALAKEANALYTICS,omitempty"`
+
+	// DBCLUSTER monitoring settings (AWS)
+	DBCLUSTER *CloudServiceSettings `json:"DBCLUSTER,omitempty"`
+
+	// DATALAKESTORE monitoring settings (Azure)
+	DATALAKESTORE *CloudServiceSettings `json:"DATALAKESTORE,omitempty"`
+
+	// DATABRICKS monitoring settings (Azure)
+	DATABRICKS *CloudServiceSettings `json:"DATABRICKS,omitempty"`
+
+	// DETECTIVEGRAPH monitoring settings (AWS)
+	DETECTIVEGRAPH *CloudServiceSettings `json:"DETECTIVEGRAPH,omitempty"`
+
+	// DIRECTCONNECT monitoring settings (AWS)
 	DIRECTCONNECT *CloudServiceSettings `json:"DIRECTCONNECT,omitempty"`
 
-	// DMSREPLICATION monitoring settings
+	// DIRECTCONNECTVIRTUALINTERFACE monitoring settings (AWS)
+	DIRECTCONNECTVIRTUALINTERFACE *CloudServiceSettings `json:"DIRECTCONNECTVIRTUALINTERFACE,omitempty"`
+
+	// DISKS monitoring settings (Azure)
+	DISKS *CloudServiceSettings `json:"DISKS,omitempty"`
+
+	// DMSREPLICATION monitoring settings (AWS)
 	DMSREPLICATION *CloudServiceSettings `json:"DMSREPLICATION,omitempty"`
 
-	// DMSREPLICATIONTASKS monitoring settings
+	// DMSREPLICATIONTASKS monitoring settings (AWS)
 	DMSREPLICATIONTASKS *CloudServiceSettings `json:"DMSREPLICATIONTASKS,omitempty"`
 
-	// DOCDB monitoring settings
+	// DOCDB monitoring settings (AWS)
 	DOCDB *CloudServiceSettings `json:"DOCDB,omitempty"`
 
-	// DYNAMODB monitoring settings
+	// DYNAMODB monitoring settings (AWS)
 	DYNAMODB *CloudServiceSettings `json:"DYNAMODB,omitempty"`
 
-	// EBS monitoring settings
+	// EBS monitoring settings (AWS)
 	EBS *CloudServiceSettings `json:"EBS,omitempty"`
 
-	// EC2 monitoring settings
+	// EC2 monitoring settings (AWS)
 	EC2 *CloudServiceSettings `json:"EC2,omitempty"`
 
-	// ECS monitoring settings
+	// ECR monitoring settings (AWS)
+	ECR *CloudServiceSettings `json:"ECR,omitempty"`
+
+	// ECS monitoring settings (AWS)
 	ECS *CloudServiceSettings `json:"ECS,omitempty"`
 
-	// EFS monitoring settings
+	// EFS monitoring settings (AWS)
 	EFS *CloudServiceSettings `json:"EFS,omitempty"`
 
-	// ELASTICACHE monitoring settings
+	// EKS monitoring settings (AWS)
+	EKS *CloudServiceSettings `json:"EKS,omitempty"`
+
+	// ELASTICACHE monitoring settings (AWS)
 	ELASTICACHE *CloudServiceSettings `json:"ELASTICACHE,omitempty"`
 
-	// ELASTICBEANSTALK monitoring settings
+	// ELASTICBEANSTALK monitoring settings (AWS)
 	ELASTICBEANSTALK *CloudServiceSettings `json:"ELASTICBEANSTALK,omitempty"`
 
-	// ELASTICSEARCH monitoring settings
+	// ELASTICIP monitoring settings (AWS)
+	ELASTICIP *CloudServiceSettings `json:"ELASTICIP,omitempty"`
+
+	// ELASTICSEARCH monitoring settings (AWS)
 	ELASTICSEARCH *CloudServiceSettings `json:"ELASTICSEARCH,omitempty"`
 
-	// ELASTICTRANSCODER monitoring settings
+	// ELASTICTRANSCODER monitoring settings (AWS)
 	ELASTICTRANSCODER *CloudServiceSettings `json:"ELASTICTRANSCODER,omitempty"`
 
-	// ELB monitoring settings
+	// ELB monitoring settings (AWS)
 	ELB *CloudServiceSettings `json:"ELB,omitempty"`
 
-	// EMR monitoring settings
+	// EMR monitoring settings (AWS)
 	EMR *CloudServiceSettings `json:"EMR,omitempty"`
 
-	// EVENTBRIDGE monitoring settings
+	// EVENTBRIDGE monitoring settings (AWS)
 	EVENTBRIDGE *CloudServiceSettings `json:"EVENTBRIDGE,omitempty"`
 
-	// Event Hub
+	// EVENTGRID monitoring settings (Azure)
+	EVENTGRID *CloudServiceSettings `json:"EVENTGRID,omitempty"`
+
+	// EVENTHUB monitoring settings (Azure)
 	EVENTHUB *CloudServiceSettings `json:"EVENTHUB,omitempty"`
 
-	// Express Route Circuit
+	// EXPRESSROUTECIRCUIT monitoring settings (Azure)
 	EXPRESSROUTECIRCUIT *CloudServiceSettings `json:"EXPRESSROUTECIRCUIT,omitempty"`
 
-	// File storage
+	// FILESTORAGE monitoring settings (Azure)
 	FILESTORAGE *CloudServiceSettings `json:"FILESTORAGE,omitempty"`
 
-	// FIREHOSE monitoring settings
+	// FIREHOSE monitoring settings (AWS)
 	FIREHOSE *CloudServiceSettings `json:"FIREHOSE,omitempty"`
 
-	// Firewall
+	// FIREWALL monitoring settings (Azure)
 	FIREWALL *CloudServiceSettings `json:"FIREWALL,omitempty"`
 
-	// Front Doors
+	// FRONTDOORS monitoring settings (Azure)
 	FRONTDOORS *CloudServiceSettings `json:"FRONTDOORS,omitempty"`
 
-	// FSX monitoring settings
+	// FSX monitoring settings (AWS)
 	FSX *CloudServiceSettings `json:"FSX,omitempty"`
 
-	// GLUE monitoring settings
+	// FUNCTION monitoring settings (Azure)
+	FUNCTION *CloudServiceSettings `json:"FUNCTION,omitempty"`
+
+	// GATEWAYELB monitoring settings (AWS)
+	GATEWAYELB *CloudServiceSettings `json:"GATEWAYELB,omitempty"`
+
+	// GLOBALNETWORKS monitoring settings (AWS)
+	GLOBALNETWORKS *CloudServiceSettings `json:"GLOBALNETWORKS,omitempty"`
+
+	// GLUE monitoring settings (AWS)
 	GLUE *CloudServiceSettings `json:"GLUE,omitempty"`
 
-	// Key vault
+	// HEALTHCHECK monitoring settings (AWS)
+	HEALTHCHECK *CloudServiceSettings `json:"HEALTHCHECK,omitempty"`
+
+	// HDINSIGHT monitoring settings (Azure)
+	HDINSIGHT *CloudServiceSettings `json:"HDINSIGHT,omitempty"`
+
+	// HOSTEDZONE monitoring settings (AWS)
+	HOSTEDZONE *CloudServiceSettings `json:"HOSTEDZONE,omitempty"`
+
+	// IAMROLE monitoring settings (AWS)
+	IAMROLE *CloudServiceSettings `json:"IAMROLE,omitempty"`
+
+	// INTERNETGATEWAY monitoring settings (AWS)
+	INTERNETGATEWAY *CloudServiceSettings `json:"INTERNETGATEWAY,omitempty"`
+
+	// IOTHUB monitoring settings (Azure)
+	IOTHUB *CloudServiceSettings `json:"IOTHUB,omitempty"`
+
+	// KEYVAULT monitoring settings (Azure)
 	KEYVAULT *CloudServiceSettings `json:"KEYVAULT,omitempty"`
 
-	// KINESIS monitoring settings
+	// KMS monitoring settings (AWS)
+	KMS *CloudServiceSettings `json:"KMS,omitempty"`
+
+	// KINESIS monitoring settings (AWS)
 	KINESIS *CloudServiceSettings `json:"KINESIS,omitempty"`
 
-	// KINESISVIDEO monitoring settings
+	// KINESISVIDEO monitoring settings (AWS)
 	KINESISVIDEO *CloudServiceSettings `json:"KINESISVIDEO,omitempty"`
 
-	// LAMBDA monitoring settings
+	// LAMBDA monitoring settings (AWS)
 	LAMBDA *CloudServiceSettings `json:"LAMBDA,omitempty"`
 
-	// Load balancers
+	// LIGHTSAIL monitoring settings (AWS)
+	LIGHTSAIL *CloudServiceSettings `json:"LIGHTSAIL,omitempty"`
+
+	// LOADBALANCERS monitoring settings (Azure)
 	LOADBALANCERS *CloudServiceSettings `json:"LOADBALANCERS,omitempty"`
 
-	// Log Analytics Workspaces
+	// LOGANALYTICSWORKSPACES monitoring settings (Azure)
 	LOGANALYTICSWORKSPACES *CloudServiceSettings `json:"LOGANALYTICSWORKSPACES,omitempty"`
 
-	// Logic Apps
+	// LOGICAPPS monitoring settings (Azure)
 	LOGICAPPS *CloudServiceSettings `json:"LOGICAPPS,omitempty"`
 
-	// MEDIACONNECT monitoring settings
+	// MEDIACONNECT monitoring settings (AWS)
 	MEDIACONNECT *CloudServiceSettings `json:"MEDIACONNECT,omitempty"`
 
-	// MEDIACONVERT monitoring settings
+	// MEDIACONVERT monitoring settings (AWS)
 	MEDIACONVERT *CloudServiceSettings `json:"MEDIACONVERT,omitempty"`
 
-	// MEDIAPACKAGELIVE monitoring settings
+	// MEDIAPACKAGELIVE monitoring settings (AWS)
 	MEDIAPACKAGELIVE *CloudServiceSettings `json:"MEDIAPACKAGELIVE,omitempty"`
 
-	// MEDIAPACKAGEVOD monitoring settings
+	// MEDIAPACKAGEVOD monitoring settings (AWS)
 	MEDIAPACKAGEVOD *CloudServiceSettings `json:"MEDIAPACKAGEVOD,omitempty"`
 
-	// MEDIASTORE monitoring settings
+	// MEDIASTORE monitoring settings (AWS)
 	MEDIASTORE *CloudServiceSettings `json:"MEDIASTORE,omitempty"`
 
-	// MEDIATAILOR monitoring settings
+	// MEDIATAILOR monitoring settings (AWS)
 	MEDIATAILOR *CloudServiceSettings `json:"MEDIATAILOR,omitempty"`
 
-	// MQ monitoring settings
+	// MLWORKSPACES monitoring settings (Azure)
+	MLWORKSPACES *CloudServiceSettings `json:"MLWORKSPACES,omitempty"`
+
+	// MQ monitoring settings (AWS)
 	MQ *CloudServiceSettings `json:"MQ,omitempty"`
 
-	// MSKBROKER monitoring settings
+	// MARIADB monitoring settings (Azure)
+	MARIADB *CloudServiceSettings `json:"MARIADB,omitempty"`
+
+	// MSKBROKER monitoring settings (AWS)
 	MSKBROKER *CloudServiceSettings `json:"MSKBROKER,omitempty"`
 
-	// MSKCLUSTER monitoring settings
+	// MSKCLUSTER monitoring settings (AWS)
 	MSKCLUSTER *CloudServiceSettings `json:"MSKCLUSTER,omitempty"`
 
-	// My sql
+	// MYSQL monitoring settings (Azure)
 	MYSQL *CloudServiceSettings `json:"MYSQL,omitempty"`
 
-	// NATGATEWAY monitoring settings
+	// MYSQLFLEXIBLE monitoring settings (Azure)
+	MYSQLFLEXIBLE *CloudServiceSettings `json:"MYSQLFLEXIBLE,omitempty"`
+
+	// NATGATEWAY monitoring settings (AWS)
 	NATGATEWAY *CloudServiceSettings `json:"NATGATEWAY,omitempty"`
 
-	// NETWORKELB monitoring settings
+	// NATGATEWAYS monitoring settings (Azure)
+	NATGATEWAYS *CloudServiceSettings `json:"NATGATEWAYS,omitempty"`
+
+	// NETAPPPOOLS monitoring settings (Azure)
+	NETAPPPOOLS *CloudServiceSettings `json:"NETAPPPOOLS,omitempty"`
+
+	// NETWORKELB monitoring settings (AWS)
 	NETWORKELB *CloudServiceSettings `json:"NETWORKELB,omitempty"`
 
-	// Network interface
+	// NETWORKFIREWALL monitoring settings (AWS)
+	NETWORKFIREWALL *CloudServiceSettings `json:"NETWORKFIREWALL,omitempty"`
+
+	// NETWORKINTERFACE monitoring settings (Azure)
 	NETWORKINTERFACE *CloudServiceSettings `json:"NETWORKINTERFACE,omitempty"`
 
-	// OPSWORKS monitoring settings
+	// NLBTARGETGROUP monitoring settings (AWS)
+	NLBTARGETGROUP *CloudServiceSettings `json:"NLBTARGETGROUP,omitempty"`
+
+	// NOTIFICATIONHUBS monitoring settings (Azure)
+	NOTIFICATIONHUBS *CloudServiceSettings `json:"NOTIFICATIONHUBS,omitempty"`
+
+	// OPENAISERVICES monitoring settings (Azure)
+	OPENAISERVICES *CloudServiceSettings `json:"OPENAISERVICES,omitempty"`
+
+	// OPSWORKS monitoring settings (AWS)
 	OPSWORKS *CloudServiceSettings `json:"OPSWORKS,omitempty"`
 
-	// PostgreSQL
+	// POSTGRESQL monitoring settings (Azure)
 	POSTGRESQL *CloudServiceSettings `json:"POSTGRESQL,omitempty"`
 
-	// Public IP
+	// POSTGRESQLCITUS monitoring settings (Azure)
+	POSTGRESQLCITUS *CloudServiceSettings `json:"POSTGRESQLCITUS,omitempty"`
+
+	// POSTGRESQLFLEXIBLE monitoring settings (Azure)
+	POSTGRESQLFLEXIBLE *CloudServiceSettings `json:"POSTGRESQLFLEXIBLE,omitempty"`
+
+	// POWERBIEMBEDDED monitoring settings (Azure)
+	POWERBIEMBEDDED *CloudServiceSettings `json:"POWERBIEMBEDDED,omitempty"`
+
+	// PRIVATELINKENDPOINTS monitoring settings (AWS)
+	PRIVATELINKENDPOINTS *CloudServiceSettings `json:"PRIVATELINKENDPOINTS,omitempty"`
+
+	// PRIVATELINKSERVICES monitoring settings (AWS)
+	PRIVATELINKSERVICES *CloudServiceSettings `json:"PRIVATELINKSERVICES,omitempty"`
+
+	// PUBLICIP monitoring settings (Azure)
 	PUBLICIP *CloudServiceSettings `json:"PUBLICIP,omitempty"`
 
-	// Queue storage
+	// QBUSINESS monitoring settings (AWS)
+	QBUSINESS *CloudServiceSettings `json:"QBUSINESS,omitempty"`
+
+	// QUICKSIGHTDASHBOARDS monitoring settings (AWS)
+	QUICKSIGHTDASHBOARDS *CloudServiceSettings `json:"QUICKSIGHTDASHBOARDS,omitempty"`
+
+	// QUICKSIGHTDATASETS monitoring settings (AWS)
+	QUICKSIGHTDATASETS *CloudServiceSettings `json:"QUICKSIGHTDATASETS,omitempty"`
+
+	// QUOTA monitoring settings (AWS)
+	QUOTA *CloudServiceSettings `json:"QUOTA,omitempty"`
+
+	// QUEUESTORAGE monitoring settings (Azure)
 	QUEUESTORAGE *CloudServiceSettings `json:"QUEUESTORAGE,omitempty"`
 
-	// RDS monitoring settings
+	// RDS monitoring settings (AWS)
 	RDS *CloudServiceSettings `json:"RDS,omitempty"`
 
-	// Recovery Protected Item
+	// RECOVERYPROTECTEDITEM monitoring settings (Azure)
 	RECOVERYPROTECTEDITEM *CloudServiceSettings `json:"RECOVERYPROTECTEDITEM,omitempty"`
 
-	// Recovery Services
+	// RECOVERYPROTECTEDITEMS monitoring settings (Azure)
+	RECOVERYPROTECTEDITEMS *CloudServiceSettings `json:"RECOVERYPROTECTEDITEMS,omitempty"`
+
+	// RECOVERYSERVICES monitoring settings (Azure)
 	RECOVERYSERVICES *CloudServiceSettings `json:"RECOVERYSERVICES,omitempty"`
 
-	// Redis Cache
+	// REDISCACHE monitoring settings (Azure)
 	REDISCACHE *CloudServiceSettings `json:"REDISCACHE,omitempty"`
 
-	// REDSHIFT monitoring settings
+	// REDISCACHEENTERPRISE monitoring settings (Azure)
+	REDISCACHEENTERPRISE *CloudServiceSettings `json:"REDISCACHEENTERPRISE,omitempty"`
+
+	// REDSHIFT monitoring settings (AWS)
 	REDSHIFT *CloudServiceSettings `json:"REDSHIFT,omitempty"`
 
-	// ROUTE53 monitoring settings
+	// REDSHIFTSERVERLESS monitoring settings (AWS)
+	REDSHIFTSERVERLESS *CloudServiceSettings `json:"REDSHIFTSERVERLESS,omitempty"`
+
+	// RELAYNAMESPACES monitoring settings (Azure)
+	RELAYNAMESPACES *CloudServiceSettings `json:"RELAYNAMESPACES,omitempty"`
+
+	// ROUTE53 monitoring settings (AWS)
 	ROUTE53 *CloudServiceSettings `json:"ROUTE53,omitempty"`
 
-	// ROUTE53RESOLVER monitoring settings
+	// ROUTE53HOSTEDZONE monitoring settings (AWS)
+	ROUTE53HOSTEDZONE *CloudServiceSettings `json:"ROUTE53HOSTEDZONE,omitempty"`
+
+	// ROUTE53RESOLVER monitoring settings (AWS)
 	ROUTE53RESOLVER *CloudServiceSettings `json:"ROUTE53RESOLVER,omitempty"`
 
-	// S3 monitoring settings
+	// S3 monitoring settings (AWS)
 	S3 *CloudServiceSettings `json:"S3,omitempty"`
 
-	// SAGEMAKER monitoring settings
+	// SAGEMAKER monitoring settings (AWS)
 	SAGEMAKER *CloudServiceSettings `json:"SAGEMAKER,omitempty"`
 
-	// Service Bus
+	// SERVICEBUS monitoring settings (Azure)
 	SERVICEBUS *CloudServiceSettings `json:"SERVICEBUS,omitempty"`
 
-	// SES monitoring settings
+	// SERVICEFABRICMESH monitoring settings (Azure)
+	SERVICEFABRICMESH *CloudServiceSettings `json:"SERVICEFABRICMESH,omitempty"`
+
+	// SES monitoring settings (AWS)
 	SES *CloudServiceSettings `json:"SES,omitempty"`
 
-	// SNS monitoring settings
+	// SIGNALR monitoring settings (Azure)
+	SIGNALR *CloudServiceSettings `json:"SIGNALR,omitempty"`
+
+	// SITE2SITEVPN monitoring settings (AWS)
+	SITE2SITEVPN *CloudServiceSettings `json:"SITE2SITEVPN,omitempty"`
+
+	// SNS monitoring settings (AWS)
 	SNS *CloudServiceSettings `json:"SNS,omitempty"`
 
-	// SQL database
+	// SQLDATABASE monitoring settings (Azure)
 	SQLDATABASE *CloudServiceSettings `json:"SQLDATABASE,omitempty"`
 
-	// SQL ElasticPool
+	// SQLELASTICPOOL monitoring settings (Azure)
 	SQLELASTICPOOL *CloudServiceSettings `json:"SQLELASTICPOOL,omitempty"`
 
-	// SQL Managed Instance
+	// SQLMANAGEDINSTANCE monitoring settings (Azure)
 	SQLMANAGEDINSTANCE *CloudServiceSettings `json:"SQLMANAGEDINSTANCE,omitempty"`
 
-	// SQS monitoring settings
+	// SQS monitoring settings (AWS)
 	SQS *CloudServiceSettings `json:"SQS,omitempty"`
 
-	// STEPFUNCTIONS monitoring settings
+	// STEPFUNCTIONS monitoring settings (AWS)
 	STEPFUNCTIONS *CloudServiceSettings `json:"STEPFUNCTIONS,omitempty"`
 
-	// Storage account
+	// STORAGEACCOUNT monitoring settings (Azure)
 	STORAGEACCOUNT *CloudServiceSettings `json:"STORAGEACCOUNT,omitempty"`
 
-	// SWFACTIVITY monitoring settings
+	// STORAGEGATEWAY monitoring settings (AWS)
+	STORAGEGATEWAY *CloudServiceSettings `json:"STORAGEGATEWAY,omitempty"`
+
+	// STREAMANALYTICS monitoring settings (Azure)
+	STREAMANALYTICS *CloudServiceSettings `json:"STREAMANALYTICS,omitempty"`
+
+	// SWFACTIVITY monitoring settings (AWS)
 	SWFACTIVITY *CloudServiceSettings `json:"SWFACTIVITY,omitempty"`
 
-	// SWFWORKFLOW monitoring settings
+	// SWFWORKFLOW monitoring settings (AWS)
 	SWFWORKFLOW *CloudServiceSettings `json:"SWFWORKFLOW,omitempty"`
 
-	// SynapseWorkSpaces
+	// SYNAPSEWORKSPACES monitoring settings (Azure)
 	SYNAPSEWORKSPACES *CloudServiceSettings `json:"SYNAPSEWORKSPACES,omitempty"`
 
-	// Table storage
+	// TABLESTORAGE monitoring settings (Azure)
 	TABLESTORAGE *CloudServiceSettings `json:"TABLESTORAGE,omitempty"`
 
-	// TRAFFICMANAGER
+	// TRAFFICMANAGER monitoring settings (Azure)
 	TRAFFICMANAGER *CloudServiceSettings `json:"TRAFFICMANAGER,omitempty"`
 
-	// TRANSITGATEWAY monitoring settings
+	// TRANSFER monitoring settings (AWS)
+	TRANSFER *CloudServiceSettings `json:"TRANSFER,omitempty"`
+
+	// TRANSITGATEWAY monitoring settings (AWS)
 	TRANSITGATEWAY *CloudServiceSettings `json:"TRANSITGATEWAY,omitempty"`
 
-	// Virtual Desktop
+	// TRANSITGATEWAYATTACHMENT monitoring settings (AWS)
+	TRANSITGATEWAYATTACHMENT *CloudServiceSettings `json:"TRANSITGATEWAYATTACHMENT,omitempty"`
+
+	// VIRTUALDESKTOP monitoring settings (Azure)
 	VIRTUALDESKTOP *CloudServiceSettings `json:"VIRTUALDESKTOP,omitempty"`
 
-	// VIRTUAL machine
+	// VIRTUALHUBS monitoring settings (Azure)
+	VIRTUALHUBS *CloudServiceSettings `json:"VIRTUALHUBS,omitempty"`
+
+	// VIRTUALMACHINE monitoring settings (Azure)
 	VIRTUALMACHINE *CloudServiceSettings `json:"VIRTUALMACHINE,omitempty"`
 
-	// Virtual Machine Scale Set
+	// VIRTUALMACHINESCALESET monitoring settings (Azure)
 	VIRTUALMACHINESCALESET *CloudServiceSettings `json:"VIRTUALMACHINESCALESET,omitempty"`
 
-	// Virtual machine scale set VM
+	// VIRTUALMACHINESCALESETVM monitoring settings (Azure)
 	VIRTUALMACHINESCALESETVM *CloudServiceSettings `json:"VIRTUALMACHINESCALESETVM,omitempty"`
 
-	// Virtual Network Gateway
+	// VIRTUALNETWORKGATEWAY monitoring settings (Azure)
 	VIRTUALNETWORKGATEWAY *CloudServiceSettings `json:"VIRTUALNETWORKGATEWAY,omitempty"`
 
-	// VPN monitoring settings
+	// VIRTUALNETWORKS monitoring settings (Azure)
+	VIRTUALNETWORKS *CloudServiceSettings `json:"VIRTUALNETWORKS,omitempty"`
+
+	// VPC monitoring settings (AWS)
+	VPC *CloudServiceSettings `json:"VPC,omitempty"`
+
+	// VPCENDPOINT monitoring settings (AWS)
+	VPCENDPOINT *CloudServiceSettings `json:"VPCENDPOINT,omitempty"`
+
+	// VPCPEERING monitoring settings (AWS)
+	VPCPEERING *CloudServiceSettings `json:"VPCPEERING,omitempty"`
+
+	// VPN monitoring settings (Azure)
 	VPN *CloudServiceSettings `json:"VPN,omitempty"`
 
-	// WORKSPACE monitoring settings
+	// VPNGATEWAYS monitoring settings (Azure)
+	VPNGATEWAYS *CloudServiceSettings `json:"VPNGATEWAYS,omitempty"`
+
+	// WORKSPACE monitoring settings (AWS)
 	WORKSPACE *CloudServiceSettings `json:"WORKSPACE,omitempty"`
 
-	// WORKSPACEDIRECTORY monitoring settings
+	// WORKSPACEDIRECTORY monitoring settings (AWS)
 	WORKSPACEDIRECTORY *CloudServiceSettings `json:"WORKSPACEDIRECTORY,omitempty"`
 }
 
 // Validate validates this cloud services
 func (m *CloudServices) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateACM(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateAPIGATEWAY(formats); err != nil {
 		res = append(res, err)
@@ -343,6 +590,10 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAPPLICATIONINSIGHTS(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAPPLICATIONMIGRATIONSERVICE(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -370,7 +621,19 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateBACKUP(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateBACKUPPROTECTEDITEMS(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBACKUPPROTECTEDRESOURCE(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBEDROCK(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -410,7 +673,15 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDBCLUSTER(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDIRECTCONNECT(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDIRECTCONNECTVIRTUALINTERFACE(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -442,7 +713,15 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateECR(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEFS(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEKS(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -499,6 +778,10 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateFSX(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGATEWAYELB(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -598,7 +881,27 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validatePRIVATELINKENDPOINTS(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePRIVATELINKSERVICES(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQBUSINESS(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateQUEUESTORAGE(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQUICKSIGHTDASHBOARDS(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQUICKSIGHTDATASETS(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -607,6 +910,10 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRECOVERYPROTECTEDITEM(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRECOVERYPROTECTEDITEMS(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -622,7 +929,15 @@ func (m *CloudServices) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateREDSHIFTSERVERLESS(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateROUTE53(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateROUTE53HOSTEDZONE(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1298,6 +1613,25 @@ func (m *CloudServices) validateEFS(formats strfmt.Registry) error {
 				return ve.ValidateName("EFS")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("EFS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateEKS(formats strfmt.Registry) error {
+	if swag.IsZero(m.EKS) { // not required
+		return nil
+	}
+
+	if m.EKS != nil {
+		if err := m.EKS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("EKS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("EKS")
 			}
 			return err
 		}
@@ -2085,6 +2419,25 @@ func (m *CloudServices) validateRECOVERYPROTECTEDITEM(formats strfmt.Registry) e
 	return nil
 }
 
+func (m *CloudServices) validateRECOVERYPROTECTEDITEMS(formats strfmt.Registry) error {
+	if swag.IsZero(m.RECOVERYPROTECTEDITEMS) { // not required
+		return nil
+	}
+
+	if m.RECOVERYPROTECTEDITEMS != nil {
+		if err := m.RECOVERYPROTECTEDITEMS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("RECOVERYPROTECTEDITEMS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("RECOVERYPROTECTEDITEMS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) validateRECOVERYSERVICES(formats strfmt.Registry) error {
 	if swag.IsZero(m.RECOVERYSERVICES) { // not required
 		return nil
@@ -2655,9 +3008,317 @@ func (m *CloudServices) validateWORKSPACEDIRECTORY(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *CloudServices) validateACM(formats strfmt.Registry) error {
+	if swag.IsZero(m.ACM) { // not required
+		return nil
+	}
+
+	if m.ACM != nil {
+		if err := m.ACM.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ACM")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ACM")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateAPPLICATIONMIGRATIONSERVICE(formats strfmt.Registry) error {
+	if swag.IsZero(m.APPLICATIONMIGRATIONSERVICE) { // not required
+		return nil
+	}
+
+	if m.APPLICATIONMIGRATIONSERVICE != nil {
+		if err := m.APPLICATIONMIGRATIONSERVICE.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("APPLICATIONMIGRATIONSERVICE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("APPLICATIONMIGRATIONSERVICE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateBACKUP(formats strfmt.Registry) error {
+	if swag.IsZero(m.BACKUP) { // not required
+		return nil
+	}
+
+	if m.BACKUP != nil {
+		if err := m.BACKUP.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("BACKUP")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("BACKUP")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateBACKUPPROTECTEDRESOURCE(formats strfmt.Registry) error {
+	if swag.IsZero(m.BACKUPPROTECTEDRESOURCE) { // not required
+		return nil
+	}
+
+	if m.BACKUPPROTECTEDRESOURCE != nil {
+		if err := m.BACKUPPROTECTEDRESOURCE.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("BACKUPPROTECTEDRESOURCE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("BACKUPPROTECTEDRESOURCE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateBEDROCK(formats strfmt.Registry) error {
+	if swag.IsZero(m.BEDROCK) { // not required
+		return nil
+	}
+
+	if m.BEDROCK != nil {
+		if err := m.BEDROCK.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("BEDROCK")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("BEDROCK")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateDBCLUSTER(formats strfmt.Registry) error {
+	if swag.IsZero(m.DBCLUSTER) { // not required
+		return nil
+	}
+
+	if m.DBCLUSTER != nil {
+		if err := m.DBCLUSTER.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DBCLUSTER")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DBCLUSTER")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateDIRECTCONNECTVIRTUALINTERFACE(formats strfmt.Registry) error {
+	if swag.IsZero(m.DIRECTCONNECTVIRTUALINTERFACE) { // not required
+		return nil
+	}
+
+	if m.DIRECTCONNECTVIRTUALINTERFACE != nil {
+		if err := m.DIRECTCONNECTVIRTUALINTERFACE.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DIRECTCONNECTVIRTUALINTERFACE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DIRECTCONNECTVIRTUALINTERFACE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateECR(formats strfmt.Registry) error {
+	if swag.IsZero(m.ECR) { // not required
+		return nil
+	}
+
+	if m.ECR != nil {
+		if err := m.ECR.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ECR")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ECR")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateGATEWAYELB(formats strfmt.Registry) error {
+	if swag.IsZero(m.GATEWAYELB) { // not required
+		return nil
+	}
+
+	if m.GATEWAYELB != nil {
+		if err := m.GATEWAYELB.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("GATEWAYELB")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("GATEWAYELB")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validatePRIVATELINKENDPOINTS(formats strfmt.Registry) error {
+	if swag.IsZero(m.PRIVATELINKENDPOINTS) { // not required
+		return nil
+	}
+
+	if m.PRIVATELINKENDPOINTS != nil {
+		if err := m.PRIVATELINKENDPOINTS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("PRIVATELINKENDPOINTS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("PRIVATELINKENDPOINTS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validatePRIVATELINKSERVICES(formats strfmt.Registry) error {
+	if swag.IsZero(m.PRIVATELINKSERVICES) { // not required
+		return nil
+	}
+
+	if m.PRIVATELINKSERVICES != nil {
+		if err := m.PRIVATELINKSERVICES.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("PRIVATELINKSERVICES")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("PRIVATELINKSERVICES")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateQBUSINESS(formats strfmt.Registry) error {
+	if swag.IsZero(m.QBUSINESS) { // not required
+		return nil
+	}
+
+	if m.QBUSINESS != nil {
+		if err := m.QBUSINESS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("QBUSINESS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("QBUSINESS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateQUICKSIGHTDASHBOARDS(formats strfmt.Registry) error {
+	if swag.IsZero(m.QUICKSIGHTDASHBOARDS) { // not required
+		return nil
+	}
+
+	if m.QUICKSIGHTDASHBOARDS != nil {
+		if err := m.QUICKSIGHTDASHBOARDS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("QUICKSIGHTDASHBOARDS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("QUICKSIGHTDASHBOARDS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateQUICKSIGHTDATASETS(formats strfmt.Registry) error {
+	if swag.IsZero(m.QUICKSIGHTDATASETS) { // not required
+		return nil
+	}
+
+	if m.QUICKSIGHTDATASETS != nil {
+		if err := m.QUICKSIGHTDATASETS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("QUICKSIGHTDATASETS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("QUICKSIGHTDATASETS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateREDSHIFTSERVERLESS(formats strfmt.Registry) error {
+	if swag.IsZero(m.REDSHIFTSERVERLESS) { // not required
+		return nil
+	}
+
+	if m.REDSHIFTSERVERLESS != nil {
+		if err := m.REDSHIFTSERVERLESS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("REDSHIFTSERVERLESS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("REDSHIFTSERVERLESS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) validateROUTE53HOSTEDZONE(formats strfmt.Registry) error {
+	if swag.IsZero(m.ROUTE53HOSTEDZONE) { // not required
+		return nil
+	}
+
+	if m.ROUTE53HOSTEDZONE != nil {
+		if err := m.ROUTE53HOSTEDZONE.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ROUTE53HOSTEDZONE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ROUTE53HOSTEDZONE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this cloud services based on the context it is used
 func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.contextValidateACM(ctx, formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.contextValidateAPIGATEWAY(ctx, formats); err != nil {
 		res = append(res, err)
@@ -2676,6 +3337,10 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 	}
 
 	if err := m.contextValidateAPPLICATIONINSIGHTS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAPPLICATIONMIGRATIONSERVICE(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2703,7 +3368,19 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateBACKUP(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateBACKUPPROTECTEDITEMS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateBACKUPPROTECTEDRESOURCE(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateBEDROCK(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2743,7 +3420,15 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDBCLUSTER(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateDIRECTCONNECT(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDIRECTCONNECTVIRTUALINTERFACE(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2775,7 +3460,15 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateECR(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateEFS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateEKS(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2832,6 +3525,10 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 	}
 
 	if err := m.contextValidateFSX(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGATEWAYELB(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2931,7 +3628,27 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidatePRIVATELINKENDPOINTS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePRIVATELINKSERVICES(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateQBUSINESS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateQUEUESTORAGE(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateQUICKSIGHTDASHBOARDS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateQUICKSIGHTDATASETS(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2940,6 +3657,10 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 	}
 
 	if err := m.contextValidateRECOVERYPROTECTEDITEM(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRECOVERYPROTECTEDITEMS(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2955,7 +3676,15 @@ func (m *CloudServices) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateREDSHIFTSERVERLESS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateROUTE53(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateROUTE53HOSTEDZONE(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -3541,6 +4270,22 @@ func (m *CloudServices) contextValidateEFS(ctx context.Context, formats strfmt.R
 				return ve.ValidateName("EFS")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("EFS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateEKS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.EKS != nil {
+		if err := m.EKS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("EKS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("EKS")
 			}
 			return err
 		}
@@ -4205,6 +4950,22 @@ func (m *CloudServices) contextValidateRECOVERYPROTECTEDITEM(ctx context.Context
 	return nil
 }
 
+func (m *CloudServices) contextValidateRECOVERYPROTECTEDITEMS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RECOVERYPROTECTEDITEMS != nil {
+		if err := m.RECOVERYPROTECTEDITEMS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("RECOVERYPROTECTEDITEMS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("RECOVERYPROTECTEDITEMS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *CloudServices) contextValidateRECOVERYSERVICES(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RECOVERYSERVICES != nil {
@@ -4677,6 +5438,262 @@ func (m *CloudServices) contextValidateWORKSPACEDIRECTORY(ctx context.Context, f
 				return ve.ValidateName("WORKSPACEDIRECTORY")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("WORKSPACEDIRECTORY")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateACM(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ACM != nil {
+		if err := m.ACM.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ACM")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ACM")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateAPPLICATIONMIGRATIONSERVICE(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.APPLICATIONMIGRATIONSERVICE != nil {
+		if err := m.APPLICATIONMIGRATIONSERVICE.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("APPLICATIONMIGRATIONSERVICE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("APPLICATIONMIGRATIONSERVICE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateBACKUP(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BACKUP != nil {
+		if err := m.BACKUP.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("BACKUP")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("BACKUP")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateBACKUPPROTECTEDRESOURCE(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BACKUPPROTECTEDRESOURCE != nil {
+		if err := m.BACKUPPROTECTEDRESOURCE.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("BACKUPPROTECTEDRESOURCE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("BACKUPPROTECTEDRESOURCE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateBEDROCK(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BEDROCK != nil {
+		if err := m.BEDROCK.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("BEDROCK")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("BEDROCK")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateDBCLUSTER(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DBCLUSTER != nil {
+		if err := m.DBCLUSTER.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DBCLUSTER")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DBCLUSTER")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateDIRECTCONNECTVIRTUALINTERFACE(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DIRECTCONNECTVIRTUALINTERFACE != nil {
+		if err := m.DIRECTCONNECTVIRTUALINTERFACE.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DIRECTCONNECTVIRTUALINTERFACE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DIRECTCONNECTVIRTUALINTERFACE")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateECR(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ECR != nil {
+		if err := m.ECR.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ECR")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ECR")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateGATEWAYELB(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GATEWAYELB != nil {
+		if err := m.GATEWAYELB.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("GATEWAYELB")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("GATEWAYELB")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidatePRIVATELINKENDPOINTS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PRIVATELINKENDPOINTS != nil {
+		if err := m.PRIVATELINKENDPOINTS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("PRIVATELINKENDPOINTS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("PRIVATELINKENDPOINTS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidatePRIVATELINKSERVICES(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PRIVATELINKSERVICES != nil {
+		if err := m.PRIVATELINKSERVICES.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("PRIVATELINKSERVICES")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("PRIVATELINKSERVICES")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateQBUSINESS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.QBUSINESS != nil {
+		if err := m.QBUSINESS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("QBUSINESS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("QBUSINESS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateQUICKSIGHTDASHBOARDS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.QUICKSIGHTDASHBOARDS != nil {
+		if err := m.QUICKSIGHTDASHBOARDS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("QUICKSIGHTDASHBOARDS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("QUICKSIGHTDASHBOARDS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateQUICKSIGHTDATASETS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.QUICKSIGHTDATASETS != nil {
+		if err := m.QUICKSIGHTDATASETS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("QUICKSIGHTDATASETS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("QUICKSIGHTDATASETS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateREDSHIFTSERVERLESS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.REDSHIFTSERVERLESS != nil {
+		if err := m.REDSHIFTSERVERLESS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("REDSHIFTSERVERLESS")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("REDSHIFTSERVERLESS")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *CloudServices) contextValidateROUTE53HOSTEDZONE(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ROUTE53HOSTEDZONE != nil {
+		if err := m.ROUTE53HOSTEDZONE.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ROUTE53HOSTEDZONE")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ROUTE53HOSTEDZONE")
 			}
 			return err
 		}

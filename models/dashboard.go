@@ -55,7 +55,7 @@ type Dashboard struct {
 
 	// Whether or not the dashboard is sharable. This value will always be true unless the dashboard is a private dashboard
 	// Example: true
-	Sharable bool `json:"sharable,omitempty"`
+	Sharable bool `json:"sharable"`
 
 	// The template which is used for import dashboard
 	Template interface{} `json:"template,omitempty"`

@@ -46,7 +46,8 @@ func NewGetCollectorByIDOK() *GetCollectorByIDOK {
 	return &GetCollectorByIDOK{}
 }
 
-/* GetCollectorByIDOK describes a response with status code 200, with default header values.
+/*
+	GetCollectorByIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewGetCollectorByIDDefault(code int) *GetCollectorByIDDefault {
 	}
 }
 
-/* GetCollectorByIDDefault describes a response with status code -1, with default header values.
+/*
+	GetCollectorByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

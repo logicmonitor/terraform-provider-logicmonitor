@@ -1,24 +1,24 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"strconv"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func DeviceGroupSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"applies_to": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"aws_regions_info": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"aws_test_result": {
 			Type: schema.TypeList, //GoType: AwsAccountTestResult
 			Elem: &schema.Resource{
@@ -26,17 +26,17 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"aws_test_result_code": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"azure_regions_info": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"azure_test_result": {
 			Type: schema.TypeList, //GoType: AzureAccountTestResult
 			Elem: &schema.Resource{
@@ -44,61 +44,61 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"azure_test_result_code": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"created_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"custom_properties": {
 			Type: schema.TypeSet,
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"default_auto_balanced_collector_group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"default_collector_description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"default_collector_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"disable_alerting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"effective_alert_enabled": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"enable_netflow": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"extra": {
 			Type: schema.TypeList, //GoType: CloudAccountExtra
 			Elem: &schema.Resource{
@@ -106,17 +106,17 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"full_path": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"gcp_regions_info": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"gcp_test_result": {
 			Type: schema.TypeList, //GoType: GcpAccountTestResult
 			Elem: &schema.Resource{
@@ -124,72 +124,72 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"gcp_test_result_code": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"group_status": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"group_type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"has_netflow_enabled_devices": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"num_of_a_w_s_devices": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"num_of_azure_devices": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"num_of_direct_devices": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"num_of_direct_sub_groups": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"num_of_gcp_devices": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"num_of_hosts": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"parent_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"saas_test_result": {
 			Type: schema.TypeList, //GoType: SaasAccountTestResult
 			Elem: &schema.Resource{
@@ -197,39 +197,37 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"sub_groups": {
-			Type: schema.TypeList, //GoType: []*DeviceGroupData  
+			Type: schema.TypeList, //GoType: []*DeviceGroupData
 			Elem: &schema.Resource{
 				Schema: DeviceGroupDataSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Computed: true,
+			Computed:   true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
 	}
 }
-
 
 // Schema mapping representing the resource's respective datasource object defined in Terraform configuration
 // Only difference between this and DeviceGroupSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
 func DataSourceDeviceGroupSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"applies_to": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"aws_regions_info": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"aws_test_result": {
 			Type: schema.TypeList, //GoType: AwsAccountTestResult
 			Elem: &schema.Resource{
@@ -237,17 +235,17 @@ func DataSourceDeviceGroupSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"aws_test_result_code": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"azure_regions_info": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"azure_test_result": {
 			Type: schema.TypeList, //GoType: AzureAccountTestResult
 			Elem: &schema.Resource{
@@ -255,61 +253,61 @@ func DataSourceDeviceGroupSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"azure_test_result_code": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"created_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"custom_properties": {
-			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Type: schema.TypeList, //GoType: []*NameAndValue
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"default_auto_balanced_collector_group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"default_collector_description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"default_collector_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"disable_alerting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"effective_alert_enabled": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"enable_netflow": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"extra": {
 			Type: schema.TypeList, //GoType: CloudAccountExtra
 			Elem: &schema.Resource{
@@ -317,17 +315,17 @@ func DataSourceDeviceGroupSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"full_path": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"gcp_regions_info": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"gcp_test_result": {
 			Type: schema.TypeList, //GoType: GcpAccountTestResult
 			Elem: &schema.Resource{
@@ -335,73 +333,73 @@ func DataSourceDeviceGroupSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"gcp_test_result_code": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"group_status": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"group_type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"has_netflow_enabled_devices": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"num_of_a_w_s_devices": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"num_of_azure_devices": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"num_of_direct_devices": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"num_of_direct_sub_groups": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"num_of_gcp_devices": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"num_of_hosts": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"parent_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"saas_test_result": {
 			Type: schema.TypeList, //GoType: SaasAccountTestResult
 			Elem: &schema.Resource{
@@ -409,24 +407,24 @@ func DataSourceDeviceGroupSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"sub_groups": {
-			Type: schema.TypeList, //GoType: []*DeviceGroupData 
+			Type: schema.TypeList, //GoType: []*DeviceGroupData
 			Elem: &schema.Resource{
 				Schema: DeviceGroupDataSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"filter": {
 			Type:     schema.TypeString,
-            Optional: true,
+			Optional: true,
 		},
 	}
 }
@@ -534,20 +532,20 @@ func DeviceGroupModel(d *schema.ResourceData) *models.DeviceGroup {
 	id, _ := strconv.Atoi(d.Get("id").(string))
 	name := d.Get("name").(string)
 	parentID := int32(d.Get("parent_id").(int))
-	
-	return &models.DeviceGroup {
-		AppliesTo: appliesTo,
-		CustomProperties: customProperties,
+
+	return &models.DeviceGroup{
+		AppliesTo:                           appliesTo,
+		CustomProperties:                    customProperties,
 		DefaultAutoBalancedCollectorGroupID: defaultAutoBalancedCollectorGroupID,
-		DefaultCollectorID: defaultCollectorID,
-		Description: description,
-		DisableAlerting: disableAlerting,
-		EnableNetflow: enableNetflow,
-		Extra: extra,
-		GroupType: groupType,
-		ID: int32(id),
-		Name: &name,
-		ParentID: parentID,
+		DefaultCollectorID:                  defaultCollectorID,
+		Description:                         description,
+		DisableAlerting:                     disableAlerting,
+		EnableNetflow:                       enableNetflow,
+		Extra:                               extra,
+		GroupType:                           groupType,
+		ID:                                  int32(id),
+		Name:                                &name,
+		ParentID:                            parentID,
 	}
 }
 func GetDeviceGroupPropertyFields() (t []string) {

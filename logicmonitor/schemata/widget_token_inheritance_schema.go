@@ -1,22 +1,21 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func WidgetTokenInheritanceSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"fullpath": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"value": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -34,12 +33,10 @@ func SetWidgetTokenInheritanceSubResourceData(m []*models.WidgetTokenInheritance
 
 func WidgetTokenInheritanceModel(d map[string]interface{}) *models.WidgetTokenInheritance {
 	// assume that the incoming map only contains the relevant resource data
-	
-	return &models.WidgetTokenInheritance {
-	}
+
+	return &models.WidgetTokenInheritance{}
 }
 
 func GetWidgetTokenInheritancePropertyFields() (t []string) {
-	return []string{
-	}
+	return []string{}
 }

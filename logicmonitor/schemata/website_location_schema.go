@@ -1,45 +1,44 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func WebsiteLocationSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"all": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"collector_ids": {
 			Type: schema.TypeList, //GoType: []int32
 			Elem: &schema.Schema{
-                 Type: schema.TypeInt,
-            },
+				Type: schema.TypeInt,
+			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"collectors": {
-			Type: schema.TypeList, //GoType: []*WebsiteCollectorInfo  
+			Type: schema.TypeList, //GoType: []*WebsiteCollectorInfo
 			Elem: &schema.Resource{
 				Schema: WebsiteCollectorInfoSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"smg_ids": {
 			Type: schema.TypeList, //GoType: []int32
 			Elem: &schema.Schema{
-                 Type: schema.TypeInt,
-            },
+				Type: schema.TypeInt,
+			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
 	}
 }
 
@@ -63,12 +62,12 @@ func WebsiteLocationModel(d map[string]interface{}) *models.WebsiteLocation {
 	collectorIds := utils.ConvertSetToInt32Slice(d["collectorIds"].([]interface{}))
 	collectors := d["collectors"].([]*models.WebsiteCollectorInfo)
 	smgIds := utils.ConvertSetToInt32Slice(d["smgIds"].([]interface{}))
-	
-	return &models.WebsiteLocation {
-		All: all,
+
+	return &models.WebsiteLocation{
+		All:          all,
 		CollectorIds: collectorIds,
-		Collectors: collectors,
-		SmgIds: smgIds,
+		Collectors:   collectors,
+		SmgIds:       smgIds,
 	}
 }
 

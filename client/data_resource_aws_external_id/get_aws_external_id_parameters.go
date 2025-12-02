@@ -53,10 +53,12 @@ func NewGetAwsExternalIDParamsWithHTTPClient(client *http.Client) *GetAwsExterna
 	}
 }
 
-/* GetAwsExternalIDParams contains all the parameters to send to the API endpoint
-   for the get aws external Id operation.
+/*
+GetAwsExternalIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get aws external Id operation.
+
+	Typically these are written to a http.Request.
 */
 type GetAwsExternalIDParams struct {
 	timeout    time.Duration

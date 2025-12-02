@@ -1,31 +1,30 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func SdtPaginationResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"items": {
-			Type: schema.TypeList, //GoType: []*Sdt  
+			Type: schema.TypeList, //GoType: []*Sdt
 			Elem: &schema.Resource{
 				Schema: SdtSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"search_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"total": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -45,8 +44,8 @@ func SetSdtPaginationResponseSubResourceData(m []*models.SdtPaginationResponse) 
 func SdtPaginationResponseModel(d map[string]interface{}) *models.SdtPaginationResponse {
 	// assume that the incoming map only contains the relevant resource data
 	items := d["items"].([]*models.Sdt)
-	
-	return &models.SdtPaginationResponse {
+
+	return &models.SdtPaginationResponse{
 		Items: items,
 	}
 }

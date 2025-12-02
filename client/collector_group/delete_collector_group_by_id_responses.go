@@ -46,7 +46,8 @@ func NewDeleteCollectorGroupByIDOK() *DeleteCollectorGroupByIDOK {
 	return &DeleteCollectorGroupByIDOK{}
 }
 
-/* DeleteCollectorGroupByIDOK describes a response with status code 200, with default header values.
+/*
+	DeleteCollectorGroupByIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -78,7 +79,8 @@ func NewDeleteCollectorGroupByIDDefault(code int) *DeleteCollectorGroupByIDDefau
 	}
 }
 
-/* DeleteCollectorGroupByIDDefault describes a response with status code -1, with default header values.
+/*
+	DeleteCollectorGroupByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

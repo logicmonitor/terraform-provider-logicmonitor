@@ -46,7 +46,8 @@ func NewAddDeviceOK() *AddDeviceOK {
 	return &AddDeviceOK{}
 }
 
-/* AddDeviceOK describes a response with status code 200, with default header values.
+/*
+	AddDeviceOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewAddDeviceDefault(code int) *AddDeviceDefault {
 	}
 }
 
-/* AddDeviceDefault describes a response with status code -1, with default header values.
+/*
+	AddDeviceDefault describes a response with status code -1, with default header values.
 
 Error
 */

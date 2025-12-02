@@ -46,7 +46,8 @@ func NewAddDashboardGroupOK() *AddDashboardGroupOK {
 	return &AddDashboardGroupOK{}
 }
 
-/* AddDashboardGroupOK describes a response with status code 200, with default header values.
+/*
+	AddDashboardGroupOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewAddDashboardGroupDefault(code int) *AddDashboardGroupDefault {
 	}
 }
 
-/* AddDashboardGroupDefault describes a response with status code -1, with default header values.
+/*
+	AddDashboardGroupDefault describes a response with status code -1, with default header values.
 
 Error
 */

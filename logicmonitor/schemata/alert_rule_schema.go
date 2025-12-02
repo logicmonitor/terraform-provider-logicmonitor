@@ -1,38 +1,38 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"strconv"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func AlertRuleSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"datapoint": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"datasource": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"device_groups": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Required: true,
 		},
-		
+
 		"devices": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Required: true,
 		},
-		
+
 		"escalating_chain": {
 			Type: schema.TypeMap, //GoType: interface{}
 			Elem: &schema.Schema{
@@ -40,98 +40,96 @@ func AlertRuleSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"escalating_chain_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"escalation_interval": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"instance": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"level_str": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"priority": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"resource_properties": {
-			Type: schema.TypeList, //GoType: []*DeviceProperty  
+			Type: schema.TypeList, //GoType: []*DeviceProperty
 			Elem: &schema.Resource{
 				Schema: DevicePropertySchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"send_anomaly_suppressed_alert": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"suppress_alert_ack_sdt": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"suppress_alert_clear": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
 	}
 }
-
 
 // Schema mapping representing the resource's respective datasource object defined in Terraform configuration
 // Only difference between this and AlertRuleSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
 func DataSourceAlertRuleSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"datapoint": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"datasource": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"device_groups": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Optional: true,
 		},
-		
+
 		"devices": {
-			Type: schema.TypeSet,
+			Type:     schema.TypeSet,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 			Set:      schema.HashString,
 			Optional: true,
 		},
-		
+
 		"escalating_chain": {
 			Type: schema.TypeMap, //GoType: interface{}
 			Elem: &schema.Schema{
@@ -139,70 +137,70 @@ func DataSourceAlertRuleSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"escalating_chain_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"escalation_interval": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 			Optional: true,
 		},
-		
+
 		"instance": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"level_str": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"priority": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"resource_properties": {
-			Type: schema.TypeList, //GoType: []*DeviceProperty 
+			Type: schema.TypeList, //GoType: []*DeviceProperty
 			Elem: &schema.Resource{
 				Schema: DevicePropertySchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"send_anomaly_suppressed_alert": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"suppress_alert_ack_sdt": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"suppress_alert_clear": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"filter": {
 			Type:     schema.TypeString,
-            Optional: true,
+			Optional: true,
 		},
 	}
 }
@@ -268,23 +266,23 @@ func AlertRuleModel(d *schema.ResourceData) *models.AlertRule {
 	sendAnomalySuppressedAlert := d.Get("send_anomaly_suppressed_alert").(bool)
 	suppressAlertAckSdt := d.Get("suppress_alert_ack_sdt").(bool)
 	suppressAlertClear := d.Get("suppress_alert_clear").(bool)
-	
-	return &models.AlertRule {
-		Datapoint: &datapoint,
-		Datasource: &datasource,
-		DeviceGroups: deviceGroups,
-		Devices: devices,
-		EscalatingChainID: &escalatingChainID,
-		EscalationInterval: &escalationInterval,
-		ID: int32(id),
-		Instance: &instance,
-		LevelStr: levelStr,
-		Name: &name,
-		Priority: &priority,
-		ResourceProperties: resourceProperties,
+
+	return &models.AlertRule{
+		Datapoint:                  &datapoint,
+		Datasource:                 &datasource,
+		DeviceGroups:               deviceGroups,
+		Devices:                    devices,
+		EscalatingChainID:          &escalatingChainID,
+		EscalationInterval:         &escalationInterval,
+		ID:                         int32(id),
+		Instance:                   &instance,
+		LevelStr:                   levelStr,
+		Name:                       &name,
+		Priority:                   &priority,
+		ResourceProperties:         resourceProperties,
 		SendAnomalySuppressedAlert: sendAnomalySuppressedAlert,
-		SuppressAlertAckSdt: suppressAlertAckSdt,
-		SuppressAlertClear: suppressAlertClear,
+		SuppressAlertAckSdt:        suppressAlertAckSdt,
+		SuppressAlertClear:         suppressAlertClear,
 	}
 }
 func GetAlertRulePropertyFields() (t []string) {

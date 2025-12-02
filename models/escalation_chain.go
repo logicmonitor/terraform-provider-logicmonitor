@@ -34,7 +34,7 @@ type EscalationChain struct {
 
 	// if throttle needs to be enabled then true if not then false.
 	// Example: true
-	EnableThrottling bool `json:"enableThrottling,omitempty"`
+	EnableThrottling bool `json:"enableThrottling"`
 
 	// id
 	// Read Only: true
@@ -42,7 +42,7 @@ type EscalationChain struct {
 
 	// in alerting
 	// Read Only: true
-	InAlerting *bool `json:"inAlerting,omitempty"`
+	InAlerting *bool `json:"inAlerting"`
 
 	// the chain name
 	// Example: NOC Team

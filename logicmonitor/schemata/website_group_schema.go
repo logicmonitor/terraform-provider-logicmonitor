@@ -1,165 +1,163 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"strconv"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func WebsiteGroupSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"disable_alerting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"full_path": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"has_websites_disabled": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"num_of_direct_sub_groups": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"num_of_direct_websites": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"num_of_websites": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"parent_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"properties": {
 			Type: schema.TypeSet,
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"stop_monitoring": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"test_location": {
-			Type: schema.TypeList, //GoType: WebsiteLocation 
-            Elem: &schema.Resource{
+			Type: schema.TypeList, //GoType: WebsiteLocation
+			Elem: &schema.Resource{
 				Schema: WebsiteLocationSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
 	}
 }
-
 
 // Schema mapping representing the resource's respective datasource object defined in Terraform configuration
 // Only difference between this and WebsiteGroupSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
 func DataSourceWebsiteGroupSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"disable_alerting": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"full_path": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"has_websites_disabled": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"num_of_direct_sub_groups": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"num_of_direct_websites": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"num_of_websites": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"parent_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"properties": {
-			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Type: schema.TypeList, //GoType: []*NameAndValue
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"stop_monitoring": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"test_location": {
 			Type: schema.TypeList, //GoType: WebsiteLocation
 			Elem: &schema.Resource{
@@ -167,15 +165,15 @@ func DataSourceWebsiteGroupSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"filter": {
 			Type:     schema.TypeString,
-            Optional: true,
+			Optional: true,
 		},
 	}
 }
@@ -229,19 +227,17 @@ func WebsiteGroupModel(d *schema.ResourceData) *models.WebsiteGroup {
 	parentID := int32(d.Get("parent_id").(int))
 	properties := utils.GetPropertiesFromResource(d, "properties")
 	stopMonitoring := d.Get("stop_monitoring").(bool)
-    testLocation := utils.GetPropFromLocationMap(d, "test_location")
+	testLocation := utils.GetPropFromLocationMap(d, "test_location")
 
-	          
-	
-	return &models.WebsiteGroup {
-		Description: description,
+	return &models.WebsiteGroup{
+		Description:     description,
 		DisableAlerting: disableAlerting,
-		ID: int32(id),
-		Name: &name,
-		ParentID: parentID,
-		Properties: properties,
-		StopMonitoring: stopMonitoring,
-		TestLocation: testLocation,
+		ID:              int32(id),
+		Name:            &name,
+		ParentID:        parentID,
+		Properties:      properties,
+		StopMonitoring:  stopMonitoring,
+		TestLocation:    testLocation,
 	}
 }
 func GetWebsiteGroupPropertyFields() (t []string) {

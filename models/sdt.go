@@ -115,7 +115,7 @@ type Sdt struct {
 	// The values can be true|false, where true: the SDT is currently active
 	// false: the SDT is currently inactive
 	// Read Only: true
-	IsEffective *bool `json:"isEffective,omitempty"`
+	IsEffective *bool `json:"isEffective"`
 
 	// The values can be 1 | 2....| 60. Specifies the minute of the hour that the SDT should begin for a repeating SDT
 	// Example: 6

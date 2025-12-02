@@ -46,7 +46,8 @@ func NewAddDashboardOK() *AddDashboardOK {
 	return &AddDashboardOK{}
 }
 
-/* AddDashboardOK describes a response with status code 200, with default header values.
+/*
+	AddDashboardOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewAddDashboardDefault(code int) *AddDashboardDefault {
 	}
 }
 
-/* AddDashboardDefault describes a response with status code -1, with default header values.
+/*
+	AddDashboardDefault describes a response with status code -1, with default header values.
 
 Error
 */

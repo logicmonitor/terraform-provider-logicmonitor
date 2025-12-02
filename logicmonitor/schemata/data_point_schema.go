@@ -1,97 +1,96 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func DataPointSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"alert_body": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"alert_clear_transition_interval": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"alert_expr": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"alert_expr_note": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"alert_for_no_data": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"alert_subject": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"alert_transition_interval": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"data_type": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"max_digits": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"max_value": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"min_value": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"post_processor_method": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"post_processor_param": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"raw_data_field_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
 	}
 }
 
@@ -141,25 +140,25 @@ func DataPointModel(d map[string]interface{}) *models.DataPoint {
 	postProcessorParam := d["post_processor_param"].(string)
 	rawDataFieldName := d["raw_data_field_name"].(string)
 	typeVar := int32(d["type"].(int))
-	
-	return &models.DataPoint {
-		AlertBody: alertBody,
+
+	return &models.DataPoint{
+		AlertBody:                    alertBody,
 		AlertClearTransitionInterval: alertClearTransitionInterval,
-		AlertExpr: alertExpr,
-		AlertExprNote: alertExprNote,
-		AlertForNoData: alertForNoData,
-		AlertSubject: alertSubject,
-		AlertTransitionInterval: alertTransitionInterval,
-		DataType: dataType,
-		Description: description,
-		MaxDigits: maxDigits,
-		MaxValue: maxValue,
-		MinValue: minValue,
-		Name: &name,
-		PostProcessorMethod: postProcessorMethod,
-		PostProcessorParam: postProcessorParam,
-		RawDataFieldName: rawDataFieldName,
-		Type: typeVar,
+		AlertExpr:                    alertExpr,
+		AlertExprNote:                alertExprNote,
+		AlertForNoData:               alertForNoData,
+		AlertSubject:                 alertSubject,
+		AlertTransitionInterval:      alertTransitionInterval,
+		DataType:                     dataType,
+		Description:                  description,
+		MaxDigits:                    maxDigits,
+		MaxValue:                     maxValue,
+		MinValue:                     minValue,
+		Name:                         &name,
+		PostProcessorMethod:          postProcessorMethod,
+		PostProcessorParam:           postProcessorParam,
+		RawDataFieldName:             rawDataFieldName,
+		Type:                         typeVar,
 	}
 }
 

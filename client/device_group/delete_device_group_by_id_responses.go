@@ -46,7 +46,8 @@ func NewDeleteDeviceGroupByIDOK() *DeleteDeviceGroupByIDOK {
 	return &DeleteDeviceGroupByIDOK{}
 }
 
-/* DeleteDeviceGroupByIDOK describes a response with status code 200, with default header values.
+/*
+	DeleteDeviceGroupByIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -78,7 +79,8 @@ func NewDeleteDeviceGroupByIDDefault(code int) *DeleteDeviceGroupByIDDefault {
 	}
 }
 
-/* DeleteDeviceGroupByIDDefault describes a response with status code -1, with default header values.
+/*
+	DeleteDeviceGroupByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

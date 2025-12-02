@@ -46,7 +46,8 @@ func NewDeleteDashboardGroupByIDOK() *DeleteDashboardGroupByIDOK {
 	return &DeleteDashboardGroupByIDOK{}
 }
 
-/* DeleteDashboardGroupByIDOK describes a response with status code 200, with default header values.
+/*
+	DeleteDashboardGroupByIDOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -78,7 +79,8 @@ func NewDeleteDashboardGroupByIDDefault(code int) *DeleteDashboardGroupByIDDefau
 	}
 }
 
-/* DeleteDashboardGroupByIDDefault describes a response with status code -1, with default header values.
+/*
+	DeleteDashboardGroupByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

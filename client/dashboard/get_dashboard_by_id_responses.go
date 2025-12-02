@@ -46,7 +46,8 @@ func NewGetDashboardByIDOK() *GetDashboardByIDOK {
 	return &GetDashboardByIDOK{}
 }
 
-/* GetDashboardByIDOK describes a response with status code 200, with default header values.
+/*
+	GetDashboardByIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewGetDashboardByIDDefault(code int) *GetDashboardByIDDefault {
 	}
 }
 
-/* GetDashboardByIDDefault describes a response with status code -1, with default header values.
+/*
+	GetDashboardByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

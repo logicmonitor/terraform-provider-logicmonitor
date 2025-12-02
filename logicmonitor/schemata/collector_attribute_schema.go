@@ -1,17 +1,16 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func CollectorAttributeSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
 	}
 }
 
@@ -29,8 +28,8 @@ func SetCollectorAttributeSubResourceData(m []*models.CollectorAttribute) (d []*
 func CollectorAttributeModel(d map[string]interface{}) *models.CollectorAttribute {
 	// assume that the incoming map only contains the relevant resource data
 	name := d["name"].(string)
-	
-	return &models.CollectorAttribute {
+
+	return &models.CollectorAttribute{
 		Name: &name,
 	}
 }

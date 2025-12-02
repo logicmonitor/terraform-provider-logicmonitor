@@ -46,7 +46,8 @@ func NewUpdateCollectorGroupByIDOK() *UpdateCollectorGroupByIDOK {
 	return &UpdateCollectorGroupByIDOK{}
 }
 
-/* UpdateCollectorGroupByIDOK describes a response with status code 200, with default header values.
+/*
+	UpdateCollectorGroupByIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewUpdateCollectorGroupByIDDefault(code int) *UpdateCollectorGroupByIDDefau
 	}
 }
 
-/* UpdateCollectorGroupByIDDefault describes a response with status code -1, with default header values.
+/*
+	UpdateCollectorGroupByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

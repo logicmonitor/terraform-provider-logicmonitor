@@ -46,7 +46,8 @@ func NewGetWidgetListByDashboardIDOK() *GetWidgetListByDashboardIDOK {
 	return &GetWidgetListByDashboardIDOK{}
 }
 
-/* GetWidgetListByDashboardIDOK describes a response with status code 200, with default header values.
+/*
+	GetWidgetListByDashboardIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewGetWidgetListByDashboardIDDefault(code int) *GetWidgetListByDashboardIDD
 	}
 }
 
-/* GetWidgetListByDashboardIDDefault describes a response with status code -1, with default header values.
+/*
+	GetWidgetListByDashboardIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

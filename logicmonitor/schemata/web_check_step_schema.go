@@ -1,151 +1,150 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func WebCheckStepSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"http_body": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"http_headers": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"http_method": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"http_version": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"auth": {
-			Type: schema.TypeList, //GoType: Authentication 
-            Elem: &schema.Resource{
+			Type: schema.TypeList, //GoType: Authentication
+			Elem: &schema.Resource{
 				Schema: AuthenticationSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"enable": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"follow_redirection": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"fullpage_load": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"invert_match": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"keyword": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"label": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"match_type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"path": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"post_data_edit_type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"req_script": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"req_type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"require_auth": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"resp_script": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"resp_type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"schema": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"status_code": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"timeout": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"url": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"use_default_root": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Required: true,
 		},
-		
 	}
 }
 
@@ -219,35 +218,35 @@ func WebCheckStepModel(d map[string]interface{}) *models.WebCheckStep {
 	typeVar := d["type"].(string)
 	url := d["url"].(string)
 	useDefaultRoot := d["use_default_root"].(bool)
-	
-	return &models.WebCheckStep {
-		HTTPBody: hTTPBody,
-		HTTPHeaders: hTTPHeaders,
-		HTTPMethod: hTTPMethod,
-		HTTPVersion: hTTPVersion,
-		Auth: auth,
-		Description: description,
-		Enable: enable,
+
+	return &models.WebCheckStep{
+		HTTPBody:          hTTPBody,
+		HTTPHeaders:       hTTPHeaders,
+		HTTPMethod:        hTTPMethod,
+		HTTPVersion:       hTTPVersion,
+		Auth:              auth,
+		Description:       description,
+		Enable:            enable,
 		FollowRedirection: followRedirection,
-		FullpageLoad: fullpageLoad,
-		InvertMatch: invertMatch,
-		Keyword: keyword,
-		Label: label,
-		MatchType: matchType,
-		Name: name,
-		Path: path,
-		PostDataEditType: postDataEditType,
-		ReqScript: reqScript,
-		ReqType: reqType,
-		RequireAuth: requireAuth,
-		RespScript: respScript,
-		RespType: respType,
-		Schema: schema,
-		StatusCode: statusCode,
-		Timeout: timeout,
-		Type: typeVar,
-		URL: url,
-		UseDefaultRoot: &useDefaultRoot,
+		FullpageLoad:      fullpageLoad,
+		InvertMatch:       invertMatch,
+		Keyword:           keyword,
+		Label:             label,
+		MatchType:         matchType,
+		Name:              name,
+		Path:              path,
+		PostDataEditType:  postDataEditType,
+		ReqScript:         reqScript,
+		ReqType:           reqType,
+		RequireAuth:       requireAuth,
+		RespScript:        respScript,
+		RespType:          respType,
+		Schema:            schema,
+		StatusCode:        statusCode,
+		Timeout:           timeout,
+		Type:              typeVar,
+		URL:               url,
+		UseDefaultRoot:    &useDefaultRoot,
 	}
 }
 

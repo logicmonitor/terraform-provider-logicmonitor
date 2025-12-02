@@ -85,15 +85,15 @@ type AlertRule struct {
 
 	// Whether or not send anomaly suppressed alert
 	// Example: true
-	SendAnomalySuppressedAlert bool `json:"sendAnomalySuppressedAlert,omitempty"`
+	SendAnomalySuppressedAlert bool `json:"sendAnomalySuppressedAlert"`
 
 	// Whether or not status notifications for acknowledgements and SDTs should be sent to the alert rule
 	// Example: true
-	SuppressAlertAckSdt bool `json:"suppressAlertAckSdt,omitempty"`
+	SuppressAlertAckSdt bool `json:"suppressAlertAckSdt"`
 
 	// Whether or not alert clear notifications should be sent to the alert rule
 	// Example: true
-	SuppressAlertClear bool `json:"suppressAlertClear,omitempty"`
+	SuppressAlertClear bool `json:"suppressAlertClear"`
 }
 
 // Validate validates this alert rule

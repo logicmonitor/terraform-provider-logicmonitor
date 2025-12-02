@@ -1,31 +1,30 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func CollectorGroupPaginationResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"items": {
-			Type: schema.TypeList, //GoType: []*CollectorGroup 
+			Type: schema.TypeList, //GoType: []*CollectorGroup
 			Elem: &schema.Resource{
 				Schema: CollectorGroupSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"search_id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"total": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -45,8 +44,8 @@ func SetCollectorGroupPaginationResponseSubResourceData(m []*models.CollectorGro
 func CollectorGroupPaginationResponseModel(d map[string]interface{}) *models.CollectorGroupPaginationResponse {
 	// assume that the incoming map only contains the relevant resource data
 	items := d["items"].([]*models.CollectorGroup)
-	
-	return &models.CollectorGroupPaginationResponse {
+
+	return &models.CollectorGroupPaginationResponse{
 		Items: items,
 	}
 }

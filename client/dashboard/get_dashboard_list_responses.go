@@ -46,7 +46,8 @@ func NewGetDashboardListOK() *GetDashboardListOK {
 	return &GetDashboardListOK{}
 }
 
-/* GetDashboardListOK describes a response with status code 200, with default header values.
+/*
+	GetDashboardListOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewGetDashboardListDefault(code int) *GetDashboardListDefault {
 	}
 }
 
-/* GetDashboardListDefault describes a response with status code -1, with default header values.
+/*
+	GetDashboardListDefault describes a response with status code -1, with default header values.
 
 Error
 */

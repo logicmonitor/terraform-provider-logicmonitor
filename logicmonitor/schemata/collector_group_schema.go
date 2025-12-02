@@ -1,48 +1,48 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"strconv"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func CollectorGroupSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"auto_balance": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"auto_balance_instance_count_threshold": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"auto_balance_strategy": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"create_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"custom_properties": {
 			Type: schema.TypeSet,
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"highest_priority_collector_status": {
 			Type: schema.TypeList, //GoType: RestHighestPriorityCollectorStatus
 			Elem: &schema.Resource{
@@ -50,69 +50,67 @@ func CollectorGroupSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"num_of_collectors": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
 	}
 }
-
 
 // Schema mapping representing the resource's respective datasource object defined in Terraform configuration
 // Only difference between this and CollectorGroupSchema() are the computabilty of the id field and the inclusion of a filter field for datasources
 func DataSourceCollectorGroupSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"auto_balance": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"auto_balance_instance_count_threshold": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"auto_balance_strategy": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"create_on": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"custom_properties": {
-			Type: schema.TypeList, //GoType: []*NameAndValue 
+			Type: schema.TypeList, //GoType: []*NameAndValue
 			Elem: &schema.Resource{
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"highest_priority_collector_status": {
 			Type: schema.TypeList, //GoType: RestHighestPriorityCollectorStatus
 			Elem: &schema.Resource{
@@ -120,31 +118,31 @@ func DataSourceCollectorGroupSchema() map[string]*schema.Schema {
 			},
 			Optional: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 			Optional: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"num_of_collectors": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"filter": {
 			Type:     schema.TypeString,
-            Optional: true,
+			Optional: true,
 		},
 	}
 }
@@ -192,15 +190,15 @@ func CollectorGroupModel(d *schema.ResourceData) *models.CollectorGroup {
 	description := d.Get("description").(string)
 	id, _ := strconv.Atoi(d.Get("id").(string))
 	name := d.Get("name").(string)
-	
-	return &models.CollectorGroup {
-		AutoBalance: autoBalance,
+
+	return &models.CollectorGroup{
+		AutoBalance:                       autoBalance,
 		AutoBalanceInstanceCountThreshold: autoBalanceInstanceCountThreshold,
-		AutoBalanceStrategy: autoBalanceStrategy,
-		CustomProperties: customProperties,
-		Description: description,
-		ID: int32(id),
-		Name: &name,
+		AutoBalanceStrategy:               autoBalanceStrategy,
+		CustomProperties:                  customProperties,
+		Description:                       description,
+		ID:                                int32(id),
+		Name:                              &name,
 	}
 }
 func GetCollectorGroupPropertyFields() (t []string) {

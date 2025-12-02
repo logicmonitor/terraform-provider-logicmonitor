@@ -1,42 +1,41 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func NextUpgradeInfoSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"major_version": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"mandatory": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"minor_version": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"stable": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"upgrade_time": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"upgrade_time_epoch": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -58,12 +57,10 @@ func SetNextUpgradeInfoSubResourceData(m []*models.NextUpgradeInfo) (d []*map[st
 
 func NextUpgradeInfoModel(d map[string]interface{}) *models.NextUpgradeInfo {
 	// assume that the incoming map only contains the relevant resource data
-	
-	return &models.NextUpgradeInfo {
-	}
+
+	return &models.NextUpgradeInfo{}
 }
 
 func GetNextUpgradeInfoPropertyFields() (t []string) {
-	return []string{
-	}
+	return []string{}
 }

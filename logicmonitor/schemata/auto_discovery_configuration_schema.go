@@ -1,47 +1,47 @@
 package schemata
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func AutoDiscoveryConfigurationSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"data_source_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"delete_inactive_instance": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"disable_instance": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"filters": {
-			Type: schema.TypeList, //GoType: []*AutoDiscoveryFilter  
+			Type: schema.TypeList, //GoType: []*AutoDiscoveryFilter
 			Elem: &schema.Resource{
 				Schema: AutoDiscoveryFilterSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
+			Optional:   true,
 		},
-		
+
 		"instance_auto_group_method": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"instance_auto_group_method_params": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"method": {
 			Type: schema.TypeList, //GoType: AutoDiscoveryMethod
 			Elem: &schema.Resource{
@@ -49,17 +49,16 @@ func AutoDiscoveryConfigurationSchema() map[string]*schema.Schema {
 			},
 			Required: true,
 		},
-		
+
 		"persistent_instance": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"schedule_interval": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Optional: true,
 		},
-		
 	}
 }
 
@@ -96,16 +95,16 @@ func AutoDiscoveryConfigurationModel(d map[string]interface{}) *models.AutoDisco
 	}
 	persistentInstance := d["persistent_instance"].(bool)
 	scheduleInterval := int32(d["schedule_interval"].(int))
-	
-	return &models.AutoDiscoveryConfiguration {
-		DeleteInactiveInstance: deleteInactiveInstance,
-		DisableInstance: disableInstance,
-		Filters: filters,
-		InstanceAutoGroupMethod: instanceAutoGroupMethod,
+
+	return &models.AutoDiscoveryConfiguration{
+		DeleteInactiveInstance:        deleteInactiveInstance,
+		DisableInstance:               disableInstance,
+		Filters:                       filters,
+		InstanceAutoGroupMethod:       instanceAutoGroupMethod,
 		InstanceAutoGroupMethodParams: instanceAutoGroupMethodParams,
-		Method: method,
-		PersistentInstance: persistentInstance,
-		ScheduleInterval: scheduleInterval,
+		Method:                        method,
+		PersistentInstance:            persistentInstance,
+		ScheduleInterval:              scheduleInterval,
 	}
 }
 

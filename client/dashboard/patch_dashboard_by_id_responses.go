@@ -46,7 +46,8 @@ func NewPatchDashboardByIDOK() *PatchDashboardByIDOK {
 	return &PatchDashboardByIDOK{}
 }
 
-/* PatchDashboardByIDOK describes a response with status code 200, with default header values.
+/*
+	PatchDashboardByIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewPatchDashboardByIDDefault(code int) *PatchDashboardByIDDefault {
 	}
 }
 
-/* PatchDashboardByIDDefault describes a response with status code -1, with default header values.
+/*
+	PatchDashboardByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

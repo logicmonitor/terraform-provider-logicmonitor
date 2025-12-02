@@ -1,57 +1,56 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func OnetimeUpgradeInfoSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"created_by": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"end_epoch": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"level": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"major_version": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"minor_version": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"start_epoch": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Required: true,
 		},
-		
+
 		"timezone": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Optional: true,
 		},
-		
+
 		"type": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -81,13 +80,13 @@ func OnetimeUpgradeInfoModel(d map[string]interface{}) *models.OnetimeUpgradeInf
 	minorVersion := int32(d["minor_version"].(int))
 	startEpoch := int64(d["start_epoch"].(int))
 	timezone := d["timezone"].(string)
-	
-	return &models.OnetimeUpgradeInfo {
-		Description: description,
+
+	return &models.OnetimeUpgradeInfo{
+		Description:  description,
 		MajorVersion: &majorVersion,
 		MinorVersion: &minorVersion,
-		StartEpoch: &startEpoch,
-		Timezone: timezone,
+		StartEpoch:   &startEpoch,
+		Timezone:     timezone,
 	}
 }
 

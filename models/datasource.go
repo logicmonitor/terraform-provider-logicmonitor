@@ -72,11 +72,11 @@ type Datasource struct {
 
 	// Enable Auto Discovery or not when this data source has multi instance: false|true
 	// Example: false
-	EnableAutoDiscovery bool `json:"enableAutoDiscovery,omitempty"`
+	EnableAutoDiscovery bool `json:"enableAutoDiscovery"`
 
 	// Enable ERI Discovery or not: false|true
 	// Example: false
-	EnableEriDiscovery bool `json:"enableEriDiscovery,omitempty"`
+	EnableEriDiscovery bool `json:"enableEriDiscovery"`
 
 	// eri discovery config
 	EriDiscoveryConfig *ScriptERIDiscoveryAttributeV2 `json:"eriDiscoveryConfig,omitempty"`
@@ -90,7 +90,7 @@ type Datasource struct {
 	Group string `json:"group,omitempty"`
 
 	// If the DataSource has multi instance: true|false
-	HasMultiInstances bool `json:"hasMultiInstances,omitempty"`
+	HasMultiInstances bool `json:"hasMultiInstances"`
 
 	// The ID of the LMModule
 	// Read Only: true
@@ -123,7 +123,7 @@ type Datasource struct {
 
 	// Use wild-value as unique identifier in case of multi instance datasource: true|false
 	// Read Only: true
-	UseWildValueAsUUID *bool `json:"useWildValueAsUUID,omitempty"`
+	UseWildValueAsUUID *bool `json:"useWildValueAsUUID"`
 
 	// The data source version
 	// Read Only: true

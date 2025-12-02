@@ -54,10 +54,12 @@ func NewGetCollectorGroupByIDParamsWithHTTPClient(client *http.Client) *GetColle
 	}
 }
 
-/* GetCollectorGroupByIDParams contains all the parameters to send to the API endpoint
-   for the get collector group by Id operation.
+/*
+GetCollectorGroupByIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get collector group by Id operation.
+
+	Typically these are written to a http.Request.
 */
 type GetCollectorGroupByIDParams struct {
 

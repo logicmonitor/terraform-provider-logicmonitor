@@ -23,7 +23,7 @@ type CollectorGroup struct {
 
 	// Denotes whether or not the collector group should be auto balanced
 	// Example: true
-	AutoBalance bool `json:"autoBalance,omitempty"`
+	AutoBalance bool `json:"autoBalance"`
 
 	// Threshold for instance count strategy to check if a collector has high load
 	// Example: 10000

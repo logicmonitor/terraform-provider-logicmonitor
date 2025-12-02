@@ -46,7 +46,8 @@ func NewDeleteCollectorByIDOK() *DeleteCollectorByIDOK {
 	return &DeleteCollectorByIDOK{}
 }
 
-/* DeleteCollectorByIDOK describes a response with status code 200, with default header values.
+/*
+	DeleteCollectorByIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -78,7 +79,8 @@ func NewDeleteCollectorByIDDefault(code int) *DeleteCollectorByIDDefault {
 	}
 }
 
-/* DeleteCollectorByIDDefault describes a response with status code -1, with default header values.
+/*
+	DeleteCollectorByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

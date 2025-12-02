@@ -1,27 +1,26 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func CloudTagFilterSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"operation": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
+
 		"value": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
 		},
-		
 	}
 }
 
@@ -43,11 +42,11 @@ func CloudTagFilterModel(d map[string]interface{}) *models.CloudTagFilter {
 	name := d["name"].(string)
 	operation := d["operation"].(string)
 	value := d["value"].(string)
-	
-	return &models.CloudTagFilter {
-		Name: &name,
+
+	return &models.CloudTagFilter{
+		Name:      &name,
 		Operation: &operation,
-		Value: &value,
+		Value:     &value,
 	}
 }
 

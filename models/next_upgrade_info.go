@@ -25,7 +25,7 @@ type NextUpgradeInfo struct {
 
 	// mandatory
 	// Read Only: true
-	Mandatory *bool `json:"mandatory,omitempty"`
+	Mandatory *bool `json:"mandatory"`
 
 	// minor version
 	// Read Only: true
@@ -33,7 +33,7 @@ type NextUpgradeInfo struct {
 
 	// stable
 	// Read Only: true
-	Stable *bool `json:"stable,omitempty"`
+	Stable *bool `json:"stable"`
 
 	// upgrade time
 	// Read Only: true

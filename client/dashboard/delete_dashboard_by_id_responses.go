@@ -46,7 +46,8 @@ func NewDeleteDashboardByIDOK() *DeleteDashboardByIDOK {
 	return &DeleteDashboardByIDOK{}
 }
 
-/* DeleteDashboardByIDOK describes a response with status code 200, with default header values.
+/*
+	DeleteDashboardByIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -78,7 +79,8 @@ func NewDeleteDashboardByIDDefault(code int) *DeleteDashboardByIDDefault {
 	}
 }
 
-/* DeleteDashboardByIDDefault describes a response with status code -1, with default header values.
+/*
+	DeleteDashboardByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */

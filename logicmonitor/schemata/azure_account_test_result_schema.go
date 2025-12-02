@@ -1,8 +1,8 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func AzureAccountTestResultSchema() map[string]*schema.Schema {
@@ -14,7 +14,7 @@ func AzureAccountTestResultSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"no_permission_services": {
 			Type: schema.TypeMap, //GoType: interface{}
 			Elem: &schema.Schema{
@@ -22,7 +22,6 @@ func AzureAccountTestResultSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -40,12 +39,10 @@ func SetAzureAccountTestResultSubResourceData(m []*models.AzureAccountTestResult
 
 func AzureAccountTestResultModel(d map[string]interface{}) *models.AzureAccountTestResult {
 	// assume that the incoming map only contains the relevant resource data
-	
-	return &models.AzureAccountTestResult {
-	}
+
+	return &models.AzureAccountTestResult{}
 }
 
 func GetAzureAccountTestResultPropertyFields() (t []string) {
-	return []string{
-	}
+	return []string{}
 }

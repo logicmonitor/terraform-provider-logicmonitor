@@ -56,10 +56,12 @@ func NewUpdateDashboardGroupByIDParamsWithHTTPClient(client *http.Client) *Updat
 	}
 }
 
-/* UpdateDashboardGroupByIDParams contains all the parameters to send to the API endpoint
-   for the update dashboard group by Id operation.
+/*
+UpdateDashboardGroupByIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update dashboard group by Id operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateDashboardGroupByIDParams struct {
 

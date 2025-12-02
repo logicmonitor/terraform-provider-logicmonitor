@@ -1,42 +1,41 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func WebsiteCollectorInfoSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"collector_group_id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"collector_group_name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"description": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"hostname": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"status": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -58,9 +57,8 @@ func SetWebsiteCollectorInfoSubResourceData(m []*models.WebsiteCollectorInfo) (d
 
 func WebsiteCollectorInfoModel(d map[string]interface{}) *models.WebsiteCollectorInfo {
 	// assume that the incoming map only contains the relevant resource data
-	
-	return &models.WebsiteCollectorInfo {
-	}
+
+	return &models.WebsiteCollectorInfo{}
 }
 
 func GetWebsiteCollectorInfoPropertyFields() (t []string) {

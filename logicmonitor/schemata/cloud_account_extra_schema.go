@@ -1,8 +1,8 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func CloudAccountExtraSchema() map[string]*schema.Schema {
@@ -14,7 +14,7 @@ func CloudAccountExtraSchema() map[string]*schema.Schema {
 			},
 			Required: true,
 		},
-		
+
 		"default": {
 			Type: schema.TypeList, //GoType: CloudServiceSettings
 			Elem: &schema.Resource{
@@ -22,7 +22,7 @@ func CloudAccountExtraSchema() map[string]*schema.Schema {
 			},
 			Required: true,
 		},
-		
+
 		"devices": {
 			Type: schema.TypeList, //GoType: CloudDevice
 			Elem: &schema.Resource{
@@ -30,7 +30,7 @@ func CloudAccountExtraSchema() map[string]*schema.Schema {
 			},
 			Computed: true,
 		},
-		
+
 		"services": {
 			Type: schema.TypeList, //GoType: CloudServices
 			Elem: &schema.Resource{
@@ -38,7 +38,6 @@ func CloudAccountExtraSchema() map[string]*schema.Schema {
 			},
 			Required: true,
 		},
-		
 	}
 }
 
@@ -73,10 +72,10 @@ func CloudAccountExtraModel(d map[string]interface{}) *models.CloudAccountExtra 
 	if len(servicesList) > 0 { // len(nil) = 0
 		services = CloudServicesModel(servicesList[0].(map[string]interface{}))
 	}
-	
-	return &models.CloudAccountExtra {
-		Account: account,
-		Default: defaultVar,
+
+	return &models.CloudAccountExtra{
+		Account:  account,
+		Default:  defaultVar,
 		Services: services,
 	}
 }

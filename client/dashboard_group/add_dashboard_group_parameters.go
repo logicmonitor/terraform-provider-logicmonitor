@@ -55,10 +55,12 @@ func NewAddDashboardGroupParamsWithHTTPClient(client *http.Client) *AddDashboard
 	}
 }
 
-/* AddDashboardGroupParams contains all the parameters to send to the API endpoint
-   for the add dashboard group operation.
+/*
+AddDashboardGroupParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the add dashboard group operation.
+
+	Typically these are written to a http.Request.
 */
 type AddDashboardGroupParams struct {
 

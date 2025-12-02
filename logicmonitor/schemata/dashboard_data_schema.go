@@ -1,32 +1,31 @@
 package schemata
 
 import (
-	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"terraform-provider-logicmonitor/models"
 )
 
 func DashboardDataSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"id": {
-			Type: schema.TypeInt,
+			Type:     schema.TypeInt,
 			Computed: true,
 		},
-		
+
 		"name": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"sharable": {
-			Type: schema.TypeBool,
+			Type:     schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"user_permission": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Computed: true,
 		},
-		
 	}
 }
 
@@ -46,9 +45,8 @@ func SetDashboardDataSubResourceData(m []*models.DashboardData) (d []*map[string
 
 func DashboardDataModel(d map[string]interface{}) *models.DashboardData {
 	// assume that the incoming map only contains the relevant resource data
-	
-	return &models.DashboardData {
-	}
+
+	return &models.DashboardData{}
 }
 
 func GetDashboardDataPropertyFields() (t []string) {

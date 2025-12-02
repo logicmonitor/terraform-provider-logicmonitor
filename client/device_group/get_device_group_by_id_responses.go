@@ -46,7 +46,8 @@ func NewGetDeviceGroupByIDOK() *GetDeviceGroupByIDOK {
 	return &GetDeviceGroupByIDOK{}
 }
 
-/* GetDeviceGroupByIDOK describes a response with status code 200, with default header values.
+/*
+	GetDeviceGroupByIDOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -80,7 +81,8 @@ func NewGetDeviceGroupByIDDefault(code int) *GetDeviceGroupByIDDefault {
 	}
 }
 
-/* GetDeviceGroupByIDDefault describes a response with status code -1, with default header values.
+/*
+	GetDeviceGroupByIDDefault describes a response with status code -1, with default header values.
 
 Error
 */
