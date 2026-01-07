@@ -153,6 +153,10 @@ resource "logicmonitor_device_group" "my_aws_device_group" {
 		null_resource.wait,
 	]
 }
+
+Note: The following services are currently not supported by the Terraform Provider: directconnectvirtualinterface, globalnetworks, privatelinkservices, privatelinkendpoints, quicksightdashboards, quicksightdatasets.
+Support for these services may be added in future releases.
+
 ```
 ## Example Usage - Azure Cloud Account
 ```hcl
@@ -214,7 +218,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -234,7 +238,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -255,7 +259,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -276,7 +280,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -297,7 +301,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -317,7 +321,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -337,7 +341,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -357,7 +361,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -377,7 +381,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -397,7 +401,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -417,7 +421,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -437,7 +441,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -457,7 +461,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -477,7 +481,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
@@ -497,7 +501,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         disable_terminated_host_alerting = true
         normal_collector_config {
           collectors = []
-          enabled    = false
+          enable    = false
         }
         custom_n_s_p_schedule = ""
         select_all            = true
