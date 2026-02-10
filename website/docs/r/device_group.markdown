@@ -154,9 +154,6 @@ resource "logicmonitor_device_group" "my_aws_device_group" {
 	]
 }
 
-Note: The following services are currently not supported by the Terraform Provider: directconnectvirtualinterface, globalnetworks, privatelinkservices, privatelinkendpoints, quicksightdashboards, quicksightdatasets.
-Support for these services may be added in future releases.
-
 ```
 ## Example Usage - Azure Cloud Account
 ```hcl
@@ -521,6 +518,246 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
     }
   }
 }
+```
+## Example Usage - GCP Cloud Account
+```hcl
+//Auth information for GCP account
+variable "user_info_gcp" {
+  type = object({
+    project_id          = string
+    service_account_key = any  # JSON object for service account key
+  })
+  nullable  = false
+  sensitive = true
+}
+resource "logicmonitor_device_group" "my_gcp_device_group" {
+  name             = "GCP Production"
+  parent_id        = 1
+  group_type       = "GCP/GcpRoot"
+  description      = "GCP Production Environment"
+  disable_alerting = false
+  custom_properties = [
+    {
+      name  = "gcp.project_id"
+      value = var.user_info_gcp.project_id
+    },
+    {
+      name  = "gcp.service_account_key"
+      value = jsonencode(var.user_info_gcp.service_account_key)
+    }
+  ]
+  
+  extra {
+    account {
+      # GCP-specific account fields
+      project_id              = var.user_info_gcp.project_id
+      service_account_key     = jsonencode(var.user_info_gcp.service_account_key)
+      schedule                = "0 * * * *"
+      collector_description   = "GCP Cloud Collector"
+    }
+    
+    default {
+      # Default settings for all GCP services
+      use_default                         = true
+      select_all                          = false
+      monitoring_regions                  = ["us-central1", "us-west1", "europe-west1"]
+      dead_operation                      = "KEEP_7_DAYS"
+      disable_terminated_host_alerting    = true
+      disable_stop_terminate_host_monitor = true
+      name_filter = ["prod-*", "*-production"]
+      tags = [
+        {
+          operation = "include"
+          name      = "system.gcp.label.environment" 
+          value     = "production"
+        },
+        {
+          operation = "exclude"
+          name      = "system.gcp.label.temporary"
+          value     = "true"
+        }
+      ]
+    }
+    services {
+      a_p_p_e_n_g_i_n_e {
+        use_default     = true
+      }
+      c_l_o_u_d_a_ip_l_a_t_f_o_r_m {
+        use_default     = true
+      }
+      c_l_o_u_d_b_i_g_t_a_b_l_e {
+        use_default     = true
+      }
+      c_l_o_u_d_c_o_m_p_o_s_e_r {
+        use_default     = true
+      }
+      c_l_o_u_d_d_a_t_a_f_l_o_w {
+        use_default     = true
+      }
+      c_l_o_u_d_d_a_t_a_p_r_o_c {
+        use_default     = true
+      }
+      c_l_o_u_d_d_l_p {
+        use_default     = true
+      }
+      c_l_o_u_d_dns {
+        use_default     = true
+      }
+      c_l_o_u_d_f_i_l_e_s_t_o_r_e {
+        use_default     = true
+      }
+      c_l_o_u_d_f_i_r_e_s_t_o_r_e {
+        use_default     = true
+      }
+      c_l_o_u_d_f_u_n_c_t_i_o_n {
+        use_default     = true
+      }
+      c_l_o_u_d_i_n_t_e_r_c_o_n_n_e_c_t {
+        use_default     = true
+      }
+      c_l_o_u_d_i_o_t {
+        use_default     = true
+      }
+      c_l_o_udp_u_b_s_u_b {
+        use_default     = true
+      }
+      c_l_o_u_d_r_e_d_i_s {
+        use_default     = true
+      }
+      c_l_o_u_d_r_o_u_t_e_r {
+        use_default     = true
+      }
+      c_l_o_u_d_r_u_n {
+        use_default     = true
+      }
+      c_l_o_u_d_s_p_a_n_n_e_r {
+        use_default     = true
+      }
+      c_l_o_u_d_sql {
+        use_default     = true
+      }
+      c_l_o_u_d_s_t_o_r_a_g_e {
+        use_default     = true
+      }
+      c_l_o_u_d_t_a_s_k_s {
+        use_default     = true
+      }
+      c_l_o_u_d_t_p_u {
+        use_default     = true
+      }
+      c_l_o_u_d_t_r_a_c_e {
+        use_default     = true
+      }
+      c_o_m_p_u_t_e_e_n_g_i_n_e {
+        use_default     = true
+      }
+      c_o_m_p_u_t_e_e_n_g_i_n_e_a_u_t_o_s_c_a_l_e_r {
+        use_default     = true
+      }
+      https_l_o_a_d_b_a_l_a_n_c_e_r {
+        use_default     = true
+      }
+      i_n_t_e_r_c_o_n_n_e_c_t_a_t_t_a_c_h_m_e_n_t {
+        use_default     = true
+      }
+      m_a_n_a_g_e_d_s_e_r_v_i_c_e_f_o_r_m_i_c_r_o_s_o_f_t_a_d {
+        use_default     = true
+      }
+      n_e_t_w_o_r_k_l_o_a_d_b_a_l_a_n_c_e_r {
+        use_default     = true
+      }
+      r_e_g_i_o_n_a_l_https_l_o_a_d_b_a_l_a_n_c_e_r {
+        use_default     = true
+      }
+      r_e_g_i_o_n_a_l_n_e_t_w_o_r_k_l_o_a_d_b_a_l_a_n_c_e_r {
+        use_default     = true
+      }
+      v_p_n_g_a_t_e_w_a_y {
+        use_default     = true
+      }
+      v_p_n_h_a_g_a_t_e_w_a_y {
+        use_default     = true
+      }
+   }
+ }
+}
+```
+## Example Usage - OCI Cloud Account
+```hcl
+//Auth information for OCI account
+
+variable "user_info_oci" {
+  type = object({
+    tenancy_id  = string
+    user_id     = string
+    private_key = string
+  })
+  nullable  = false
+  sensitive = true
+}
+resource "logicmonitor_device_group" "my_OCI_device_group" {
+  name             = "OCI Production"
+  parent_id        = 1
+  group_type       = "OCI/OciRoot"
+  description      = "OCI Production Environment"
+  disable_alerting = false
+  custom_properties = [
+    {
+      name  = "oci.tenancy_id"
+      value = var.user_info_oci.tenancy_id
+    },
+    {
+      name  = "oci.user_id"
+      value = var.user_info_oci.user_id
+    },
+    {
+      name  = "oci.private_key"
+      value = var.user_info_oci.private_key
+    }
+  ]
+  extra {
+    account {
+      schedule              = "0 * * * *"
+      country               = "USA"
+      collector_description = "OCI Cloud Collector"
+      tenancy_id             = var.user_info_oci.tenancy_id
+      user_id                = var.user_info_oci.user_id
+      private_key            = var.user_info_oci.private_key
+    }
+  default {
+      # Default settings for all OCI services
+      use_default                         = true
+      select_all                          = false
+      monitoring_regions                  = []
+      dead_operation                      = "KEEP_7_DAYS"
+      disable_terminated_host_alerting    = true
+      disable_stop_terminate_host_monitor = true
+    }
+    services {
+      o_c_i_b_l_o_c_k_s_t_o_r_a_g_e {
+        use_default = true
+      }
+      o_c_i_a_u_t_o_n_o_m_o_u_s_d_a_t_a_b_a_s_e{
+       use_default = true
+      }
+      o_c_i_c_o_m_p_u_t_e{
+       use_default = true
+      }
+      o_c_id_y_n_a_m_i_c_r_o_u_t_i_n_g_g_a_t_e_w_a_y{
+       use_default = true
+      }
+      o_c_i_f_u_n_c_t_i_o_n_s{
+       use_default = true
+      }
+      o_c_i_o_b_j_e_c_t_s_t_o_r_a_g_e{
+       use_default = true
+      }
+      o_c_i_s_i_t_e_t_o_s_i_t_e_v_p_n{
+       use_default = true
+      }
+    }
+  }
+}
 
 
 ```
@@ -543,7 +780,7 @@ The following arguments are **optional**:
 * `disable_alerting` - Indicates whether alerting is disabled (true) or enabled (false) for this device group (bool)
 * `enable_netflow` - Indicates whether Netflow is enabled (true) or disabled (false) for the device group, the default value is true (bool)
 * `extra` - The extra setting for cloud group (CloudAccountExtra)
-  + `account` - cloud account information (currently only supports AWS)
+  + `account` - cloud account information
     + `accountId` - LogicMonitor's Account ID
     + `assumedRoleArn` - ARN of the role created for LogicMonitor to use while monitoring AWS (required)
     + `billingBucketName` - S3 bucket name that houses AWS billing info (deprecated) (computed)
@@ -551,9 +788,14 @@ The following arguments are **optional**:
     + `collectorId` - ID of the collector assigned to this group (computed)
     + `externalId` - External ID provide by LM for the creation of the assumed role in AWS (required)
     + `clientId`   - Client ID from Azure account (required for Azure)
+    + `privateKey` - Private key  from OCI Account (required for OCI)
+    + `projectId` - Project ID  from GCP Account (required for GCP)
     + `secretKey` - Secret key  from Azure Account (required for Azure)
-    + `subscriptionIds` -  List of subcription ids(comma separated, required for Azure)) 
+    + `serviceAccountKey` - Service account key from GCP Account (required for GCP)
+    + `subscriptionIds` -  List of subcription ids(comma separated, required for Azure)
+    + `tenancyId` - Tenancy ID from OCI account (required for OCI) 
     + `tenantId` - Tenant ID from Azure account (required for Azure)
+    + `userId` - User ID from OCI account (required for OCI) 
     + `schedule` - The NetScan schedule for how frequently the cloud collector should scan/discover new resources in the cloud account. It's format is similar to Linux crontab but doesn't support some complex representations ('-', '/', ',') supported in standard linux crontabs.\nFormat: '*(minute) *(hour) *(day) *(week of month) *(weekday)'\nExamples: '50 * * * *' means scheduling at 50th minute per hour\n'50 10 20 * *' means scheduling at 10:50 of the 20th day per month\n'50 10 * 1 3' means scheduling at wednesday of the first week per month
     + `type` - Type of cloud account (computed)
   + `default` - default cloud service monitoring settings
@@ -580,7 +822,7 @@ The following arguments are **optional**:
   + `devices` - Cloud devices to monitor in the group (computed)
     + `deviceType` - Cloud device type (2 for AWS Device) (int)
     + `requiredProps` - Required device properties (array of strings)
-  + `services` - Cloud account services to monitor. This is an object with keys for each AWS/Azure service that have the same arguments as `default`. See example above (all service keys alternate letters and underscores, but not numbers; SQS=s_q_s, SAGEMAKER=s_a_g_e_m_a_k_e_r, EC2=e_c2 etc.)
+  + `services` - Cloud account services to monitor. This is an object with keys for each AWS/Azure/GCP/OCI service that have the same arguments as `default`. See example above (all service keys alternate letters and underscores, but not numbers; SQS=s_q_s, SAGEMAKER=s_a_g_e_m_a_k_e_r, EC2=e_c2 etc.)
 * `group_type` - The type of device group: normal and dynamic device groups will have groupType=Normal, and AWS groups will have a groupType value of AWS/SERVICE (e.g. AWS/AwsRoot, AWS/S3,Azure/AzureRoot etc.) (string)
 * `parent_id` - The id of the parent group for this device group (the root device group has an Id of 1) (int32)
 

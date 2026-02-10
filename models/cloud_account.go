@@ -49,6 +49,12 @@ type CloudAccount struct {
 	// External ID provide by LM for the creation of the assumed role in AWS
 	ExternalID string `json:"externalId,omitempty"`
 
+	// oci private key
+	PrivateKey string `json:"privateKey,omitempty"`
+
+	// project id
+	ProjectID string `json:"projectId,omitempty"`
+
 	// The NetScan schedule for how frequently the cloud collector should scan/discover new resources in the cloud account. It's format is similar to Linux crontab but doesn't support some complex representations ('-', '/', ',') supported in standard linux crontabs.
 	// Format: '*(minute) *(hour) *(day) *(week of month) *(weekday)'
 	// Examples: '50 * * * *' means scheduling at 50th minute per hour
@@ -59,8 +65,14 @@ type CloudAccount struct {
 	// secretKey
 	SecretKey string `json:"secretKey,omitempty"`
 
+	// service account key
+	ServiceAccountKey string `json:"serviceAccountKey,omitempty"`
+
 	// subscriptionIds
 	SubscriptionIds string `json:"subscriptionIds,omitempty"`
+
+	// oci tenancy id
+	TenancyID string `json:"tenancyId,omitempty"`
 
 	// tenantId
 	TenantID string `json:"tenantId,omitempty"`
@@ -68,6 +80,9 @@ type CloudAccount struct {
 	// Type of cloud account
 	// Read Only: true
 	Type string `json:"type,omitempty"`
+
+	// oci user id
+	UserID string `json:"userId,omitempty"`
 }
 
 // Validate validates this cloud account
