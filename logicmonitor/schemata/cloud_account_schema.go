@@ -52,6 +52,16 @@ func CloudAccountSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"private_key": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"project_id": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
 		"schedule": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -62,7 +72,17 @@ func CloudAccountSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
+		"service_account_key": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
 		"subscription_ids": {
+			Type: schema.TypeString,
+			Optional: true,
+		},
+		
+		"tenancy_id": {
 			Type: schema.TypeString,
 			Optional: true,
 		},
@@ -75,6 +95,11 @@ func CloudAccountSchema() map[string]*schema.Schema {
 		"type": {
 			Type: schema.TypeString,
 			Computed: true,
+		},
+		
+		"user_id": {
+			Type: schema.TypeString,
+			Optional: true,
 		},
 		
 	}
@@ -93,11 +118,16 @@ func SetCloudAccountSubResourceData(m []*models.CloudAccount) (d []*map[string]i
 			properties["collector_id"] = cloudAccount.CollectorID
 			properties["country"] = cloudAccount.Country
 			properties["external_id"] = cloudAccount.ExternalID
+			properties["private_key"] = cloudAccount.PrivateKey
+			properties["project_id"] = cloudAccount.ProjectID
 			properties["schedule"] = cloudAccount.Schedule
 			properties["secret_key"] = cloudAccount.SecretKey
+			properties["service_account_key"] = cloudAccount.ServiceAccountKey
 			properties["subscription_ids"] = cloudAccount.SubscriptionIds
+			properties["tenancy_id"] = cloudAccount.TenancyID
 			properties["tenant_id"] = cloudAccount.TenantID
 			properties["type"] = cloudAccount.Type
+			properties["user_id"] = cloudAccount.UserID
 			d = append(d, &properties)
 		}
 	}
@@ -112,10 +142,15 @@ func CloudAccountModel(d map[string]interface{}) *models.CloudAccount {
 	collectorDescription := d["collector_description"].(string)
 	country := d["country"].(string)
 	externalID := d["external_id"].(string)
+	privateKey := d["private_key"].(string)
+	projectID := d["project_id"].(string)
 	schedule := d["schedule"].(string)
 	secretKey := d["secret_key"].(string)
+	serviceAccountKey := d["service_account_key"].(string)
 	subscriptionIds := d["subscription_ids"].(string)
+	tenancyID := d["tenancy_id"].(string)
 	tenantID := d["tenant_id"].(string)
+	userID := d["user_id"].(string)
 	
 	return &models.CloudAccount {
 		AccountID: accountID,
@@ -124,10 +159,15 @@ func CloudAccountModel(d map[string]interface{}) *models.CloudAccount {
 		CollectorDescription: collectorDescription,
 		Country: country,
 		ExternalID: externalID,
+		PrivateKey: privateKey,
+		ProjectID: projectID,
 		Schedule: schedule,
 		SecretKey: secretKey,
+		ServiceAccountKey: serviceAccountKey,
 		SubscriptionIds: subscriptionIds,
+		TenancyID: tenancyID,
 		TenantID: tenantID,
+		UserID: userID,
 	}
 }
 
@@ -139,9 +179,14 @@ func GetCloudAccountPropertyFields() (t []string) {
 		"collector_description",
 		"country",
 		"external_id",
+		"private_key",
+		"project_id",
 		"schedule",
 		"secret_key",
+		"service_account_key",
 		"subscription_ids",
+		"tenancy_id",
 		"tenant_id",
+		"user_id",
 	}
 }
