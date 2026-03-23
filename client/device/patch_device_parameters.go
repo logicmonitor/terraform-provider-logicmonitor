@@ -85,8 +85,6 @@ type PatchDeviceParams struct {
 	NetflowFilter *string
 
 	// OpType.
-	//
-	// Default: "refresh"
 	OpType *string
 
 	// Start.
@@ -111,21 +109,7 @@ func (o *PatchDeviceParams) WithDefaults() *PatchDeviceParams {
 //
 // All values with no default are reset to their zero value.
 func (o *PatchDeviceParams) SetDefaults() {
-	var (
-		needStcGrpAndSortedCPDefault = bool(false)
-
-		opTypeDefault = string("refresh")
-	)
-
-	val := PatchDeviceParams{
-		NeedStcGrpAndSortedCP: &needStcGrpAndSortedCPDefault,
-		OpType:                &opTypeDefault,
-	}
-
-	val.timeout = o.timeout
-	val.Context = o.Context
-	val.HTTPClient = o.HTTPClient
-	*o = val
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the patch device params

@@ -21,6 +21,10 @@ import (
 // swagger:model Device
 type Device struct {
 
+	// The threshold (in days) for triggering SSL certification alerts
+	// Example: \u003c 200 100 50
+	AlertExpr string `json:"alertExpr,omitempty"`
+
 	// The Auto Balanced Collector Group id. 0 means not monitored by ABCG
 	// Example: 0
 	AutoBalancedCollectorGroupID int32 `json:"autoBalancedCollectorGroupId,omitempty"`
@@ -45,9 +49,20 @@ type Device struct {
 	// Read Only: true
 	AzureState int32 `json:"azureState,omitempty"`
 
+	// The checkpoints from which the website device device is monitored. This object should reference each location specified in testLocation in addition to an 'Overall' checkpoint
+	Checkpoints []*WebsiteCheckPoint `json:"checkpoints"`
+
+	// The id of the host from which the website device was cloned
+	// Read Only: true
+	ClonedFromHostID string `json:"clonedFromHostId,omitempty"`
+
 	// The description/name of the collector for this device
 	// Read Only: true
 	CollectorDescription string `json:"collectorDescription,omitempty"`
+
+	// The collectors that are monitoring the website device, if the website device is internal
+	// Read Only: true
+	Collectors []*WebsiteDeviceCollectorInfo `json:"collectors"`
 
 	// request contains multi value field
 	ContainsMultiValue bool `json:"containsMultiValue,omitempty"`
@@ -75,7 +90,7 @@ type Device struct {
 	// Example: This is a Cisco Router
 	Description string `json:"description,omitempty"`
 
-	// The type of device: 0 indicates a regular device, 2 indicates an AWS device, 4 indicates an Azure device
+	// The type of device: 0 indicates a regular device, 2 indicates an AWS device, 4 indicates an Azure device,18 indicates an uptime webcheck,19 indicates an uptime pingcheck
 	// Example: 0
 	DeviceType int32 `json:"deviceType,omitempty"`
 
@@ -88,6 +103,10 @@ type Device struct {
 	// Required: true
 	DisplayName *string `json:"displayName"`
 
+	// Required for type=webcheck, the domain of the service. This is the base URL of the service
+	// Example: www.ebay.com
+	Domain string `json:"domain,omitempty"`
+
 	// Indicates whether Netflow is enabled (true) or disabled (false) for the device
 	// Example: true
 	EnableNetflow bool `json:"enableNetflow,omitempty"`
@@ -95,6 +114,22 @@ type Device struct {
 	// The Azure instance state (if applicable): 1 indicates that the instance is running, 2 indicates that the instance is stopped and 3 the instance is terminated.
 	// Read Only: true
 	GcpState int32 `json:"gcpState,omitempty"`
+
+	// The number of test locations that checks must fail at to trigger an alert, where the alert triggered will be consistent with the value of overallAlertLevel. Possible values and corresponding number of Site Monitor locations are
+	// 0 : all
+	// 1 : half
+	// 2 : more than one
+	// 3 : any
+	// Example: 0
+	GlobalSmAlertCond int32 `json:"globalSmAlertCond,omitempty"`
+
+	// The ids of the groups the website device is in
+	// Example: [1,2]
+	GroupIds []int32 `json:"groupIds"`
+
+	// The URL to check, without the scheme or protocol (e.g http or https)
+	// E.g. if the URL is "http://www.google.com", then the host="www.google.com"
+	Host string `json:"host,omitempty"`
 
 	// The Id(s) of the groups the device is in, where multiple group ids are comma separated
 	// Example: 16,4,3
@@ -108,9 +143,28 @@ type Device struct {
 	// Read Only: true
 	ID int32 `json:"id,omitempty"`
 
+	// Whether or not SSL should be ignored, the default value is true
+	// Example: true
+	IgnoreSSL bool `json:"ignoreSSL,omitempty"`
+
+	// The values can be warn|error|critical
+	// The level of alert to trigger if the website device device fails a check from an individual test location
+	// Example: warn
+	IndividualAlertLevel string `json:"individualAlertLevel,omitempty"`
+
+	// The values can be true|false where
+	// true: an alert will be triggered if a check fails from an individual test location
+	// false: an alert will not be triggered if a check fails from an individual test location
+	// Example: false
+	IndividualSmAlertEnable bool `json:"individualSmAlertEnable,omitempty"`
+
 	// Any properties inherit from parents
 	// Read Only: true
 	InheritedProperties []*NameAndValue `json:"inheritedProperties"`
+
+	// Whether or not the website device is internal
+	// Example: false
+	IsInternal bool `json:"isInternal,omitempty"`
 
 	// Indicates whether Preferred Log Collector is configured  (true) or not (false) for the device
 	// Example: true
@@ -124,6 +178,10 @@ type Device struct {
 	// Read Only: true
 	LastRawdataTime int64 `json:"lastRawdataTime,omitempty"`
 
+	// The time (in epoch format) that the website device was updated
+	// Read Only: true
+	LastUpdated int64 `json:"lastUpdated,omitempty"`
+
 	// The URL link associated with the device
 	// Example: www.ciscorouter.com
 	Link string `json:"link,omitempty"`
@@ -131,6 +189,10 @@ type Device struct {
 	// The Id of the netflow collector associated with the device
 	// Example: 1
 	LogCollectorID int32 `json:"logCollectorId,omitempty"`
+
+	// The model of the website device, which is determined by the type
+	// Example: websiteDevice
+	Model string `json:"model,omitempty"`
 
 	// The host name or IP address of the device
 	// Example: collector.localhost
@@ -160,6 +222,23 @@ type Device struct {
 	// whether to use AND or OR for device matching
 	Op string `json:"op,omitempty"`
 
+	// The values can be warn|error|critical
+	// The level of alert to trigger if the website device device fails the number of checks specified by transition from the test locations specified by globalSmAlertCond
+	// Example: warn
+	OverallAlertLevel string `json:"overallAlertLevel,omitempty"`
+
+	// The time in milliseconds that the page must load within for each step to avoid triggering an alert
+	// Example: 30000
+	PageLoadAlertTimeInMS int32 `json:"pageLoadAlertTimeInMS,omitempty"`
+
+	// The percentage of packets that should be returned in the time period specified by timeoutInMSPktsNotReceive for each ping check
+	PercentPktsNotReceiveInTime *int32 `json:"percentPktsNotReceiveInTime,omitempty"`
+
+	// The values can be 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+	// The polling interval for the website device device, in units of minutes. This value indicates how often the website device device is checked. The minimum is 1 minute, and the maximum is 10 minutes
+	// Example: 5
+	PollingInterval int32 `json:"pollingInterval,omitempty"`
+
 	// The id of the Collector Group associated with the device's preferred collector
 	// Read Only: true
 	PreferredCollectorGroupID int32 `json:"preferredCollectorGroupId,omitempty"`
@@ -173,6 +252,9 @@ type Device struct {
 	// Required: true
 	PreferredCollectorID *int32 `json:"preferredCollectorId"`
 
+	// The properties associated with the website device
+	Properties []*NameAndValue `json:"properties"`
+
 	// The Id of the AWS EC2 instance related to this device, if one exists in the LogicMonitor account. This value defaults to -1, which indicates that there are no related devices
 	// Example: -1
 	RelatedDeviceID int32 `json:"relatedDeviceId,omitempty"`
@@ -185,6 +267,29 @@ type Device struct {
 	// Read Only: true
 	ScanConfigID int32 `json:"scanConfigId,omitempty"`
 
+	// The scheme or protocol associated with the URL to check. Acceptable values are: http, https
+	// Example: https
+	Schema string `json:"schema,omitempty"`
+
+	// Whether the website device is dead (the collector is down) or not
+	// Read Only: true
+	Status string `json:"status,omitempty"`
+
+	// Required for type=webcheck, an object comprising one or more steps, see the table below for the properties included in each step
+	Steps []*UptimeWebCheckStep `json:"steps"`
+
+	// The values can be true|false where
+	// true: monitoring is disabled for the website device device
+	// false: monitoring is enabled for the website device device
+	// If stopMonitoring=true, then alerting will also be disabled by default for the website device device
+	StopMonitoring bool `json:"stopMonitoring,omitempty"`
+
+	// The values can be true|false where
+	// true: monitoring is disabled for all services in the website device device's folder
+	// false: monitoring is not disabled for all services in website device device's folder
+	// Read Only: true
+	StopMonitoringByFolder *bool `json:"stopMonitoringByFolder,omitempty"`
+
 	// The list of ids of the collectors currently monitoring the resource and discovering instances
 	// Example: 1,4
 	// Unique: true
@@ -194,9 +299,37 @@ type Device struct {
 	// Read Only: true
 	SystemProperties []*NameAndValue `json:"systemProperties"`
 
+	// template
+	Template *JSONObject `json:"template,omitempty"`
+
+	// test location
+	TestLocation *WebsiteLocation `json:"testLocation,omitempty"`
+
+	// The time period that the percentage of packets specified by percentPktsNotReceiveInTime must be returned in for each ping check
+	TimeoutInMSPktsNotReceive *int32 `json:"timeoutInMSPktsNotReceive,omitempty"`
+
 	// The number of milliseconds until the device will be automatically deleted from your LogicMonitor account (a value of zero indicates that a future delete time/date has not been scheduled)
 	// Read Only: true
 	ToDeleteTimeInMs int64 `json:"toDeleteTimeInMs,omitempty"`
+
+	// The values can be 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 30 | 60
+	// The number of checks that must fail before an alert is triggered
+	// Example: 1
+	Transition int32 `json:"transition,omitempty"`
+
+	// Whether or not SSL expiration alerts should be triggered
+	// Example: false
+	TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert,omitempty"`
+
+	// Whether or not SSL status alerts should be triggered
+	// Example: false
+	TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert,omitempty"`
+
+	// Specifies the v3 Uptime Device request type. Supported values:
+	//  webcheck - for Uptime Web Check devices
+	//  pingcheck - for Uptime Ping Check devices blank/empty value- for regular devices
+	// Example: webcheck
+	Type string `json:"type,omitempty"`
 
 	// The uptime of the device in seconds. This value will always be the largest value reported by the following datasources:
 	// Host Uptime-
@@ -211,6 +344,18 @@ type Device struct {
 	// Read Only: true
 	UpdatedOn int64 `json:"updatedOn,omitempty"`
 
+	// The values can be true|false where
+	// true: The alert settings configured in the website device device Default Settings will be used
+	// false: Service Default Settings will not be used, and you will need to specify individualSMAlertEnable, individualAlertLevel, globalSmAlertConf, overallAlertLevel and pollingInterval
+	// Example: true
+	UseDefaultAlertSetting bool `json:"useDefaultAlertSetting,omitempty"`
+
+	// The values can be true|false where
+	// true: The checkpoint locations configured in the website device device Default Settings will be used
+	// false: The checkpoint locations specified in the testLocation will be used
+	// Example: false
+	UseDefaultLocationSetting bool `json:"useDefaultLocationSetting,omitempty"`
+
 	// The read and/or write permissions for this device that are granted to the user who made the API request
 	// Read Only: true
 	UserPermission string `json:"userPermission,omitempty"`
@@ -221,6 +366,14 @@ func (m *Device) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAutoProperties(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCheckpoints(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCollectors(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -244,7 +397,15 @@ func (m *Device) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateProperties(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateResourceIds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSteps(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -253,6 +414,14 @@ func (m *Device) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSystemProperties(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTemplate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTestLocation(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -278,6 +447,58 @@ func (m *Device) validateAutoProperties(formats strfmt.Registry) error {
 					return ve.ValidateName("autoProperties" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("autoProperties" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Device) validateCheckpoints(formats strfmt.Registry) error {
+	if swag.IsZero(m.Checkpoints) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Checkpoints); i++ {
+		if swag.IsZero(m.Checkpoints[i]) { // not required
+			continue
+		}
+
+		if m.Checkpoints[i] != nil {
+			if err := m.Checkpoints[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("checkpoints" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("checkpoints" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Device) validateCollectors(formats strfmt.Registry) error {
+	if swag.IsZero(m.Collectors) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Collectors); i++ {
+		if swag.IsZero(m.Collectors[i]) { // not required
+			continue
+		}
+
+		if m.Collectors[i] != nil {
+			if err := m.Collectors[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("collectors" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("collectors" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -367,6 +588,32 @@ func (m *Device) validatePreferredCollectorID(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Device) validateProperties(formats strfmt.Registry) error {
+	if swag.IsZero(m.Properties) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Properties); i++ {
+		if swag.IsZero(m.Properties[i]) { // not required
+			continue
+		}
+
+		if m.Properties[i] != nil {
+			if err := m.Properties[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("properties" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("properties" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *Device) validateResourceIds(formats strfmt.Registry) error {
 	if swag.IsZero(m.ResourceIds) { // not required
 		return nil
@@ -383,6 +630,32 @@ func (m *Device) validateResourceIds(formats strfmt.Registry) error {
 					return ve.ValidateName("resourceIds" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("resourceIds" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Device) validateSteps(formats strfmt.Registry) error {
+	if swag.IsZero(m.Steps) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Steps); i++ {
+		if swag.IsZero(m.Steps[i]) { // not required
+			continue
+		}
+
+		if m.Steps[i] != nil {
+			if err := m.Steps[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("steps" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("steps" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -431,6 +704,44 @@ func (m *Device) validateSystemProperties(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Device) validateTemplate(formats strfmt.Registry) error {
+	if swag.IsZero(m.Template) { // not required
+		return nil
+	}
+
+	if m.Template != nil {
+		if err := m.Template.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("template")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("template")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Device) validateTestLocation(formats strfmt.Registry) error {
+	if swag.IsZero(m.TestLocation) { // not required
+		return nil
+	}
+
+	if m.TestLocation != nil {
+		if err := m.TestLocation.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("testLocation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("testLocation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this device based on the context it is used
 func (m *Device) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -455,7 +766,19 @@ func (m *Device) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCheckpoints(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateClonedFromHostID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCollectorDescription(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateCollectors(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -472,6 +795,10 @@ func (m *Device) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	}
 
 	if err := m.contextValidateGcpState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGroupIds(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -495,6 +822,10 @@ func (m *Device) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateLastUpdated(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateNetflowCollectorDescription(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -515,6 +846,10 @@ func (m *Device) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateProperties(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateResourceIds(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -523,7 +858,27 @@ func (m *Device) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSteps(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStopMonitoringByFolder(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSystemProperties(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTemplate(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTestLocation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -609,10 +964,63 @@ func (m *Device) contextValidateAzureState(ctx context.Context, formats strfmt.R
 	return nil
 }
 
+func (m *Device) contextValidateCheckpoints(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Checkpoints); i++ {
+
+		if m.Checkpoints[i] != nil {
+			if err := m.Checkpoints[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("checkpoints" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("checkpoints" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Device) contextValidateClonedFromHostID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "clonedFromHostId", "body", string(m.ClonedFromHostID)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Device) contextValidateCollectorDescription(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "collectorDescription", "body", string(m.CollectorDescription)); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Device) contextValidateCollectors(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "collectors", "body", []*WebsiteDeviceCollectorInfo(m.Collectors)); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Collectors); i++ {
+
+		if m.Collectors[i] != nil {
+			if err := m.Collectors[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("collectors" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("collectors" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -660,6 +1068,19 @@ func (m *Device) contextValidateGcpState(ctx context.Context, formats strfmt.Reg
 
 	if err := validate.ReadOnly(ctx, "gcpState", "body", int32(m.GcpState)); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Device) contextValidateGroupIds(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.GroupIds); i++ {
+
+		if err := validate.ReadOnly(ctx, "groupIds"+"."+strconv.Itoa(i), "body", int32(m.GroupIds[i])); err != nil {
+			return err
+		}
+
 	}
 
 	return nil
@@ -725,6 +1146,15 @@ func (m *Device) contextValidateLastRawdataTime(ctx context.Context, formats str
 	return nil
 }
 
+func (m *Device) contextValidateLastUpdated(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "lastUpdated", "body", int64(m.LastUpdated)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Device) contextValidateNetflowCollectorDescription(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "netflowCollectorDescription", "body", string(m.NetflowCollectorDescription)); err != nil {
@@ -770,6 +1200,26 @@ func (m *Device) contextValidatePreferredCollectorGroupName(ctx context.Context,
 	return nil
 }
 
+func (m *Device) contextValidateProperties(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Properties); i++ {
+
+		if m.Properties[i] != nil {
+			if err := m.Properties[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("properties" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("properties" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *Device) contextValidateResourceIds(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.ResourceIds); i++ {
@@ -799,6 +1249,44 @@ func (m *Device) contextValidateScanConfigID(ctx context.Context, formats strfmt
 	return nil
 }
 
+func (m *Device) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "status", "body", string(m.Status)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Device) contextValidateSteps(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Steps); i++ {
+
+		if m.Steps[i] != nil {
+			if err := m.Steps[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("steps" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("steps" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Device) contextValidateStopMonitoringByFolder(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "stopMonitoringByFolder", "body", m.StopMonitoringByFolder); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Device) contextValidateSystemProperties(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "systemProperties", "body", []*NameAndValue(m.SystemProperties)); err != nil {
@@ -818,6 +1306,38 @@ func (m *Device) contextValidateSystemProperties(ctx context.Context, formats st
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *Device) contextValidateTemplate(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Template != nil {
+		if err := m.Template.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("template")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("template")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Device) contextValidateTestLocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TestLocation != nil {
+		if err := m.TestLocation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("testLocation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("testLocation")
+			}
+			return err
+		}
 	}
 
 	return nil

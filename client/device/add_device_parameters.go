@@ -104,21 +104,7 @@ func (o *AddDeviceParams) WithDefaults() *AddDeviceParams {
 //
 // All values with no default are reset to their zero value.
 func (o *AddDeviceParams) SetDefaults() {
-	var (
-		addFromWizardDefault = bool(false)
-
-		needStcGrpAndSortedCPDefault = bool(false)
-	)
-
-	val := AddDeviceParams{
-		AddFromWizard:         &addFromWizardDefault,
-		NeedStcGrpAndSortedCP: &needStcGrpAndSortedCPDefault,
-	}
-
-	val.timeout = o.timeout
-	val.Context = o.Context
-	val.HTTPClient = o.HTTPClient
-	*o = val
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the add device params
