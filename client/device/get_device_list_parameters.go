@@ -54,10 +54,12 @@ func NewGetDeviceListParamsWithHTTPClient(client *http.Client) *GetDeviceListPar
 	}
 }
 
-/* GetDeviceListParams contains all the parameters to send to the API endpoint
-   for the get device list operation.
+/*
+GetDeviceListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get device list operation.
+
+	Typically these are written to a http.Request.
 */
 type GetDeviceListParams struct {
 
@@ -71,6 +73,9 @@ type GetDeviceListParams struct {
 
 	// Filter.
 	Filter *string
+
+	// IncludeDeletedResources.
+	IncludeDeletedResources *bool
 
 	// NetflowFilter.
 	NetflowFilter *string
@@ -191,6 +196,17 @@ func (o *GetDeviceListParams) SetFilter(filter *string) {
 	o.Filter = filter
 }
 
+// WithIncludeDeletedResources adds the includeDeletedResources to the get device list params
+func (o *GetDeviceListParams) WithIncludeDeletedResources(includeDeletedResources *bool) *GetDeviceListParams {
+	o.SetIncludeDeletedResources(includeDeletedResources)
+	return o
+}
+
+// SetIncludeDeletedResources adds the includeDeletedResources to the get device list params
+func (o *GetDeviceListParams) SetIncludeDeletedResources(includeDeletedResources *bool) {
+	o.IncludeDeletedResources = includeDeletedResources
+}
+
 // WithNetflowFilter adds the netflowFilter to the get device list params
 func (o *GetDeviceListParams) WithNetflowFilter(netflowFilter *string) *GetDeviceListParams {
 	o.SetNetflowFilter(netflowFilter)
@@ -289,6 +305,23 @@ func (o *GetDeviceListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		if qFilter != "" {
 
 			if err := r.SetQueryParam("filter", qFilter); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.IncludeDeletedResources != nil {
+
+		// query param includeDeletedResources
+		var qrIncludeDeletedResources bool
+
+		if o.IncludeDeletedResources != nil {
+			qrIncludeDeletedResources = *o.IncludeDeletedResources
+		}
+		qIncludeDeletedResources := swag.FormatBool(qrIncludeDeletedResources)
+		if qIncludeDeletedResources != "" {
+
+			if err := r.SetQueryParam("includeDeletedResources", qIncludeDeletedResources); err != nil {
 				return err
 			}
 		}

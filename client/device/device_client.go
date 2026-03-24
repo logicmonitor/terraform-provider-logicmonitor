@@ -30,7 +30,9 @@ type Client struct {
 }
 
 /*
-AddDevice adds a new device
+AddDevice adds a new device request schema may change depending upon the type of uptime device being added
+
+add a new device (Request schema may change depending upon the type of uptime device being added)
 */
 func (a *Client) AddDevice(params *AddDeviceParams) (*AddDeviceOK, error) {
 	// TODO: Validate the params before sending
@@ -60,6 +62,8 @@ func (a *Client) AddDevice(params *AddDeviceParams) (*AddDeviceOK, error) {
 
 /*
 DeleteDeviceByID deletes a device
+
+delete a device
 */
 func (a *Client) DeleteDeviceByID(params *DeleteDeviceByIDParams) (*DeleteDeviceByIDOK, error) {
 	// TODO: Validate the params before sending
@@ -120,6 +124,8 @@ func (a *Client) GetDeviceByID(params *GetDeviceByIDParams) (*GetDeviceByIDOK, e
 
 /*
 GetDeviceList gets device list
+
+Retrieve a paginated list of devices
 */
 func (a *Client) GetDeviceList(params *GetDeviceListParams) (*GetDeviceListOK, error) {
 	// TODO: Validate the params before sending
@@ -148,7 +154,9 @@ func (a *Client) GetDeviceList(params *GetDeviceListParams) (*GetDeviceListOK, e
 }
 
 /*
-PatchDevice updates a device
+PatchDevice updates a device request schema may change depending upon the type of uptime device being updated
+
+update a device (Request schema may change depending upon the type of uptime device being updated)
 */
 func (a *Client) PatchDevice(params *PatchDeviceParams) (*PatchDeviceOK, error) {
 	// TODO: Validate the params before sending
@@ -177,7 +185,9 @@ func (a *Client) PatchDevice(params *PatchDeviceParams) (*PatchDeviceOK, error) 
 }
 
 /*
-UpdateDevice updates a device
+UpdateDevice updates a device request schema may change depending upon the type of uptime device being updated
+
+update a device (Request schema may change depending upon the type of uptime device being updated)
 */
 func (a *Client) UpdateDevice(params *UpdateDeviceParams) (*UpdateDeviceOK, error) {
 	// TODO: Validate the params before sending

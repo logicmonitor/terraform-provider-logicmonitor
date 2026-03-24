@@ -98,13 +98,14 @@ func GetPropertiesFromMap(d map[string]interface{}, key string) (t []*models.Nam
 
 // retrieve resource custom properties from resource structure
 func GetPropertiesFromResource(d *schema.ResourceData, key string) (t []*models.NameAndValue) {
-	if r, ok := d.GetOk(key); ok {
-		return getPropertiesFromInterface(r)
-	}
-	return
+	r := d.Get(key)
+	return getPropertiesFromInterface(r)
 }
 
 func getPropertiesFromInterface(r interface{}) (t []*models.NameAndValue) {
+	// Initialize empty slice to ensure we return [] instead of nil
+	t = make([]*models.NameAndValue, 0)
+
 	// Convert *schema.Set to []interface{} first
 	var list []interface{}
 
@@ -113,7 +114,7 @@ func getPropertiesFromInterface(r interface{}) (t []*models.NameAndValue) {
 	} else if arr, ok := r.([]interface{}); ok {
 		list = arr // Already in expected format
 	} else {
-		return // Return empty if type is unknown
+		return t // Return empty slice if type is unknown
 	}
 
 	// Iterate over the list
@@ -128,7 +129,7 @@ func getPropertiesFromInterface(r interface{}) (t []*models.NameAndValue) {
 			t = append(t, model)
 		}
 	}
-	return
+	return t
 }
 // retrieve resource custom properties (techops version - json object input)
 func GetPropertiesTechops(d *schema.ResourceData) (t []*models.NameAndValue) {
@@ -437,6 +438,84 @@ func getPropFromStepsInterface(r interface{}) (t []*models.WebCheckStep) {
 				Name: name,
 				Timeout: timeout,
 				UseDefaultRoot: &useDefaultRoot,
+				PostDataEditType: postDataEditType,
+				FullpageLoad: fullpageLoad,
+				RequireAuth: requireAuth,
+				Path: path,
+				HTTPHeaders: httpHeaders,
+				HTTPBody: httpBody, 
+				Keyword: keyword,
+                RespScript: respScript,
+				Label: label,
+				URL: URL,
+				InvertMatch: invertMatch,
+                ReqScript: reqScript,
+				Type: typee,
+				StatusCode: statusCode,
+               }
+			   if requireAuth {
+                model.Auth = auth
+            }
+			t = append(t, model)
+		}
+	}
+	return
+}
+
+func GetPropFromUptimeSteps(d *schema.ResourceData, key string) (t []*models.UptimeWebCheckStep) {
+	if r, ok := d.GetOk(key); ok {
+		return getPropFromUptimeStepsInterface(r)
+	}
+	return
+}
+
+func getPropFromUptimeStepsInterface(r interface{}) (t []*models.UptimeWebCheckStep) {
+	for _, i := range r.([]interface{}) {
+		if m, ok := i.(map[string]interface{}); ok {
+			var schema = m["schema"].(string)
+			var matchType = m["match_type"].(string)
+            var description = m["description"].(string)
+			var httpVersion = m["http_version"].(string)
+			var respType = m["resp_type"].(string)
+			var reqType = m["req_type"].(string)
+			var followRedirection = m["follow_redirection"].(bool)
+			var httpMehod = m["http_method"].(string)
+			var enable = m["enable"].(bool)
+			var name = m["name"].(string)
+			var timeout = int32(m["timeout"].(int))
+			var useDefaultRoot = m["use_default_root"].(bool)
+			var postDataEditType = m["post_data_edit_type"].(string)
+			var fullpageLoad = m["fullpage_load"].(bool)
+			var requireAuth = m["require_auth"].(bool)
+			var path = m["path"].(string)
+            var auth *models.Authentication
+            if requireAuth {
+                auth = GetAuth(m["auth"].([]interface{}))
+            }
+			var httpHeaders = m["http_headers"].(string)
+			var httpBody = m["http_body"].(string)
+            var keyword = m["keyword"].(string)
+			var respScript = m["resp_script"].(string)
+			var label = m["label"].(string)
+			var URL = m["url"].(string)
+			var invertMatch = m["invert_match"].(bool)
+			var reqScript = m["req_script"].(string)
+			var typee = m["type"].(string)
+			var statusCode = m["status_code"].(string)
+            
+			model := &models.UptimeWebCheckStep{
+				Schema:  schema,
+				MatchType: matchType,
+                Description: description,
+                HTTPVersion: httpVersion,
+                RespType: respType,
+				ReqType: reqType,
+				FollowRedirection: followRedirection,
+				HTTPMethod: httpMehod,
+				Enable: enable,
+				Name: name,
+				Timeout: timeout,
+				UseDefaultRoot: useDefaultRoot,
 				PostDataEditType: postDataEditType,
 				FullpageLoad: fullpageLoad,
 				RequireAuth: requireAuth,

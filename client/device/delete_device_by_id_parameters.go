@@ -54,16 +54,16 @@ func NewDeleteDeviceByIDParamsWithHTTPClient(client *http.Client) *DeleteDeviceB
 	}
 }
 
-/* DeleteDeviceByIDParams contains all the parameters to send to the API endpoint
-   for the delete device by Id operation.
+/*
+DeleteDeviceByIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete device by Id operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteDeviceByIDParams struct {
 
 	// DeleteHard.
-	//
-	// Default: true
 	DeleteHard *bool
 
 	// End.
@@ -101,18 +101,7 @@ func (o *DeleteDeviceByIDParams) WithDefaults() *DeleteDeviceByIDParams {
 //
 // All values with no default are reset to their zero value.
 func (o *DeleteDeviceByIDParams) SetDefaults() {
-	var (
-		deleteHardDefault = bool(true)
-	)
-
-	val := DeleteDeviceByIDParams{
-		DeleteHard: &deleteHardDefault,
-	}
-
-	val.timeout = o.timeout
-	val.Context = o.Context
-	val.HTTPClient = o.HTTPClient
-	*o = val
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the delete device by Id params
