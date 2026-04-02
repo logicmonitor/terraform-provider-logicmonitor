@@ -13,8 +13,12 @@ func NameAndValueSchema() map[string]*schema.Schema {
 		},
 		
 		"value": {
-			Type: schema.TypeString,
+			Type:     schema.TypeString,
 			Required: true,
+			DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+				// LM API masks sensitive property values as "**********"
+				return old == "**********"
+			},
 		},
 		
 	}
