@@ -537,16 +537,15 @@ resource "logicmonitor_device_group" "my_gcp_device_group" {
   description      = "GCP Production Environment"
   disable_alerting = false
   custom_properties = [
-    {
-      name  = "gcp.project_id"
-      value = var.user_info_gcp.project_id
-    },
-    {
-      name  = "gcp.service_account_key"
-      value = jsonencode(var.user_info_gcp.service_account_key)
-    }
+   {
+			name = "location"
+      value = "pune"
+	 },
+   {
+			name = "host"
+      value = "localhost"
+	 }
   ]
-  
   extra {
     account {
       # GCP-specific account fields
@@ -702,18 +701,14 @@ resource "logicmonitor_device_group" "my_OCI_device_group" {
   description      = "OCI Production Environment"
   disable_alerting = false
   custom_properties = [
-    {
-      name  = "oci.tenancy_id"
-      value = var.user_info_oci.tenancy_id
-    },
-    {
-      name  = "oci.user_id"
-      value = var.user_info_oci.user_id
-    },
-    {
-      name  = "oci.private_key"
-      value = var.user_info_oci.private_key
-    }
+   {
+			name = "location"
+      value = "pune"
+	 },
+   {
+			name = "host"
+      value = "localhost"
+	 }
   ]
   extra {
     account {

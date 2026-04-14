@@ -55,6 +55,7 @@ func CloudAccountSchema() map[string]*schema.Schema {
 		"private_key": {
 			Type: schema.TypeString,
 			Optional: true,
+			Sensitive: true,
 		},
 		
 		"project_id": {
@@ -70,11 +71,13 @@ func CloudAccountSchema() map[string]*schema.Schema {
 		"secret_key": {
 			Type: schema.TypeString,
 			Optional: true,
+			Sensitive: true,
 		},
 		
 		"service_account_key": {
 			Type: schema.TypeString,
 			Optional: true,
+			Sensitive: true,
 		},
 		
 		"subscription_ids": {
