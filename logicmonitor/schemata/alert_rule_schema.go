@@ -212,7 +212,11 @@ func SetAlertRuleResourceData(d *schema.ResourceData, m *models.AlertRule) {
 	d.Set("datasource", m.Datasource)
 	d.Set("device_groups", m.DeviceGroups)
 	d.Set("devices", m.Devices)
-	d.Set("escalating_chain", m.EscalatingChain)
+	if m.EscalatingChain != nil {
+		d.Set("escalating_chain", m.EscalatingChain)
+	} else {
+		d.Set("escalating_chain", map[string]interface{}{})
+	}
 	d.Set("escalating_chain_id", m.EscalatingChainID)
 	d.Set("escalation_interval", m.EscalationInterval)
 	d.Set("id", strconv.Itoa(int(m.ID)))

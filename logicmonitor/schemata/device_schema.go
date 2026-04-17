@@ -95,7 +95,7 @@ func DeviceSchema() map[string]*schema.Schema {
 			Type: schema.TypeInt,
 			Optional: true,
 		},
-		
+
 		"custom_properties": {
 			Type: schema.TypeSet,
 			Elem: &schema.Resource{
@@ -103,6 +103,7 @@ func DeviceSchema() map[string]*schema.Schema {
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
 			Optional: true,
+			Computed: true,
 		},
 		
 		"deleted_time_in_ms": {

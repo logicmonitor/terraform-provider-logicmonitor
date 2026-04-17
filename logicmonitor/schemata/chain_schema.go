@@ -40,7 +40,11 @@ func SetChainSubResourceData(m []*models.Chain) (d []*map[string]interface{}) {
 		if chain != nil {
 			properties := make(map[string]interface{})
 			properties["period"] = SetPeriodSubResourceData([]*models.Period{chain.Period})
-            properties["stages"] = SetRecipientSubResourceData(chain.Stages[0])
+			if len(chain.Stages) > 0 {
+				properties["stages"] = SetRecipientSubResourceData(chain.Stages[0])
+			} else {
+				properties["stages"] = []*map[string]interface{}{}
+			}
 			properties["type"] = chain.Type
 			d = append(d, &properties)
 		}
