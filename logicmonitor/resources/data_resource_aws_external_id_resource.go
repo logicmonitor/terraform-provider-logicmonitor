@@ -42,6 +42,10 @@ func getAwsExternalId(ctx context.Context, d *schema.ResourceData, m interface{}
 	}
 
 	respModel := resp.GetPayload()
+	if respModel == nil {
+		diags = append(diags, diag.Errorf("no AWS external ID returned from API")...)
+		return diags
+	}
 	schemata.SetAwsExternalIDResourceData(d, respModel)
 	return diags
 }
