@@ -730,25 +730,130 @@ resource "logicmonitor_device_group" "my_OCI_device_group" {
     }
     services {
       o_c_i_b_l_o_c_k_s_t_o_r_a_g_e {
-        use_default = true
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+        collectors = []
+        enable    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "us-phoenix-1"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
       }
       o_c_i_a_u_t_o_n_o_m_o_u_s_d_a_t_a_b_a_s_e{
-       use_default = true
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+        collectors = []
+        enable    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "us-phoenix-1"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
       }
       o_c_i_c_o_m_p_u_t_e{
-       use_default = true
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+        collectors = []
+        enable    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "us-phoenix-1"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
       }
       o_c_id_y_n_a_m_i_c_r_o_u_t_i_n_g_g_a_t_e_w_a_y{
-       use_default = true
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+        collectors = []
+        enable    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "us-phoenix-1"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
       }
       o_c_i_f_u_n_c_t_i_o_n_s{
-       use_default = true
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+        collectors = []
+        enable    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "us-phoenix-1"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
       }
       o_c_i_o_b_j_e_c_t_s_t_o_r_a_g_e{
-       use_default = true
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+        collectors = []
+        enable    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "us-phoenix-1"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
       }
       o_c_i_s_i_t_e_t_o_s_i_t_e_v_p_n{
-       use_default = true
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+        collectors = []
+        enable    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
+        monitoring_regions = [
+          "us-phoenix-1"
+        ]
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
       }
     }
   }
