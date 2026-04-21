@@ -34,7 +34,7 @@ type EscalationChain struct {
 
 	// if throttle needs to be enabled then true if not then false.
 	// Example: true
-	EnableThrottling bool `json:"enableThrottling,omitempty"`
+	EnableThrottling bool `json:"enableThrottling"`
 
 	// id
 	// Read Only: true

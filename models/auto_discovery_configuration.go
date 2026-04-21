@@ -25,10 +25,10 @@ type AutoDiscoveryConfiguration struct {
 	DataSourceName string `json:"dataSourceName,omitempty"`
 
 	// delete inactive instance
-	DeleteInactiveInstance bool `json:"deleteInactiveInstance,omitempty"`
+	DeleteInactiveInstance bool `json:"deleteInactiveInstance"`
 
 	// disable instance
-	DisableInstance bool `json:"disableInstance,omitempty"`
+	DisableInstance bool `json:"disableInstance"`
 
 	// filters
 	Filters []*AutoDiscoveryFilter `json:"filters"`
@@ -44,7 +44,7 @@ type AutoDiscoveryConfiguration struct {
 	Method *AutoDiscoveryMethod `json:"method"`
 
 	// persistent instance
-	PersistentInstance bool `json:"persistentInstance,omitempty"`
+	PersistentInstance bool `json:"persistentInstance"`
 
 	// schedule interval
 	ScheduleInterval int32 `json:"scheduleInterval,omitempty"`

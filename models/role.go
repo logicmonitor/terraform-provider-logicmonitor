@@ -60,7 +60,7 @@ type Role struct {
 
 	// Whether or not users assigned this role should be required to acknowledge the EULA (end user license agreement)
 	// Example: true
-	RequireEULA bool `json:"requireEULA,omitempty"`
+	RequireEULA bool `json:"requireEULA"`
 
 	// The group Id of the role
 	// Example: 3
@@ -68,7 +68,7 @@ type Role struct {
 
 	// Whether Two-Factor Authentication should be required for this role
 	// Example: true
-	TwoFARequired bool `json:"twoFARequired,omitempty"`
+	TwoFARequired bool `json:"twoFARequired"`
 
 	// The permission of current role with the admin. The values can be write|read|none
 	// Example: read

@@ -19,7 +19,7 @@ type WebsiteLocation struct {
 
 	// all
 	// Example: true
-	All bool `json:"all,omitempty"`
+	All bool `json:"all"`
 
 	// collector ids
 	CollectorIds []int32 `json:"collectorIds"`

@@ -73,7 +73,7 @@ type DeviceGroup struct {
 
 	// Indicates whether alerting is disabled (true) or enabled (false) for this device group
 	// Example: true
-	DisableAlerting bool `json:"disableAlerting,omitempty"`
+	DisableAlerting bool `json:"disableAlerting"`
 
 	// Whether or not alerting is effectively disabled for this device group (alerting may be disabled at a higher level, e.g. parent group)
 	// Read Only: true

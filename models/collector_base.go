@@ -26,7 +26,7 @@ type CollectorBase struct {
 
 	// Whether or not the Collector is currently acknowledged
 	// Read Only: true
-	Acked *bool `json:"acked,omitempty"`
+	Acked *bool `json:"acked"`
 
 	// The user that acknowledged the Collector (if it is in alert)
 	// Read Only: true
@@ -112,11 +112,11 @@ type CollectorBase struct {
 
 	// Whether or not automatic failback is enabled for the Collector, the default value is true
 	// Example: true
-	EnableFailBack bool `json:"enableFailBack,omitempty"`
+	EnableFailBack bool `json:"enableFailBack"`
 
 	// Whether or not the device the Collector is installed on is enabled for fail over
 	// Example: true
-	EnableFailOverOnCollectorDevice bool `json:"enableFailOverOnCollectorDevice,omitempty"`
+	EnableFailOverOnCollectorDevice bool `json:"enableFailOverOnCollectorDevice"`
 
 	// The Id of the escalation chain associated with this Collector
 	// Example: 80
@@ -152,7 +152,7 @@ type CollectorBase struct {
 
 	// Whether to create a collector device when instance collector, the default value is true
 	// Example: true
-	NeedAutoCreateCollectorDevice bool `json:"needAutoCreateCollectorDevice,omitempty"`
+	NeedAutoCreateCollectorDevice bool `json:"needAutoCreateCollectorDevice"`
 
 	// The Netscan version associated with the Collector
 	// Read Only: true
@@ -209,7 +209,7 @@ type CollectorBase struct {
 
 	// Whether alert clear notifications are suppressed for the Collector
 	// Example: true
-	SuppressAlertClear bool `json:"suppressAlertClear,omitempty"`
+	SuppressAlertClear bool `json:"suppressAlertClear"`
 
 	// The time the Collector has been up, in seconds
 	// Read Only: true

@@ -34,10 +34,10 @@ type CloudServiceSettings struct {
 	DeviceDisplayNameTemplate string `json:"deviceDisplayNameTemplate,omitempty"`
 
 	// If monitoring of stopped/terminated hosts is disabled
-	DisableStopTerminateHostMonitor bool `json:"disableStopTerminateHostMonitor,omitempty"`
+	DisableStopTerminateHostMonitor bool `json:"disableStopTerminateHostMonitor"`
 
 	// If alerting should be disabled when a cloud device is terminated
-	DisableTerminatedHostAlerting bool `json:"disableTerminatedHostAlerting,omitempty"`
+	DisableTerminatedHostAlerting bool `json:"disableTerminatedHostAlerting"`
 
 	// The regions this group will monitor
 	// Unique: true
@@ -54,7 +54,7 @@ type CloudServiceSettings struct {
 	NormalCollectorConfig *CloudNormalCollectorConfig `json:"normalCollectorConfig,omitempty"`
 
 	// Whether or not to use all regions (can be used instead of monitoringRegions and monitoringRegionInfos)
-	SelectAll bool `json:"selectAll,omitempty"`
+	SelectAll bool `json:"selectAll"`
 
 	// Tags used to filter whether or not a cloud device is included in this group
 	Tags []*CloudTagFilter `json:"tags,omitempty"`

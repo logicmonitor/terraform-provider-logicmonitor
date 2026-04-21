@@ -65,7 +65,7 @@ type Device struct {
 	Collectors []*WebsiteDeviceCollectorInfo `json:"collectors"`
 
 	// request contains multi value field
-	ContainsMultiValue bool `json:"containsMultiValue,omitempty"`
+	ContainsMultiValue bool `json:"containsMultiValue"`
 
 	// The time, in epoch seconds format, that the device was added to your LogicMonitor account
 	// Read Only: true
@@ -96,7 +96,7 @@ type Device struct {
 
 	// Indicates whether alerting is disabled (true) or enabled (false) for this device
 	// Example: true
-	DisableAlerting bool `json:"disableAlerting,omitempty"`
+	DisableAlerting bool `json:"disableAlerting"`
 
 	// The display name of the device
 	// Example: Cisco Router
@@ -109,7 +109,7 @@ type Device struct {
 
 	// Indicates whether Netflow is enabled (true) or disabled (false) for the device
 	// Example: true
-	EnableNetflow bool `json:"enableNetflow,omitempty"`
+	EnableNetflow bool `json:"enableNetflow"`
 
 	// The Azure instance state (if applicable): 1 indicates that the instance is running, 2 indicates that the instance is stopped and 3 the instance is terminated.
 	// Read Only: true
@@ -145,7 +145,7 @@ type Device struct {
 
 	// Whether or not SSL should be ignored, the default value is true
 	// Example: true
-	IgnoreSSL bool `json:"ignoreSSL,omitempty"`
+	IgnoreSSL bool `json:"ignoreSSL"`
 
 	// The values can be warn|error|critical
 	// The level of alert to trigger if the website device device fails a check from an individual test location
@@ -156,7 +156,7 @@ type Device struct {
 	// true: an alert will be triggered if a check fails from an individual test location
 	// false: an alert will not be triggered if a check fails from an individual test location
 	// Example: false
-	IndividualSmAlertEnable bool `json:"individualSmAlertEnable,omitempty"`
+	IndividualSmAlertEnable bool `json:"individualSmAlertEnable"`
 
 	// Any properties inherit from parents
 	// Read Only: true
@@ -164,11 +164,11 @@ type Device struct {
 
 	// Whether or not the website device is internal
 	// Example: false
-	IsInternal bool `json:"isInternal,omitempty"`
+	IsInternal bool `json:"isInternal"`
 
 	// Indicates whether Preferred Log Collector is configured  (true) or not (false) for the device
 	// Example: true
-	IsPreferredLogCollectorConfigured bool `json:"isPreferredLogCollectorConfigured,omitempty"`
+	IsPreferredLogCollectorConfigured bool `json:"isPreferredLogCollectorConfigured"`
 
 	// The last time, in epoch seconds, that the device received Netflow data
 	// Read Only: true
@@ -201,7 +201,7 @@ type Device struct {
 
 	// Indicates whether Static group and sorted Custom properties are needed
 	// Example: true
-	NeedStcGrpAndSortedCP *bool `json:"needStcGrpAndSortedCP,omitempty"`
+	NeedStcGrpAndSortedCP *bool `json:"needStcGrpAndSortedCP"`
 
 	// The description/name of the netflow collector for this device
 	// Read Only: true
@@ -282,7 +282,7 @@ type Device struct {
 	// true: monitoring is disabled for the website device device
 	// false: monitoring is enabled for the website device device
 	// If stopMonitoring=true, then alerting will also be disabled by default for the website device device
-	StopMonitoring bool `json:"stopMonitoring,omitempty"`
+	StopMonitoring bool `json:"stopMonitoring"`
 
 	// The values can be true|false where
 	// true: monitoring is disabled for all services in the website device device's folder
@@ -319,11 +319,11 @@ type Device struct {
 
 	// Whether or not SSL expiration alerts should be triggered
 	// Example: false
-	TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert,omitempty"`
+	TriggerSSLExpirationAlert bool `json:"triggerSSLExpirationAlert"`
 
 	// Whether or not SSL status alerts should be triggered
 	// Example: false
-	TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert,omitempty"`
+	TriggerSSLStatusAlert bool `json:"triggerSSLStatusAlert"`
 
 	// Specifies the v3 Uptime Device request type. Supported values:
 	//  webcheck - for Uptime Web Check devices
@@ -348,13 +348,13 @@ type Device struct {
 	// true: The alert settings configured in the website device device Default Settings will be used
 	// false: Service Default Settings will not be used, and you will need to specify individualSMAlertEnable, individualAlertLevel, globalSmAlertConf, overallAlertLevel and pollingInterval
 	// Example: true
-	UseDefaultAlertSetting bool `json:"useDefaultAlertSetting,omitempty"`
+	UseDefaultAlertSetting bool `json:"useDefaultAlertSetting"`
 
 	// The values can be true|false where
 	// true: The checkpoint locations configured in the website device device Default Settings will be used
 	// false: The checkpoint locations specified in the testLocation will be used
 	// Example: false
-	UseDefaultLocationSetting bool `json:"useDefaultLocationSetting,omitempty"`
+	UseDefaultLocationSetting bool `json:"useDefaultLocationSetting"`
 
 	// The read and/or write permissions for this device that are granted to the user who made the API request
 	// Read Only: true

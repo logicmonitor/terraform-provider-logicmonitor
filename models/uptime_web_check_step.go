@@ -43,22 +43,22 @@ type UptimeWebCheckStep struct {
 	// The values can be true|false
 	// Specifies whether to enable step or not
 	// Example: true
-	Enable bool `json:"enable,omitempty"`
+	Enable bool `json:"enable"`
 
 	// The values can be true|false
 	// Specifies whether to follow redirection or not
 	// Example: true
-	FollowRedirection bool `json:"followRedirection,omitempty"`
+	FollowRedirection bool `json:"followRedirection"`
 
 	// The values can be true|false
 	// Checks if full page should be loaded or not
 	// Example: false
-	FullpageLoad bool `json:"fullpageLoad,omitempty"`
+	FullpageLoad bool `json:"fullpageLoad"`
 
 	// The values can be true|false
 	// Checks if invert matches or not
 	// Example: false
-	InvertMatch bool `json:"invertMatch,omitempty"`
+	InvertMatch bool `json:"invertMatch"`
 
 	// Keyword that matches the body
 	Keyword string `json:"keyword,omitempty"`
@@ -91,7 +91,7 @@ type UptimeWebCheckStep struct {
 	// The values can be true|false
 	// Checks if authorization required or not
 	// Example: false
-	RequireAuth bool `json:"requireAuth,omitempty"`
+	RequireAuth bool `json:"requireAuth"`
 
 	// The Step Response Script
 	RespScript string `json:"respScript,omitempty"`
@@ -121,7 +121,7 @@ type UptimeWebCheckStep struct {
 	// The values can be true|false
 	// Check if using the default root
 	// Example: true
-	UseDefaultRoot bool `json:"useDefaultRoot,omitempty"`
+	UseDefaultRoot bool `json:"useDefaultRoot"`
 }
 
 // Validate validates this uptime web check step
