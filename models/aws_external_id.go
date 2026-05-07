@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // AwsExternalID aws external Id
@@ -18,9 +20,11 @@ import (
 type AwsExternalID struct {
 
 	// created at
+	// Read Only: true
 	CreatedAt string `json:"createdAt,omitempty"`
 
 	// external Id
+	// Read Only: true
 	ExternalID string `json:"externalId,omitempty"`
 }
 
@@ -29,8 +33,39 @@ func (m *AwsExternalID) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this aws external Id based on context it is used
+// ContextValidate validate this aws external Id based on the context it is used
 func (m *AwsExternalID) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateCreatedAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateExternalID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AwsExternalID) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createdAt", "body", string(m.CreatedAt)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AwsExternalID) contextValidateExternalID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "externalId", "body", string(m.ExternalID)); err != nil {
+		return err
+	}
+
 	return nil
 }
 

@@ -11,12 +11,12 @@ func AwsExternalIDSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"created_at": {
 			Type: schema.TypeString,
-			Optional: true,
+			Computed: true,
 		},
 		
 		"external_id": {
 			Type: schema.TypeString,
-			Optional: true,
+			Computed: true,
 		},
 		
 	}
@@ -42,18 +42,12 @@ func SetAwsExternalIDSubResourceData(m []*models.AwsExternalID) (d []*map[string
 
 func AwsExternalIDModel(d map[string]interface{}) *models.AwsExternalID {
 	// assume that the incoming map only contains the relevant resource data
-	createdAt := d["created_at"].(string)
-	externalID := d["external_id"].(string)
 	
 	return &models.AwsExternalID {
-		CreatedAt: createdAt,
-		ExternalID: externalID,
 	}
 }
 
 func GetAwsExternalIDPropertyFields() (t []string) {
 	return []string{
-		"created_at",
-		"external_id",
 	}
 }
