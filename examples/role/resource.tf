@@ -6,14 +6,9 @@ resource "logicmonitor_role" "my_role" {
   custom_help_label = "Internal Admin Support"
   custom_help_url   = "https://internal-docs.company.com/admin-help"
   role_group_id = 1
-  privileges {
-    object_type = "dashboard_group"
-    object_id   = "14519"  
-    operation   = "write"
-  }
-  privileges {
-    object_type = "dashboard"
-    object_id   = "68605"  
-    operation   = "write"
+  privileges{
+    object_id     = ""
+    object_type   = "configNeedDeviceManagePermission"
+    operation     = "write"
   }
 }

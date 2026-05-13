@@ -18,15 +18,10 @@ resource "logicmonitor_role" "my_role" {
   custom_help_url = "https://logicmonitor.com/support"
   description = "Administrator can do everything, including security-sensitive actions"
   name = "administrator"
-  privileges {
-    object_type = "dashboard_group"
-    object_id   = "14519"  
-    operation   = "write"
-  }
-  privileges {
-    object_type = "dashboard"
-    object_id   = "68605"  
-    operation   = "write"
+  privileges{
+    object_id     = ""
+    object_type   = "configNeedDeviceManagePermission"
+    operation     = "write"
   }
   require_e_u_l_a = true
   role_group_id = 3
