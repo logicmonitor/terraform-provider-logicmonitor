@@ -31,6 +31,7 @@ import (
 	"terraform-provider-logicmonitor/client/datasource"
 	"terraform-provider-logicmonitor/client/device"
 	"terraform-provider-logicmonitor/client/device_group"
+	"terraform-provider-logicmonitor/client/device_group_cluster_alert_conf"
 	"terraform-provider-logicmonitor/client/escalation_chain"
 	"terraform-provider-logicmonitor/client/report_group"
 	"terraform-provider-logicmonitor/client/role"
@@ -121,6 +122,8 @@ func New(c *Config, httpClient *http.Client) *LogicMonitorRESTAPI {
 
 	cli.DeviceGroup = device_group.New(transport, strfmt.Default, authInfo)
 
+	cli.DeviceGroupClusterAlertConf = device_group_cluster_alert_conf.New(transport, strfmt.Default, authInfo)
+
 	cli.EscalationChain = escalation_chain.New(transport, strfmt.Default, authInfo)
 
 	cli.ReportGroup = report_group.New(transport, strfmt.Default, authInfo)
@@ -195,6 +198,8 @@ type LogicMonitorRESTAPI struct {
 
 	DeviceGroup *device_group.Client
 
+	DeviceGroupClusterAlertConf *device_group_cluster_alert_conf.Client
+
 	EscalationChain *escalation_chain.Client
 
 	ReportGroup *report_group.Client
@@ -231,6 +236,8 @@ func (c *LogicMonitorRESTAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Device.SetTransport(transport)
 
 	c.DeviceGroup.SetTransport(transport)
+
+	c.DeviceGroupClusterAlertConf.SetTransport(transport)
 
 	c.EscalationChain.SetTransport(transport)
 
