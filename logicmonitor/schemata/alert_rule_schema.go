@@ -6,6 +6,12 @@ import (
 	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
+func normalizeAlertRuleEscalatingChain(v interface{}) interface{} {
+	if v == nil {
+		return map[string]interface{}{}
+	}
+	return v
+}
 
 func AlertRuleSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
@@ -212,7 +218,7 @@ func SetAlertRuleResourceData(d *schema.ResourceData, m *models.AlertRule) {
 	d.Set("datasource", m.Datasource)
 	d.Set("device_groups", m.DeviceGroups)
 	d.Set("devices", m.Devices)
-	d.Set("escalating_chain", m.EscalatingChain)
+	d.Set("escalating_chain", normalizeAlertRuleEscalatingChain(m.EscalatingChain))
 	d.Set("escalating_chain_id", m.EscalatingChainID)
 	d.Set("escalation_interval", m.EscalationInterval)
 	d.Set("id", strconv.Itoa(int(m.ID)))
@@ -234,7 +240,7 @@ func SetAlertRuleSubResourceData(m []*models.AlertRule) (d []*map[string]interfa
 			properties["datasource"] = alertRule.Datasource
 			properties["device_groups"] = alertRule.DeviceGroups
 			properties["devices"] = alertRule.Devices
-			properties["escalating_chain"] = alertRule.EscalatingChain
+			properties["escalating_chain"] = normalizeAlertRuleEscalatingChain(alertRule.EscalatingChain)
 			properties["escalating_chain_id"] = alertRule.EscalatingChainID
 			properties["escalation_interval"] = alertRule.EscalationInterval
 			properties["id"] = alertRule.ID
