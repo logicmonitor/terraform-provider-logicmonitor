@@ -62,6 +62,7 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
 			Optional: true,
+			Computed: true,
 		},
 		
 		"default_auto_balanced_collector_group_id": {
@@ -93,18 +94,19 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 			Type: schema.TypeBool,
 			Computed: true,
 		},
-		
+
 		"enable_netflow": {
 			Type: schema.TypeBool,
 			Optional: true,
 		},
-		
+
 		"extra": {
 			Type: schema.TypeList, //GoType: CloudAccountExtra
 			Elem: &schema.Resource{
 				Schema: CloudAccountExtraSchema(),
 			},
 			Optional: true,
+			Computed: true,
 		},
 		
 		"full_path": {

@@ -118,7 +118,7 @@ func CollectorSchema() map[string]*schema.Schema {
 			Type: schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"custom_properties": {
 			Type: schema.TypeSet,
 			Elem: &schema.Resource{
@@ -126,6 +126,7 @@ func CollectorSchema() map[string]*schema.Schema {
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
 			Optional: true,
+			Computed: true,
 		},
 		
 		"description": {
