@@ -40,12 +40,43 @@ func SetChainSubResourceData(m []*models.Chain) (d []*map[string]interface{}) {
 		if chain != nil {
 			properties := make(map[string]interface{})
 			properties["period"] = SetPeriodSubResourceData([]*models.Period{chain.Period})
-            properties["stages"] = SetRecipientSubResourceData(chain.Stages[0])
+			properties["stages"] = setChainStagesSubResourceData(chain.Stages)
 			properties["type"] = chain.Type
 			d = append(d, &properties)
 		}
 	}
 	return
+}
+func setChainStagesSubResourceData(stages [][]*models.Recipient) []interface{} {
+	if len(stages) == 0 {
+		return []interface{}{}
+	}
+
+	result := make([]interface{}, 0, len(stages))
+	for _, stage := range stages {
+		if len(stage) == 0 {
+			result = append(result, []interface{}{})
+			continue
+		}
+
+		serializedStage := make([]interface{}, 0, len(stage))
+		for _, recipient := range stage {
+			if recipient == nil {
+				continue
+			}
+
+			serializedStage = append(serializedStage, map[string]interface{}{
+				"addr":    recipient.Addr,
+				"contact": recipient.Contact,
+				"method":  recipient.Method,
+				"type":    recipient.Type,
+			})
+		}
+
+		result = append(result, serializedStage)
+	}
+
+	return result
 }
 
 func ChainModel(d map[string]interface{}) *models.Chain {

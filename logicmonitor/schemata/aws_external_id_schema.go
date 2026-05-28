@@ -1,8 +1,6 @@
 package schemata
 
 import (
-	"strconv"
-	"time"
 	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -25,7 +23,7 @@ func AwsExternalIDSchema() map[string]*schema.Schema {
 func SetAwsExternalIDResourceData(d *schema.ResourceData, m *models.AwsExternalID) {
 	d.Set("created_at", m.CreatedAt)
 	d.Set("external_id", m.ExternalID)
-	d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
+	d.SetId(m.ExternalID)
 }
 
 func SetAwsExternalIDSubResourceData(m []*models.AwsExternalID) (d []*map[string]interface{}) {
