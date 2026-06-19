@@ -11,7 +11,7 @@ func AwsExternalIDSchema() map[string]*schema.Schema {
 			Type: schema.TypeString,
 			Computed: true,
 		},
-		
+
 		"external_id": {
 			Type: schema.TypeString,
 			Computed: true,
