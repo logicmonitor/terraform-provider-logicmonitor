@@ -190,10 +190,6 @@ type Device struct {
 	// Example: 1
 	LogCollectorID int32 `json:"logCollectorId,omitempty"`
 
-	// The model of the website device, which is determined by the type
-	// Example: websiteDevice
-	Model string `json:"model,omitempty"`
-
 	// The host name or IP address of the device
 	// Example: collector.localhost
 	// Required: true

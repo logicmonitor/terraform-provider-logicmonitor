@@ -10,6 +10,16 @@ description: |-
 
 Provides a LogicMonitor device resource. This can be used to create and manage LogicMonitor devices.
 
+> **Note:** The `logicmonitor_device` resource is also used to manage **Uptime** resources (uptime web check and uptime ping check).
+> These resource types are backed by the same Device API in LogicMonitor.
+>
+> **Important:** For uptime resources, always set `name` and `display_name` to the same value to avoid configuration drift.
+> If they differ, subsequent `terraform plan` runs may detect a drift on `display_name`.
+>
+> Since uptime resources share the Device API, drifts on certain device-specific fields are expected and can be safely ignored.
+> These include: `related_device_id`, `current_collector_id`, `preferred_collector_id`, `synthetics_collector_ids`,
+> and other device-level fields that are managed or auto-populated by the LogicMonitor backend for uptime resource types.
+
 ## Example Usage
 ```hcl
 # Create a LogicMonitor device
@@ -49,7 +59,6 @@ resource "logicmonitor_device" "my_device" {
   is_preferred_log_collector_configured = true
   link = "www.ciscorouter.com"
   log_collector_id = 1
-  model = "websiteDevice"
   name = "collector.localhost"
   need_stc_grp_and_sorted_c_p = true
   netflow_collector_id = 1
@@ -161,7 +170,6 @@ false: an alert will not be triggered if a check fails from an individual test l
 * `is_preferred_log_collector_configured` - Indicates whether Preferred Log Collector is configured  (true) or not (false) for the device (bool)
 * `link` - The URL link associated with the device (string)
 * `log_collector_id` - The Id of the netflow collector associated with the device (int32)
-* `model` - The model of the website device, which is determined by the type (string)
 * `need_stc_grp_and_sorted_c_p` - Indicates whether Static group and sorted Custom properties are needed (bool)
 * `netflow_collector_id` - The Id of the netflow collector associated with the device (int32)
 * `op` - whether to use AND or OR for device matching (string)
