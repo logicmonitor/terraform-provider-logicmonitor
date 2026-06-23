@@ -121,9 +121,9 @@ type Sdt struct {
 	// Example: 6
 	Minute int32 `json:"minute,omitempty"`
 
-	// The values can be 1 | 2....| 31. Specifies the day of the month that the SDT will be active for a monthly SDT
+	// The values can be -3 | 1 | 2....| 31. Specifies the day(s) of the month that the SDT will be active for a monthly SDT. Use -3 for the last day of the month. Supports comma-separated values (e.g., '1,15,28') when multi-day is enabled.
 	// Example: 7
-	MonthDay int32 `json:"monthDay,omitempty"`
+	MonthDay string `json:"monthDay,omitempty"`
 
 	// The type of sdt. The values can be oneTime|weekly|monthly|daily|monthlyByWeek
 	// Example: oneTime

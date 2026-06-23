@@ -154,7 +154,7 @@ func SdtSchema() map[string]*schema.Schema {
 		},
 		
 		"month_day": {
-			Type: schema.TypeInt,
+			Type: schema.TypeString,
 			Optional: true,
 		},
 		
@@ -348,7 +348,7 @@ func DataSourceSdtSchema() map[string]*schema.Schema {
 		},
 		
 		"month_day": {
-			Type: schema.TypeInt,
+			Type: schema.TypeString,
 			Optional: true,
 		},
 		
@@ -508,7 +508,7 @@ func SdtModel(d *schema.ResourceData) *models.Sdt {
 	hour := int32(d.Get("hour").(int))
 	id := d.Get("id").(string)
 	minute := int32(d.Get("minute").(int))
-	monthDay := int32(d.Get("month_day").(int))
+	monthDay := d.Get("month_day").(string)
 	sdtType := d.Get("sdt_type").(string)
 	startDateTime := int64(d.Get("start_date_time").(int))
 	timezone := d.Get("timezone").(string)

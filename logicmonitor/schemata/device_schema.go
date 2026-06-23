@@ -238,11 +238,6 @@ func DeviceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
-		"model": {
-			Type: schema.TypeString,
-			Optional: true,
-		},
-		
 		"name": {
 			Type: schema.TypeString,
 			Required: true,
@@ -694,11 +689,6 @@ func DataSourceDeviceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
-		"model": {
-			Type: schema.TypeString,
-			Optional: true,
-		},
-		
 		"name": {
 			Type: schema.TypeString,
 			Optional: true,
@@ -960,7 +950,6 @@ func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("last_updated", m.LastUpdated)
 	d.Set("link", m.Link)
 	d.Set("log_collector_id", m.LogCollectorID)
-	d.Set("model", m.Model)
 	d.Set("name", m.Name)
 	// Special handling for 'need_stc_grp_and_sorted_c_p' as it is a query param and not returned by API
 	if val, ok := d.GetOk("need_stc_grp_and_sorted_c_p"); ok {
@@ -1051,7 +1040,6 @@ func SetDeviceSubResourceData(m []*models.Device) (d []*map[string]interface{}) 
 			properties["last_updated"] = device.LastUpdated
 			properties["link"] = device.Link
 			properties["log_collector_id"] = device.LogCollectorID
-			properties["model"] = device.Model
 			properties["name"] = device.Name
 			properties["need_stc_grp_and_sorted_c_p"] = device.NeedStcGrpAndSortedCP
 			properties["netflow_collector_description"] = device.NetflowCollectorDescription
@@ -1126,7 +1114,6 @@ func DeviceModel(d *schema.ResourceData) *models.Device {
 	isPreferredLogCollectorConfigured := d.Get("is_preferred_log_collector_configured").(bool)
 	link := d.Get("link").(string)
 	logCollectorID := int32(d.Get("log_collector_id").(int))
-	model := d.Get("model").(string)
 	name := d.Get("name").(string)
 	needStcGrpAndSortedCP := d.Get("need_stc_grp_and_sorted_c_p").(bool)
 	netflowCollectorID := int32(d.Get("netflow_collector_id").(int))
@@ -1186,7 +1173,6 @@ func DeviceModel(d *schema.ResourceData) *models.Device {
 		IsPreferredLogCollectorConfigured: isPreferredLogCollectorConfigured,
 		Link: link,
 		LogCollectorID: logCollectorID,
-		Model: model,
 		Name: &name,
 		NeedStcGrpAndSortedCP: &needStcGrpAndSortedCP,
 		NetflowCollectorID: netflowCollectorID,
@@ -1241,7 +1227,6 @@ func GetDevicePropertyFields() (t []string) {
 		"is_preferred_log_collector_configured",
 		"link",
 		"log_collector_id",
-		"model",
 		"name",
 		"need_stc_grp_and_sorted_c_p",
 		"netflow_collector_id",

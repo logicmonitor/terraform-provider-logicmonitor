@@ -4,7 +4,6 @@ variable "require_auth" {
   default     = false
 }
 resource "logicmonitor_device" "my_device"{
-	current_collector_id = 2
   properties = []
 	custom_properties = [
 		{
@@ -23,40 +22,35 @@ resource "logicmonitor_device" "my_device"{
       name  = "system.categories"
       value = ""
     },
-	]
-  display_name = "uptime webcheck"
-  host_group_ids = 276147
-  need_stc_grp_and_sorted_c_p = false
-  preferred_collector_id = 2
-  type = "uptimewebcheck"
-  model = "websiteDevice"
-  device_type = 18
-  name = "Test-Web-Check-Int-V3-Int-New-111"
-	description = ""
-  group_ids = [64]
-  resource_ids = [
-		{
-			name = "addr"
-      value = "127.0.0.1"
-		}
   ]
+  type = "uptimewebcheck"
+  device_type = 18
+  name = "Test-Web-Check-Int-V3-Int-New-112201"
+  display_name = "Test-Web-Check-Int-V3-Int-New-112201"
+  preferred_collector_id = 10
+	description = ""
+  group_ids = [276147]
   is_internal = true
   global_sm_alert_cond = 0
   use_default_alert_setting = false
   use_default_location_setting = false
+  overall_alert_level = "warn"
+  polling_interval = 5
   test_location = [
     {
       all = true
-      collector_ids = [2]
+      collector_ids = [30329]
       smg_ids = []
     }
    ]
   page_load_alert_time_in_m_s = 30000
   alert_expr = ""
   domain = "www.google.com"
-  host = "google.com"
   ignore_s_s_l = true
   schema = "https"
+  transition = 1
+  trigger_s_s_l_expiration_alert = false
+  trigger_s_s_l_status_alert = false
   steps = [
    {
     schema = "https"
@@ -94,7 +88,6 @@ resource "logicmonitor_device" "my_device"{
    }
   ]
 }
-
 data "logicmonitor_device" "my_devices" {
     filter = "displayName~\"uptime webcheck\""
 	depends_on = [

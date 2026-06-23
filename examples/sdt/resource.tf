@@ -6,6 +6,7 @@ resource "logicmonitor_sdt" "my_sdt"{
   end_date_time = 1767232800000    # November 30, 2025 01:00:00 UTC  
   duration = 60
   timezone = "America/New_York"
+  month_day = "0"
   default_value = "2025-01-01T00:00:00Z"
   month_day = 7
   collector_id = "30329"

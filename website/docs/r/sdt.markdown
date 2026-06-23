@@ -38,7 +38,7 @@ resource "logicmonitor_sdt" "my_sdt" {
   event_source_name = ""
   hour = 3
   minute = 6
-  month_day = 7
+  month_day = "7"
   sdt_type = "oneTime"
   start_date_time = 1534460400000
   timezone = "America/Los_Angeles"
@@ -79,7 +79,7 @@ The following arguments are **optional**:
 * `event_source_name` - The name of the eventsource that the SDT will apply to (string)
 * `hour` - The values can be 1 | 2....| 24. Specifies the hour that the SDT will start for a repeating SDT (daily, weekly, or monthly) (int32)
 * `minute` - The values can be 1 | 2....| 60. Specifies the minute of the hour that the SDT should begin for a repeating SDT (int32)
-* `month_day` - The values can be 1 | 2....| 31. Specifies the day of the month that the SDT will be active for a monthly SDT (int32)
+* `month_day` - The values can be -3 | 1 | 2....| 31. Specifies the day(s) of the month that the SDT will be active for a monthly SDT. Use -3 for the last day of the month. Supports comma-separated values (e.g., '1,15,28') when multi-day is enabled. (string)
 * `sdt_type` - The type of sdt. The values can be oneTime|weekly|monthly|daily|monthlyByWeek (string)
 * `start_date_time` - The epoch time, in milliseconds, that the SDT will start (int64)
 * `timezone` - The specific timezone for SDT (string)
