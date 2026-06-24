@@ -8,7 +8,6 @@ resource "logicmonitor_sdt" "my_sdt"{
   timezone = "America/New_York"
   month_day = "0"
   default_value = "2025-01-01T00:00:00Z"
-  month_day = 7
   collector_id = "30329"
   #device_id = "3087872"
   #device_data_source_id = "25268320"
