@@ -104,7 +104,3 @@ terraform apply
 Terraform will prompt you to confirm the execution plan one more time. Type yes and press Enter to proceed.
 The Terraform execution will begin and create/update the necessary resources according to your configuration.
 
-## Internal Documentation
-```sh
-https://confluence.logicmonitor.com/display/ENG/Development+Guide
-```
