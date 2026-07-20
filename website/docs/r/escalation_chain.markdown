@@ -84,6 +84,7 @@ The following arguments are **required**:
 The following arguments are **optional**:
 * `cc_destinations` -  ([]*Recipient)
   + `addr` - the user name if method = admin, or the email address if method = arbitrary
+     The LogicMonitor backend automatically prefixes CC email addresses with LMCarbonCopy to identify them as CC recipients. As a result, the stored value may differ from the value originally specified in the Terraform configuration..
   + `contact` - contact details, email address or phone number
   + `method` (required) - Admin | Arbitrary, where Admin = a user, and Arbitrary = an arbitrary email
   + `type` (required) - email | sms | voice, where type must be email if method = arbitrary
