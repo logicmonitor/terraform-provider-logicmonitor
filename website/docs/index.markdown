@@ -450,6 +450,43 @@ resource "logicmonitor_website_group" "my_website_group" {
 }
 ```
 
+### Widget
+
+```hcl
+# create a new LogicMonitor widget
+resource "logicmonitor_widget" "my_widget" {
+  # Polymorphic: type = cgraph | bigNumber | pieChart.
+  # Full examples (all variants): see docs/r/widget.markdown
+  dashboard_id = 1
+  name         = "CPU Graph"
+  type         = "cgraph"
+  theme        = "newBorderBlue"
+  interval     = 5
+
+  graph_info {
+    vertical_label = "CPU %"
+    top_x          = 10
+    aggregate      = true
+
+    data_points {
+      name                  = "cpu"
+      data_source_full_name = "WinCPU"
+      data_point_name       = "PercentProcessorTime"
+
+      device_group_full_path {
+        value = "*"
+      }
+      device_display_name {
+        value = "*"
+      }
+      instance_name {
+        value = "*"
+      }
+    }
+  }
+}
+```
+
 
 ## Argument Reference
 

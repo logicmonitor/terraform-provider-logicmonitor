@@ -7,15 +7,7 @@ package client
 
 import (
 	"bytes"
-	"crypto/hmac"
-	"crypto/sha256"
-	"encoding/base64"
-	"encoding/hex"
-	"encoding/json"
-	"fmt"
 	"net/http"
-	"strconv"
-	"time"
 
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
@@ -38,6 +30,7 @@ import (
 	"terraform-provider-logicmonitor/client/sdt"
 	"terraform-provider-logicmonitor/client/website"
 	"terraform-provider-logicmonitor/client/website_group"
+	"terraform-provider-logicmonitor/client/widget"
 )
 
 const (
@@ -103,6 +96,10 @@ func New(c *Config, httpClient *http.Client) *LogicMonitorRESTAPI {
 
 	cli := new(LogicMonitorRESTAPI)
 	cli.Transport = transport
+	cli.accessID = *c.AccessID
+	cli.accessKey = *c.AccessKey
+	cli.httpClient = httpClient
+	cli.transportCfg = c.TransportCfg
 
 	cli.AlertRule = alert_rule.New(transport, strfmt.Default, authInfo)
 
@@ -135,6 +132,8 @@ func New(c *Config, httpClient *http.Client) *LogicMonitorRESTAPI {
 	cli.Website = website.New(transport, strfmt.Default, authInfo)
 
 	cli.WebsiteGroup = website_group.New(transport, strfmt.Default, authInfo)
+
+	cli.Widget = widget.New(transport, strfmt.Default, authInfo)
 
 	return cli
 }
@@ -212,7 +211,14 @@ type LogicMonitorRESTAPI struct {
 
 	WebsiteGroup *website_group.Client
 
+	Widget *widget.Client
+
 	Transport runtime.ClientTransport
+
+	accessID     string
+	accessKey    string
+	httpClient   *http.Client
+	transportCfg *TransportConfig
 }
 
 // SetTransport changes the transport on the client and all its subresources
@@ -251,45 +257,35 @@ func (c *LogicMonitorRESTAPI) SetTransport(transport runtime.ClientTransport) {
 
 	c.WebsiteGroup.SetTransport(transport)
 
+	c.Widget.SetTransport(transport)
+
 }
 
-// TODO: See if there is a way to move this out of Facade Template and into Main or Provider templates
 func LMv1Auth(accessId, accessKey string) runtime.ClientAuthInfoWriter {
 	return runtime.ClientAuthInfoWriterFunc(func(r runtime.ClientRequest, _ strfmt.Registry) error {
-		// get epoch
-		now := time.Now()
-		nanos := now.UnixNano()
-		epoch := strconv.FormatInt(nanos/1000000, 10)
-
-		// build the signature
-		h := hmac.New(sha256.New, []byte(accessKey))
-		h.Write([]byte(r.GetMethod() + epoch))
-
+		var bodyParts [][]byte
 		if r.GetBodyParam() != nil {
-			buf := new(bytes.Buffer)
-			enc := json.NewEncoder(buf)
-			enc.SetEscapeHTML(false)
-			_ = enc.Encode(r.GetBodyParam())
-			h.Write(buf.Bytes())
+			body, err := EncodeLMv1JSONBody(r.GetBodyParam())
+			if err != nil {
+				return err
+			}
+			if len(body) > 0 {
+				bodyParts = append(bodyParts, body)
+			}
 		}
-
 		if r.GetFileParam() != nil {
 			for _, files := range r.GetFileParam() {
 				for i, file := range files {
 					buf := bytes.NewBuffer(nil)
 					buf.ReadFrom(file)
-					h.Write(buf.Bytes())
+					bodyParts = append(bodyParts, buf.Bytes())
 					file = runtime.NamedReader(file.Name(), bytes.NewReader(buf.Bytes()))
 					files[i] = file
 				}
 			}
 		}
-
-		h.Write([]byte(r.GetPath()))
-		hexDigest := hex.EncodeToString(h.Sum(nil))
-		signature := base64.StdEncoding.EncodeToString([]byte(hexDigest))
-		r.SetHeaderParam("Authorization", fmt.Sprintf("LMv1 %s:%s:%s", accessId, signature, epoch))
-		//TODO Consider moving this up to terraform template level of config
+		authHeader := SignLMv1WithBodyParts(accessId, accessKey, r.GetMethod(), r.GetPath(), bodyParts)
+		r.SetHeaderParam("Authorization", authHeader)
 		return r.SetHeaderParam("X-version", "3")
 	})
 }
