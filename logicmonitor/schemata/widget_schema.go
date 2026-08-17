@@ -14,9 +14,12 @@ var widgetTypeToBlock = map[string]string{
 			"cgraph": "graph_info",
 		"bigNumber": "big_number_info",
 		"pieChart": "pie_chart_info",
+		"alert": "alert_info",
+		"noc": "noc_info",
+		"table": "table_info",
 }
 
-var widgetAllBlocks = []string{"graph_info", "big_number_info", "pie_chart_info"}
+var widgetAllBlocks = []string{"graph_info", "big_number_info", "pie_chart_info", "alert_info", "noc_info", "table_info"}
 
 func WidgetSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
@@ -93,6 +96,30 @@ func WidgetSchema() map[string]*schema.Schema {
 			MaxItems: 1,
 			Elem: &schema.Resource{
 				Schema: pie_chart_info_block_schema(),
+			},
+		},
+		"alert_info": {
+			Type:     schema.TypeList,
+			Optional: true,
+			MaxItems: 1,
+			Elem: &schema.Resource{
+				Schema: alert_info_block_schema(),
+			},
+		},
+		"noc_info": {
+			Type:     schema.TypeList,
+			Optional: true,
+			MaxItems: 1,
+			Elem: &schema.Resource{
+				Schema: noc_info_block_schema(),
+			},
+		},
+		"table_info": {
+			Type:     schema.TypeList,
+			Optional: true,
+			MaxItems: 1,
+			Elem: &schema.Resource{
+				Schema: table_info_block_schema(),
 			},
 		},
 	}
@@ -248,6 +275,148 @@ func pie_chart_info_block_schema() map[string]*schema.Schema {
 		Elem: &schema.Resource{
 						Schema: virtual_data_point_object_schema(),
 					},
+		Optional: true,
+	},
+	}
+}
+
+func alert_info_block_schema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+	"clone_widget_id": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	"display_settings": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"filters": {
+		Type:     schema.TypeMap,
+		Elem: &schema.Schema{Type: schema.TypeString},
+		Optional: true,
+	},
+	"is_support_custom_property": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"parsed_filters": {
+		Type:     schema.TypeMap,
+		Elem: &schema.Schema{Type: schema.TypeString},
+		Optional: true,
+	},
+	"refresh_frequency": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"support_custom_property": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"widget_color_schema": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	}
+}
+
+func noc_info_block_schema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+	"ack_checked": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"clone_widget_id": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	"display_column": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	"display_critical_alert": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"display_error_alert": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"display_settings": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"display_warn_alert": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"is_support_custom_property": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"items": {
+		Type:     schema.TypeList,
+		Elem: &schema.Resource{
+						Schema: noc_item_base_object_schema(),
+					},
+		Required: true,
+	},
+	"sdt_checked": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"sort_by": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"support_custom_property": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"widget_filters": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	}
+}
+
+func table_info_block_schema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+	"clone_widget_id": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	"columns": {
+		Type:     schema.TypeList,
+		Elem: &schema.Resource{
+						Schema: table_widget_column_object_schema(),
+					},
+		Required: true,
+	},
+	"display_settings": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"forecast": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"is_support_custom_property": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"rows": {
+		Type:     schema.TypeList,
+		Elem: &schema.Resource{
+						Schema: table_widget_row_object_schema(),
+					},
+		Required: true,
+	},
+	"support_custom_property": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"widget_filters": {
+		Type:     schema.TypeString,
 		Optional: true,
 	},
 	}
@@ -542,6 +711,198 @@ func pie_chart_item_object_schema() map[string]*schema.Schema {
 	}
 }
 
+func noc_item_base_object_schema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+	"data_point_name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"data_source_display_name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"device_display_name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"device_group_full_path": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"group_by": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"instance_name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"noc_item_options": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"type": {
+		Type:     schema.TypeString,
+		Required: true,
+	},
+	"website_group_name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"website_name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	}
+}
+
+func table_widget_data_point_object_schema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+	"data_point_id": {
+		Type:     schema.TypeInt,
+		Required: true,
+	},
+	"data_point_name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"data_source_full_name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"data_source_id": {
+		Type:     schema.TypeString,
+		Required: true,
+	},
+	"is_multiple": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	}
+}
+
+func table_widget_column_object_schema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+	"alternate_data_points": {
+		Type:     schema.TypeList,
+		Elem: &schema.Resource{
+						Schema: table_widget_data_point_object_schema(),
+					},
+		Optional: true,
+	},
+	"column_name": {
+		Type:     schema.TypeString,
+		Required: true,
+	},
+	"data_point": {
+		Type:     schema.TypeMap,
+		Elem: &schema.Schema{Type: schema.TypeString},
+		Required: true,
+	},
+	"enable_forecast": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"id": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"index": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	"position": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	"properties_options": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"rounding_decimal": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	"rpn": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"unit_label": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	}
+}
+
+func table_widget_instance_cell_object_schema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+	"data_point_id": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	"data_point_name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"instance_id": {
+		Type:     schema.TypeInt,
+		Required: true,
+	},
+	"instance_name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"validation_status_code": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	}
+}
+
+func table_widget_row_object_schema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+	"device_display_name": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"device_id": {
+		Type:     schema.TypeInt,
+		Required: true,
+	},
+	"group_full_path": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"group_id": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	"id": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"instances": {
+		Type:     schema.TypeList,
+		Elem: &schema.Resource{
+						Schema: table_widget_instance_cell_object_schema(),
+					},
+		Optional: true,
+	},
+	"label": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"position": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	}
+}
+
 
 func WidgetCustomizeDiff(_ context.Context, d *schema.ResourceDiff, _ interface{}) error {
 	typeValue, err := getTypeAttr(d)
@@ -660,6 +1021,24 @@ func SetWidgetResourceData(d *schema.ResourceData, raw map[string]interface{}) {
 		if v, ok := raw["pieChartInfo"]; ok {
 			d.Set("pie_chart_info", []interface{}{apiMapToSnake(v)})
 		}
+	case "alert":
+		block := apiFieldsToSnakeBlock(raw, []string{"cloneWidgetId", "displaySettings", "filters", "isSupportCustomProperty", "parsedFilters", "refreshFrequency", "supportCustomProperty", "widgetColorSchema"})
+		d.Set("alert_info", []interface{}{block})
+	case "noc":
+		block := apiFieldsToSnakeBlock(raw, []string{"ackChecked", "cloneWidgetId", "displayColumn", "displayCriticalAlert", "displayErrorAlert", "displaySettings", "displayWarnAlert", "isSupportCustomProperty", "sdtChecked", "sortBy", "supportCustomProperty", "widgetFilters"})
+		if v, ok := raw["items"].([]interface{}); ok {
+			block["items"] = apiObjectListToSnake(v)
+		}
+		d.Set("noc_info", []interface{}{block})
+	case "table":
+		block := apiFieldsToSnakeBlock(raw, []string{"cloneWidgetId", "displaySettings", "forecast", "isSupportCustomProperty", "supportCustomProperty", "widgetFilters"})
+		if v, ok := raw["columns"].([]interface{}); ok {
+			block["columns"] = apiObjectListToSnake(v)
+		}
+		if v, ok := raw["rows"].([]interface{}); ok {
+			block["rows"] = apiObjectListToSnake(v)
+		}
+		d.Set("table_info", []interface{}{block})
 	}
 }
 
@@ -718,6 +1097,108 @@ func FlattenWidgetPayload(d *schema.ResourceData) (map[string]interface{}, error
 			return nil, err
 		}
 		payload["pieChartInfo"] = tfBlockToAPI(block)
+	case "alert":
+		block, err := getSingleBlock(d, "alert_info")
+		if err != nil {
+			return nil, err
+		}
+		if v, err := getIntFromBlock(block, "clone_widget_id"); err == nil {
+			payload["cloneWidgetId"] = v
+		}
+		if v, err := getStringFromBlock(block, "display_settings"); err == nil {
+			payload["displaySettings"] = decodeJSONContainerIfPossible(v)
+		}
+		if v, err := getStringFromBlock(block, "filters"); err == nil {
+			payload["filters"] = v
+		}
+		if v, err := getBoolFromBlock(block, "is_support_custom_property"); err == nil {
+			payload["isSupportCustomProperty"] = v
+		}
+		if v, err := getStringFromBlock(block, "parsed_filters"); err == nil {
+			payload["parsedFilters"] = v
+		}
+		if v, err := getStringFromBlock(block, "refresh_frequency"); err == nil {
+			payload["refreshFrequency"] = decodeJSONContainerIfPossible(v)
+		}
+		if v, err := getBoolFromBlock(block, "support_custom_property"); err == nil {
+			payload["supportCustomProperty"] = v
+		}
+		if v, err := getStringFromBlock(block, "widget_color_schema"); err == nil {
+			payload["widgetColorSchema"] = v
+		}
+	case "noc":
+		block, err := getSingleBlock(d, "noc_info")
+		if err != nil {
+			return nil, err
+		}
+		if v, err := getBoolFromBlock(block, "ack_checked"); err == nil {
+			payload["ackChecked"] = v
+		}
+		if v, err := getIntFromBlock(block, "clone_widget_id"); err == nil {
+			payload["cloneWidgetId"] = v
+		}
+		if v, err := getIntFromBlock(block, "display_column"); err == nil {
+			payload["displayColumn"] = v
+		}
+		if v, err := getBoolFromBlock(block, "display_critical_alert"); err == nil {
+			payload["displayCriticalAlert"] = v
+		}
+		if v, err := getBoolFromBlock(block, "display_error_alert"); err == nil {
+			payload["displayErrorAlert"] = v
+		}
+		if v, err := getStringFromBlock(block, "display_settings"); err == nil {
+			payload["displaySettings"] = decodeJSONContainerIfPossible(v)
+		}
+		if v, err := getBoolFromBlock(block, "display_warn_alert"); err == nil {
+			payload["displayWarnAlert"] = v
+		}
+		if v, err := getBoolFromBlock(block, "is_support_custom_property"); err == nil {
+			payload["isSupportCustomProperty"] = v
+		}
+		if v, ok := block["items"].([]interface{}); ok {
+			payload["items"] = expandObjectListToAPI(v)
+		}
+		if v, err := getBoolFromBlock(block, "sdt_checked"); err == nil {
+			payload["sdtChecked"] = v
+		}
+		if v, err := getStringFromBlock(block, "sort_by"); err == nil {
+			payload["sortBy"] = v
+		}
+		if v, err := getBoolFromBlock(block, "support_custom_property"); err == nil {
+			payload["supportCustomProperty"] = v
+		}
+		if v, err := getStringFromBlock(block, "widget_filters"); err == nil {
+			payload["widgetFilters"] = decodeJSONContainerIfPossible(v)
+		}
+	case "table":
+		block, err := getSingleBlock(d, "table_info")
+		if err != nil {
+			return nil, err
+		}
+		if v, err := getIntFromBlock(block, "clone_widget_id"); err == nil {
+			payload["cloneWidgetId"] = v
+		}
+		if v, ok := block["columns"].([]interface{}); ok {
+			payload["columns"] = expandObjectListToAPI(v)
+		}
+		if v, err := getStringFromBlock(block, "display_settings"); err == nil {
+			payload["displaySettings"] = decodeJSONContainerIfPossible(v)
+		}
+		if v, err := getStringFromBlock(block, "forecast"); err == nil {
+			payload["forecast"] = decodeJSONContainerIfPossible(v)
+		}
+		if v, err := getBoolFromBlock(block, "is_support_custom_property"); err == nil {
+			payload["isSupportCustomProperty"] = v
+		}
+		if v, ok := block["rows"].([]interface{}); ok {
+			payload["rows"] = expandObjectListToAPI(v)
+		}
+		if v, err := getBoolFromBlock(block, "support_custom_property"); err == nil {
+			payload["supportCustomProperty"] = v
+		}
+		if v, err := getStringFromBlock(block, "widget_filters"); err == nil {
+			payload["widgetFilters"] = decodeJSONContainerIfPossible(v)
+		}
 	default:
 		return nil, fmt.Errorf("unsupported type: %s", typeValue)
 	}

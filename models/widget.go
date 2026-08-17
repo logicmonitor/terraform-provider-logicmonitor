@@ -282,6 +282,24 @@ func unmarshalWidget(data []byte, consumer runtime.Consumer) (Widget, error) {
 
 	// The value of type is used to determine which type to create and unmarshal the data into
 	switch getType.Type {
+	case "AlertWidget":
+		var result AlertWidget
+		if err := consumer.Consume(buf2, &result); err != nil {
+			return nil, err
+		}
+		return &result, nil
+	case "NOCWidget":
+		var result NOCWidget
+		if err := consumer.Consume(buf2, &result); err != nil {
+			return nil, err
+		}
+		return &result, nil
+	case "TableWidget":
+		var result TableWidget
+		if err := consumer.Consume(buf2, &result); err != nil {
+			return nil, err
+		}
+		return &result, nil
 	case "Widget":
 		var result widget
 		if err := consumer.Consume(buf2, &result); err != nil {
