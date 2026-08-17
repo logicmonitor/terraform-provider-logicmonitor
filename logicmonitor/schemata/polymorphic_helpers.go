@@ -3,6 +3,7 @@
 package schemata
 
 import (
+	"encoding/json"
 	"fmt"
 	"strconv"
 	"strings"
@@ -189,6 +190,22 @@ func getStringFromBlock(block map[string]interface{}, key string) (string, error
 		return "", fmt.Errorf("%q must be a string", key)
 	}
 	return s, nil
+}
+
+func decodeJSONContainerIfPossible(raw string) interface{} {
+	trimmed := strings.TrimSpace(raw)
+	if trimmed == "" {
+		return raw
+	}
+	first := trimmed[0]
+	if first != '{' && first != '[' {
+		return raw
+	}
+	var decoded interface{}
+	if err := json.Unmarshal([]byte(trimmed), &decoded); err == nil {
+		return decoded
+	}
+	return raw
 }
 
 func getIntFromBlock(block map[string]interface{}, key string) (int, error) {

@@ -11,7 +11,7 @@ Provides a LogicMonitor widget resource. This can be used to create and manage L
 
 ## Example Usage
 
-The `logicmonitor_widget` resource is polymorphic. Set `type` to `cgraph`, `bigNumber`, or `pieChart` and provide the matching configuration block (`graph_info`, `big_number_info`, or `pie_chart_info`).
+The `logicmonitor_widget` resource is polymorphic. Set `type` to `cgraph`, `bigNumber`, `pieChart`, `table`, `noc`, or `alert` and provide the matching configuration block (`graph_info`, `big_number_info`, `pie_chart_info`, `table_info`, `noc_info`, or `alert_info`).
 
 ### Custom Graph Widget (`cgraph`)
 #### Omit fields entirely when empty (do not set an empty list).
@@ -214,6 +214,241 @@ resource "logicmonitor_widget" "pie" {
       color           = "auto"
     }
   }
+}
+```
+
+### Table Widget (`table`)
+#### Omit fields entirely when empty (do not set an empty list).
+```hcl
+resource "logicmonitor_widget" "table" {
+  name            = "ctable"
+  description     = ""
+  type            = "table"
+  dashboard_id    = 65756
+  theme           = "newBorderGray"
+  user_permission = "write"
+  interval        = 3
+  timescale       = "day"
+  table_info {
+    display_settings = jsonencode({
+      propertyColumns = []
+      pageSize        = "25"
+      overrideFilter  = false
+      showFilter      = false
+      columnsV4 = [
+        {
+          columnName = "recvdpktsq"
+          dataPoint = {
+            dataSourceFullName = "Ping"
+            dataSourceId       = "122104301"
+            dataPointName      = "recvdpkts"
+          }
+          alternateDataPoints = [
+            {
+              dataSourceFullName = ""
+              dataSourceId       = "124192717"
+              dataPointName      = ""
+            }
+          ]
+          unitLabel         = ""
+          enableForecast    = false
+          roundingDecimal   = 2
+          rpn               = ""
+          position          = 0
+          propertiesOptions = "1"
+          id                = "undefined_0"
+          index             = 0
+        }
+      ]
+    })
+    is_support_custom_property = false
+    columns {
+      column_name = "recvdpktsq"
+      data_point = {
+        dataSourceFullName = "Ping"
+        dataSourceId       = "122104301"
+        dataPointName      = "recvdpkts"
+      }
+      alternate_data_points {
+        data_source_full_name = ""
+        data_source_id        = "124192717"
+        data_point_name       = ""
+      }
+      unit_label         = ""
+      enable_forecast    = false
+      rounding_decimal   = 2
+      rpn                = ""
+      position           = 0
+      properties_options = "1"
+      id                 = "undefined_0"
+      index              = 0
+    }
+    rows {
+      label               = "device21"
+      group_id            = 215809
+      group_full_path     = ""
+      device_id           = 1042326
+      device_display_name = null
+      instances {
+        instance_id            = 0
+        instance_name          = null
+        data_point_name        = null
+        data_point_id          = 0
+        validation_status_code = 1
+      }
+      position = 0
+      id       = "device21_0"
+    }
+    forecast = jsonencode({
+      confidence = 70
+      algorithm  = "ARIMA"
+    })
+    support_custom_property = false
+    widget_filters          = jsonencode({})
+  }
+}
+```
+
+### NOC Widget (`noc`)
+#### Omit fields entirely when empty (do not set an empty list).
+```hcl
+resource "logicmonitor_widget" "noc" {
+  name            = "NOC"
+  description     = ""
+  type            = "noc"
+  dashboard_id    = 65756
+  theme           = "newBorderGray"
+  user_permission = "write"
+  interval        = 3
+  timescale       = "day"
+  noc_info {
+    display_settings = jsonencode({
+      showTypeIcon   = true
+      displayAs      = "table"
+      overrideFilter = false
+      showFilter     = false
+    })
+    is_support_custom_property = false
+    items {
+      type                     = "device"
+      device_group_full_path   = "gayatri-qapr-201"
+      device_display_name      = "*"
+      data_source_display_name = "Ping"
+      instance_name            = "*"
+      data_point_name          = "recvdpkts"
+      group_by                 = "device"
+      name                     = "##RESOURCENAME##"
+      noc_item_options         = "1"
+    }
+    sort_by                 = "alertSeverity"
+    display_column          = 1
+    display_warn_alert      = true
+    display_error_alert     = true
+    display_critical_alert  = true
+    ack_checked             = true
+    sdt_checked             = true
+    support_custom_property = false
+    widget_filters          = jsonencode({})
+  }
+}
+```
+
+### Alert Widget (`alert`)
+#### Omit fields entirely when empty (do not set an empty list).
+```hcl
+resource "logicmonitor_widget" "alert" {
+  name            = "alerts1"
+  description     = ""
+  type            = "alert"
+  dashboard_id    = 38044
+  theme           = "newSolidDarkBlue"
+  user_permission = "write"
+  interval        = 3
+  timescale       = "day"
+  alert_info {
+    display_settings = jsonencode({
+      columns = [
+        {
+          columnKey   = "alert-began"
+          columnLabel = "Reported At"
+          visible     = true
+          passthroughProps = {
+            hasRelativeTime = true
+          }
+          columnSize    = 146
+          isSortable    = true
+          componentName = "SpaceDateTime"
+          dataPath = [
+            "reportedAtMS"
+          ]
+        },
+        {
+          columnKey     = "alert-severity"
+          columnLabel   = "Severity"
+          visible       = true
+          columnSize    = 138
+          isSortable    = true
+          minSize       = 82
+          componentName = "SeverityCell"
+        }
+      ]
+      showFilter = false
+      fontsize   = "normal-font"
+      sort       = "-monitorObjectName"
+      playSound = {
+        criticalAlertAudioFileName = "none"
+        errorAlertAudioFileName    = "none"
+        warningAlertAudioFileName  = "none"
+        shouldPlay                 = false
+      }
+      isShowAll = false
+    })
+    is_support_custom_property = false
+    filters = {
+      group                  = ""
+      host                   = ""
+      dataSource             = "Port-"
+      instance               = "*"
+      dataPoint              = ""
+      severity               = ""
+      acked                  = "all"
+      sdted                  = "all"
+      isHistoricalSdt        = "all"
+      rule                   = ""
+      chain                  = ""
+      cleared                = "all"
+      isEscalation           = "all"
+      keyword                = ""
+      dependencyRole         = ""
+      dependencyRoutingState = ""
+      anomaly                = ""
+      suppressionType        = ""
+    }
+    parsed_filters = {
+      group                  = ""
+      host                   = ""
+      dataSource             = "Port-"
+      instance               = "*"
+      dataPoint              = ""
+      severity               = ""
+      acked                  = "all"
+      sdted                  = "all"
+      rule                   = ""
+      chain                  = ""
+      isEscalation           = "all"
+      isHistoricalSdt        = "all"
+      cleared                = "all"
+      keyword                = ""
+      dependencyRole         = ""
+      dependencyRoutingState = ""
+      suppressionType        = ""
+      anomaly                = ""
+    }
+    support_custom_property = false
+    refresh_frequency       = jsonencode({ units = "SECONDS", offset = 180 })
+    widget_color_schema     = "newSolidDarkBlue"
+  }
+  support_key_word = "Alert List"
 }
 ```
 
