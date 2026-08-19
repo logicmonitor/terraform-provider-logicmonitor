@@ -11,6 +11,7 @@ import (
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/data_resource_aws_external_id"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
+	"terraform-provider-logicmonitor/logicmonitor/utils"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -37,6 +38,10 @@ func getAwsExternalId(ctx context.Context, d *schema.ResourceData, m interface{}
 	resp, err := client.DataResourceAwsExternalID.GetAwsExternalID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

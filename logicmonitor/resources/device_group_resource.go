@@ -48,6 +48,7 @@ func addDeviceGroup(ctx context.Context, d *schema.ResourceData, m interface{}) 
 
 	model := schemata.DeviceGroupModel(d)
 	params := device_group.NewAddDeviceGroupParams()
+
 	params.SetBody(model)
 
 	client := m.(*client.LogicMonitorRESTAPI)
@@ -55,6 +56,11 @@ func addDeviceGroup(ctx context.Context, d *schema.ResourceData, m interface{}) 
 	resp, err := client.DeviceGroup.AddDeviceGroup(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			d.Partial(false)
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -85,6 +91,7 @@ func deleteDeviceGroupById(ctx context.Context, d *schema.ResourceData, m interf
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -118,6 +125,7 @@ func getDeviceGroupById(ctx context.Context, d *schema.ResourceData, m interface
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -129,6 +137,10 @@ func getDeviceGroupById(ctx context.Context, d *schema.ResourceData, m interface
 	resp, err := client.DeviceGroup.GetDeviceGroupByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -182,6 +194,7 @@ func updateDeviceGroupById(ctx context.Context, d *schema.ResourceData, m interf
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -205,6 +218,10 @@ func updateDeviceGroupById(ctx context.Context, d *schema.ResourceData, m interf
 	resp, err := client.DeviceGroup.UpdateDeviceGroupByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

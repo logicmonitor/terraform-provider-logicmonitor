@@ -23,11 +23,7 @@ resource "logicmonitor_device_group" "my_device_group" {
 		{
 			name = "host"
       		value = "localhost"
-		},
-    {
-      name  = "system.categories"
-      value = "" 
-    }
+		}
 	]
   default_auto_balanced_collector_group_id = 
   default_collector_id = 1

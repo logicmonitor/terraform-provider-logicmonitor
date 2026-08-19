@@ -48,6 +48,7 @@ func addAlertRule(ctx context.Context, d *schema.ResourceData, m interface{}) di
 
 	model := schemata.AlertRuleModel(d)
 	params := alert_rule.NewAddAlertRuleParams()
+
 	params.SetBody(model)
 
 	client := m.(*client.LogicMonitorRESTAPI)
@@ -55,6 +56,11 @@ func addAlertRule(ctx context.Context, d *schema.ResourceData, m interface{}) di
 	resp, err := client.AlertRule.AddAlertRule(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			d.Partial(false)
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -75,6 +81,7 @@ func deleteAlertRuleById(ctx context.Context, d *schema.ResourceData, m interfac
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -108,6 +115,7 @@ func getAlertRuleById(ctx context.Context, d *schema.ResourceData, m interface{}
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -119,6 +127,10 @@ func getAlertRuleById(ctx context.Context, d *schema.ResourceData, m interface{}
 	resp, err := client.AlertRule.GetAlertRuleByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -172,6 +184,7 @@ func updateAlertRuleById(ctx context.Context, d *schema.ResourceData, m interfac
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -195,6 +208,10 @@ func updateAlertRuleById(ctx context.Context, d *schema.ResourceData, m interfac
 	resp, err := client.AlertRule.UpdateAlertRuleByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

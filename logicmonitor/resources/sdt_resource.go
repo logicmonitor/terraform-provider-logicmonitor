@@ -55,6 +55,11 @@ func addSdt(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Dia
 	resp, err := client.Sdt.AddSdt(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			d.Partial(false)
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -116,6 +121,10 @@ func getSdtById(ctx context.Context, d *schema.ResourceData, m interface{}) diag
 	resp, err := client.Sdt.GetSdtByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -193,6 +202,10 @@ func updateSdtById(ctx context.Context, d *schema.ResourceData, m interface{}) d
 	resp, err := client.Sdt.UpdateSdtByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

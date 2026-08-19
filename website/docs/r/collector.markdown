@@ -37,11 +37,7 @@ resource "logicmonitor_collector" "my_collector" {
 		{
 			name = "host"
       		value = "localhost"
-		},
-    {
-      name  = "system.categories"
-      value = "" 
-    }
+		}
 	]
   description = "Linux Collector"
   ea = false

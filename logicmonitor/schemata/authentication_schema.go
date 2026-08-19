@@ -1,6 +1,7 @@
 package schemata
 
 import (
+	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -14,8 +15,10 @@ func AuthenticationSchema() map[string]*schema.Schema {
 		
 		"password": {
 			Type: schema.TypeString,
-			Sensitive: true,
 			Required: true,
+			Sensitive: true,
+			DiffSuppressFunc: utils.SuppressSensitiveIfRedactedOrEmpty,
+			DiffSuppressOnRefresh: true,
 		},
 		
 		"type": {

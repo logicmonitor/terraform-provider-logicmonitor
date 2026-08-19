@@ -37,11 +37,7 @@ resource "logicmonitor_device" "my_device" {
 		{
 			name = "host"
       		value = "localhost"
-		},
-    {
-      name  = "system.categories"
-      value = "" 
-    }
+		}
 	]
   description = "This is a Cisco Router"
   device_type = 0
@@ -68,7 +64,6 @@ resource "logicmonitor_device" "my_device" {
   percent_pkts_not_receive_in_time = 
   polling_interval = 5
   preferred_collector_id = 2
-  properties = []
   related_device_id = -1
   schema = "https"
   steps = [
@@ -180,7 +175,6 @@ The level of alert to trigger if the website device device fails the number of c
 * `polling_interval` - The values can be 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
 The polling interval for the website device device, in units of minutes. This value indicates how often the website device device is checked. The minimum is 1 minute, and the maximum is 10 minutes (int32)
 * `preferred_collector_group_id` - The id of the Collector Group associated with the device's preferred collector (int32), It can be 0 for auto balanced collector group .
-* `properties` - The properties associated with the website device ([]*NameAndValue)
 * `related_device_id` - The Id of the AWS EC2 instance related to this device, if one exists in the LogicMonitor account. This value defaults to -1, which indicates that there are no related devices (int32)
 * `resource_ids` - Any non-system properties (aside from system.categories) defined for this device ([]*NameAndValue)
 * `schema` - The scheme or protocol associated with the URL to check. Acceptable values are: http, https (string)

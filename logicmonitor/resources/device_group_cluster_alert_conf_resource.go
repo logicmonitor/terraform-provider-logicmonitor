@@ -66,6 +66,11 @@ func addDeviceGroupClusterAlertConf(ctx context.Context, d *schema.ResourceData,
 	resp, err := client.DeviceGroupClusterAlertConf.AddDeviceGroupClusterAlertConf(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			d.Partial(false)
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -147,6 +152,10 @@ func getDeviceGroupClusterAlertConfById(ctx context.Context, d *schema.ResourceD
 	resp, err := client.DeviceGroupClusterAlertConf.GetDeviceGroupClusterAlertConfByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -234,6 +243,10 @@ func updateDeviceGroupClusterAlertConfById(ctx context.Context, d *schema.Resour
 	resp, err := client.DeviceGroupClusterAlertConf.UpdateDeviceGroupClusterAlertConfByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

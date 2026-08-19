@@ -56,6 +56,11 @@ func addRole(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Di
 	resp, err := client.Role.AddRole(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			d.Partial(false)
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -122,6 +127,10 @@ func getRoleById(ctx context.Context, d *schema.ResourceData, m interface{}) dia
 	resp, err := client.Role.GetRoleByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -199,6 +208,10 @@ func updateRoleById(ctx context.Context, d *schema.ResourceData, m interface{}) 
 	resp, err := client.Role.UpdateRoleByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

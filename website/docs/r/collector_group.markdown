@@ -25,11 +25,7 @@ resource "logicmonitor_collector_group" "my_collector_group" {
 		{
 			name = "host"
       		value = "localhost"
-		},
-    {
-      name  = "system.categories"
-      value = "" 
-    }
+		}
 	]
   description = "Group for collectors dedicated to Network Devices"
   name = "Collector_Group_(Network Devices)"
