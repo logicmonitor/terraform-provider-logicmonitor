@@ -1,6 +1,7 @@
 package schemata
 
 import (
+	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -56,6 +57,8 @@ func CloudAccountSchema() map[string]*schema.Schema {
 			Type: schema.TypeString,
 			Optional: true,
 			Sensitive: true,
+			DiffSuppressFunc: utils.SuppressSensitiveIfRedactedOrEmpty,
+			DiffSuppressOnRefresh: true,
 		},
 		
 		"project_id": {
@@ -72,12 +75,16 @@ func CloudAccountSchema() map[string]*schema.Schema {
 			Type: schema.TypeString,
 			Optional: true,
 			Sensitive: true,
+			DiffSuppressFunc: utils.SuppressSensitiveIfRedactedOrEmpty,
+			DiffSuppressOnRefresh: true,
 		},
 		
 		"service_account_key": {
 			Type: schema.TypeString,
 			Optional: true,
 			Sensitive: true,
+			DiffSuppressFunc: utils.SuppressSensitiveIfRedactedOrEmpty,
+			DiffSuppressOnRefresh: true,
 		},
 		
 		"subscription_ids": {

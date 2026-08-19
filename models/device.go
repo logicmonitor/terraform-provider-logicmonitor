@@ -248,9 +248,6 @@ type Device struct {
 	// Required: true
 	PreferredCollectorID *int32 `json:"preferredCollectorId"`
 
-	// The properties associated with the website device
-	Properties []*NameAndValue `json:"properties"`
-
 	// The Id of the AWS EC2 instance related to this device, if one exists in the LogicMonitor account. This value defaults to -1, which indicates that there are no related devices
 	// Example: -1
 	RelatedDeviceID int32 `json:"relatedDeviceId,omitempty"`
@@ -390,10 +387,6 @@ func (m *Device) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePreferredCollectorID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateProperties(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -579,32 +572,6 @@ func (m *Device) validatePreferredCollectorID(formats strfmt.Registry) error {
 
 	if err := validate.Required("preferredCollectorId", "body", m.PreferredCollectorID); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *Device) validateProperties(formats strfmt.Registry) error {
-	if swag.IsZero(m.Properties) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Properties); i++ {
-		if swag.IsZero(m.Properties[i]) { // not required
-			continue
-		}
-
-		if m.Properties[i] != nil {
-			if err := m.Properties[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("properties" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("properties" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil
@@ -839,10 +806,6 @@ func (m *Device) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	}
 
 	if err := m.contextValidatePreferredCollectorGroupName(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateProperties(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1191,26 +1154,6 @@ func (m *Device) contextValidatePreferredCollectorGroupName(ctx context.Context,
 
 	if err := validate.ReadOnly(ctx, "preferredCollectorGroupName", "body", string(m.PreferredCollectorGroupName)); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *Device) contextValidateProperties(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Properties); i++ {
-
-		if m.Properties[i] != nil {
-			if err := m.Properties[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("properties" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("properties" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil

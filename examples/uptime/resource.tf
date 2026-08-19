@@ -4,7 +4,6 @@ variable "require_auth" {
   default     = false
 }
 resource "logicmonitor_device" "my_device"{
-  properties = []
 	custom_properties = [
 		{
 			name = "addr"
@@ -17,11 +16,7 @@ resource "logicmonitor_device" "my_device"{
     {
 			name = "location"
       value = "pune"
-		},
-    {
-      name  = "system.categories"
-      value = ""
-    },
+		}
   ]
   type = "uptimewebcheck"
   device_type = 18

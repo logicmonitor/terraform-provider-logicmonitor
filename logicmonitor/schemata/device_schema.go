@@ -308,15 +308,6 @@ func DeviceSchema() map[string]*schema.Schema {
 			Required: true,
 		},
 		
-		"properties": {
-			Type: schema.TypeSet,
-			Elem: &schema.Resource{
-				Schema: NameAndValueSchema(),
-			},
-			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
-		},
-		
 		"related_device_id": {
 			Type: schema.TypeInt,
 			Optional: true,
@@ -759,15 +750,6 @@ func DataSourceDeviceSchema() map[string]*schema.Schema {
 			Optional: true,
 		},
 		
-		"properties": {
-			Type: schema.TypeList, //GoType: []*NameAndValue 
-			Elem: &schema.Resource{
-				Schema: NameAndValueSchema(),
-			},
-			ConfigMode: schema.SchemaConfigModeAttr,
-			Optional: true,
-		},
-		
 		"related_device_id": {
 			Type: schema.TypeInt,
 			Optional: true,
@@ -969,7 +951,6 @@ func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("preferred_collector_group_id", m.PreferredCollectorGroupID)
 	d.Set("preferred_collector_group_name", m.PreferredCollectorGroupName)
 	d.Set("preferred_collector_id", m.PreferredCollectorID)
-	d.Set("properties", SetNameAndValueSubResourceData(m.Properties))
 	d.Set("related_device_id", m.RelatedDeviceID)
 	d.Set("resource_ids", SetNameAndValueSubResourceData(m.ResourceIds))
 	d.Set("scan_config_id", m.ScanConfigID)
@@ -1054,7 +1035,6 @@ func SetDeviceSubResourceData(m []*models.Device) (d []*map[string]interface{}) 
 			properties["preferred_collector_group_id"] = device.PreferredCollectorGroupID
 			properties["preferred_collector_group_name"] = device.PreferredCollectorGroupName
 			properties["preferred_collector_id"] = device.PreferredCollectorID
-			properties["properties"] = SetNameAndValueSubResourceData(device.Properties)
 			properties["related_device_id"] = device.RelatedDeviceID
 			properties["resource_ids"] = SetNameAndValueSubResourceData(device.ResourceIds)
 			properties["scan_config_id"] = device.ScanConfigID
@@ -1123,7 +1103,6 @@ func DeviceModel(d *schema.ResourceData) *models.Device {
 	percentPktsNotReceiveInTime := int32(d.Get("percent_pkts_not_receive_in_time").(int))
 	pollingInterval := int32(d.Get("polling_interval").(int))
 	preferredCollectorID := int32(d.Get("preferred_collector_id").(int))
-	properties := utils.GetPropertiesFromResource(d, "properties")
 	relatedDeviceID := int32(d.Get("related_device_id").(int))
 	resourceIds := utils.GetPropertiesFromResource(d, "resource_ids")
 	schema := d.Get("schema").(string)
@@ -1182,7 +1161,6 @@ func DeviceModel(d *schema.ResourceData) *models.Device {
 		PercentPktsNotReceiveInTime: &percentPktsNotReceiveInTime,
 		PollingInterval: pollingInterval,
 		PreferredCollectorID: &preferredCollectorID,
-		Properties: properties,
 		RelatedDeviceID: relatedDeviceID,
 		ResourceIds: resourceIds,
 		Schema: schema,
@@ -1236,7 +1214,6 @@ func GetDevicePropertyFields() (t []string) {
 		"percent_pkts_not_receive_in_time",
 		"polling_interval",
 		"preferred_collector_id",
-		"properties",
 		"related_device_id",
 		"resource_ids",
 		"schema",

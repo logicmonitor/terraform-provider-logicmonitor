@@ -192,7 +192,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
       device_display_name_template        = ""
       disable_stop_terminate_host_monitor = true
       dead_operation                      = "KEEP_7_DAYS"
-      use_default                         = true
+      use_default                         = false
       name_filter                         = []
       tags                                = []
     }
@@ -208,7 +208,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         monitoring_regions = [
           "CENTRAL_US",
           "EAST_US_2",
-          "WEST_US"
+          "EAST_US"
         ]
         device_display_name_template        = ""
         disable_stop_terminate_host_monitor = true
@@ -311,7 +311,7 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         monitoring_regions = [
           "CENTRAL_US",
           "EAST_US_2",
-          "WEST_US"
+          "EAST_US"
         ]
         device_display_name_template        = ""
         disable_stop_terminate_host_monitor = true
@@ -700,26 +700,6 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         name_filter                         = []
         tags                                = []
       }
-      l_o_a_d_b_a_l_a_n_c_e_r_s {
-        disable_terminated_host_alerting = true
-        normal_collector_config {
-          collectors = []
-          enable    = false
-        }
-        custom_n_s_p_schedule = ""
-        select_all            = true
-        monitoring_regions = [
-          "CENTRAL_US",
-          "EAST_US_2",
-          "WEST_US"
-        ]
-        device_display_name_template        = ""
-        disable_stop_terminate_host_monitor = true
-        dead_operation                      = "KEEP_7_DAYS"
-        use_default                         = true
-        name_filter                         = []
-        tags                                = []
-      }
       l_o_g_a_n_a_l_y_t_i_c_s_w_o_r_k_s_p_a_c_e_s {
         disable_terminated_host_alerting = true
         normal_collector_config {
@@ -781,24 +761,24 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         tags                                = []
       }
       f_r_o_n_t_d_o_o_r_s {
-        # disable_terminated_host_alerting = true
-        # normal_collector_config {
-        #   collectors = []
-        #   enable    = false
-        # }
-        # custom_n_s_p_schedule = ""
-        # select_all            = true
+        disable_terminated_host_alerting = true
+        normal_collector_config {
+          collectors = []
+          enable    = false
+        }
+        custom_n_s_p_schedule = ""
+        select_all            = true
         monitoring_regions = [
           "CENTRAL_US",
           "EAST_US_2",
           "WEST_US"
         ]
-        # device_display_name_template        = ""
-        # disable_stop_terminate_host_monitor = true
-        # dead_operation                      = "KEEP_7_DAYS"
-        use_default = true
-        # name_filter                         = []
-        # tags                                = []
+        device_display_name_template        = ""
+        disable_stop_terminate_host_monitor = true
+        dead_operation                      = "KEEP_7_DAYS"
+        use_default                         = true
+        name_filter                         = []
+        tags                                = []
       }
       s_y_n_a_p_s_e_w_o_r_k_s_p_a_c_e_s {
         disable_terminated_host_alerting = true
@@ -840,11 +820,9 @@ resource "logicmonitor_device_group" "my_azure_device_group" {
         name_filter                         = []
         tags                                = []
       }
-
     }
   }
 }
-
 data "logicmonitor_device_group" "myDeviceGroup" {
   filter = "description~\"Azure test\""
   depends_on = [

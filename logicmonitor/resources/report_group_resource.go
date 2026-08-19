@@ -56,6 +56,11 @@ func addReportGroup(ctx context.Context, d *schema.ResourceData, m interface{}) 
 	resp, err := client.ReportGroup.AddReportGroup(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			d.Partial(false)
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -117,6 +122,10 @@ func getReportGroupById(ctx context.Context, d *schema.ResourceData, m interface
 	resp, err := client.ReportGroup.GetReportGroupByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -194,6 +203,10 @@ func updateReportGroupById(ctx context.Context, d *schema.ResourceData, m interf
 	resp, err := client.ReportGroup.UpdateReportGroupByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

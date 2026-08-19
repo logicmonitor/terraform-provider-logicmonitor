@@ -48,6 +48,7 @@ func addWebsite(ctx context.Context, d *schema.ResourceData, m interface{}) diag
 
 	model := schemata.WebsiteModel(d)
 	params := website.NewAddWebsiteParams()
+
 	params.SetBody(model)
 
 	client := m.(*client.LogicMonitorRESTAPI)
@@ -55,6 +56,11 @@ func addWebsite(ctx context.Context, d *schema.ResourceData, m interface{}) diag
 	resp, err := client.Website.AddWebsite(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			d.Partial(false)
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -75,6 +81,7 @@ func deleteWebsiteById(ctx context.Context, d *schema.ResourceData, m interface{
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -108,6 +115,7 @@ func getWebsiteById(ctx context.Context, d *schema.ResourceData, m interface{}) 
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -119,6 +127,10 @@ func getWebsiteById(ctx context.Context, d *schema.ResourceData, m interface{}) 
 	resp, err := client.Website.GetWebsiteByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -172,6 +184,7 @@ func updateWebsiteById(ctx context.Context, d *schema.ResourceData, m interface{
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -200,6 +213,10 @@ func updateWebsiteById(ctx context.Context, d *schema.ResourceData, m interface{
 	resp, err := client.Website.UpdateWebsiteByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

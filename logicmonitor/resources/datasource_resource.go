@@ -62,6 +62,11 @@ func addDatasourceById(ctx context.Context, d *schema.ResourceData, m interface{
 	resp, err := client.Datasource.AddDatasourceByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			d.Partial(false)
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -82,6 +87,7 @@ func deleteDatasourceById(ctx context.Context, d *schema.ResourceData, m interfa
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -120,6 +126,7 @@ func getDatasourceById(ctx context.Context, d *schema.ResourceData, m interface{
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -131,6 +138,10 @@ func getDatasourceById(ctx context.Context, d *schema.ResourceData, m interface{
 	resp, err := client.Datasource.GetDatasourceByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -195,6 +206,7 @@ func updateDatasourceById(ctx context.Context, d *schema.ResourceData, m interfa
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -223,6 +235,10 @@ func updateDatasourceById(ctx context.Context, d *schema.ResourceData, m interfa
 	resp, err := client.Datasource.UpdateDatasourceByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

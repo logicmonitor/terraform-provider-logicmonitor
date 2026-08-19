@@ -48,6 +48,7 @@ func addEscalationChain(ctx context.Context, d *schema.ResourceData, m interface
 
 	model := schemata.EscalationChainModel(d)
 	params := escalation_chain.NewAddEscalationChainParams()
+
 	params.SetBody(model)
 
 	client := m.(*client.LogicMonitorRESTAPI)
@@ -55,6 +56,11 @@ func addEscalationChain(ctx context.Context, d *schema.ResourceData, m interface
 	resp, err := client.EscalationChain.AddEscalationChain(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			d.Partial(false)
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -75,6 +81,7 @@ func deleteEscalationChainById(ctx context.Context, d *schema.ResourceData, m in
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -108,6 +115,7 @@ func getEscalationChainById(ctx context.Context, d *schema.ResourceData, m inter
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -119,6 +127,10 @@ func getEscalationChainById(ctx context.Context, d *schema.ResourceData, m inter
 	resp, err := client.EscalationChain.GetEscalationChainByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -172,6 +184,7 @@ func updateEscalationChainById(ctx context.Context, d *schema.ResourceData, m in
 	if idIsSet {
 		id, _ := strconv.Atoi(idVal.(string))
 		params.ID = int32(id)
+
 	} else {
 		diags = append(diags, diag.Errorf("unexpected: Missing parameter - id")...)
 		diags = append(diags, diag.Errorf("ending operation")...)
@@ -195,6 +208,10 @@ func updateEscalationChainById(ctx context.Context, d *schema.ResourceData, m in
 	resp, err := client.EscalationChain.UpdateEscalationChainByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

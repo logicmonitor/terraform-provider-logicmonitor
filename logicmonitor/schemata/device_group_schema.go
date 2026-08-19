@@ -3,6 +3,7 @@ package schemata
 import (
 	"strconv"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
+	"strings"
 	"terraform-provider-logicmonitor/models"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -440,7 +441,7 @@ func SetDeviceGroupResourceData(d *schema.ResourceData, m *models.DeviceGroup) {
 	d.Set("azure_test_result", SetAzureAccountTestResultSubResourceData([]*models.AzureAccountTestResult{m.AzureTestResult}))
 	d.Set("azure_test_result_code", m.AzureTestResultCode)
 	d.Set("created_on", m.CreatedOn)
-	d.Set("custom_properties", SetNameAndValueSubResourceData(m.CustomProperties))
+	d.Set("custom_properties", SetNameAndValueSubResourceData(filterDeviceGroupCustomProperties(m.GroupType, m.CustomProperties)))
 	d.Set("default_auto_balanced_collector_group_id", m.DefaultAutoBalancedCollectorGroupID)
 	d.Set("default_collector_description", m.DefaultCollectorDescription)
 	d.Set("default_collector_id", m.DefaultCollectorID)
@@ -482,7 +483,7 @@ func SetDeviceGroupSubResourceData(m []*models.DeviceGroup) (d []*map[string]int
 			properties["azure_test_result"] = SetAzureAccountTestResultSubResourceData([]*models.AzureAccountTestResult{deviceGroup.AzureTestResult})
 			properties["azure_test_result_code"] = deviceGroup.AzureTestResultCode
 			properties["created_on"] = deviceGroup.CreatedOn
-			properties["custom_properties"] = SetNameAndValueSubResourceData(deviceGroup.CustomProperties)
+				properties["custom_properties"] = SetNameAndValueSubResourceData(filterDeviceGroupCustomProperties(deviceGroup.GroupType, deviceGroup.CustomProperties))
 			properties["default_auto_balanced_collector_group_id"] = deviceGroup.DefaultAutoBalancedCollectorGroupID
 			properties["default_collector_description"] = deviceGroup.DefaultCollectorDescription
 			properties["default_collector_id"] = deviceGroup.DefaultCollectorID
@@ -514,6 +515,34 @@ func SetDeviceGroupSubResourceData(m []*models.DeviceGroup) (d []*map[string]int
 		}
 	}
 	return
+}
+func isCloudRootGroupType(groupType string) bool {
+	gt := strings.ToLower(groupType)
+	return strings.Contains(gt, "awsroot") || strings.Contains(gt, "azureroot") || strings.Contains(gt, "gcproot") || strings.Contains(gt, "ociroot")
+}
+
+func isInjectedCloudCustomProperty(name string) bool {
+	n := strings.ToLower(name)
+	return strings.HasPrefix(n, "azure.") || strings.HasPrefix(n, "aws.") || strings.HasPrefix(n, "gcp.") || strings.HasPrefix(n, "oci.")
+}
+
+func filterDeviceGroupCustomProperties(groupType string, customProperties []*models.NameAndValue) []*models.NameAndValue {
+	if !isCloudRootGroupType(groupType) {
+		return customProperties
+	}
+
+	filtered := make([]*models.NameAndValue, 0, len(customProperties))
+	for _, customProperty := range customProperties {
+		if customProperty == nil || customProperty.Name == nil {
+			continue
+		}
+		if isInjectedCloudCustomProperty(*customProperty.Name) {
+			continue
+		}
+		filtered = append(filtered, customProperty)
+	}
+
+	return filtered
 }
 
 func DeviceGroupModel(d *schema.ResourceData) *models.DeviceGroup {

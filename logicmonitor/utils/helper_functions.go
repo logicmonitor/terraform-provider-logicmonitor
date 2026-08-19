@@ -20,6 +20,49 @@ func IsID(s string) bool {
 	return err == nil
 }
 
+// SuppressSensitiveIfRedactedOrEmpty prevents perpetual drift when APIs return
+// redacted or empty values for secret fields during refresh.
+func SuppressSensitiveIfRedactedOrEmpty(_ string, oldValue, newValue string, _ *schema.ResourceData) bool {
+	// Keep create-time diffs visible when there is no prior state.
+	if oldValue == "" && strings.TrimSpace(newValue) != "" {
+		return false
+	}
+
+	oldMaskedOrEmpty := isSensitiveMaskedOrEmpty(oldValue)
+	newMaskedOrEmpty := isSensitiveMaskedOrEmpty(newValue)
+
+	// Suppress when either side is masked/empty because API refresh may redact secrets.
+	if oldMaskedOrEmpty || newMaskedOrEmpty {
+		return true
+	}
+
+	return false
+}
+
+func isSensitiveMaskedOrEmpty(value string) bool {
+	normalized := strings.TrimSpace(strings.ToLower(value))
+	if normalized == "" {
+		return true
+	}
+
+	if strings.Contains(normalized, "redacted") || strings.Contains(normalized, "masked") {
+		return true
+	}
+
+	allMaskChars := true
+	for _, r := range normalized {
+		if r != '*' && r != 'x' && r != 'X' && r != '-' {
+			allMaskChars = false
+			break
+		}
+	}
+	if allMaskChars {
+		return true
+	}
+
+	return false
+}
+
 // retrieve installer url
 func SetInstallerUrl(d *schema.ResourceData, m *models.Collector, client *client.LogicMonitorRESTAPI) diag.Diagnostics {
 	var diags diag.Diagnostics
@@ -152,6 +195,17 @@ func Remove(s []string, r string) []string {
 		}
 	}
 	return s
+}
+
+// IsNotFoundError checks whether an API error indicates a missing resource.
+func IsNotFoundError(err error) bool {
+	if err == nil {
+		return false
+	}
+	errText := strings.ToLower(err.Error())
+	return strings.Contains(errText, "[404]") ||
+		strings.Contains(errText, " status 404") ||
+		strings.Contains(errText, "not found")
 }
 
 // retrieve CloudCollectorConfig Objects
