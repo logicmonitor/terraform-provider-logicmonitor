@@ -300,6 +300,12 @@ func unmarshalWidget(data []byte, consumer runtime.Consumer) (Widget, error) {
 			return nil, err
 		}
 		return &result, nil
+	case "TextWidget":
+		var result TextWidget
+		if err := consumer.Consume(buf2, &result); err != nil {
+			return nil, err
+		}
+		return &result, nil
 	case "Widget":
 		var result widget
 		if err := consumer.Consume(buf2, &result); err != nil {

@@ -17,9 +17,10 @@ var widgetTypeToBlock = map[string]string{
 		"alert": "alert_info",
 		"noc": "noc_info",
 		"table": "table_info",
+		"text": "text_info",
 }
 
-var widgetAllBlocks = []string{"graph_info", "big_number_info", "pie_chart_info", "alert_info", "noc_info", "table_info"}
+var widgetAllBlocks = []string{"graph_info", "big_number_info", "pie_chart_info", "alert_info", "noc_info", "table_info", "text_info"}
 
 func WidgetSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
@@ -120,6 +121,14 @@ func WidgetSchema() map[string]*schema.Schema {
 			MaxItems: 1,
 			Elem: &schema.Resource{
 				Schema: table_info_block_schema(),
+			},
+		},
+		"text_info": {
+			Type:     schema.TypeList,
+			Optional: true,
+			MaxItems: 1,
+			Elem: &schema.Resource{
+				Schema: text_info_block_schema(),
 			},
 		},
 	}
@@ -417,6 +426,31 @@ func table_info_block_schema() map[string]*schema.Schema {
 	},
 	"widget_filters": {
 		Type:     schema.TypeString,
+		Optional: true,
+	},
+	}
+}
+
+func text_info_block_schema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+	"clone_widget_id": {
+		Type:     schema.TypeInt,
+		Optional: true,
+	},
+	"content": {
+		Type:     schema.TypeString,
+		Required: true,
+	},
+	"display_settings": {
+		Type:     schema.TypeString,
+		Optional: true,
+	},
+	"is_support_custom_property": {
+		Type:     schema.TypeBool,
+		Optional: true,
+	},
+	"support_custom_property": {
+		Type:     schema.TypeBool,
 		Optional: true,
 	},
 	}
@@ -1039,6 +1073,9 @@ func SetWidgetResourceData(d *schema.ResourceData, raw map[string]interface{}) {
 			block["rows"] = apiObjectListToSnake(v)
 		}
 		d.Set("table_info", []interface{}{block})
+	case "text":
+		block := apiFieldsToSnakeBlock(raw, []string{"cloneWidgetId", "content", "displaySettings", "isSupportCustomProperty", "supportCustomProperty"})
+		d.Set("text_info", []interface{}{block})
 	}
 }
 
@@ -1198,6 +1235,26 @@ func FlattenWidgetPayload(d *schema.ResourceData) (map[string]interface{}, error
 		}
 		if v, err := getStringFromBlock(block, "widget_filters"); err == nil {
 			payload["widgetFilters"] = decodeJSONContainerIfPossible(v)
+		}
+	case "text":
+		block, err := getSingleBlock(d, "text_info")
+		if err != nil {
+			return nil, err
+		}
+		if v, err := getIntFromBlock(block, "clone_widget_id"); err == nil {
+			payload["cloneWidgetId"] = v
+		}
+		if v, err := getStringFromBlock(block, "content"); err == nil {
+			payload["content"] = v
+		}
+		if v, err := getStringFromBlock(block, "display_settings"); err == nil {
+			payload["displaySettings"] = decodeJSONContainerIfPossible(v)
+		}
+		if v, err := getBoolFromBlock(block, "is_support_custom_property"); err == nil {
+			payload["isSupportCustomProperty"] = v
+		}
+		if v, err := getBoolFromBlock(block, "support_custom_property"); err == nil {
+			payload["supportCustomProperty"] = v
 		}
 	default:
 		return nil, fmt.Errorf("unsupported type: %s", typeValue)

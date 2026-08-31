@@ -643,3 +643,21 @@ resource "logicmonitor_widget" "alert" {
   }
   support_key_word = "Alert List"
 }
+
+resource "logicmonitor_widget" "text" {
+  name            = "textWidget_clone"
+  description     = ""
+  type            = "text"
+  dashboard_id    = 38044
+  theme           = "newSolidDarkBlue"
+  user_permission = "write"
+  interval        = 3
+  timescale       = "day"
+  text_info {
+    display_settings           = jsonencode({})
+    is_support_custom_property = false
+    content                    = "<p><span style=\"color:#ffffff;\"><span style=\"font-size:34.836px;\">Widgets not applicable for Filtering</span></span></p>"
+    support_custom_property    = false
+    clone_widget_id            = 318179
+  }
+}
