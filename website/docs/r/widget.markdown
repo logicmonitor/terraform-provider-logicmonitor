@@ -11,7 +11,17 @@ Provides a LogicMonitor widget resource. This can be used to create and manage L
 
 ## Example Usage
 
-The `logicmonitor_widget` resource is polymorphic. Set `type` to `cgraph`, `bigNumber`, `pieChart`, `table`, `noc`, or `alert` and provide the matching configuration block (`graph_info`, `big_number_info`, `pie_chart_info`, `table_info`, `noc_info`, or `alert_info`).
+The `logicmonitor_widget` resource is polymorphic. Set `type` to one of the supported widget types and provide exactly one matching configuration block. Do not configure blocks for other widget types, including as empty blocks.
+
+* `cgraph` uses `graph_info`
+* `bigNumber` uses `big_number_info`
+* `pieChart` uses `pie_chart_info`
+* `table` uses `table_info`
+* `noc` uses `noc_info`
+* `alert` uses `alert_info`
+* `text` uses `text_info`
+
+The provider uses the selected block to build the widget-specific API payload. Widget-specific attributes must be placed inside the matching block, not at the resource root.
 
 ### Custom Graph Widget (`cgraph`)
 #### Omit fields entirely when empty (do not set an empty list).
@@ -452,13 +462,34 @@ resource "logicmonitor_widget" "alert" {
 }
 ```
 
+### Text Widget (`text`)
+```hcl
+resource "logicmonitor_widget" "text" {
+  name            = "textWidget_clone"
+  description     = ""
+  type            = "text"
+  dashboard_id    = 38044
+  theme           = "newSolidDarkBlue"
+  user_permission = "write"
+  interval        = 3
+  timescale       = "day"
+
+  text_info {
+    display_settings           = jsonencode({})
+    is_support_custom_property = false
+    content                    = "<p><span style=\"color:#ffffff;\"><span style=\"font-size:34.836px;\">Widgets not applicable for Filtering</span></span></p>"
+    support_custom_property    = false
+  }
+}
+```
+
 ## Argument Reference
 
 The following arguments are **required**:
 
 * `dashboard_id` - The id of the dashboard the widget belongs to (int32)
 * `name` - The name of the widget (string)
-* `type` - Widget type. Supported values: `cgraph` (custom graph), `bigNumber`, `pieChart` (string)
+* `type` - Widget type. Supported values: `cgraph` (custom graph), `bigNumber`, `pieChart`, `table`, `noc`, `alert`, and `text` (string)
 
 The following arguments are **optional**:
 
@@ -473,6 +504,10 @@ Exactly one type-specific block must be set to match `type`:
 * `graph_info` - Configuration for custom graph widgets (`type = "cgraph"`). Supports `data_points` (including `is_virtual_datapoint`, `is_valid_exp`, and TypeMap fields such as `device_display_name` / `instance_name` / `display`), `virtual_data_points`, `vertical_label`, `top_x`, `aggregate`, `min_value`, `max_value`, `scale_unit`, `global_consolidate_function`, and related graph settings.
 * `big_number_info` - Configuration for big number widgets (`type = "bigNumber"`). Requires `data_points` and `big_number_items` blocks. Datapoints support `type`; items support `change_threshold_color_toggle`. Optional `counters` and `virtual_data_points` blocks may be omitted when empty.
 * `pie_chart_info` - Configuration for pie chart widgets (`type = "pieChart"`). Requires `pie_chart_items`; `data_points` should be set for datapoint-backed slices and supports `type` / `glob_mode`. Optional `counters` and `virtual_data_points` blocks may be omitted when empty.
+* `table_info` - Configuration for table widgets (`type = "table"`). Requires `columns` and `rows` blocks. Table-specific attributes, including `display_settings`, `forecast`, and `widget_filters`, belong inside this block.
+* `noc_info` - Configuration for NOC widgets (`type = "noc"`). Requires `items`. NOC-specific attributes, including alert display settings, sorting, and `widget_filters`, belong inside this block.
+* `alert_info` - Configuration for alert widgets (`type = "alert"`). Alert-specific attributes, including `display_settings`, `filters`, `parsed_filters`, and `refresh_frequency`, belong inside this block.
+* `text_info` - Configuration for text widgets (`type = "text"`). Requires `content`, which is the HTML displayed by the widget. Optional text-widget settings, including `display_settings`, belong inside this block.
 
 The following attributes are **exported**:
 
