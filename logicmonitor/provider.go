@@ -1,11 +1,18 @@
 package logicmonitor 
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"io"
+	"log"
+	"math/rand"
 	"net/http"
+	"strconv"
+	"strings"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/logicmonitor/resources"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -22,6 +29,7 @@ func Provider() *schema.Provider {
 			"api_key": {
 				Type:        schema.TypeString,
 				Required:    true,
+				Sensitive:   true,
 				DefaultFunc: schema.EnvDefaultFunc("LM_API_KEY", nil),
 			},
 			"domain": {
@@ -98,11 +106,16 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	config.SetAccountDomain(&company)
 	config.SetBulkResource(&bulkResource)
 
-	// Create the HTTP client with a custom User-Agent
+	// Create the HTTP client with a custom User-Agent and 429 retry handling.
     httpClient := &http.Client{
-        Transport: &userAgentTransport{
-            underlyingTransport: http.DefaultTransport,
-            userAgent:           fmt.Sprintf("logicmonitor-terraform-provider/v%s", ProviderVersion),
+        Transport: &retryTransport{
+            underlyingTransport: &userAgentTransport{
+                underlyingTransport: http.DefaultTransport,
+                userAgent:           fmt.Sprintf("logicmonitor-terraform-provider/v%s", ProviderVersion),
+            },
+            maxRetries: 6,
+            baseDelay:  time.Second,
+            maxDelay:   60 * time.Second,
         },
     }
 	c := ValidateClient{}
@@ -123,4 +136,94 @@ type userAgentTransport struct {
 func (t *userAgentTransport) RoundTrip(req *http.Request) (*http.Response, error) {
     req.Header.Set("User-Agent", t.userAgent)
     return t.underlyingTransport.RoundTrip(req)
+}
+
+// retryTransport retries requests that fail with HTTP 429 (Too Many Requests).
+// It honors the server's Retry-After header when present and otherwise falls
+// back to exponential backoff with jitter. This allows Terraform workflows that
+// issue many GET requests (e.g. per-widget dashboard reads) to complete despite
+// hitting the API rate limit instead of failing outright.
+type retryTransport struct {
+	underlyingTransport http.RoundTripper
+	maxRetries          int
+	baseDelay           time.Duration
+	maxDelay            time.Duration
+}
+
+func (t *retryTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	// Buffer the body so the request can be replayed on retry when the caller
+	// did not provide a rewindable GetBody (GET requests have no body).
+	if req.Body != nil && req.GetBody == nil {
+		bodyBytes, err := io.ReadAll(req.Body)
+		req.Body.Close()
+		if err != nil {
+			return nil, err
+		}
+		req.Body = io.NopCloser(bytes.NewReader(bodyBytes))
+		req.GetBody = func() (io.ReadCloser, error) {
+			return io.NopCloser(bytes.NewReader(bodyBytes)), nil
+		}
+	}
+
+	for attempt := 0; ; attempt++ {
+		if attempt > 0 && req.GetBody != nil {
+			body, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = body
+		}
+
+		resp, err := t.underlyingTransport.RoundTrip(req)
+		if err != nil {
+			return nil, err
+		}
+		if resp.StatusCode != http.StatusTooManyRequests || attempt >= t.maxRetries {
+			return resp, nil
+		}
+
+		delay := t.backoff(attempt, resp.Header.Get("Retry-After"))
+		log.Printf("[WARN] %s %s returned HTTP 429; retrying in %s (attempt %d/%d)",
+			req.Method, req.URL.Path, delay, attempt+1, t.maxRetries)
+
+		// Drain and close the body so the underlying connection can be reused.
+		io.Copy(io.Discard, resp.Body)
+		resp.Body.Close()
+
+		select {
+		case <-time.After(delay):
+		case <-req.Context().Done():
+			return nil, req.Context().Err()
+		}
+	}
+}
+
+// backoff computes the wait before the next retry, preferring the Retry-After
+// header (delta seconds or HTTP date) and falling back to capped exponential
+// backoff with jitter.
+func (t *retryTransport) backoff(attempt int, retryAfter string) time.Duration {
+	if retryAfter = strings.TrimSpace(retryAfter); retryAfter != "" {
+		if secs, err := strconv.Atoi(retryAfter); err == nil && secs >= 0 {
+			return t.capDelay(time.Duration(secs) * time.Second)
+		}
+		if when, err := http.ParseTime(retryAfter); err == nil {
+			if d := time.Until(when); d > 0 {
+				return t.capDelay(d)
+			}
+		}
+	}
+
+	d := t.baseDelay * time.Duration(1<<uint(attempt))
+	d = t.capDelay(d)
+	if d > 0 {
+		d += time.Duration(rand.Int63n(int64(d)/2 + 1))
+	}
+	return t.capDelay(d)
+}
+
+func (t *retryTransport) capDelay(d time.Duration) time.Duration {
+	if t.maxDelay > 0 && d > t.maxDelay {
+		return t.maxDelay
+	}
+	return d
 }

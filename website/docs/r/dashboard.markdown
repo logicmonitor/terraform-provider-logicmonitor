@@ -7,7 +7,6 @@ description: |-
 ---
 
 # logicmonitor_dashboard
-
 Provides a LogicMonitor dashboard resource. This can be used to create and manage LogicMonitor dashboards.
 
 ## Example Usage
@@ -20,7 +19,53 @@ resource "logicmonitor_dashboard" "my_dashboard" {
   name = "Default Device Group"
   owner = ""
   sharable = true
-  template =   
+  template = {
+  name                 = "test dashboard"
+  description          = "Created from a dashboard template"
+  widgetsConfigVersion = "2"
+  type                 = "dashboard"
+  version              = "2"
+  widget_tokens = jsonencode([
+    {
+      name         = "defaultDeviceGroup"
+      value        = "*"
+      inherit_list = null
+      type         = null
+    },
+    {
+      name         = "defaultServiceGroup"
+      value        = "*"
+      inherit_list = null
+      type         = null
+    }
+  ])
+  widgets = jsonencode([
+    {
+      position = {
+        col   = 1
+        row   = 1
+        sizex = 6
+        sizey = 4
+      }
+      config = {
+        name        = "How to use dashboards"
+        description = "HTML widget from template"
+        type        = "html"
+        theme       = "borderPurple"
+        interval    = 5
+        timescale   = "day"
+        isCustom    = false
+        resources = [
+          {
+            type = "html"
+            URL  = "https://www.youtube.com/embed/-WNU4ffumk0"
+          }
+        ]
+        version = 2
+      }
+    }
+  ])
+}  
   widget_tokens = [
     {
       name  = "defaultDeviceGroup"
