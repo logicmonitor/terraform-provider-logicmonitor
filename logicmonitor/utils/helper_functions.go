@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -275,6 +276,33 @@ func ConvertSetToStringSlice(set *schema.Set) (slice []string) {
 		slice[i] = v.(string)
 	}
 	return
+}
+
+var jsonEncodedMapFields = map[string]bool{
+	"widgets":       true,
+	"widgetTokens":  true,
+	"widgetsConfig": true,
+}
+
+func NormalizeJSONMap(raw interface{}) interface{} {
+	rawMap, ok := raw.(map[string]interface{})
+	if !ok {
+		return raw
+	}
+
+	result := make(map[string]interface{}, len(rawMap))
+	for k, v := range rawMap {
+		strVal, isString := v.(string)
+		if isString && jsonEncodedMapFields[k] {
+			var parsed interface{}
+			if err := json.Unmarshal([]byte(strVal), &parsed); err == nil {
+				result[k] = parsed
+				continue
+			}
+		}
+		result[k] = v
+	}
+	return result
 }
 
 // retrieve resource widget tokens from resource structure

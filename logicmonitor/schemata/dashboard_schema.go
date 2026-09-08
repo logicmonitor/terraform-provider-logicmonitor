@@ -68,7 +68,7 @@ func DashboardSchema() map[string]*schema.Schema {
 		},
 		
 		"widget_tokens": {
-			Type: schema.TypeList, //GoType: []*WidgetToken 
+			Type: schema.TypeList, //GoType: []*WidgetToken  
 			Elem: &schema.Resource{
 				Schema: WidgetTokenSchema(),
 			},
@@ -222,7 +222,7 @@ func DashboardModel(d *schema.ResourceData) *models.Dashboard {
 	name := d.Get("name").(string)
 	owner := d.Get("owner").(string)
 	sharable := d.Get("sharable").(bool)
-	template := d.Get("template")
+	template := utils.NormalizeJSONMap(d.Get("template"))
 	widgetTokens := utils.GetPropFromWTMap(d, "widget_tokens")
 	widgetsConfig := d.Get("widgets_config")
 	
