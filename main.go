@@ -1,3 +1,4 @@
+// Bamboo selective sync test.
 package main
 
 import (

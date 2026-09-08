@@ -93,4 +93,4 @@ Here you can get more information about this resource :
 ```sh
 https://www.logicmonitor.com/support/lm-service-insight/adding-services
 ```
-
+# Bamboo selective sync test
