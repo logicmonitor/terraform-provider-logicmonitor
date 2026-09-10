@@ -1,6 +1,8 @@
 // Bamboo selective sync test.
 package main
 
+// Testing-only comment for Bamboo selective synchronization.
+
 import (
 	"context"
 	"flag"
