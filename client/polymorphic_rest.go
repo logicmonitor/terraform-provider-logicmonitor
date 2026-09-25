@@ -78,7 +78,9 @@ func (c *LogicMonitorRESTAPI) PolymorphicREST(ctx context.Context, method, path 
 		return nil, err
 	}
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		return nil, fmt.Errorf("polymorphic API %s %s failed: %s", method, path, string(respBody))
+		// The status code must stay in the message: utils.IsNotFoundError matches on
+		// the error text to distinguish a deleted resource from a real failure.
+		return nil, fmt.Errorf("polymorphic API %s %s failed with status %d: %s", method, path, resp.StatusCode, string(respBody))
 	}
 	if len(respBody) == 0 {
 		return map[string]interface{}{}, nil

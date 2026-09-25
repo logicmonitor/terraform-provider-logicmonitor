@@ -86,6 +86,12 @@ func getWidgetById(ctx context.Context, d *schema.ResourceData, m interface{}) d
 	respModel, err := apiClient.PolymorphicREST(ctx, http.MethodGet, path, nil)
 	log.Printf("[TRACE] widget get response: %v", respModel)
 	if err != nil {
+		// A missing remote object is drift, not a failure: clearing the ID lets
+		// Terraform drop it from state and plan a recreate.
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
@@ -126,6 +132,10 @@ func updateWidgetById(ctx context.Context, d *schema.ResourceData, m interface{}
 	respModel, err := apiClient.PolymorphicREST(ctx, http.MethodPut, path, payload)
 	log.Printf("[TRACE] widget update response: %v", respModel)
 	if err != nil {
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}
