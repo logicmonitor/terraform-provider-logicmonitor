@@ -7,10 +7,27 @@ VERSION=2.0.21
 OS_ARCH=darwin_amd64
 LDFLAGS = -ldflags "-X terraform-provider-logicmonitor/logicmonitor.ProviderVersion=$(VERSION)"
 
-default: build
+default: install
 
-build:
+spec:
+	cd spec_files && python3 createSpecFile.py
+
+gen-polymorphic:
+	python3 spec_files/generate_polymorphic_codegen.py
+
+build: spec clean
+	swagger generate client -f ./spec_files/current.json --template-dir templates -C config.yml	--additional-initialism=ProviderVersion=$(VERSION) > swagrun.log
+	find website/docs/r website/docs/d -name '*.markdown' -empty -delete 2>/dev/null || true
+	$(MAKE) gen-polymorphic
 	go build $(LDFLAGS) -o ${BINARY}
+
+clean:
+	rm -Rf logicmonitor/resources/*
+	rm -Rf logicmonitor/schemata/*
+	rm -Rf logicmonitor/utils/*
+
+nogen: 
+	go build -o ${BINARY}
 	mkdir -p ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
 	mv ${BINARY} ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
 
@@ -28,9 +45,13 @@ release:
 	GOOS=windows GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_windows_386
 	GOOS=windows GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_windows_amd64
 
-test:
-	go test -i $(TEST) || exit 1
-	echo $(TEST) | xargs -t -n4 go test $(TESTARGS) -timeout=30s -parallel=4
+install: build
+	mkdir -p ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
+	cp ${BINARY} ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
 
-testacc:
-	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m
+test: 
+	go test -i $(TEST) || exit 1                                                   
+	echo $(TEST) | xargs -t -n4 go test $(TESTARGS) -timeout=30s -parallel=4                    
+
+testacc: 
+	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m   

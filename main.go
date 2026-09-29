@@ -14,6 +14,7 @@ import (
 )
 
 func main() {
+	// Temporary repo-state sync testing comment.
 	//time.Sleep(20 * time.Second) // for debugging
 
 	var debugMode bool

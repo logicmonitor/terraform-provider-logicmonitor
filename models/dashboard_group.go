@@ -16,6 +16,7 @@ import (
 )
 
 // DashboardGroup dashboard group
+// Example: isResource
 //
 // swagger:model DashboardGroup
 type DashboardGroup struct {
