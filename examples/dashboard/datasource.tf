@@ -3,53 +3,51 @@ resource "logicmonitor_dashboard" "mydashboard" {
 	name = "test_dashboard"
 	sharable = true
   group_id = 1
-  template = {
-  name                 = "test dashboard"
-  description          = "Created from a dashboard template"
-  widgetsConfigVersion = "2"
-  type                 = "dashboard"
-  version              = "2"
-  widget_tokens = jsonencode([
-    {
-      name         = "defaultDeviceGroup"
-      value        = "*"
-      inherit_list = null
-      type         = null
-    },
-    {
-      name         = "defaultServiceGroup"
-      value        = "*"
-      inherit_list = null
-      type         = null
-    }
-  ])
-  widgets = jsonencode([
-    {
-      position = {
-        col   = 1
-        row   = 1
-        sizex = 6
-        sizey = 4
+  # Pass the entire dashboard import JSON as a single string. You can also use
+  # template = file("${path.module}/dashboard-export.json") with a raw export.
+  template = jsonencode({
+    name                 = "test dashboard"
+    description          = "Created from a dashboard template"
+    widgetsConfigVersion = 2
+    type                 = "dashboard"
+    version              = 2
+    widgetTokens = [
+      {
+        name  = "defaultDeviceGroup"
+        value = "*"
+      },
+      {
+        name  = "defaultServiceGroup"
+        value = "*"
       }
-      config = {
-        name        = "How to use dashboards"
-        description = "HTML widget from template"
-        type        = "html"
-        theme       = "borderPurple"
-        interval    = 5
-        timescale   = "day"
-        isCustom    = false
-        resources = [
-          {
-            type = "html"
-            URL  = "https://www.youtube.com/embed/-WNU4ffumk0"
-          }
-        ]
-        version = 2
+    ]
+    widgets = [
+      {
+        position = {
+          col   = 1
+          row   = 1
+          sizex = 6
+          sizey = 4
+        }
+        config = {
+          name        = "How to use dashboards"
+          description = "HTML widget from template"
+          type        = "html"
+          theme       = "borderPurple"
+          interval    = 5
+          timescale   = "day"
+          isCustom    = false
+          resources = [
+            {
+              type = "html"
+              URL  = "https://www.youtube.com/embed/-WNU4ffumk0"
+            }
+          ]
+          version = 2
+        }
       }
-    }
-  ])
-}
+    ]
+  })
   widget_tokens = [
     {
       name  = "defaultDeviceGroup"
@@ -65,8 +63,6 @@ resource "logicmonitor_dashboard" "mydashboard" {
     }
   ]
 }
-
-
 data "logicmonitor_dashboard" "mydashboard"{
 	filter = "description~\"my dashboard\""
 	depends_on = [

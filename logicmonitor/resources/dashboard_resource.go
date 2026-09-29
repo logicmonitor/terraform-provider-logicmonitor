@@ -127,12 +127,6 @@ func getDashboardById(ctx context.Context, d *schema.ResourceData, m interface{}
 		return diags
 	}
 
-	templateVal, templateIsSet := d.GetOk("template")
-	if templateIsSet {
-		template := templateVal.(bool)
-		params.Template = &template
-	}
-
 	client := m.(*client.LogicMonitorRESTAPI)
 
 	resp, err := client.Dashboard.GetDashboardByID(params)
