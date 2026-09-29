@@ -19,53 +19,49 @@ resource "logicmonitor_dashboard" "my_dashboard" {
   name = "Default Device Group"
   owner = ""
   sharable = true
-  template = {
-  name                 = "test dashboard"
-  description          = "Created from a dashboard template"
-  widgetsConfigVersion = "2"
-  type                 = "dashboard"
-  version              = "2"
-  widget_tokens = jsonencode([
-    {
-      name         = "defaultDeviceGroup"
-      value        = "*"
-      inherit_list = null
-      type         = null
-    },
-    {
-      name         = "defaultServiceGroup"
-      value        = "*"
-      inherit_list = null
-      type         = null
-    }
-  ])
-  widgets = jsonencode([
-    {
-      position = {
-        col   = 1
-        row   = 1
-        sizex = 6
-        sizey = 4
+  template = jsonencode({
+    name                 = "test dashboard"
+    description          = "Created from a dashboard template"
+    widgetsConfigVersion = 2
+    type                 = "dashboard"
+    version              = 2
+    widgetTokens = [
+      {
+        name  = "defaultDeviceGroup"
+        value = "*"
+      },
+      {
+        name  = "defaultServiceGroup"
+        value = "*"
       }
-      config = {
-        name        = "How to use dashboards"
-        description = "HTML widget from template"
-        type        = "html"
-        theme       = "borderPurple"
-        interval    = 5
-        timescale   = "day"
-        isCustom    = false
-        resources = [
-          {
-            type = "html"
-            URL  = "https://www.youtube.com/embed/-WNU4ffumk0"
-          }
-        ]
-        version = 2
+    ]
+    widgets = [
+      {
+        position = {
+          col   = 1
+          row   = 1
+          sizex = 6
+          sizey = 4
+        }
+        config = {
+          name        = "How to use dashboards"
+          description = "HTML widget from template"
+          type        = "html"
+          theme       = "borderPurple"
+          interval    = 5
+          timescale   = "day"
+          isCustom    = false
+          resources = [
+            {
+              type = "html"
+              URL  = "https://www.youtube.com/embed/-WNU4ffumk0"
+            }
+          ]
+          version = 2
+        }
       }
-    }
-  ])
-}  
+    ]
+  })  
   widget_tokens = [
     {
       name  = "defaultDeviceGroup"

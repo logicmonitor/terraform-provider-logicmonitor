@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"reflect"
 	"strconv"
 	"strings"
 	"terraform-provider-logicmonitor/client"
@@ -278,31 +279,63 @@ func ConvertSetToStringSlice(set *schema.Set) (slice []string) {
 	return
 }
 
-var jsonEncodedMapFields = map[string]bool{
-	"widgets":       true,
-	"widgetTokens":  true,
-	"widgetsConfig": true,
-}
-
-func NormalizeJSONMap(raw interface{}) interface{} {
-	rawMap, ok := raw.(map[string]interface{})
-	if !ok {
+// ExpandJSONString parses a JSON document supplied as a string (e.g. via
+// jsonencode(...) or file(...)) into a generic Go value so it can be sent to the
+// API with its original structure and value types (objects, arrays, numbers,
+// booleans) preserved. An empty string yields nil so the field is omitted, and
+// an unparseable string is passed through unchanged.
+func ExpandJSONString(raw string) interface{} {
+	if strings.TrimSpace(raw) == "" {
+		return nil
+	}
+	var parsed interface{}
+	if err := json.Unmarshal([]byte(raw), &parsed); err != nil {
+		log.Printf("[WARN] value is not valid JSON, sending as a raw string: %v", err)
 		return raw
 	}
+	return parsed
+}
 
-	result := make(map[string]interface{}, len(rawMap))
-	for k, v := range rawMap {
-		strVal, isString := v.(string)
-		if isString && jsonEncodedMapFields[k] {
-			var parsed interface{}
-			if err := json.Unmarshal([]byte(strVal), &parsed); err == nil {
-				result[k] = parsed
-				continue
-			}
-		}
-		result[k] = v
+// FlattenJSONToString serializes a generic value returned by the API back into a
+// JSON string for storage in a TypeString schema field.
+func FlattenJSONToString(v interface{}) string {
+	if v == nil {
+		return ""
 	}
-	return result
+	if s, ok := v.(string); ok {
+		return s
+	}
+	b, err := json.Marshal(v)
+	if err != nil {
+		log.Printf("[WARN] failed to serialize value to JSON: %v", err)
+		return ""
+	}
+	return string(b)
+}
+
+// SuppressEquivalentJSON suppresses diffs between two JSON documents that are
+// semantically equal but differ only in key ordering or whitespace, preventing
+// perpetual drift when the API echoes back a normalized document.
+func SuppressEquivalentJSON(_ string, oldValue, newValue string, _ *schema.ResourceData) bool {
+	if oldValue == newValue {
+		return true
+	}
+
+	oldTrimmed := strings.TrimSpace(oldValue)
+	newTrimmed := strings.TrimSpace(newValue)
+	// Keep create-time and cleared-value diffs visible.
+	if oldTrimmed == "" || newTrimmed == "" {
+		return false
+	}
+
+	var oldJSON, newJSON interface{}
+	if err := json.Unmarshal([]byte(oldTrimmed), &oldJSON); err != nil {
+		return false
+	}
+	if err := json.Unmarshal([]byte(newTrimmed), &newJSON); err != nil {
+		return false
+	}
+	return reflect.DeepEqual(oldJSON, newJSON)
 }
 
 // retrieve resource widget tokens from resource structure

@@ -55,10 +55,8 @@ func DashboardSchema() map[string]*schema.Schema {
 		},
 		
 		"template": {
-			Type: schema.TypeMap, //GoType: interface{}
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			},
+			Type: schema.TypeString, //GoType: interface{}
+			DiffSuppressFunc: utils.SuppressEquivalentJSON,
 			Optional: true,
 		},
 		
@@ -139,10 +137,8 @@ func DataSourceDashboardSchema() map[string]*schema.Schema {
 		},
 		
 		"template": {
-			Type: schema.TypeMap, //GoType: interface{}
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			},
+			Type: schema.TypeString, //GoType: interface{}
+			DiffSuppressFunc: utils.SuppressEquivalentJSON,
 			Optional: true,
 		},
 		
@@ -185,7 +181,9 @@ func SetDashboardResourceData(d *schema.ResourceData, m *models.Dashboard) {
 	d.Set("name", m.Name)
 	d.Set("owner", m.Owner)
 	d.Set("sharable", m.Sharable)
-	d.Set("template", m.Template)
+	if m.Template != nil {
+		d.Set("template", utils.FlattenJSONToString(m.Template))
+	}
 	d.Set("user_permission", m.UserPermission)
 	d.Set("widget_tokens", SetWidgetTokenSubResourceData(m.WidgetTokens))
 	d.Set("widgets_config", m.WidgetsConfig)
@@ -204,7 +202,7 @@ func SetDashboardSubResourceData(m []*models.Dashboard) (d []*map[string]interfa
 			properties["name"] = dashboard.Name
 			properties["owner"] = dashboard.Owner
 			properties["sharable"] = dashboard.Sharable
-			properties["template"] = dashboard.Template
+			properties["template"] = utils.FlattenJSONToString(dashboard.Template)
 			properties["user_permission"] = dashboard.UserPermission
 			properties["widget_tokens"] = SetWidgetTokenSubResourceData(dashboard.WidgetTokens)
 			properties["widgets_config"] = dashboard.WidgetsConfig
@@ -222,7 +220,7 @@ func DashboardModel(d *schema.ResourceData) *models.Dashboard {
 	name := d.Get("name").(string)
 	owner := d.Get("owner").(string)
 	sharable := d.Get("sharable").(bool)
-	template := utils.NormalizeJSONMap(d.Get("template"))
+	template := utils.ExpandJSONString(d.Get("template").(string))
 	widgetTokens := utils.GetPropFromWTMap(d, "widget_tokens")
 	widgetsConfig := d.Get("widgets_config")
 	
