@@ -346,6 +346,34 @@ func DataSourceWebsiteSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceWebsiteListSchema is the schema of the plural "logicmonitor_websites" data source.
+// "items" holds one read-only entry per Website matching "filter", with the same attributes as DataSourceWebsiteSchema().
+func DataSourceWebsiteListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceWebsiteSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetWebsiteResourceData(d *schema.ResourceData, m *models.Website) {
 	d.Set("alert_expr", m.AlertExpr)
 	d.Set("description", m.Description)
@@ -440,6 +468,8 @@ func WebsiteModel(d *schema.ResourceData) *models.Website {
 	stopMonitoring := d.Get("stop_monitoring").(bool)
 	template := d.Get("template")
     testLocation := utils.GetPropFromLocationMap(d, "test_location")
+
+	          
 	transition := int32(d.Get("transition").(int))
 	triggerSSLExpirationAlert := d.Get("trigger_s_s_l_expiration_alert").(bool)
 	triggerSSLStatusAlert := d.Get("trigger_s_s_l_status_alert").(bool)

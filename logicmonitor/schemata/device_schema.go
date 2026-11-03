@@ -890,6 +890,36 @@ func DataSourceDeviceSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceDeviceListSchema is the schema of the plural "logicmonitor_devices" data source.
+// "items" holds one read-only entry per Device matching "filter", with the same attributes as DataSourceDeviceSchema().
+func DataSourceDeviceListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceDeviceSchema()
+	delete(itemSchema, "filter")
+	itemSchema["group_ids"] = &schema.Schema{Type: schema.TypeList, Elem: &schema.Schema{Type: schema.TypeInt}}
+	itemSchema["synthetics_collector_ids"] = &schema.Schema{Type: schema.TypeList, Elem: &schema.Schema{Type: schema.TypeInt}}
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("alert_expr", m.AlertExpr)
 	d.Set("auto_balanced_collector_group_id", m.AutoBalancedCollectorGroupID)

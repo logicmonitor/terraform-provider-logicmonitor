@@ -131,6 +131,34 @@ func DataSourceEscalationChainSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceEscalationChainListSchema is the schema of the plural "logicmonitor_escalation_chains" data source.
+// "items" holds one read-only entry per EscalationChain matching "filter", with the same attributes as DataSourceEscalationChainSchema().
+func DataSourceEscalationChainListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceEscalationChainSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetEscalationChainResourceData(d *schema.ResourceData, m *models.EscalationChain) {
 	d.Set("cc_destinations", SetRecipientSubResourceData(m.CcDestinations))
 	d.Set("description", m.Description)

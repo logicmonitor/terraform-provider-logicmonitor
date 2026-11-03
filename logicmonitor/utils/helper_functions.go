@@ -777,3 +777,136 @@ func GetFilters(d []interface{}) []*models.AutoDiscoveryFilter {
 	return filters
 }
 
+// ConformToSchema converts flattened sub-resource data (a slice of
+// map[string]interface{} or *map[string]interface{}, as returned by the generated
+// Set<Model>SubResourceData functions) into a value that ResourceData.Set accepts
+// for a list attribute whose element is a *schema.Resource with the given attributes.
+//
+// ResourceData.Set rejects the entire list when any nested value has an unexpected
+// type, so loosely typed API fields are coerced:
+//   - TypeMap attributes with string elements keep string values and JSON-encode
+//     any other non-nil value (numbers, booleans, nested objects).
+//   - Nested list/set attributes whose element is a *schema.Resource are converted
+//     recursively.
+//   - Keys without a matching attribute schema are dropped.
+//
+// All other values are passed through unchanged.
+func ConformToSchema(items interface{}, attrs map[string]*schema.Schema) []interface{} {
+	out := []interface{}{}
+	rv := reflect.ValueOf(items)
+	if !rv.IsValid() || (rv.Kind() != reflect.Slice && rv.Kind() != reflect.Array) {
+		return out
+	}
+	for i := 0; i < rv.Len(); i++ {
+		item, ok := asStringKeyedMap(rv.Index(i).Interface())
+		if !ok {
+			continue
+		}
+		conformed := make(map[string]interface{}, len(item))
+		for key, value := range item {
+			if attr, known := attrs[key]; known {
+				conformed[key] = conformValueToSchema(value, attr)
+			}
+		}
+		out = append(out, conformed)
+	}
+	return out
+}
+
+// conformValueToSchema coerces a single attribute value for ConformToSchema.
+func conformValueToSchema(value interface{}, attr *schema.Schema) interface{} {
+	switch attr.Type {
+	case schema.TypeMap:
+		if elem, ok := attr.Elem.(*schema.Schema); ok && elem.Type != schema.TypeString {
+			return value
+		}
+		m, ok := asStringKeyedMap(value)
+		if !ok {
+			return nil
+		}
+		result := make(map[string]interface{}, len(m))
+		for k, v := range m {
+			switch typed := v.(type) {
+			case nil:
+			case string:
+				result[k] = typed
+			default:
+				if encoded, err := json.Marshal(typed); err == nil {
+					result[k] = string(encoded)
+				} else {
+					result[k] = fmt.Sprintf("%v", typed)
+				}
+			}
+		}
+		return result
+	case schema.TypeList, schema.TypeSet:
+		if nested, ok := attr.Elem.(*schema.Resource); ok {
+			return ConformToSchema(value, nested.SchemaMap())
+		}
+	}
+	return value
+}
+
+// asStringKeyedMap returns v as a map[string]interface{} when v is a non-nil map
+// (or pointer to a map) with string keys.
+func asStringKeyedMap(v interface{}) (map[string]interface{}, bool) {
+	rv := reflect.ValueOf(v)
+	if rv.Kind() == reflect.Ptr {
+		if rv.IsNil() {
+			return nil, false
+		}
+		rv = rv.Elem()
+	}
+	if rv.Kind() != reflect.Map || rv.IsNil() || rv.Type().Key().Kind() != reflect.String {
+		return nil, false
+	}
+	out := make(map[string]interface{}, rv.Len())
+	iter := rv.MapRange()
+	for iter.Next() {
+		out[iter.Key().String()] = iter.Value().Interface()
+	}
+	return out, true
+}
+
+// FetchAllPages drives the generic offset/size pagination loop shared by
+// every plural ("list") data source reader, typed and polymorphic alike.
+//
+// fetchPage is called with increasing offsets; it must fetch exactly one
+// page and report how many items that page contained plus the API's
+// reported running total. FetchAllPages itself never touches the fetched
+// items directly -- callers accumulate them (e.g. into a slice) from within
+// fetchPage's closure -- so this helper has no model-specific type.
+//
+// Paging stops as soon as:
+//   - fetchPage returns an error (propagated to the caller), or
+//   - a page reports zero items (nothing left to fetch), or
+//   - the running count of fetched items reaches total, or
+//   - maxIterations pages have been fetched, a safety cap against a
+//     misbehaving total/items response that would otherwise loop forever.
+//
+// The offset passed to fetchPage advances by the number of items the
+// previous page actually contained rather than by pageSize, so a server
+// that caps the effective page size below what was requested is still
+// paged through correctly instead of skipping or re-fetching records.
+func FetchAllPages(pageSize int32, fetchPage func(offset, size int32) (items int, total int32, err error)) error {
+	const maxIterations = 1000
+
+	var fetched int32
+	offset := int32(0)
+	for i := 0; i < maxIterations; i++ {
+		items, total, err := fetchPage(offset, pageSize)
+		if err != nil {
+			return err
+		}
+
+		fetched += int32(items)
+		if items == 0 || fetched >= total {
+			return nil
+		}
+
+		offset += int32(items)
+	}
+
+	return nil
+}
+

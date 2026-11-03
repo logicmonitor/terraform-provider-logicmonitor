@@ -14,6 +14,7 @@ import (
 	"terraform-provider-logicmonitor/client/alert_rule"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
+	"terraform-provider-logicmonitor/models"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -41,6 +42,70 @@ func DataResourceAlertRule() *schema.Resource {
 		ReadContext: getAlertRuleList,
 		Schema:      schemata.DataSourceAlertRuleSchema(),
 	}
+}
+
+// DataResourceAlertRuleList is the plural AlertRule data source: every match of "filter".
+func DataResourceAlertRuleList() *schema.Resource {
+	return &schema.Resource{
+		ReadContext: getAlertRuleListAll,
+		Schema:      schemata.DataSourceAlertRuleListSchema(),
+	}
+}
+
+// getAlertRuleListAll pages through GetAlertRuleList using offset/size until every
+// AlertRule matching "filter" has been retrieved, then flattens them into "items".
+func getAlertRuleListAll(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+	var filter *string
+	if filterVal, ok := d.GetOk("filter"); ok {
+		s := filterVal.(string)
+		filter = &s
+	}
+	pageSize := int32(300)
+	if v, ok := d.Get("page_size").(int); ok && v > 0 {
+		pageSize = int32(v)
+	}
+	client := m.(*client.LogicMonitorRESTAPI)
+
+	var allItems []*models.AlertRule
+	var total int32
+	// Offset, empty-page, total, and max-iteration stop rules live in FetchAllPages.
+	err := utils.FetchAllPages(pageSize, func(offset, size int32) (int, int32, error) {
+		params := alert_rule.NewGetAlertRuleListParams()
+		params.Filter = filter
+		pageOffset, reqSize := offset, size
+		params.Offset = &pageOffset
+		params.Size = &reqSize
+
+		resp, err := client.AlertRule.GetAlertRuleList(params)
+		if err != nil {
+			return 0, 0, err
+		}
+		payload := resp.GetPayload()
+		total = payload.Total
+		allItems = append(allItems, payload.Items...)
+		log.Printf("[TRACE] alert rule list page offset=%d returned %d items (total=%d)", offset, len(payload.Items), total)
+		return len(payload.Items), payload.Total, nil
+	})
+	if err != nil {
+		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
+		return diags
+	}
+
+	itemSchema := schemata.DataSourceAlertRuleListSchema()["items"].Elem.(*schema.Resource).Schema
+	items := utils.ConformToSchema(schemata.SetAlertRuleSubResourceData(allItems), itemSchema)
+	if err := d.Set("items", items); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("total", total); err != nil {
+		return diag.FromErr(err)
+	}
+	id := "all"
+	if filter != nil {
+		id = *filter
+	}
+	d.SetId(id)
+	return diags
 }
 
 func addAlertRule(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {

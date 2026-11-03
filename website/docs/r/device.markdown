@@ -7,18 +7,7 @@ description: |-
 ---
 
 # logicmonitor_device
-
 Provides a LogicMonitor device resource. This can be used to create and manage LogicMonitor devices.
-
-> **Note:** The `logicmonitor_device` resource is also used to manage **Uptime** resources (uptime web check and uptime ping check).
-> These resource types are backed by the same Device API in LogicMonitor.
->
-> **Important:** For uptime resources, always set `name` and `display_name` to the same value to avoid configuration drift.
-> If they differ, subsequent `terraform plan` runs may detect a drift on `display_name`.
->
-> Since uptime resources share the Device API, drifts on certain device-specific fields are expected and can be safely ignored.
-> These include: `related_device_id`, `current_collector_id`, `preferred_collector_id`, `synthetics_collector_ids`,
-> and other device-level fields that are managed or auto-populated by the LogicMonitor backend for uptime resource types.
 
 ## Example Usage
 ```hcl
@@ -37,7 +26,11 @@ resource "logicmonitor_device" "my_device" {
 		{
 			name = "host"
       		value = "localhost"
-		}
+		},
+    {
+      name  = "system.categories"
+      value = "" 
+    }
 	]
   description = "This is a Cisco Router"
   device_type = 0

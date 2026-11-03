@@ -432,6 +432,34 @@ func DataSourceDeviceGroupSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceDeviceGroupListSchema is the schema of the plural "logicmonitor_device_groups" data source.
+// "items" holds one read-only entry per DeviceGroup matching "filter", with the same attributes as DataSourceDeviceGroupSchema().
+func DataSourceDeviceGroupListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceDeviceGroupSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetDeviceGroupResourceData(d *schema.ResourceData, m *models.DeviceGroup) {
 	d.Set("applies_to", m.AppliesTo)
 	d.Set("aws_regions_info", m.AwsRegionsInfo)

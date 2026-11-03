@@ -19,6 +19,13 @@ type MapFieldWriter struct {
 
 	lock   sync.Mutex
 	result map[string]string
+	// writtenPrefixes holds every dotted key prefix that has been stored in
+	// result ("items.", "items.0.custom_properties.", ...). clearTree uses it
+	// to skip the full-map scan when an address has never been written.
+	// The scan is otherwise repeated for every nested list and is quadratic
+	// in the size of the state, which makes data sources that return
+	// thousands of nested objects appear to hang.
+	writtenPrefixes map[string]struct{}
 }
 
 // Map returns the underlying map that is being written to.
@@ -40,6 +47,7 @@ func (w *MapFieldWriter) unsafeWriteField(addr string, value string) {
 	}
 
 	w.result[addr] = value
+	w.markWritten(addr)
 }
 
 // clearTree clears a field and any sub-fields of the given address out of the
@@ -48,9 +56,32 @@ func (w *MapFieldWriter) unsafeWriteField(addr string, value string) {
 // example, if the set was previously written to the writer's layer).
 func (w *MapFieldWriter) clearTree(addr []string) {
 	prefix := strings.Join(addr, ".") + "."
+	if _, ok := w.writtenPrefixes[prefix]; !ok {
+		// Nothing has been stored under this address yet, so the scan below
+		// would delete nothing. This is the common case: each list or map is
+		// written once while building state.
+		return
+	}
+	for p := range w.writtenPrefixes {
+		if strings.HasPrefix(p, prefix) {
+			delete(w.writtenPrefixes, p)
+		}
+	}
 	for k := range w.result {
 		if strings.HasPrefix(k, prefix) {
 			delete(w.result, k)
+		}
+	}
+}
+
+// markWritten records each dotted prefix of key for clearTree's fast path.
+func (w *MapFieldWriter) markWritten(key string) {
+	if w.writtenPrefixes == nil {
+		w.writtenPrefixes = make(map[string]struct{})
+	}
+	for i := 0; i < len(key); i++ {
+		if key[i] == '.' {
+			w.writtenPrefixes[key[:i+1]] = struct{}{}
 		}
 	}
 }
@@ -157,6 +188,7 @@ func (w *MapFieldWriter) setList(
 	}
 
 	w.result[k+".#"] = strconv.FormatInt(int64(len(vs)), 10)
+	w.markWritten(k + ".#")
 	return nil
 }
 
@@ -170,6 +202,7 @@ func (w *MapFieldWriter) setMap(
 	if value == nil {
 		// The empty string here means the map is removed.
 		w.result[k] = ""
+		w.markWritten(k)
 		return nil
 	}
 
@@ -202,6 +235,7 @@ func (w *MapFieldWriter) setMap(
 
 	// Set the count
 	w.result[k+".%"] = strconv.Itoa(len(vs))
+	w.markWritten(k + ".%")
 
 	return nil
 }
@@ -246,6 +280,7 @@ func (w *MapFieldWriter) setPrimitive(
 	if v == nil {
 		// The empty string here means the value is removed.
 		w.result[k] = ""
+		w.markWritten(k)
 		return nil
 	}
 
@@ -279,6 +314,7 @@ func (w *MapFieldWriter) setPrimitive(
 	}
 
 	w.result[k] = set
+	w.markWritten(k)
 	return nil
 }
 
@@ -292,6 +328,7 @@ func (w *MapFieldWriter) setSet(
 
 	if value == nil {
 		w.result[k+".#"] = "0"
+		w.markWritten(k + ".#")
 		return nil
 	}
 
@@ -345,6 +382,7 @@ func (w *MapFieldWriter) setSet(
 
 	if value.(*Set) == nil {
 		w.result[k+".#"] = "0"
+		w.markWritten(k + ".#")
 		return nil
 	}
 
@@ -355,5 +393,6 @@ func (w *MapFieldWriter) setSet(
 	}
 
 	w.result[k+".#"] = strconv.Itoa(value.(*Set).Len())
+	w.markWritten(k + ".#")
 	return nil
 }

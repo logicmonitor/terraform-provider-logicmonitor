@@ -163,6 +163,34 @@ func DataSourceRoleSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceRoleListSchema is the schema of the plural "logicmonitor_roles" data source.
+// "items" holds one read-only entry per Role matching "filter", with the same attributes as DataSourceRoleSchema().
+func DataSourceRoleListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceRoleSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetRoleResourceData(d *schema.ResourceData, m *models.Role) {
 	d.Set("acct_require_two_f_a", m.AcctRequireTwoFA)
 	d.Set("associated_user_count", m.AssociatedUserCount)

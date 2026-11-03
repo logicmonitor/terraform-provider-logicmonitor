@@ -7,7 +7,6 @@ description: |-
 ---
 
 # logicmonitor_device_group
-
 Provides a LogicMonitor device group resource. This can be used to create and manage LogicMonitor device groups.
 
 ## Example Usage
@@ -23,7 +22,11 @@ resource "logicmonitor_device_group" "my_device_group" {
 		{
 			name = "host"
       		value = "localhost"
-		}
+		},
+    {
+      name  = "system.categories"
+      value = "" 
+    }
 	]
   default_auto_balanced_collector_group_id = 
   default_collector_id = 1

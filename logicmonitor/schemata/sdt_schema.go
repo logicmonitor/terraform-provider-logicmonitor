@@ -394,6 +394,36 @@ func DataSourceSdtSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceSdtListSchema is the schema of the plural "logicmonitor_sdts" data source.
+// "items" holds one read-only entry per Sdt matching "filter", with the same attributes as DataSourceSdtSchema().
+func DataSourceSdtListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceSdtSchema()
+	delete(itemSchema, "filter")
+	// models.Sdt.ID is a string, and a mistyped element makes d.Set reject the whole "items" list.
+	itemSchema["id"] = &schema.Schema{Type: schema.TypeString}
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetSdtResourceData(d *schema.ResourceData, m *models.Sdt) {
 	d.Set("admin", m.Admin)
 	d.Set("batch_job_name", m.BatchJobName)

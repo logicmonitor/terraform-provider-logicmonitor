@@ -84,6 +84,34 @@ func DataSourceReportGroupSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceReportGroupListSchema is the schema of the plural "logicmonitor_report_groups" data source.
+// "items" holds one read-only entry per ReportGroup matching "filter", with the same attributes as DataSourceReportGroupSchema().
+func DataSourceReportGroupListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceReportGroupSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetReportGroupResourceData(d *schema.ResourceData, m *models.ReportGroup) {
 	d.Set("description", m.Description)
 	d.Set("id", strconv.Itoa(int(m.ID)))

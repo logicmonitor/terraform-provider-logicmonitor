@@ -7,7 +7,6 @@ description: |-
 ---
 
 # logicmonitor_website_group
-
 Provides a LogicMonitor website group resource. This can be used to create and manage LogicMonitor website groups.
 
 ## Example Usage
@@ -18,18 +17,12 @@ resource "logicmonitor_website_group" "my_website_group" {
   disable_alerting = false
   name = "Amazon Website Checks"
   parent_id = 1
-  properties = [
-   {
-    name : "addr",
-    value : "127.0.0.1"
-   }  
-  ]
+  properties = []
   stop_monitoring = false
   test_location = [
     {
       all = false
       collector_ids = [1, 2, 3]
-      collectors = null
       smg_ids = [85, 90]
     }
   ]
@@ -49,9 +42,6 @@ false: alerting is enabled for the websites in the group
 If stopMonitoring=true, then alerting will also by default be disabled for the websites in the group (bool)
 * `parent_id` - The Id of the parent group. If parentId=1 then the group exists under the root  group (int32)
 * `properties` -  ([]*NameAndValue)
-    Provide custom properties in alphabetical order based on their property name.
-  + `name` - The name of a property (required)
-  + `value` - The value of a property (required)
 * `stop_monitoring` - true: monitoring is disabled for the websites in the group
 false: monitoring is enabled for the websites in the group
 If stopMonitoring=true, then alerting will also by default be disabled for the websites in the group (bool)

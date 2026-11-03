@@ -213,6 +213,34 @@ func DataSourceAlertRuleSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceAlertRuleListSchema is the schema of the plural "logicmonitor_alert_rules" data source.
+// "items" holds one read-only entry per AlertRule matching "filter", with the same attributes as DataSourceAlertRuleSchema().
+func DataSourceAlertRuleListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceAlertRuleSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetAlertRuleResourceData(d *schema.ResourceData, m *models.AlertRule) {
 	d.Set("datapoint", m.Datapoint)
 	d.Set("datasource", m.Datasource)

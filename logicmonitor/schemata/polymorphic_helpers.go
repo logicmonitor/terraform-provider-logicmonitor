@@ -24,6 +24,58 @@ func ExtractResponseItems(resp map[string]interface{}) ([]interface{}, error) {
 	return items, nil
 }
 
+// ExtractResponseTotal returns the "total" count from a paginated API response.
+// ok is false when the field is missing, non-numeric or negative, so callers
+// can fall back to stopping on a short page.
+func ExtractResponseTotal(resp map[string]interface{}) (total int, ok bool) {
+	switch v := resp["total"].(type) {
+	case float64:
+		total = int(v)
+	case int:
+		total = v
+	case int32:
+		total = int(v)
+	case int64:
+		total = int(v)
+	default:
+		return 0, false
+	}
+	if total < 0 {
+		return 0, false
+	}
+	return total, true
+}
+
+// ComputedOnlySchema marks every attribute (recursively through nested
+// resources) as read-only Computed, clearing settings the SDK rejects on
+// computed-only attributes. The map is modified in place and returned.
+func ComputedOnlySchema(s map[string]*schema.Schema) map[string]*schema.Schema {
+	for _, attr := range s {
+		attr.Required = false
+		attr.Optional = false
+		attr.Computed = true
+		attr.ForceNew = false
+		attr.Default = nil
+		attr.DefaultFunc = nil
+		attr.ValidateFunc = nil
+		attr.ValidateDiagFunc = nil
+		attr.DiffSuppressFunc = nil
+		attr.DiffSuppressOnRefresh = false
+		attr.StateFunc = nil
+		attr.InputDefault = ""
+		attr.MaxItems = 0
+		attr.MinItems = 0
+		attr.ConflictsWith = nil
+		attr.ExactlyOneOf = nil
+		attr.AtLeastOneOf = nil
+		attr.RequiredWith = nil
+		if res, ok := attr.Elem.(*schema.Resource); ok {
+			ComputedOnlySchema(res.Schema)
+		}
+	}
+	return s
+}
+
 // SetResourceIDFromAPI sets the Terraform resource ID from an API object id field.
 func SetResourceIDFromAPI(d *schema.ResourceData, raw map[string]interface{}) {
 	idVal, ok := raw["id"]

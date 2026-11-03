@@ -78,6 +78,90 @@ func getWidgetList(ctx context.Context, d *schema.ResourceData, m interface{}) d
 	return diags
 }
 
+// DataResourceWidgetList is the plural Widget data source: every match of "filter".
+func DataResourceWidgetList() *schema.Resource {
+	return &schema.Resource{
+		ReadContext: getWidgetListAll,
+		Schema:      schemata.DataSourceWidgetListSchema(),
+	}
+}
+
+// getWidgetListAll pages through "/dashboard/widgets" using offset/size until every
+// Widget matching "filter" has been retrieved, then flattens them into "items".
+func getWidgetListAll(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+	var filter *string
+	if filterVal, ok := d.GetOk("filter"); ok {
+		s, ok := filterVal.(string)
+		if !ok {
+			diags = append(diags, diag.Errorf("filter must be a string")...)
+			return diags
+		}
+		filter = &s
+	}
+	pageSize := int32(300)
+	if v, ok := d.Get("page_size").(int); ok && v > 0 {
+		pageSize = int32(v)
+	}
+	apiClient := m.(*client.LogicMonitorRESTAPI)
+
+	allItems := []interface{}{}
+	var total int32
+	// Offset, empty-page, total, and max-iteration stop rules live in FetchAllPages.
+	err := utils.FetchAllPages(pageSize, func(offset, size int32) (int, int32, error) {
+		respModel, err := apiClient.PolymorphicRESTListPage(ctx, "/dashboard/widgets", filter, offset, size)
+		if err != nil {
+			return 0, 0, err
+		}
+		page, err := schemata.ExtractResponseItems(respModel)
+		if err != nil {
+			return 0, 0, err
+		}
+		pageTotal, totalKnown := schemata.ExtractResponseTotal(respModel)
+		for _, raw := range page {
+			result, ok := raw.(map[string]interface{})
+			if !ok {
+				return 0, 0, fmt.Errorf("unexpected list item type")
+			}
+			allItems = append(allItems, schemata.WidgetItemFromAPI(result))
+		}
+		// FetchAllPages stops once the running count reaches the reported total.
+		// When the API omits total, a short page is the end and a full page must
+		// keep going, so report one past the count collected so far.
+		reported := total
+		if totalKnown {
+			total = int32(pageTotal)
+			reported = total
+		} else if len(page) == 0 || int32(len(page)) < size {
+			total = int32(len(allItems))
+			reported = total
+		} else {
+			reported = int32(len(allItems)) + 1
+		}
+		log.Printf("[TRACE] widget list page offset=%d returned %d items (total=%d)", offset, len(page), reported)
+		return len(page), reported, nil
+	})
+	if err != nil {
+		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
+		return diags
+	}
+
+	itemSchema := schemata.DataSourceWidgetListSchema()["items"].Elem.(*schema.Resource).Schema
+	items := utils.ConformToSchema(allItems, itemSchema)
+	if err := d.Set("items", items); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("total", total); err != nil {
+		return diag.FromErr(err)
+	}
+	id := "all"
+	if filter != nil {
+		id = *filter
+	}
+	d.SetId(id)
+	return diags
+}
+
 func getWidgetById(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	var diags diag.Diagnostics
 	id, _ := strconv.Atoi(d.Id())

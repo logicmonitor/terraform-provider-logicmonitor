@@ -10,7 +10,7 @@ import (
 func DashboardGroupSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"dashboards": {
-			Type: schema.TypeList, //GoType: []*DashboardData 
+			Type: schema.TypeList, //GoType: []*DashboardData  
 			Elem: &schema.Resource{
 				Schema: DashboardDataSchema(),
 			},
@@ -72,7 +72,7 @@ func DashboardGroupSchema() map[string]*schema.Schema {
 		},
 		
 		"widget_tokens": {
-			Type: schema.TypeList, //GoType: []*WidgetToken 
+			Type: schema.TypeList, //GoType: []*WidgetToken  
 			Elem: &schema.Resource{
 				Schema: WidgetTokenSchema(),
 			},
@@ -163,6 +163,34 @@ func DataSourceDashboardGroupSchema() map[string]*schema.Schema {
 		"filter": {
 			Type:     schema.TypeString,
             Optional: true,
+		},
+	}
+}
+
+// DataSourceDashboardGroupListSchema is the schema of the plural "logicmonitor_dashboard_groups" data source.
+// "items" holds one read-only entry per DashboardGroup matching "filter", with the same attributes as DataSourceDashboardGroupSchema().
+func DataSourceDashboardGroupListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceDashboardGroupSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
 		},
 	}
 }

@@ -735,6 +735,34 @@ func DataSourceCollectorSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceCollectorListSchema is the schema of the plural "logicmonitor_collectors" data source.
+// "items" holds one read-only entry per Collector matching "filter", with the same attributes as DataSourceCollectorSchema().
+func DataSourceCollectorListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceCollectorSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetCollectorResourceData(d *schema.ResourceData, m *models.Collector) {
 	d.Set("ack_comment", m.AckComment)
 	d.Set("acked", m.Acked)

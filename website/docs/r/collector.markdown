@@ -7,7 +7,6 @@ description: |-
 ---
 
 # logicmonitor_collector
-
 Provides a LogicMonitor collector resource. This can be used to create and manage LogicMonitor collectors.
 
 ## Example Usage
@@ -37,7 +36,11 @@ resource "logicmonitor_collector" "my_collector" {
 		{
 			name = "host"
       		value = "localhost"
-		}
+		},
+    {
+      name  = "system.categories"
+      value = "" 
+    }
 	]
   description = "Linux Collector"
   ea = false

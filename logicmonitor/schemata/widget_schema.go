@@ -148,6 +148,36 @@ func DataSourceWidgetSchema() map[string]*schema.Schema {
 	return s
 }
 
+// DataSourceWidgetListSchema is the schema for the plural Widget data source.
+// "items" holds one read-only entry per match, using the attributes of
+// DataSourceWidgetSchema() (minus "filter") forced to Computed.
+func DataSourceWidgetListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceWidgetSchema()
+	delete(itemSchema, "filter")
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem: &schema.Resource{
+				Schema: ComputedOnlySchema(itemSchema),
+			},
+		},
+	}
+}
+
 func graph_info_block_schema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 	"aggregate": {
@@ -1077,6 +1107,118 @@ func SetWidgetResourceData(d *schema.ResourceData, raw map[string]interface{}) {
 		block := apiFieldsToSnakeBlock(raw, []string{"cloneWidgetId", "content", "displaySettings", "isSupportCustomProperty", "supportCustomProperty"})
 		d.Set("text_info", []interface{}{block})
 	}
+}
+
+// WidgetItemFromAPI converts one raw API object into an element of the
+// "items" list of the plural Widget data source.
+func WidgetItemFromAPI(raw map[string]interface{}) map[string]interface{} {
+	item := map[string]interface{}{}
+	if v, ok := raw["id"]; ok && v != nil {
+		switch id := v.(type) {
+		case float64:
+			item["id"] = int(id)
+		case int:
+			item["id"] = id
+		case int32:
+			item["id"] = int(id)
+		case int64:
+			item["id"] = int(id)
+		}
+	}
+	if v, ok := raw["dashboardId"]; ok && v != nil {
+		switch n := v.(type) {
+		case float64:
+			item["dashboard_id"] = int(n)
+		case int:
+			item["dashboard_id"] = n
+		case int32:
+			item["dashboard_id"] = int(n)
+		}
+	}
+	if v, ok := raw["description"].(string); ok {
+		item["description"] = v
+	}
+	if v, ok := raw["interval"]; ok && v != nil {
+		switch n := v.(type) {
+		case float64:
+			item["interval"] = int(n)
+		case int:
+			item["interval"] = n
+		case int32:
+			item["interval"] = int(n)
+		}
+	}
+	if v, ok := raw["lastUpdatedBy"].(string); ok {
+		item["last_updated_by"] = v
+	}
+	if v, ok := raw["lastUpdatedOn"]; ok && v != nil {
+		switch n := v.(type) {
+		case float64:
+			item["last_updated_on"] = int64(n)
+		case int:
+			item["last_updated_on"] = int64(n)
+		case int64:
+			item["last_updated_on"] = n
+		}
+	}
+	if v, ok := raw["name"].(string); ok {
+		item["name"] = v
+	}
+	if v, ok := raw["supportKeyWord"].(string); ok {
+		item["support_key_word"] = v
+	}
+	if v, ok := raw["theme"].(string); ok {
+		item["theme"] = v
+	}
+	if v, ok := raw["timescale"].(string); ok {
+		item["timescale"] = v
+	}
+	if v, ok := raw["type"].(string); ok {
+		item["type"] = v
+	}
+	if v, ok := raw["userPermission"].(string); ok {
+		item["user_permission"] = v
+	}
+	typeValue, ok := raw["type"].(string)
+	if !ok {
+		return item
+	}
+	switch typeValue {
+	case "cgraph":
+		if v, ok := raw["graphInfo"]; ok {
+			item["graph_info"] = []interface{}{apiMapToSnake(v)}
+		}
+	case "bigNumber":
+		if v, ok := raw["bigNumberInfo"]; ok {
+			item["big_number_info"] = []interface{}{apiMapToSnake(v)}
+		}
+	case "pieChart":
+		if v, ok := raw["pieChartInfo"]; ok {
+			item["pie_chart_info"] = []interface{}{apiMapToSnake(v)}
+		}
+	case "alert":
+		block := apiFieldsToSnakeBlock(raw, []string{"cloneWidgetId", "displaySettings", "filters", "isSupportCustomProperty", "parsedFilters", "refreshFrequency", "supportCustomProperty", "widgetColorSchema"})
+		item["alert_info"] = []interface{}{block}
+	case "noc":
+		block := apiFieldsToSnakeBlock(raw, []string{"ackChecked", "cloneWidgetId", "displayColumn", "displayCriticalAlert", "displayErrorAlert", "displaySettings", "displayWarnAlert", "isSupportCustomProperty", "sdtChecked", "sortBy", "supportCustomProperty", "widgetFilters"})
+		if v, ok := raw["items"].([]interface{}); ok {
+			block["items"] = apiObjectListToSnake(v)
+		}
+		item["noc_info"] = []interface{}{block}
+	case "table":
+		block := apiFieldsToSnakeBlock(raw, []string{"cloneWidgetId", "displaySettings", "forecast", "isSupportCustomProperty", "supportCustomProperty", "widgetFilters"})
+		if v, ok := raw["columns"].([]interface{}); ok {
+			block["columns"] = apiObjectListToSnake(v)
+		}
+		if v, ok := raw["rows"].([]interface{}); ok {
+			block["rows"] = apiObjectListToSnake(v)
+		}
+		item["table_info"] = []interface{}{block}
+	case "text":
+		block := apiFieldsToSnakeBlock(raw, []string{"cloneWidgetId", "content", "displaySettings", "isSupportCustomProperty", "supportCustomProperty"})
+		item["text_info"] = []interface{}{block}
+	}
+	return item
 }
 
 func FlattenWidgetPayload(d *schema.ResourceData) (map[string]interface{}, error) {

@@ -180,6 +180,34 @@ func DataSourceWebsiteGroupSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceWebsiteGroupListSchema is the schema of the plural "logicmonitor_website_groups" data source.
+// "items" holds one read-only entry per WebsiteGroup matching "filter", with the same attributes as DataSourceWebsiteGroupSchema().
+func DataSourceWebsiteGroupListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceWebsiteGroupSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetWebsiteGroupResourceData(d *schema.ResourceData, m *models.WebsiteGroup) {
 	d.Set("description", m.Description)
 	d.Set("disable_alerting", m.DisableAlerting)

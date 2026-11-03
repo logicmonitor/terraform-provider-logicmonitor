@@ -149,6 +149,34 @@ func DataSourceCollectorGroupSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceCollectorGroupListSchema is the schema of the plural "logicmonitor_collector_groups" data source.
+// "items" holds one read-only entry per CollectorGroup matching "filter", with the same attributes as DataSourceCollectorGroupSchema().
+func DataSourceCollectorGroupListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceCollectorGroupSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetCollectorGroupResourceData(d *schema.ResourceData, m *models.CollectorGroup) {
 	d.Set("auto_balance", m.AutoBalance)
 	d.Set("auto_balance_instance_count_threshold", m.AutoBalanceInstanceCountThreshold)

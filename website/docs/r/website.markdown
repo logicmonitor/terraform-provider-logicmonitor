@@ -7,7 +7,6 @@ description: |-
 ---
 
 # logicmonitor_website
-
 Provides a LogicMonitor website resource. This can be used to create and manage LogicMonitor websites.
 
 ## Example Usage
@@ -65,13 +64,12 @@ resource "logicmonitor_website" "my_website" {
     status_code = "200"
    }
   ]
-  stop_monitoring = 
+  stop_monitoring = false
   template = 
   test_location = [
     {
       all = false
       collector_ids = [1, 2, 3]
-      collectors = null
       smg_ids = [85, 90]
     }
   ]

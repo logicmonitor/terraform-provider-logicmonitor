@@ -340,6 +340,35 @@ func DataSourceDatasourceSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceDatasourceListSchema is the schema of the plural "logicmonitor_datasources" data source.
+// "items" holds one read-only entry per Datasource matching "filter", with the same attributes as DataSourceDatasourceSchema().
+func DataSourceDatasourceListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceDatasourceSchema()
+	delete(itemSchema, "filter")
+	itemSchema["access_group_ids"] = &schema.Schema{Type: schema.TypeList, Elem: &schema.Schema{Type: schema.TypeInt}}
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetDatasourceResourceData(d *schema.ResourceData, m *models.Datasource) {
 	d.Set("access_group_ids", m.AccessGroupIds)
 	d.Set("access_groups", SetAccessGroupSubResourceData(m.AccessGroups))

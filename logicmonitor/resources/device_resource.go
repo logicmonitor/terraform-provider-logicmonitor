@@ -14,6 +14,7 @@ import (
 	"terraform-provider-logicmonitor/client/device"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
+	"terraform-provider-logicmonitor/models"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -41,6 +42,70 @@ func DataResourceDevice() *schema.Resource {
 		ReadContext: getDeviceList,
 		Schema:      schemata.DataSourceDeviceSchema(),
 	}
+}
+
+// DataResourceDeviceList is the plural Device data source: every match of "filter".
+func DataResourceDeviceList() *schema.Resource {
+	return &schema.Resource{
+		ReadContext: getDeviceListAll,
+		Schema:      schemata.DataSourceDeviceListSchema(),
+	}
+}
+
+// getDeviceListAll pages through GetDeviceList using offset/size until every
+// Device matching "filter" has been retrieved, then flattens them into "items".
+func getDeviceListAll(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+	var filter *string
+	if filterVal, ok := d.GetOk("filter"); ok {
+		s := filterVal.(string)
+		filter = &s
+	}
+	pageSize := int32(300)
+	if v, ok := d.Get("page_size").(int); ok && v > 0 {
+		pageSize = int32(v)
+	}
+	client := m.(*client.LogicMonitorRESTAPI)
+
+	var allItems []*models.Device
+	var total int32
+	// Offset, empty-page, total, and max-iteration stop rules live in FetchAllPages.
+	err := utils.FetchAllPages(pageSize, func(offset, size int32) (int, int32, error) {
+		params := device.NewGetDeviceListParams()
+		params.Filter = filter
+		pageOffset, reqSize := offset, size
+		params.Offset = &pageOffset
+		params.Size = &reqSize
+
+		resp, err := client.Device.GetDeviceList(params)
+		if err != nil {
+			return 0, 0, err
+		}
+		payload := resp.GetPayload()
+		total = payload.Total
+		allItems = append(allItems, payload.Items...)
+		log.Printf("[TRACE] device list page offset=%d returned %d items (total=%d)", offset, len(payload.Items), total)
+		return len(payload.Items), payload.Total, nil
+	})
+	if err != nil {
+		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
+		return diags
+	}
+
+	itemSchema := schemata.DataSourceDeviceListSchema()["items"].Elem.(*schema.Resource).Schema
+	items := utils.ConformToSchema(schemata.SetDeviceSubResourceData(allItems), itemSchema)
+	if err := d.Set("items", items); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("total", total); err != nil {
+		return diag.FromErr(err)
+	}
+	id := "all"
+	if filter != nil {
+		id = *filter
+	}
+	d.SetId(id)
+	return diags
 }
 
 func addDevice(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {

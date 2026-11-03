@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
@@ -98,4 +99,16 @@ func (c *LogicMonitorRESTAPI) PolymorphicRESTList(ctx context.Context, path stri
 		path = path + "?filter=" + url.QueryEscape(*filter)
 	}
 	return c.PolymorphicREST(ctx, http.MethodGet, path, nil)
+}
+
+// PolymorphicRESTListPage fetches one page of a polymorphic list endpoint.
+// filter is optional; offset and size are always sent so the caller controls paging.
+func (c *LogicMonitorRESTAPI) PolymorphicRESTListPage(ctx context.Context, path string, filter *string, offset, size int32) (map[string]interface{}, error) {
+	query := url.Values{}
+	if filter != nil && *filter != "" {
+		query.Set("filter", *filter)
+	}
+	query.Set("offset", strconv.FormatInt(int64(offset), 10))
+	query.Set("size", strconv.FormatInt(int64(size), 10))
+	return c.PolymorphicREST(ctx, http.MethodGet, path+"?"+query.Encode(), nil)
 }

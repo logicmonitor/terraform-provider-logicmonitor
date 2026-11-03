@@ -171,6 +171,34 @@ func DataSourceDashboardSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceDashboardListSchema is the schema of the plural "logicmonitor_dashboards" data source.
+// "items" holds one read-only entry per Dashboard matching "filter", with the same attributes as DataSourceDashboardSchema().
+func DataSourceDashboardListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceDashboardSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetDashboardResourceData(d *schema.ResourceData, m *models.Dashboard) {
 	d.Set("description", m.Description)
 	d.Set("full_name", m.FullName)

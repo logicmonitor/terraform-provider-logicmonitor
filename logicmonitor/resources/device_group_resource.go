@@ -14,6 +14,7 @@ import (
 	"terraform-provider-logicmonitor/client/device_group"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
+	"terraform-provider-logicmonitor/models"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -41,6 +42,70 @@ func DataResourceDeviceGroup() *schema.Resource {
 		ReadContext: getDeviceGroupList,
 		Schema:      schemata.DataSourceDeviceGroupSchema(),
 	}
+}
+
+// DataResourceDeviceGroupList is the plural DeviceGroup data source: every match of "filter".
+func DataResourceDeviceGroupList() *schema.Resource {
+	return &schema.Resource{
+		ReadContext: getDeviceGroupListAll,
+		Schema:      schemata.DataSourceDeviceGroupListSchema(),
+	}
+}
+
+// getDeviceGroupListAll pages through GetDeviceGroupList using offset/size until every
+// DeviceGroup matching "filter" has been retrieved, then flattens them into "items".
+func getDeviceGroupListAll(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+	var filter *string
+	if filterVal, ok := d.GetOk("filter"); ok {
+		s := filterVal.(string)
+		filter = &s
+	}
+	pageSize := int32(300)
+	if v, ok := d.Get("page_size").(int); ok && v > 0 {
+		pageSize = int32(v)
+	}
+	client := m.(*client.LogicMonitorRESTAPI)
+
+	var allItems []*models.DeviceGroup
+	var total int32
+	// Offset, empty-page, total, and max-iteration stop rules live in FetchAllPages.
+	err := utils.FetchAllPages(pageSize, func(offset, size int32) (int, int32, error) {
+		params := device_group.NewGetDeviceGroupListParams()
+		params.Filter = filter
+		pageOffset, reqSize := offset, size
+		params.Offset = &pageOffset
+		params.Size = &reqSize
+
+		resp, err := client.DeviceGroup.GetDeviceGroupList(params)
+		if err != nil {
+			return 0, 0, err
+		}
+		payload := resp.GetPayload()
+		total = payload.Total
+		allItems = append(allItems, payload.Items...)
+		log.Printf("[TRACE] device group list page offset=%d returned %d items (total=%d)", offset, len(payload.Items), total)
+		return len(payload.Items), payload.Total, nil
+	})
+	if err != nil {
+		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
+		return diags
+	}
+
+	itemSchema := schemata.DataSourceDeviceGroupListSchema()["items"].Elem.(*schema.Resource).Schema
+	items := utils.ConformToSchema(schemata.SetDeviceGroupSubResourceData(allItems), itemSchema)
+	if err := d.Set("items", items); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("total", total); err != nil {
+		return diag.FromErr(err)
+	}
+	id := "all"
+	if filter != nil {
+		id = *filter
+	}
+	d.SetId(id)
+	return diags
 }
 
 func addDeviceGroup(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {

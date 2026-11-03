@@ -154,6 +154,34 @@ func DataSourceDeviceGroupClusterAlertConfSchema() map[string]*schema.Schema {
 	}
 }
 
+// DataSourceDeviceGroupClusterAlertConfListSchema is the schema of the plural "logicmonitor_device_group_cluster_alert_confs" data source.
+// "items" holds one read-only entry per DeviceGroupClusterAlertConf matching "filter", with the same attributes as DataSourceDeviceGroupClusterAlertConfSchema().
+func DataSourceDeviceGroupClusterAlertConfListSchema() map[string]*schema.Schema {
+	itemSchema := DataSourceDeviceGroupClusterAlertConfSchema()
+	delete(itemSchema, "filter")
+
+	return map[string]*schema.Schema{
+		"filter": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"page_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
+		"total": {
+			Type:     schema.TypeInt,
+			Computed: true,
+		},
+		"items": {
+			Type:     schema.TypeList,
+			Computed: true,
+			Elem:     &schema.Resource{Schema: ComputedOnlySchema(itemSchema)},
+		},
+	}
+}
+
 func SetDeviceGroupClusterAlertConfResourceData(d *schema.ResourceData, m *models.DeviceGroupClusterAlertConf) {
 	d.Set("alert_expr", m.AlertExpr)
 	d.Set("count_by", m.CountBy)

@@ -7,7 +7,6 @@ description: |-
 ---
 
 # logicmonitor_collector_group
-
 Provides a LogicMonitor collector group resource. This can be used to create and manage LogicMonitor collector groups.
 
 ## Example Usage
@@ -25,7 +24,11 @@ resource "logicmonitor_collector_group" "my_collector_group" {
 		{
 			name = "host"
       		value = "localhost"
-		}
+		},
+    {
+      name  = "system.categories"
+      value = "" 
+    }
 	]
   description = "Group for collectors dedicated to Network Devices"
   name = "Collector_Group_(Network Devices)"
