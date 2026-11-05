@@ -163,6 +163,11 @@ func deleteCollectorById(ctx context.Context, d *schema.ResourceData, m interfac
 	resp, err := client.Collector.DeleteCollectorByID(params)
 	log.Printf("[TRACE] response: %v", resp)
 	if err != nil {
+		// Already gone is a successful delete: clearing the ID removes it from state.
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

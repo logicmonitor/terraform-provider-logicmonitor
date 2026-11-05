@@ -35,6 +35,7 @@ func CollectorGroupSchema() map[string]*schema.Schema {
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
+			Set: utils.HashNameAndValue,
 			Optional: true,
 		},
 		
@@ -182,7 +183,7 @@ func SetCollectorGroupResourceData(d *schema.ResourceData, m *models.CollectorGr
 	d.Set("auto_balance_instance_count_threshold", m.AutoBalanceInstanceCountThreshold)
 	d.Set("auto_balance_strategy", m.AutoBalanceStrategy)
 	d.Set("create_on", m.CreateOn)
-	d.Set("custom_properties", SetNameAndValueSubResourceData(m.CustomProperties))
+	d.Set("custom_properties", SetNameAndValueSubResourceData(utils.PreserveEquivalentProperties(d, "custom_properties", m.CustomProperties)))
 	d.Set("description", m.Description)
 	d.Set("highest_priority_collector_status", SetRestHighestPriorityCollectorStatusSubResourceData([]*models.RestHighestPriorityCollectorStatus{m.HighestPriorityCollectorStatus}))
 	d.Set("id", strconv.Itoa(int(m.ID)))

@@ -338,6 +338,127 @@ func SuppressEquivalentJSON(_ string, oldValue, newValue string, _ *schema.Resou
 	return reflect.DeepEqual(oldJSON, newJSON)
 }
 
+// canonicalPropertyValue returns a serialization-independent form of a
+// name/value property value, so that two encodings of the same JSON document
+// compare equal.
+//
+// Only JSON objects and arrays are canonicalized. Those are the values whose
+// serialization is ambiguous (key order, indentation, escaping) and which the
+// API re-serializes when it stores them, the Service Insight membership document
+// held in "predef.bizservice.members" being the common case. Anything else,
+// including JSON-looking scalars such as "1.50", is returned untouched so that a
+// genuine change to a plain property is never hidden.
+func canonicalPropertyValue(value string) string {
+	trimmed := strings.TrimSpace(value)
+	if !strings.HasPrefix(trimmed, "{") && !strings.HasPrefix(trimmed, "[") {
+		return value
+	}
+
+	var parsed interface{}
+	if err := json.Unmarshal([]byte(trimmed), &parsed); err != nil {
+		return value
+	}
+	canonical, err := json.Marshal(parsed)
+	if err != nil {
+		return value
+	}
+	return string(canonical)
+}
+
+// HashNameAndValue is the TypeSet element hash for every name/value property
+// collection (custom_properties, system_properties, resource_ids, ...).
+//
+// A set element is identified by its hash, so hashing the value verbatim makes a
+// property whose JSON the API re-serialized (same document, different key order
+// or whitespace) look like a different element, which Terraform can only report
+// as "remove this element, add that element" on every plan and apply. Hashing
+// the canonical form keeps such a property as a single stable element.
+func HashNameAndValue(v interface{}) int {
+	property, ok := v.(map[string]interface{})
+	if !ok {
+		return 0
+	}
+
+	name, _ := property["name"].(string)
+	value, _ := property["value"].(string)
+	canonicalValue := canonicalPropertyValue(value)
+
+	// Length prefixes keep ("ab", "c") and ("a", "bc") from hashing alike.
+	return schema.HashString(fmt.Sprintf("%d:%s%d:%s", len(name), name, len(canonicalValue), canonicalValue))
+}
+
+// PreserveEquivalentProperties returns apiProperties with every value the API
+// only re-serialized replaced by the value already held under the same property
+// name, which during a read is the practitioner's own configuration.
+//
+// Storing the API's serialization instead would leave state and configuration
+// textually different for the rest of the resource's life, so the value would be
+// rewritten on every apply even though nothing about it changed. Values that
+// genuinely differ, and properties absent from the configuration, are returned
+// exactly as the API reported them.
+func PreserveEquivalentProperties(d *schema.ResourceData, key string, apiProperties []*models.NameAndValue) []*models.NameAndValue {
+	if d == nil || len(apiProperties) == 0 {
+		return apiProperties
+	}
+
+	knownValues := propertyValuesByName(d.Get(key))
+	if len(knownValues) == 0 {
+		return apiProperties
+	}
+
+	preserved := make([]*models.NameAndValue, 0, len(apiProperties))
+	for _, apiProperty := range apiProperties {
+		if apiProperty == nil || apiProperty.Name == nil || apiProperty.Value == nil {
+			preserved = append(preserved, apiProperty)
+			continue
+		}
+
+		name := *apiProperty.Name
+		value := *apiProperty.Value
+		for _, knownValue := range knownValues[name] {
+			if knownValue != value && canonicalPropertyValue(knownValue) == canonicalPropertyValue(value) {
+				value = knownValue
+				break
+			}
+		}
+
+		if value == *apiProperty.Value {
+			preserved = append(preserved, apiProperty)
+			continue
+		}
+		preserved = append(preserved, &models.NameAndValue{Name: &name, Value: &value})
+	}
+	return preserved
+}
+
+// propertyValuesByName groups the values currently held for a name/value
+// property collection by property name, accepting both the set form used by
+// resources and the list form used by data sources. A property name can
+// legitimately repeat, so each name maps to every value recorded for it.
+func propertyValuesByName(raw interface{}) map[string][]string {
+	var list []interface{}
+	switch typed := raw.(type) {
+	case *schema.Set:
+		list = typed.List()
+	case []interface{}:
+		list = typed
+	default:
+		return nil
+	}
+
+	values := make(map[string][]string, len(list))
+	for _, element := range list {
+		property, ok := element.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		name, _ := property["name"].(string)
+		value, _ := property["value"].(string)
+		values[name] = append(values[name], value)
+	}
+	return values
+}
+
 // retrieve resource widget tokens from resource structure
 func GetPropFromWTMap(d *schema.ResourceData, key string) (t []*models.WidgetToken) {
 	if r, ok := d.GetOk(key); ok {

@@ -62,6 +62,7 @@ func DeviceGroupSchema() map[string]*schema.Schema {
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
+			Set: utils.HashNameAndValue,
 			Optional: true,
 		},
 		
@@ -469,7 +470,7 @@ func SetDeviceGroupResourceData(d *schema.ResourceData, m *models.DeviceGroup) {
 	d.Set("azure_test_result", SetAzureAccountTestResultSubResourceData([]*models.AzureAccountTestResult{m.AzureTestResult}))
 	d.Set("azure_test_result_code", m.AzureTestResultCode)
 	d.Set("created_on", m.CreatedOn)
-	d.Set("custom_properties", SetNameAndValueSubResourceData(filterDeviceGroupCustomProperties(m.GroupType, m.CustomProperties)))
+	d.Set("custom_properties", SetNameAndValueSubResourceData(utils.PreserveEquivalentProperties(d, "custom_properties", filterDeviceGroupCustomProperties(m.GroupType, m.CustomProperties))))
 	d.Set("default_auto_balanced_collector_group_id", m.DefaultAutoBalancedCollectorGroupID)
 	d.Set("default_collector_description", m.DefaultCollectorDescription)
 	d.Set("default_collector_id", m.DefaultCollectorID)

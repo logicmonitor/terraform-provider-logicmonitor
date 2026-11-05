@@ -117,6 +117,7 @@ func CollectorBaseSchema() map[string]*schema.Schema {
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
+			Set: utils.HashNameAndValue,
 			Optional: true,
 		},
 		

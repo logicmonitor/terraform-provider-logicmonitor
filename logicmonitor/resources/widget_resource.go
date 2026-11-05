@@ -239,6 +239,11 @@ func deleteWidgetById(ctx context.Context, d *schema.ResourceData, m interface{}
 	path := fmt.Sprintf("/dashboard/widgets/%d", id)
 	_, err = apiClient.PolymorphicREST(ctx, http.MethodDelete, path, nil)
 	if err != nil {
+		// Already gone is a successful delete: clearing the ID removes it from state.
+		if utils.IsNotFoundError(err) {
+			d.SetId("")
+			return diags
+		}
 		diags = append(diags, diag.Errorf("unexpected: %s", err)...)
 		return diags
 	}

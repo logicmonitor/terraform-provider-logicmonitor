@@ -125,6 +125,7 @@ func CollectorSchema() map[string]*schema.Schema {
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
+			Set: utils.HashNameAndValue,
 			Optional: true,
 		},
 		
@@ -785,7 +786,7 @@ func SetCollectorResourceData(d *schema.ResourceData, m *models.Collector) {
 	d.Set("conf_version", m.ConfVersion)
 	d.Set("created_on", m.CreatedOn)
 	d.Set("created_on_local", m.CreatedOnLocal)
-	d.Set("custom_properties", SetNameAndValueSubResourceData(m.CustomProperties))
+	d.Set("custom_properties", SetNameAndValueSubResourceData(utils.PreserveEquivalentProperties(d, "custom_properties", m.CustomProperties)))
 	d.Set("description", m.Description)
 	d.Set("ea", m.Ea)
 	d.Set("enable_fail_back", m.EnableFailBack)

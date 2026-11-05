@@ -65,6 +65,7 @@ func WebsiteGroupSchema() map[string]*schema.Schema {
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
+			Set: utils.HashNameAndValue,
 			Optional: true,
 		},
 		
@@ -219,7 +220,7 @@ func SetWebsiteGroupResourceData(d *schema.ResourceData, m *models.WebsiteGroup)
 	d.Set("num_of_direct_websites", m.NumOfDirectWebsites)
 	d.Set("num_of_websites", m.NumOfWebsites)
 	d.Set("parent_id", m.ParentID)
-	d.Set("properties", SetNameAndValueSubResourceData(m.Properties))
+	d.Set("properties", SetNameAndValueSubResourceData(utils.PreserveEquivalentProperties(d, "properties", m.Properties)))
 	d.Set("stop_monitoring", m.StopMonitoring)
 	d.Set("test_location", SetWebsiteLocationSubResourceData([]*models.WebsiteLocation{m.TestLocation}))
 	d.Set("user_permission", m.UserPermission)

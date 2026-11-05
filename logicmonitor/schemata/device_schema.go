@@ -25,6 +25,7 @@ func DeviceSchema() map[string]*schema.Schema {
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
+			Set: utils.HashNameAndValue,
 			Computed: true,
 		},
 		
@@ -102,6 +103,7 @@ func DeviceSchema() map[string]*schema.Schema {
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
+			Set: utils.HashNameAndValue,
 			Optional: true,
 		},
 		
@@ -200,6 +202,7 @@ func DeviceSchema() map[string]*schema.Schema {
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
+			Set: utils.HashNameAndValue,
 			Computed: true,
 		},
 		
@@ -319,6 +322,7 @@ func DeviceSchema() map[string]*schema.Schema {
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
+			Set: utils.HashNameAndValue,
 			Optional: true,
 		},
 		
@@ -371,6 +375,7 @@ func DeviceSchema() map[string]*schema.Schema {
 				Schema: NameAndValueSchema(),
 			},
 			ConfigMode: schema.SchemaConfigModeAttr,
+			Set: utils.HashNameAndValue,
 			Computed: true,
 		},
 		
@@ -923,7 +928,7 @@ func DataSourceDeviceListSchema() map[string]*schema.Schema {
 func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("alert_expr", m.AlertExpr)
 	d.Set("auto_balanced_collector_group_id", m.AutoBalancedCollectorGroupID)
-	d.Set("auto_properties", SetNameAndValueSubResourceData(m.AutoProperties))
+	d.Set("auto_properties", SetNameAndValueSubResourceData(utils.PreserveEquivalentProperties(d, "auto_properties", m.AutoProperties)))
 	d.Set("auto_props_assigned_on", m.AutoPropsAssignedOn)
 	d.Set("auto_props_updated_on", m.AutoPropsUpdatedOn)
 	d.Set("aws_state", m.AwsState)
@@ -936,7 +941,7 @@ func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("created_on", m.CreatedOn)
 	d.Set("current_collector_id", m.CurrentCollectorID)
 	d.Set("current_log_collector_id", m.CurrentLogCollectorID)
-	d.Set("custom_properties", SetNameAndValueSubResourceData(m.CustomProperties))
+	d.Set("custom_properties", SetNameAndValueSubResourceData(utils.PreserveEquivalentProperties(d, "custom_properties", m.CustomProperties)))
 	d.Set("deleted_time_in_ms", m.DeletedTimeInMs)
 	d.Set("description", m.Description)
 	d.Set("device_type", m.DeviceType)
@@ -954,7 +959,7 @@ func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("ignore_s_s_l", m.IgnoreSSL)
 	d.Set("individual_alert_level", m.IndividualAlertLevel)
 	d.Set("individual_sm_alert_enable", m.IndividualSmAlertEnable)
-	d.Set("inherited_properties", SetNameAndValueSubResourceData(m.InheritedProperties))
+	d.Set("inherited_properties", SetNameAndValueSubResourceData(utils.PreserveEquivalentProperties(d, "inherited_properties", m.InheritedProperties)))
 	d.Set("is_internal", m.IsInternal)
 	d.Set("is_preferred_log_collector_configured", m.IsPreferredLogCollectorConfigured)
 	d.Set("last_data_time", m.LastDataTime)
@@ -982,7 +987,7 @@ func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("preferred_collector_group_name", m.PreferredCollectorGroupName)
 	d.Set("preferred_collector_id", m.PreferredCollectorID)
 	d.Set("related_device_id", m.RelatedDeviceID)
-	d.Set("resource_ids", SetNameAndValueSubResourceData(m.ResourceIds))
+	d.Set("resource_ids", SetNameAndValueSubResourceData(utils.PreserveEquivalentProperties(d, "resource_ids", m.ResourceIds)))
 	d.Set("scan_config_id", m.ScanConfigID)
 	d.Set("schema", m.Schema)
 	d.Set("status", m.Status)
@@ -990,7 +995,7 @@ func SetDeviceResourceData(d *schema.ResourceData, m *models.Device) {
 	d.Set("stop_monitoring", m.StopMonitoring)
 	d.Set("stop_monitoring_by_folder", m.StopMonitoringByFolder)
 	d.Set("synthetics_collector_ids", m.SyntheticsCollectorIds)
-	d.Set("system_properties", SetNameAndValueSubResourceData(m.SystemProperties))
+	d.Set("system_properties", SetNameAndValueSubResourceData(utils.PreserveEquivalentProperties(d, "system_properties", m.SystemProperties)))
 	d.Set("template", SetJSONObjectSubResourceData([]*models.JSONObject{m.Template}))
 	d.Set("test_location", SetWebsiteLocationSubResourceData([]*models.WebsiteLocation{m.TestLocation}))
 	d.Set("timeout_in_m_s_pkts_not_receive", m.TimeoutInMSPktsNotReceive)
