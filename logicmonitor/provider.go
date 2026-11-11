@@ -56,6 +56,8 @@ func Provider() *schema.Provider {
 			"logicmonitor_dashboard": resources.Dashboard(),
 			"logicmonitor_dashboard_group": resources.DashboardGroup(),
 			"logicmonitor_datasource": resources.Datasource(),
+			"logicmonitor_datasource_graph": resources.DatasourceGraph(),
+			"logicmonitor_datasource_overview_graph": resources.DatasourceOverviewGraph(),
 			"logicmonitor_device": resources.Device(),
 			"logicmonitor_device_group": resources.DeviceGroup(),
 			"logicmonitor_device_group_cluster_alert_conf": resources.DeviceGroupClusterAlertConf(),

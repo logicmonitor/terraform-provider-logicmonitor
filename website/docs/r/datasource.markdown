@@ -130,6 +130,8 @@ The following arguments are **optional**:
 * `tags` - The Tags for the LMModule (string)
 * `technology` - The Technical Notes for the LMModule (string)
 
+Graphs and overview graphs are separate resources: `logicmonitor_datasource_graph` and `logicmonitor_datasource_overview_graph`.
+
 ## Import
 
 datasources can be imported using their datasource ID or name
