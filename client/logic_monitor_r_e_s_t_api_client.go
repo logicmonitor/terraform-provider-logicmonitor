@@ -49,6 +49,7 @@ var DefaultSchemes = []string{"https"}
 type Config struct {
 	AccessKey    *string
 	AccessID     *string
+	BearerToken  *string
 	BulkResource *bool
 	TransportCfg *TransportConfig
 }
@@ -63,6 +64,11 @@ func NewConfig() *Config {
 // SetAccessID for the client Config
 func (c *Config) SetAccessID(accessID *string) {
 	c.AccessID = accessID
+}
+
+// SetBearerToken for the client Config; when set it is used instead of LMv1 signing
+func (c *Config) SetBearerToken(bearerToken *string) {
+	c.BearerToken = bearerToken
 }
 
 // SetAccessKey for the client Config
@@ -92,12 +98,17 @@ func New(c *Config, httpClient *http.Client) *LogicMonitorRESTAPI {
 	} else {
 		transport = httptransport.New(c.TransportCfg.Host, c.TransportCfg.BasePath, c.TransportCfg.Schemes)
 	}
-	authInfo := LMv1Auth(*c.AccessID, *c.AccessKey)
-
 	cli := new(LogicMonitorRESTAPI)
+	var authInfo runtime.ClientAuthInfoWriter
+	if c.BearerToken != nil && *c.BearerToken != "" {
+		authInfo = BearerAuth(*c.BearerToken)
+		cli.bearerToken = *c.BearerToken
+	} else {
+		authInfo = LMv1Auth(*c.AccessID, *c.AccessKey)
+		cli.accessID = *c.AccessID
+		cli.accessKey = *c.AccessKey
+	}
 	cli.Transport = transport
-	cli.accessID = *c.AccessID
-	cli.accessKey = *c.AccessKey
 	cli.httpClient = httpClient
 	cli.transportCfg = c.TransportCfg
 
@@ -217,6 +228,7 @@ type LogicMonitorRESTAPI struct {
 
 	accessID     string
 	accessKey    string
+	bearerToken  string
 	httpClient   *http.Client
 	transportCfg *TransportConfig
 }
@@ -259,6 +271,16 @@ func (c *LogicMonitorRESTAPI) SetTransport(transport runtime.ClientTransport) {
 
 	c.Widget.SetTransport(transport)
 
+}
+
+// BearerAuth authenticates with a LogicMonitor API bearer token.
+func BearerAuth(token string) runtime.ClientAuthInfoWriter {
+	return runtime.ClientAuthInfoWriterFunc(func(r runtime.ClientRequest, _ strfmt.Registry) error {
+		if err := r.SetHeaderParam("Authorization", "Bearer "+token); err != nil {
+			return err
+		}
+		return r.SetHeaderParam("X-version", "3")
+	})
 }
 
 func LMv1Auth(accessId, accessKey string) runtime.ClientAuthInfoWriter {
