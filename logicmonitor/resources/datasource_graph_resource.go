@@ -73,10 +73,11 @@ func datasourceGraphSchema(overview bool) map[string]*schema.Schema {
 		"consolidate_func": {Type: schema.TypeInt, Optional: true, Default: 1},
 	}
 	s := map[string]*schema.Schema{
-		"datasource_id":  {Type: schema.TypeString, Required: true, ForceNew: true},
-		"name":           {Type: schema.TypeString, Required: true},
-		"title":          optComputed(schema.TypeString),
-		"vertical_label": optComputed(schema.TypeString),
+		"datasource_id": {Type: schema.TypeString, Required: true, ForceNew: true},
+		"name":          {Type: schema.TypeString, Required: true},
+		// the API refuses a graph without them ("title can't be null", "Vertical Label must not be blank")
+		"title":          {Type: schema.TypeString, Required: true, ValidateFunc: notEmpty},
+		"vertical_label": {Type: schema.TypeString, Required: true, ValidateFunc: notEmpty},
 		"time_scale":     optComputed(schema.TypeString),
 		"width":          optComputed(schema.TypeInt),
 		"height":         optComputed(schema.TypeInt),
@@ -105,6 +106,13 @@ func datasourceGraphSchema(overview bool) map[string]*schema.Schema {
 		dataPoint["aggregate_method"] = &schema.Schema{Type: schema.TypeString, Optional: true}
 	}
 	return s
+}
+
+func notEmpty(v interface{}, k string) ([]string, []error) {
+	if v.(string) == "" {
+		return nil, []error{fmt.Errorf("%s must not be empty", k)}
+	}
+	return nil, nil
 }
 
 func graphPath(d *schema.ResourceData, kind string) string {
@@ -141,10 +149,10 @@ func writeDatasourceGraph(ctx context.Context, d *schema.ResourceData, m interfa
 		return diag.Errorf("unexpected: %s", err)
 	}
 	body := map[string]interface{}{"name": d.Get("name").(string)}
-	for attr, key := range map[string]string{"title": "title", "vertical_label": "verticalLabel", "time_scale": "timeScale"} {
-		if v := d.Get(attr).(string); v != "" {
-			body[key] = v
-		}
+	body["title"] = d.Get("title").(string)
+	body["verticalLabel"] = d.Get("vertical_label").(string)
+	if v := d.Get("time_scale").(string); v != "" {
+		body["timeScale"] = v
 	}
 	for attr, key := range map[string]string{"width": "width", "height": "height", "display_prio": "displayPrio"} {
 		if v := d.Get(attr).(int); v != 0 {

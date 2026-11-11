@@ -40,8 +40,10 @@ resource "logicmonitor_datasource_graph" "cpu_time" {
 }
 
 resource "logicmonitor_datasource_overview_graph" "cpu_busy" {
-  datasource_id = logicmonitor_datasource.cpu.id
-  name          = "CPU Busy Percent"
+  datasource_id  = logicmonitor_datasource.cpu.id
+  name           = "CPU Busy Percent"
+  title          = "CPU Busy Percent"
+  vertical_label = "%"
   data_points {
     name             = "cpuBusyPercent"
     aggregate_method = "sum"
@@ -58,9 +60,11 @@ resource "logicmonitor_datasource_overview_graph" "cpu_busy" {
 The following arguments are **required**:
 * `datasource_id` - The datasource the graph belongs to (string)
 * `name` - The graph name (string)
+* `title` - The graph title (string)
+* `vertical_label` - The y-axis label (string)
 
 The following arguments are **optional** (left out, the value LogicMonitor sets is kept):
-* `title`, `vertical_label`, `time_scale` (e.g. 1day), `width`, `height`, `display_prio`, `rigid`, `base1024`
+* `time_scale` (e.g. 1day), `width`, `height`, `display_prio`, `rigid`, `base1024`
 * `min_value`, `max_value` - numbers, or "NaN" for automatic (string)
 * `aggregated` - overview graphs only (bool)
 * `data_points` - set of `{name, data_point_name, consolidate_func, aggregate_method}`. `name` is the datasource datapoint;
