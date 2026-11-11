@@ -23,14 +23,22 @@ func Provider() *schema.Provider {
 		Schema: map[string]*schema.Schema{
 			"api_id": {
 				Type:        schema.TypeString,
-				Required:    true,
+				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("LM_API_ID", nil),
+				Description: "LMv1 access id; required together with api_key unless bearer_token is set",
 			},
 			"api_key": {
 				Type:        schema.TypeString,
-				Required:    true,
+				Optional:    true,
 				Sensitive:   true,
 				DefaultFunc: schema.EnvDefaultFunc("LM_API_KEY", nil),
+			},
+			"bearer_token": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Sensitive:   true,
+				DefaultFunc: schema.EnvDefaultFunc("LM_BEARER_TOKEN", nil),
+				Description: "LogicMonitor API bearer token; used instead of api_id/api_key when set",
 			},
 			"domain": {
 				Type:        schema.TypeString,
@@ -115,10 +123,15 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	domain := d.Get("domain").(string)
  	company := d.Get("company").(string) + "." + domain
 	bulkResource := d.Get("bulk_resource").(bool)
+	bearer := d.Get("bearer_token").(string)
+	if bearer == "" && (id == "" || key == "") {
+		return nil, diag.Errorf("set either bearer_token, or both api_id and api_key")
+	}
 
 	config := client.NewConfig()
 	config.SetAccessKey(&key)
 	config.SetAccessID(&id)
+	config.SetBearerToken(&bearer)
 	config.SetAccountDomain(&company)
 	config.SetBulkResource(&bulkResource)
 

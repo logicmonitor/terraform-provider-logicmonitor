@@ -62,7 +62,11 @@ func (c *LogicMonitorRESTAPI) PolymorphicREST(ctx context.Context, method, path 
 	if len(bodyBytes) > 0 {
 		req.Header.Set("Content-Type", "application/json")
 	}
-	req.Header.Set("Authorization", SignLMv1(c.accessID, c.accessKey, method, bodyBytes, authPath))
+	if c.bearerToken != "" {
+		req.Header.Set("Authorization", "Bearer "+c.bearerToken)
+	} else {
+		req.Header.Set("Authorization", SignLMv1(c.accessID, c.accessKey, method, bodyBytes, authPath))
+	}
 	req.Header.Set("X-version", "3")
 
 	httpClient := c.httpClient

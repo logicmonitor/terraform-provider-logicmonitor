@@ -491,8 +491,9 @@ resource "logicmonitor_widget" "my_widget" {
 ## Argument Reference
 
 The following arguments are supported:
-* `api_id` - (Required) LogicMonitor API id. This can also be set via the `LM_API_ID` environment variable.
-* `api_key` - (Required) LogicMonitor API key. This can also be set via the `LM_API_KEY` environment variable.
+* `api_id` - (Required unless `bearer_token` is set) LogicMonitor API id. This can also be set via the `LM_API_ID` environment variable.
+* `api_key` - (Required unless `bearer_token` is set) LogicMonitor API key. This can also be set via the `LM_API_KEY` environment variable.
+* `bearer_token` - (Optional) LogicMonitor API bearer token, used instead of `api_id`/`api_key` when set. This can also be set via the `LM_BEARER_TOKEN` environment variable.
 * `company` - (Required) LogicMonitor company name. This can also be set via the `LM_COMPANY` environment variable.
 * `bulk_resource` - (Optional) True if going for bulk resources that can exceed the rate limit. The default value is false.
 * `domain` - The company domain. Defaults to logicmonitor.com. For gov companies, specify the appropriate domain value (e.g., qa-lmgov.us).
