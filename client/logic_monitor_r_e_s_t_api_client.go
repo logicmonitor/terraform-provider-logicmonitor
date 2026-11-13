@@ -14,6 +14,8 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
+	"terraform-provider-logicmonitor/client/action_chain"
+	"terraform-provider-logicmonitor/client/action_rule"
 	"terraform-provider-logicmonitor/client/alert_rule"
 	"terraform-provider-logicmonitor/client/collector"
 	"terraform-provider-logicmonitor/client/collector_group"
@@ -101,6 +103,10 @@ func New(c *Config, httpClient *http.Client) *LogicMonitorRESTAPI {
 	cli.httpClient = httpClient
 	cli.transportCfg = c.TransportCfg
 
+	cli.ActionChain = action_chain.New(transport, strfmt.Default, authInfo)
+
+	cli.ActionRule = action_rule.New(transport, strfmt.Default, authInfo)
+
 	cli.AlertRule = alert_rule.New(transport, strfmt.Default, authInfo)
 
 	cli.Collector = collector.New(transport, strfmt.Default, authInfo)
@@ -179,6 +185,10 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // LogicMonitorRESTAPI is a client for logic monitor r e s t API
 type LogicMonitorRESTAPI struct {
+	ActionChain *action_chain.Client
+
+	ActionRule *action_rule.Client
+
 	AlertRule *alert_rule.Client
 
 	Collector *collector.Client
@@ -224,6 +234,10 @@ type LogicMonitorRESTAPI struct {
 // SetTransport changes the transport on the client and all its subresources
 func (c *LogicMonitorRESTAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
+
+	c.ActionChain.SetTransport(transport)
+
+	c.ActionRule.SetTransport(transport)
 
 	c.AlertRule.SetTransport(transport)
 

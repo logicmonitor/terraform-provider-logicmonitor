@@ -25,6 +25,36 @@ provider "logicmonitor" {
 }
 ```
 
+### ActionChain
+
+```hcl
+# create a new LogicMonitor action chain
+resource "logicmonitor_action_chain" "my_action_chain" {
+      name = "Test AC"
+      description = "This chain description"
+      stages {
+        id   = 101
+        type = "diagnosticSource"
+      }
+}
+```
+
+### ActionRule
+
+```hcl
+# create a new LogicMonitor action rule
+resource "logicmonitor_action_rule" "my_action_rule" {
+      name            = "parag_action_rule"
+      action_chain_id = 216
+      level_str       = "All"
+      datasource      = "Pingds05"
+      instance        = "*"
+      datapoint       = "*"
+      device_groups   = ["Parag_device_group"]
+      devices         = ["*"]
+}
+```
+
 ### AlertRule
 
 ```hcl

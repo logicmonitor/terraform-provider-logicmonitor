@@ -50,6 +50,8 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
+			"logicmonitor_action_chain": resources.ActionChain(),
+			"logicmonitor_action_rule": resources.ActionRule(),
 			"logicmonitor_alert_rule": resources.AlertRule(),
 			"logicmonitor_collector": resources.Collector(),
 			"logicmonitor_collector_group": resources.CollectorGroup(),
@@ -68,6 +70,10 @@ func Provider() *schema.Provider {
 			"logicmonitor_widget": resources.Widget(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
+						"logicmonitor_action_chain": resources.DataResourceActionChain(),
+						"logicmonitor_action_chains": resources.DataResourceActionChainList(),
+						"logicmonitor_action_rule": resources.DataResourceActionRule(),
+						"logicmonitor_action_rules": resources.DataResourceActionRuleList(),
 						"logicmonitor_alert_rule": resources.DataResourceAlertRule(),
 						"logicmonitor_alert_rules": resources.DataResourceAlertRuleList(),
 						"logicmonitor_collector": resources.DataResourceCollector(),
