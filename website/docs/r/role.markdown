@@ -7,7 +7,6 @@ description: |-
 ---
 
 # logicmonitor_role
-
 Provides a LogicMonitor role resource. This can be used to create and manage LogicMonitor roles.
 
 ## Example Usage

@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/device_group"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ DeviceGroup device group API
 */
 
 func DeviceGroup() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_device_group")
 	return &schema.Resource{
 		CreateContext: addDeviceGroup,
 		DeleteContext: deleteDeviceGroupById,
@@ -33,7 +35,9 @@ func DeviceGroup() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceDeviceGroupStateImporter,
 		},
-		Schema: schemata.DeviceGroupSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.DeviceGroupSchema(),
 	}
 }
 

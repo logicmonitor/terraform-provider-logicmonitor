@@ -8,7 +8,7 @@ import (
 func CollectorPaginationResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"items": {
-			Type: schema.TypeList, //GoType: []*Collector 
+			Type: schema.TypeList, //GoType: []*Collector  
 			Elem: &schema.Resource{
 				Schema: CollectorSchema(),
 			},

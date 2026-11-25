@@ -8,7 +8,7 @@ import (
 func DevicePaginationResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"items": {
-			Type: schema.TypeList, //GoType: []*Device 
+			Type: schema.TypeList, //GoType: []*Device  
 			Elem: &schema.Resource{
 				Schema: DeviceSchema(),
 			},

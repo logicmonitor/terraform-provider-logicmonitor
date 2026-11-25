@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/collector_group"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ CollectorGroup collector group API
 */
 
 func CollectorGroup() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_collector_group")
 	return &schema.Resource{
 		CreateContext: addCollectorGroup,
 		DeleteContext: deleteCollectorGroupById,
@@ -33,7 +35,9 @@ func CollectorGroup() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceCollectorGroupStateImporter,
 		},
-		Schema: schemata.CollectorGroupSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.CollectorGroupSchema(),
 	}
 }
 

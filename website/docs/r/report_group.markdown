@@ -7,7 +7,6 @@ description: |-
 ---
 
 # logicmonitor_report_group
-
 Provides a LogicMonitor report group resource. This can be used to create and manage LogicMonitor report groups.
 
 ## Example Usage

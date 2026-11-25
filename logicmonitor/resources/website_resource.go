@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/website"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ Website website API
 */
 
 func Website() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_website")
 	return &schema.Resource{
 		CreateContext: addWebsite,
 		DeleteContext: deleteWebsiteById,
@@ -33,7 +35,9 @@ func Website() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceWebsiteStateImporter,
 		},
-		Schema: schemata.WebsiteSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.WebsiteSchema(),
 	}
 }
 

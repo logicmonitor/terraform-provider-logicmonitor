@@ -11,6 +11,7 @@ import (
 	"log"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/sdt"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -24,6 +25,7 @@ Sdt sdt API
 */
 
 func Sdt() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_sdt")
 	return &schema.Resource{
 		CreateContext: addSdt,
 		DeleteContext: deleteSdtById,
@@ -32,7 +34,9 @@ func Sdt() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceSdtStateImporter,
 		},
-		Schema: schemata.SdtSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.SdtSchema(),
 	}
 }
 

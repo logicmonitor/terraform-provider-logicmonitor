@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/action_rule"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ ActionRule action rule API
 */
 
 func ActionRule() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_action_rule")
 	return &schema.Resource{
 		CreateContext: addActionRule,
 		DeleteContext: deleteActionRuleById,
@@ -33,7 +35,9 @@ func ActionRule() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceActionRuleStateImporter,
 		},
-		Schema: schemata.ActionRuleSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.ActionRuleSchema(),
 	}
 }
 

@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/role"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ Role role API
 */
 
 func Role() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_role")
 	return &schema.Resource{
 		CreateContext: addRole,
 		DeleteContext: deleteRoleById,
@@ -33,7 +35,9 @@ func Role() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceRoleStateImporter,
 		},
-		Schema: schemata.RoleSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.RoleSchema(),
 	}
 }
 

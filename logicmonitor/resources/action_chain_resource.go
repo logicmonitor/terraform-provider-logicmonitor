@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/action_chain"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ ActionChain action chain API
 */
 
 func ActionChain() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_action_chain")
 	return &schema.Resource{
 		CreateContext: addActionChain,
 		DeleteContext: deleteActionChainById,
@@ -33,7 +35,9 @@ func ActionChain() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceActionChainStateImporter,
 		},
-		Schema: schemata.ActionChainSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.ActionChainSchema(),
 	}
 }
 

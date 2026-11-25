@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/dashboard"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ Dashboard dashboard API
 */
 
 func Dashboard() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_dashboard")
 	return &schema.Resource{
 		CreateContext: addDashboard,
 		DeleteContext: deleteDashboardById,
@@ -33,7 +35,9 @@ func Dashboard() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceDashboardStateImporter,
 		},
-		Schema: schemata.DashboardSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.DashboardSchema(),
 	}
 }
 

@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/collector"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ Collector collector API
 */
 
 func Collector() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_collector")
 	return &schema.Resource{
 		CreateContext: addCollector,
 		DeleteContext: deleteCollectorById,
@@ -33,7 +35,9 @@ func Collector() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceCollectorStateImporter,
 		},
-		Schema: schemata.CollectorSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.CollectorSchema(),
 	}
 }
 

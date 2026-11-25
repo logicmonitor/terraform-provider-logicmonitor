@@ -8,7 +8,7 @@ import (
 func DashboardPaginationResponseSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"items": {
-			Type: schema.TypeList, //GoType: []*Dashboard 
+			Type: schema.TypeList, //GoType: []*Dashboard  
 			Elem: &schema.Resource{
 				Schema: DashboardSchema(),
 			},

@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/escalation_chain"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ EscalationChain escalation chain API
 */
 
 func EscalationChain() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_escalation_chain")
 	return &schema.Resource{
 		CreateContext: addEscalationChain,
 		DeleteContext: deleteEscalationChainById,
@@ -33,7 +35,9 @@ func EscalationChain() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceEscalationChainStateImporter,
 		},
-		Schema: schemata.EscalationChainSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.EscalationChainSchema(),
 	}
 }
 

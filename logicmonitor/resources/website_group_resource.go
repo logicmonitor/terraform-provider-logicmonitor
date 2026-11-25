@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/website_group"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ WebsiteGroup website group API
 */
 
 func WebsiteGroup() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_website_group")
 	return &schema.Resource{
 		CreateContext: addWebsiteGroup,
 		DeleteContext: deleteWebsiteGroupById,
@@ -33,7 +35,9 @@ func WebsiteGroup() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceWebsiteGroupStateImporter,
 		},
-		Schema: schemata.WebsiteGroupSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.WebsiteGroupSchema(),
 	}
 }
 

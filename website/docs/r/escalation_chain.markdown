@@ -7,7 +7,6 @@ description: |-
 ---
 
 # logicmonitor_escalation_chain
-
 Provides a LogicMonitor escalation chain resource. This can be used to create and manage LogicMonitor escalation chains.
 
 ## Example Usage

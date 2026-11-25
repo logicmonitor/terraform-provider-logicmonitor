@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"strconv"
 	"terraform-provider-logicmonitor/client"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 
@@ -21,6 +22,7 @@ Widget Widget API (polymorphic)
 */
 
 func Widget() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_widget")
 	return &schema.Resource{
 		CreateContext: addWidget,
 		DeleteContext: deleteWidgetById,
@@ -29,6 +31,8 @@ func Widget() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceWidgetStateImporter,
 		},
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
 		CustomizeDiff: schemata.WidgetCustomizeDiff,
 		Schema:        schemata.WidgetSchema(),
 	}

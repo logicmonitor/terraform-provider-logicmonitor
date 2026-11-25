@@ -7,7 +7,6 @@ description: |-
 ---
 
 # logicmonitor_sdt
-
 Provides a LogicMonitor sdt resource. This can be used to create and manage LogicMonitor sdts.
 
 ## Example Usage

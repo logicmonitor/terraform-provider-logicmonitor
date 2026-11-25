@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/datasource"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ Datasource datasource API
 */
 
 func Datasource() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_datasource")
 	return &schema.Resource{
 		CreateContext: addDatasourceById,
 		DeleteContext: deleteDatasourceById,
@@ -33,8 +35,10 @@ func Datasource() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceDatasourceStateImporter,
 		},
-		CustomizeDiff: customizeDatasourceDiff,
-		Schema:        schemata.DatasourceSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		CustomizeDiff:  customizeDatasourceDiff,
+		Schema:         schemata.DatasourceSchema(),
 	}
 }
 

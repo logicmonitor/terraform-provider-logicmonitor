@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/device_group_cluster_alert_conf"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ DeviceGroupClusterAlertConf device group cluster alert conf API
 */
 
 func DeviceGroupClusterAlertConf() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_device_group_cluster_alert_conf")
 	return &schema.Resource{
 		CreateContext: addDeviceGroupClusterAlertConf,
 		DeleteContext: deleteDeviceGroupClusterAlertConfById,
@@ -33,7 +35,9 @@ func DeviceGroupClusterAlertConf() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceDeviceGroupClusterAlertConfStateImporter,
 		},
-		Schema: schemata.DeviceGroupClusterAlertConfSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.DeviceGroupClusterAlertConfSchema(),
 	}
 }
 

@@ -54,10 +54,12 @@ func NewMiscGetCollectorDownloadTokenParamsWithHTTPClient(client *http.Client) *
 	}
 }
 
-/* MiscGetCollectorDownloadTokenParams contains all the parameters to send to the API endpoint
-   for the misc get collector download token operation.
+/*
+MiscGetCollectorDownloadTokenParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the misc get collector download token operation.
+
+	Typically these are written to a http.Request.
 */
 type MiscGetCollectorDownloadTokenParams struct {
 

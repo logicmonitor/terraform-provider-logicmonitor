@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/dashboard_group"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ DashboardGroup dashboard group API
 */
 
 func DashboardGroup() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_dashboard_group")
 	return &schema.Resource{
 		CreateContext: addDashboardGroup,
 		DeleteContext: deleteDashboardGroupById,
@@ -33,7 +35,9 @@ func DashboardGroup() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceDashboardGroupStateImporter,
 		},
-		Schema: schemata.DashboardGroupSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.DashboardGroupSchema(),
 	}
 }
 

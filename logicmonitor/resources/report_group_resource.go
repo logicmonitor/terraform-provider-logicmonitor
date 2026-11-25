@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/report_group"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ ReportGroup report group API
 */
 
 func ReportGroup() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_report_group")
 	return &schema.Resource{
 		CreateContext: addReportGroup,
 		DeleteContext: deleteReportGroupById,
@@ -33,7 +35,9 @@ func ReportGroup() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceReportGroupStateImporter,
 		},
-		Schema: schemata.ReportGroupSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.ReportGroupSchema(),
 	}
 }
 

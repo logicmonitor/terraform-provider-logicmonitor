@@ -68,7 +68,7 @@ func CloudServiceSettingsSchema() map[string]*schema.Schema {
 		},
 		
 		"tags": {
-			Type: schema.TypeList, //GoType: []*CloudTagFilter 
+			Type: schema.TypeList, //GoType: []*CloudTagFilter  
 			Elem: &schema.Resource{
 				Schema: CloudTagFilterSchema(),
 			},

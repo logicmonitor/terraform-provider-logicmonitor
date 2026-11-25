@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/device"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ Device device API
 */
 
 func Device() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_device")
 	return &schema.Resource{
 		CreateContext: addDevice,
 		DeleteContext: deleteDeviceById,
@@ -33,7 +35,9 @@ func Device() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceDeviceStateImporter,
 		},
-		Schema: schemata.DeviceSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.DeviceSchema(),
 	}
 }
 

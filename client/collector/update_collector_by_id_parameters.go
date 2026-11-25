@@ -56,10 +56,12 @@ func NewUpdateCollectorByIDParamsWithHTTPClient(client *http.Client) *UpdateColl
 	}
 }
 
-/* UpdateCollectorByIDParams contains all the parameters to send to the API endpoint
-   for the update collector by Id operation.
+/*
+UpdateCollectorByIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update collector by Id operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateCollectorByIDParams struct {
 

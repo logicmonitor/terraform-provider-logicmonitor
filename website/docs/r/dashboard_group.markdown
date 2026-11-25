@@ -7,7 +7,6 @@ description: |-
 ---
 
 # logicmonitor_dashboard_group
-
 Provides a LogicMonitor dashboard group resource. This can be used to create and manage LogicMonitor dashboard groups.
 
 ## Example Usage

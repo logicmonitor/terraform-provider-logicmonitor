@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"terraform-provider-logicmonitor/client"
 	"terraform-provider-logicmonitor/client/alert_rule"
+	"terraform-provider-logicmonitor/logicmonitor/schema_versioning"
 	"terraform-provider-logicmonitor/logicmonitor/schemata"
 	"terraform-provider-logicmonitor/logicmonitor/utils"
 	"terraform-provider-logicmonitor/models"
@@ -25,6 +26,7 @@ AlertRule alert rule API
 */
 
 func AlertRule() *schema.Resource {
+	schemaVersion, stateUpgraders := schema_versioning.Upgraders("logicmonitor_alert_rule")
 	return &schema.Resource{
 		CreateContext: addAlertRule,
 		DeleteContext: deleteAlertRuleById,
@@ -33,7 +35,9 @@ func AlertRule() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceAlertRuleStateImporter,
 		},
-		Schema: schemata.AlertRuleSchema(),
+		SchemaVersion:  schemaVersion,
+		StateUpgraders: stateUpgraders,
+		Schema:         schemata.AlertRuleSchema(),
 	}
 }
 
