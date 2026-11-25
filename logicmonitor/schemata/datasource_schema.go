@@ -168,6 +168,22 @@ func DatasourceSchema() map[string]*schema.Schema {
 			Type: schema.TypeInt,
 			Computed: true,
 		},
+
+		"collector_script": {
+			Type:             schema.TypeList,
+			Optional:         true,
+			Computed:         true,
+			MaxItems:         1,
+			DiffSuppressFunc: utils.SuppressCollectorScriptIfOmitted,
+			Elem: &schema.Resource{
+				Schema: utils.CollectorScriptSchema(),
+			},
+		},
+		"collector_attribute_extras": {
+			Type:      schema.TypeString,
+			Computed:  true,
+			Sensitive: true,
+		},
 		
 	}
 }
@@ -332,6 +348,20 @@ func DataSourceDatasourceSchema() map[string]*schema.Schema {
 			Type: schema.TypeInt,
 			Optional: true,
 		},
+
+		"collector_script": {
+			Type:     schema.TypeList,
+			Optional: true,
+			MaxItems: 1,
+			Elem: &schema.Resource{
+				Schema: utils.CollectorScriptSchema(),
+			},
+		},
+		"collector_attribute_extras": {
+			Type:      schema.TypeString,
+			Optional:  true,
+			Sensitive: true,
+		},
 		
 		"filter": {
 			Type:     schema.TypeString,
@@ -378,7 +408,7 @@ func SetDatasourceResourceData(d *schema.ResourceData, m *models.Datasource) {
 	d.Set("checksum", m.Checksum)
 	d.Set("collect_interval", m.CollectInterval)
 	d.Set("collect_method", m.CollectMethod)
-	d.Set("collector_attribute", SetCollectorAttributeSubResourceData([]*models.CollectorAttribute{m.CollectorAttribute}))
+	utils.SetDatasourceCollectorAttributeState(d, m.CollectorAttribute)
 	d.Set("data_points", SetDataPointSubResourceData(m.DataPoints))
 	d.Set("description", m.Description)
 	d.Set("display_name", m.DisplayName)
@@ -412,6 +442,9 @@ func SetDatasourceSubResourceData(m []*models.Datasource) (d []*map[string]inter
 			properties["collect_interval"] = datasource.CollectInterval
 			properties["collect_method"] = datasource.CollectMethod
 			properties["collector_attribute"] = SetCollectorAttributeSubResourceData([]*models.CollectorAttribute{datasource.CollectorAttribute})
+			collectorScript, collectorExtras := utils.DatasourceCollectorAttributeProperties(datasource.CollectorAttribute)
+			properties["collector_script"] = collectorScript
+			properties["collector_attribute_extras"] = collectorExtras
 			properties["data_points"] = SetDataPointSubResourceData(datasource.DataPoints)
 			properties["description"] = datasource.Description
 			properties["display_name"] = datasource.DisplayName
@@ -454,12 +487,7 @@ func DatasourceModel(d *schema.ResourceData) *models.Datasource {
 	}
 	collectInterval := int32(d.Get("collect_interval").(int))
 	collectMethod := d.Get("collect_method").(string)
-	var collectorAttribute *models.CollectorAttribute = nil
-	collectorAttributeInterface, collectorAttributeIsSet := d.GetOk("collector_attribute")
-	if collectorAttributeIsSet {
-		collectorAttributeMap := collectorAttributeInterface.([]interface{})[0].(map[string]interface{})
-		collectorAttribute = CollectorAttributeModel(collectorAttributeMap)
-	}
+	collectorAttribute := utils.DatasourceCollectorAttributeModel(d)
 	dataPoints := utils.GetPropFromDatapoint(d, "data_points")
 	description := d.Get("description").(string)
 	displayName := d.Get("display_name").(string)
@@ -511,6 +539,7 @@ func GetDatasourcePropertyFields() (t []string) {
 		"collect_interval",
 		"collect_method",
 		"collector_attribute",
+		"collector_script",
 		"data_points",
 		"description",
 		"display_name",

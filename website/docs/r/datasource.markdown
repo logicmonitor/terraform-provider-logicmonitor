@@ -8,6 +8,7 @@ description: |-
 
 # logicmonitor_datasource
 
+
 Provides a LogicMonitor datasource resource. This can be used to create and manage LogicMonitor datasources.
 
 ## Example Usage
@@ -35,8 +36,13 @@ resource "logicmonitor_datasource" "my_datasource" {
   }
   collect_interval = 100
   collect_method = "script"
-  collector_attribute {
-  name = "script"
+  collector_attribute = [{
+    name = "script"
+  }]
+  # Optional: take ownership of an embedded script. Omit after import to keep the portal script.
+  collector_script {
+    script_type   = "embed"
+    groovy_script = "println \"hello\""
   }
   data_points = [
    {
@@ -92,7 +98,7 @@ The following arguments are **required**:
 * `collector_attribute` - Data collector's attributes to collector data. e.g. a ping data source has a ping collector attribute. 
  PingCollectorAttributeV1 has two fields. the ip to ping, the data size send to ping
    (CollectorAttribute)
-  + `name` - The data collectors name
+  + `name` - The data collectors name. Use attribute syntax: `collector_attribute = [{ name = "script" }]`
 * `name` - The data source name
    (string)
 

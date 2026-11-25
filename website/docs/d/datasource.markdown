@@ -26,6 +26,9 @@ data "logicmonitor_Datasource" "my_Datasource" {
 
 The following arguments are supported:
 * `filter` - (Optional) Filters the response according to the operator and value specified.More Info: https://www.logicmonitor.com/support/logicmodules/datasources/creating-managing-datasources/creating-datasources. Please refer the filter arguments from resources tab.
+* `collector_attribute` - Collector type name only. Use attribute syntax: `collector_attribute = [{ name = "script" }]`.
+* `collector_script` - Script fields returned for `script` and `batchscript` collectors: `groovy_script`, `script_type`, `windows_script`, `linux_script`, `windows_cmdline`, `linux_cmdline`, `manual_connections`, and `properties`.
+* `collector_attribute_extras` - JSON of the other collector-type fields returned by the API, such as an SNMP `ip` or a JDBC `query` and `password`. Sensitive. Values such as passwords are stored in Terraform state.
 
 * `depends_on` - (Optional) meta-argument within data blocks defers reading of the data source until after all changes to the dependencies have been applied.
 

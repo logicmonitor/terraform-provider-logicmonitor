@@ -33,8 +33,46 @@ func Datasource() *schema.Resource {
 		Importer: &schema.ResourceImporter{
 			State: resourceDatasourceStateImporter,
 		},
-		Schema: schemata.DatasourceSchema(),
+		CustomizeDiff: customizeDatasourceDiff,
+		Schema:        schemata.DatasourceSchema(),
 	}
+}
+
+// customizeDatasourceDiff marks collector_attribute_extras unknown when the
+// collector type (name) changes so stale extras from the previous type are not
+// planned back into state.
+func customizeDatasourceDiff(ctx context.Context, d *schema.ResourceDiff, m interface{}) error {
+	if d.HasChange("collector_attribute.0.name") || d.HasChange("collector_attribute") {
+		oldName, newName := "", ""
+		if d.HasChange("collector_attribute.0.name") {
+			oldRaw, newRaw := d.GetChange("collector_attribute.0.name")
+			oldName, _ = oldRaw.(string)
+			newName, _ = newRaw.(string)
+		} else {
+			oldRaw, newRaw := d.GetChange("collector_attribute")
+			oldName = collectorNameFromDiffRaw(oldRaw)
+			newName = collectorNameFromDiffRaw(newRaw)
+		}
+		if oldName != "" && oldName != newName {
+			if err := d.SetNewComputed("collector_attribute_extras"); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func collectorNameFromDiffRaw(raw interface{}) string {
+	list, ok := raw.([]interface{})
+	if !ok || len(list) == 0 || list[0] == nil {
+		return ""
+	}
+	m, ok := list[0].(map[string]interface{})
+	if !ok {
+		return ""
+	}
+	name, _ := m["name"].(string)
+	return name
 }
 
 func DataResourceDatasource() *schema.Resource {

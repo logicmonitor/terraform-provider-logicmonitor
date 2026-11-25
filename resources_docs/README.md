@@ -84,8 +84,13 @@ output "devices" {
       }]
   display_name = "Testdemo"
   collector_attribute = [{
-  name = "aggregate"
-  }] 
+    name = "script"
+  }]
+  # Optional after import: omit collector_script to keep the portal script unchanged.
+  collector_script {
+    script_type   = "embed"
+    groovy_script = "println \"hello\""
+  }
 }
 
 

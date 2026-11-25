@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -19,9 +20,183 @@ import (
 // swagger:model CollectorAttribute
 type CollectorAttribute struct {
 
+	// groovy script
+	GroovyScript string `json:"groovyScript,omitempty"`
+
+	// linux script command line
+	LinuxCmdline string `json:"linuxCmdline,omitempty"`
+
+	// linux script
+	LinuxScript string `json:"linuxScript,omitempty"`
+
+	// manual
+	ManualConnections string `json:"manualConnections,omitempty"`
+
 	// The data collector's name
 	// Required: true
 	Name *string `json:"name"`
+
+	// property based
+	Properties string `json:"properties,omitempty"`
+
+	// script type: embed | file | powershell
+	ScriptType string `json:"scriptType,omitempty"`
+
+	// windows script command line
+	WindowsCmdline string `json:"windowsCmdline,omitempty"`
+
+	// windows script
+	WindowsScript string `json:"windowsScript,omitempty"`
+
+	// collector attribute additional properties
+	CollectorAttributeAdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// UnmarshalJSON unmarshals this object with additional properties from JSON
+func (m *CollectorAttribute) UnmarshalJSON(data []byte) error {
+	// stage 1, bind the properties
+	var stage1 struct {
+
+		// groovy script
+		GroovyScript string `json:"groovyScript,omitempty"`
+
+		// linux script command line
+		LinuxCmdline string `json:"linuxCmdline,omitempty"`
+
+		// linux script
+		LinuxScript string `json:"linuxScript,omitempty"`
+
+		// manual
+		ManualConnections string `json:"manualConnections,omitempty"`
+
+		// The data collector's name
+		// Required: true
+		Name *string `json:"name"`
+
+		// property based
+		Properties string `json:"properties,omitempty"`
+
+		// script type: embed | file | powershell
+		ScriptType string `json:"scriptType,omitempty"`
+
+		// windows script command line
+		WindowsCmdline string `json:"windowsCmdline,omitempty"`
+
+		// windows script
+		WindowsScript string `json:"windowsScript,omitempty"`
+	}
+	if err := json.Unmarshal(data, &stage1); err != nil {
+		return err
+	}
+	var rcv CollectorAttribute
+
+	rcv.GroovyScript = stage1.GroovyScript
+	rcv.LinuxCmdline = stage1.LinuxCmdline
+	rcv.LinuxScript = stage1.LinuxScript
+	rcv.ManualConnections = stage1.ManualConnections
+	rcv.Name = stage1.Name
+	rcv.Properties = stage1.Properties
+	rcv.ScriptType = stage1.ScriptType
+	rcv.WindowsCmdline = stage1.WindowsCmdline
+	rcv.WindowsScript = stage1.WindowsScript
+	*m = rcv
+
+	// stage 2, remove properties and add to map
+	stage2 := make(map[string]json.RawMessage)
+	if err := json.Unmarshal(data, &stage2); err != nil {
+		return err
+	}
+
+	delete(stage2, "groovyScript")
+	delete(stage2, "linuxCmdline")
+	delete(stage2, "linuxScript")
+	delete(stage2, "manualConnections")
+	delete(stage2, "name")
+	delete(stage2, "properties")
+	delete(stage2, "scriptType")
+	delete(stage2, "windowsCmdline")
+	delete(stage2, "windowsScript")
+	// stage 3, add additional properties values
+	if len(stage2) > 0 {
+		result := make(map[string]interface{})
+		for k, v := range stage2 {
+			var toadd interface{}
+			if err := json.Unmarshal(v, &toadd); err != nil {
+				return err
+			}
+			result[k] = toadd
+		}
+		m.CollectorAttributeAdditionalProperties = result
+	}
+
+	return nil
+}
+
+// MarshalJSON marshals this object with additional properties into a JSON object
+func (m CollectorAttribute) MarshalJSON() ([]byte, error) {
+	var stage1 struct {
+
+		// groovy script
+		GroovyScript string `json:"groovyScript,omitempty"`
+
+		// linux script command line
+		LinuxCmdline string `json:"linuxCmdline,omitempty"`
+
+		// linux script
+		LinuxScript string `json:"linuxScript,omitempty"`
+
+		// manual
+		ManualConnections string `json:"manualConnections,omitempty"`
+
+		// The data collector's name
+		// Required: true
+		Name *string `json:"name"`
+
+		// property based
+		Properties string `json:"properties,omitempty"`
+
+		// script type: embed | file | powershell
+		ScriptType string `json:"scriptType,omitempty"`
+
+		// windows script command line
+		WindowsCmdline string `json:"windowsCmdline,omitempty"`
+
+		// windows script
+		WindowsScript string `json:"windowsScript,omitempty"`
+	}
+
+	stage1.GroovyScript = m.GroovyScript
+	stage1.LinuxCmdline = m.LinuxCmdline
+	stage1.LinuxScript = m.LinuxScript
+	stage1.ManualConnections = m.ManualConnections
+	stage1.Name = m.Name
+	stage1.Properties = m.Properties
+	stage1.ScriptType = m.ScriptType
+	stage1.WindowsCmdline = m.WindowsCmdline
+	stage1.WindowsScript = m.WindowsScript
+
+	// make JSON object for known properties
+	props, err := json.Marshal(stage1)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(m.CollectorAttributeAdditionalProperties) == 0 { // no additional properties
+		return props, nil
+	}
+
+	// make JSON object for the additional properties
+	additional, err := json.Marshal(m.CollectorAttributeAdditionalProperties)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(props) < 3 { // "{}": only additional properties
+		return additional, nil
+	}
+
+	// concatenate the 2 objects
+	return swag.ConcatJSON(props, additional), nil
 }
 
 // Validate validates this collector attribute

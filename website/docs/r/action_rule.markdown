@@ -13,7 +13,7 @@ Provides a LogicMonitor action rule resource. This can be used to create and man
 ```hcl
 # Create a LogicMonitor action rule
 resource "logicmonitor_action_rule" "my_action_rule" {
-  name            = "parag_action_rule pravesh"
+  name            = "parag_action_rule"
   action_chain_id = 216
   level_str       = "All"
   datasource      = "Pingds05"

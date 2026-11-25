@@ -222,8 +222,12 @@ resource "logicmonitor_datasource" "my_datasource" {
           post_processor_param = "{\"version\":\"1.0\",\"expression\":{\"funcName\":\"mean\",\"dataSourceName\":\"AWS_Cognito_GlobalAPICallStats\",\"dataPointName\":\"CallCountTotal\"},\"dataLack\":\"ignore\"}"
       }]
     display_name = "Testdemo"
-    collector_attribute {
-    name = "script"
+    collector_attribute = [{
+      name = "script"
+    }]
+    collector_script {
+      script_type   = "embed"
+      groovy_script = "println \"hello\""
     }
 }
 ```

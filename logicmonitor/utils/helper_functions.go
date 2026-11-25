@@ -793,17 +793,247 @@ func GetAuth(d []interface{}) (t *models.Authentication) {
 	}
 	return
 }
-func GetCollectorAttribute(d []interface{}) (t models.CollectorAttribute) {
-	for _, i := range d {
-		if m, ok := i.(map[string]interface{}); ok {
-           var name = m["name"].(string)
-           model := models.CollectorAttribute{
-              Name: &name,
+// CollectorScriptSchema is the nested schema of the collector_script block on
+// logicmonitor_datasource. It is Optional so an omitted block keeps imported values.
+func CollectorScriptSchema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+		"groovy_script": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"script_type": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"windows_script": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"linux_script": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"windows_cmdline": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"linux_cmdline": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"manual_connections": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+		"properties": {
+			Type:     schema.TypeString,
+			Optional: true,
+		},
+	}
+}
+
+// SuppressCollectorScriptIfOmitted keeps an imported collector_script when the
+// configuration omits the block. A configured block with different values still diffs.
+func SuppressCollectorScriptIfOmitted(k, old, new string, d *schema.ResourceData) bool {
+	if !strings.HasSuffix(k, ".#") {
+		return false
+	}
+	if new != "0" || old == "0" {
+		return false
+	}
+	raw := d.GetRawConfig()
+	if raw.IsNull() || !raw.Type().IsObjectType() {
+		return true
+	}
+	attr := raw.GetAttr("collector_script")
+	return attr.IsNull()
+}
+
+// FlattenCollectorExtrasJSON marshals the additional collector fields with
+// sorted keys so state stays stable across refreshes.
+func FlattenCollectorExtrasJSON(extras map[string]interface{}) string {
+	if len(extras) == 0 {
+		return ""
+	}
+	return FlattenJSONToString(extras)
+}
+
+// ExpandCollectorExtrasJSON parses collector_attribute_extras back into a map.
+func ExpandCollectorExtrasJSON(raw string) map[string]interface{} {
+	if strings.TrimSpace(raw) == "" {
+		return nil
+	}
+	v := ExpandJSONString(raw)
+	if m, ok := v.(map[string]interface{}); ok {
+		return m
+	}
+	return nil
+}
+
+// SetDatasourceCollectorAttributeState writes the name-only collector_attribute,
+// the collector_script block, and the read-only collector_attribute_extras from a
+// CollectorAttribute API model.
+func SetDatasourceCollectorAttributeState(d *schema.ResourceData, m *models.CollectorAttribute) {
+	if m == nil {
+		d.Set("collector_attribute", []interface{}{})
+		d.Set("collector_script", []interface{}{})
+		d.Set("collector_attribute_extras", "")
+		return
+	}
+
+	name := ""
+	if m.Name != nil {
+		name = *m.Name
+	}
+	d.Set("collector_attribute", []interface{}{
+		map[string]interface{}{"name": name},
+	})
+
+	script := map[string]interface{}{}
+	hasScript := false
+	setScript := func(tfKey, value string) {
+		if value == "" {
+			return
+		}
+		script[tfKey] = value
+		hasScript = true
+	}
+	setScript("groovy_script", m.GroovyScript)
+	setScript("script_type", m.ScriptType)
+	setScript("windows_script", m.WindowsScript)
+	setScript("linux_script", m.LinuxScript)
+	setScript("windows_cmdline", m.WindowsCmdline)
+	setScript("linux_cmdline", m.LinuxCmdline)
+	setScript("manual_connections", m.ManualConnections)
+	setScript("properties", m.Properties)
+	if hasScript {
+		d.Set("collector_script", []interface{}{script})
+	} else {
+		d.Set("collector_script", []interface{}{})
+	}
+
+	d.Set("collector_attribute_extras", FlattenCollectorExtrasJSON(m.CollectorAttributeAdditionalProperties))
+}
+
+// DatasourceCollectorAttributeProperties returns the collector_script and
+// collector_attribute_extras values for list/sub-resource flattening.
+func DatasourceCollectorAttributeProperties(m *models.CollectorAttribute) (script []interface{}, extras string) {
+	script = []interface{}{}
+	if m == nil {
+		return script, ""
+	}
+	block := map[string]interface{}{}
+	hasScript := false
+	setScript := func(tfKey, value string) {
+		if value == "" {
+			return
+		}
+		block[tfKey] = value
+		hasScript = true
+	}
+	setScript("groovy_script", m.GroovyScript)
+	setScript("script_type", m.ScriptType)
+	setScript("windows_script", m.WindowsScript)
+	setScript("linux_script", m.LinuxScript)
+	setScript("windows_cmdline", m.WindowsCmdline)
+	setScript("linux_cmdline", m.LinuxCmdline)
+	setScript("manual_connections", m.ManualConnections)
+	setScript("properties", m.Properties)
+	if hasScript {
+		script = []interface{}{block}
+	}
+	return script, FlattenCollectorExtrasJSON(m.CollectorAttributeAdditionalProperties)
+}
+
+// DatasourceCollectorAttributeModel rebuilds a CollectorAttribute for create/update
+// from collector_attribute (name), collector_script, and collector_attribute_extras.
+// When the collector name changes, extras from the previous type are not copied.
+func DatasourceCollectorAttributeModel(d *schema.ResourceData) *models.CollectorAttribute {
+	name := ""
+	if v, ok := d.GetOk("collector_attribute"); ok {
+		if list, ok := v.([]interface{}); ok && len(list) > 0 {
+			if m, ok := list[0].(map[string]interface{}); ok {
+				name, _ = m["name"].(string)
 			}
-			t = model
 		}
 	}
-	return
+	if name == "" {
+		return nil
+	}
+
+	out := &models.CollectorAttribute{Name: &name}
+
+	if v := d.Get("collector_script"); v != nil {
+		if list, ok := v.([]interface{}); ok && len(list) > 0 && list[0] != nil {
+			if m, ok := list[0].(map[string]interface{}); ok {
+				if s, ok := m["groovy_script"].(string); ok {
+					out.GroovyScript = s
+				}
+				if s, ok := m["script_type"].(string); ok {
+					out.ScriptType = s
+				}
+				if s, ok := m["windows_script"].(string); ok {
+					out.WindowsScript = s
+				}
+				if s, ok := m["linux_script"].(string); ok {
+					out.LinuxScript = s
+				}
+				if s, ok := m["windows_cmdline"].(string); ok {
+					out.WindowsCmdline = s
+				}
+				if s, ok := m["linux_cmdline"].(string); ok {
+					out.LinuxCmdline = s
+				}
+				if s, ok := m["manual_connections"].(string); ok {
+					out.ManualConnections = s
+				}
+				if s, ok := m["properties"].(string); ok {
+					out.Properties = s
+				}
+			}
+		}
+	}
+
+	// Skip extras only when the collector type actually changed from a prior
+	// non-empty name. HasChange alone is true on create with TestResourceDataRaw.
+	if !collectorAttributeNameChanged(d) {
+		if extras, ok := d.Get("collector_attribute_extras").(string); ok {
+			out.CollectorAttributeAdditionalProperties = ExpandCollectorExtrasJSON(extras)
+		}
+	}
+
+	return out
+}
+
+// collectorAttributeNameChanged reports a real collector type change from one
+// non-empty name to another. Empty old values (create) are not treated as a change.
+func collectorAttributeNameChanged(d *schema.ResourceData) bool {
+	oldName, newName := "", ""
+	if d.HasChange("collector_attribute.0.name") {
+		oldRaw, newRaw := d.GetChange("collector_attribute.0.name")
+		oldName, _ = oldRaw.(string)
+		newName, _ = newRaw.(string)
+	} else if d.HasChange("collector_attribute") {
+		oldRaw, newRaw := d.GetChange("collector_attribute")
+		oldName = collectorNameFromRaw(oldRaw)
+		newName = collectorNameFromRaw(newRaw)
+	} else {
+		return false
+	}
+	return oldName != "" && oldName != newName
+}
+
+func collectorNameFromRaw(raw interface{}) string {
+	list, ok := raw.([]interface{})
+	if !ok || len(list) == 0 || list[0] == nil {
+		return ""
+	}
+	m, ok := list[0].(map[string]interface{})
+	if !ok {
+		return ""
+	}
+	name, _ := m["name"].(string)
+	return name
 }
 func GetPropFromDatapoint(d *schema.ResourceData, key string) (t []*models.DataPoint) {
 	if r, ok := d.GetOk(key); ok {
