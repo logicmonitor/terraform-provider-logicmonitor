@@ -10,6 +10,7 @@ description: |-
 
 
 Provides a LogicMonitor datasource resource. This can be used to create and manage LogicMonitor datasources.
+Graphs and overview graphs are separate resources: `logicmonitor_datasource_graph` and `logicmonitor_datasource_overview_graph`.
 
 ## Example Usage
 ```hcl
