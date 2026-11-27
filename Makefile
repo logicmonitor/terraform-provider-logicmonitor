@@ -3,8 +3,9 @@ HOSTNAME=logicmonitor.com
 NAMESPACE=com
 NAME=logicmonitor
 BINARY=terraform-provider-${NAME}
-VERSION=2.0.21
-OS_ARCH=darwin_amd64
+# version from the latest tag (v2.1.7 -> 2.1.7); platform of the machine building it
+VERSION?=$(or $(shell git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//'),0.0.0)
+OS_ARCH?=$(shell go env GOOS)_$(shell go env GOARCH)
 LDFLAGS = -ldflags "-X terraform-provider-logicmonitor/logicmonitor.ProviderVersion=$(VERSION)"
 
 default: build
